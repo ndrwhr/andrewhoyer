@@ -1,0 +1,154 @@
+---
+layout: default
+permalink: /endless/
+no_footer: true
+---
+
+<div id="pit-mask"></div>
+
+<style type="text/css" media="screen">
+	
+	h1 {
+		display: block;
+		font-size: 80px;
+		background: none;
+		text-align: center;
+	}
+	
+	#surface {
+		position: absolute;
+		top: 150px;
+		left: 0px;
+		right: 0;
+	}
+	
+	canvas {
+		background-color: red;
+		display: block;
+		margin: 0 auto;
+	}
+	
+	#pit-mask, .pit {
+		background-color: black;
+	}
+	
+	#pit-mask {
+		position: absolute;
+		top: 250px;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		overflow: hidden;
+	}
+	
+	.pit {
+		position: relative;
+		margin: 0 auto;
+		width: 800px;
+		background-image: url(/resources/images/pit.png);
+		background-position: top center;
+		background-repeat: repeat-y;
+	}
+	
+	.pit div.sprite {
+		position: absolute;
+		height: 10px;
+		width: 10px;
+		background-color: red;
+	}
+	
+</style>
+
+
+<script type="text/javascript" charset="utf-8">
+
+var Pit = new Class({
+	
+	max_height: 10000,
+	
+	speed: 10,
+	
+	current: 0,
+	
+	sprites: [],
+	
+	left: [0, 250],
+	
+	right: [550, 800],
+	
+	num_pits: 0,
+	
+	num_sprites: 0,
+	
+	initialize: function(mask){
+		this.mask = document.id(mask);
+		this.pit = this.addPit();
+		
+		this.pit_height = this.mask_height = parseInt(this.mask.getStyle('height'), 10);
+		this.pit_height = (this.pit_height / this.speed).ceil() * this.speed;
+		this.width = parseInt(this.pit.getStyle('width'), 10);
+		
+		this.populate();
+	},
+	
+	update: function(scroll){
+		this.mask_height += this.speed;
+		this.pit_height += this.speed;
+		
+		this.mask.setStyle('height', this.mask_height);
+		if ((window.pageYOffset + window.innerHeight) > (document.body.scrollHeight - 20)) window.scrollBy(0, this.speed);		
+		if ((this.pit_height % this.max_height) == 0) this.pit = this.addPit();
+		if (Math.random() < 1) this.addSprite(this.pit_height);
+	},
+	
+	populate: function(){
+		var height = this.mask_height;
+		while ((height -= 10) > 0)
+			if (Math.random() < 1)
+				this.addSprite(height - 50);
+	},
+	
+	addPit: function(){
+		this.num_pits++;
+		this.pit_height = 0;
+		
+		return this.div('pit', {
+			'height': this.max_height
+		}).inject(this.mask, 'bottom');
+	},
+	
+	addSprite: function(height){
+		this.num_sprites++;
+		var current = this.current;
+		var position = {
+			'left': $random.apply(null, $random(0, 1) ? this.left : this.right),
+			'top': height + 100
+		};
+		
+		this.sprites[current] = this.div('sprite', position).inject(this.pit, 'top');
+		
+		this.current = (current + 1) % 10;
+	},
+	
+	div: function(className, styles){
+		return new Element('div', {
+			'class': className,
+			'styles': styles
+		});
+	}
+	
+});
+
+var pit = new Pit('pit-mask'), timer;
+
+document.addEvent('keyup', function(event){
+	if (event.key == 'g')
+		timer = timer ? clearInterval(timer) : pit.update.periodical(30, pit);
+});
+
+(function(){
+	console.log('num_sprites', pit.num_sprites, 'num_pits', pit.num_pits, 'height', pit.mask_height);
+}).periodical(5000);
+
+
+</script>

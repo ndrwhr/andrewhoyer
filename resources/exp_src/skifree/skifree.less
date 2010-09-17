@@ -1,0 +1,84 @@
+
+
+
+div#skifree-main {
+	@hill_width: 700px;
+	@middle: @hill_width / 2;
+	@skier_start: 130px;
+	
+	@start_side_offset: 150px;
+	@course_side_offset: 38px;
+	
+	position: relative;
+	border: 1px dashed #ddd;
+	border-top: none;
+	border-bottom: none;
+	width: @hill_width;
+	margin: 0 auto;
+	padding: 0;
+	
+	div {
+		position: absolute;
+		background-repeat: no-repeat;
+		background-position: top center;
+	}
+	
+	div#credit {
+		top: @skier_start - 30px;
+		left: 210px;
+		width: 104px;
+		height: 67px;
+		background-image: url(images/credit.gif);
+	}
+	
+	div#sign-slalom,
+	div#sign-tree-slalom,
+	div#sign-freestyle {
+		top: @skier_start + 200px;
+		width: 45px;
+		height: 35px;
+	}
+	
+	div#sign-slalom {
+		left: @course_side_offset;
+		background-image: url(images/sign_slalom.gif);
+	}
+	
+	div#sign-freestyle {
+		left: @middle - 22px;
+		background-image: url(images/sign_freestyle.gif);
+	}
+	
+	div#sign-tree-slalom {
+		right: @course_side_offset;
+		background-image: url(images/sign_treeslalom.gif);
+	}
+	
+	div#sign-start-left,
+	div#sign-start-right {
+		top: @skier_start + 350px;
+		width: 42px;
+		height: 27px;
+	}
+	div#sign-start-left {
+		left: @start_side_offset;
+		background-image: url(images/sign_start_left.gif);
+	}
+	div#sign-start-right {
+		right: @start_side_offset;
+		background-image: url(images/sign_start_right.gif);
+	}
+	
+	div#self {
+		top: @skier_start;
+		left: @middle - 10px;
+		width: 20px;
+		height: 30px;
+		background-color: rgba(255, 0, 0, 0.5);
+	}
+	
+	div#tree {
+		height: 64px;
+		width: 32px;
+	}
+}

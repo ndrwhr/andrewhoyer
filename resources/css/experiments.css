@@ -1,0 +1,30 @@
+ul#experiments {
+  margin: 0;
+  padding: 10px 0;
+}
+ul#experiments li {
+  float: left;
+  width: 350px;
+  height: 185px;
+  margin-top: 5px;
+  list-style: none;
+  text-align: center;
+}
+ul#experiments li a.thumb {
+  display: block;
+  width: 350px;
+  height: 100px;
+  margin-bottom: 5px;
+}
+ul#experiments li a.thumb img { border: 1px solid #dddddd; }
+ul#experiments li a.link {
+  text-decoration: none;
+  font-size: 30px;
+}
+ul#experiments li span { color: #aaaaaa; }
+ul#experiments li p {
+  text-indent: 0;
+  margin-top: 5px;
+  text-align: left;
+}
+ul#experiments li.odd { margin-right: 50px; }

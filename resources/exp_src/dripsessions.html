@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>drip session</title>
+	<link href="/stylesheets/canvas.css" media="screen" rel="stylesheet" type="text/css" />
+	<style type="text/css">
+		body{
+			margin: 0;
+			padding: 0;
+			text-align:center;
+		}
+		#canvas{
+			border:1px solid #ddd;
+		}
+	</style>
+	<script type='text/javascript' src='bacon_and_eggs.js'></script> 
+	<script type='text/javascript' src='dripsessions/canvas.js'></script> 	
+	<script type='text/javascript' src='dripsessions/dripsessions.js'></script>
+</head>
+<body onload="init()">
+	<canvas id='canvas' width='750px' height='400px'>
+		<div class='no_canvas'>
+			<strong>Sorry, It looks as though your browser does not support the canvas tag...</strong> If you can, I suggest that you should try chrome or Safari.
+		</div>
+	</canvas>
+	<br>
+	<input type='button' value='Clear' onclick='clear_and_stop()'/>
+	<input type='button' id='demo_button' value='Demo' onclick='demo()'/>
+</body>
+</html>

@@ -1,0 +1,78 @@
+div#skifree-main {
+  position: relative;
+  border: 1px dashed #dddddd;
+  border-top: none;
+  border-bottom: none;
+  width: 700px;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+}
+div#skifree-main div {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+div#skifree-main div#credit {
+  top: 100px;
+  left: 210px;
+  width: 104px;
+  height: 67px;
+  background-image: url(images/credit.gif);
+}
+div#skifree-main div#sign-slalom {
+  top: 330px;
+  width: 45px;
+  height: 35px;
+}
+div#skifree-main div#sign-tree-slalom {
+  top: 330px;
+  width: 45px;
+  height: 35px;
+}
+div#skifree-main div#sign-freestyle {
+  top: 330px;
+  width: 45px;
+  height: 35px;
+}
+div#skifree-main div#sign-slalom {
+  left: 38px;
+  background-image: url(images/sign_slalom.gif);
+}
+div#skifree-main div#sign-freestyle {
+  left: 328px;
+  background-image: url(images/sign_freestyle.gif);
+}
+div#skifree-main div#sign-tree-slalom {
+  right: 38px;
+  background-image: url(images/sign_treeslalom.gif);
+}
+div#skifree-main div#sign-start-left {
+  top: 480px;
+  width: 42px;
+  height: 27px;
+}
+div#skifree-main div#sign-start-right {
+  top: 480px;
+  width: 42px;
+  height: 27px;
+}
+div#skifree-main div#sign-start-left {
+  left: 150px;
+  background-image: url(images/sign_start_left.gif);
+}
+div#skifree-main div#sign-start-right {
+  right: 150px;
+  background-image: url(images/sign_start_right.gif);
+}
+div#skifree-main div#self {
+  top: 130px;
+  left: 340px;
+  width: 20px;
+  height: 30px;
+  background-color: rgba(255, 0, 0, 0.5);
+}
+div#skifree-main div#tree {
+  height: 64px;
+  width: 32px;
+}

@@ -1,0 +1,24 @@
+---
+layout: default
+permalink: /something_a_day/
+css:
+    - exp_src/something_a_day/something_a_day.css
+js:
+    - exp_src/something_a_day/somethings.js
+    - exp_src/something_a_day/something_a_day.js
+---
+
+<h2>Something a day</h2>
+
+<p><strong>This experiment has more or less concluded.</strong> At the time when it was started, my plan was to enter at least one memorable moment every day for an entire year. The first Something was entered on January 6th, 2009 and the last on January 5th, 2010.</p>
+
+<h2>The Tags:</h2>
+<div id='sad-tag-cloud'></div>
+
+<div id='chart-wrapper'>
+	<img src='{{ site.loader }}' id='chart-1' />
+</div>
+
+<h2>Read some somethings:</h2>
+<p id='something-controls'><a href='#read-all-asc' id='read-all-asc'>Read All (Ascending)</a> <a href='#read-random' id='read-random'>Random</a> <a href='#read-all-desc' id='read-all-desc'>Read All (Descending)</a></p>
+<div id='something-wrapper'></div>

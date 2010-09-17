@@ -1,0 +1,44 @@
+---
+layout: default
+permalink: /thoughts/
+path: /resources/images/thoughts/
+thoughts:
+    - num: '01'
+      caption: 'i am big fan of the robert bateman sketchbooks, started this one on January 4th, 2010'
+    - num: '02'
+      caption: 'figuring out the odds of getting into grad school'
+    - num: '03'
+      caption: 'early planning of experiments that went nowhere quickly'
+    - num: '04'
+      caption: 'networking homework and early planning for a grad course project'
+    - num: '05'
+      caption: 'planning the first draft of the sudoku solver'
+    - num: '06'
+      caption: 'more planning for my grad course (querying sensor networks)'
+    - num: '07'
+      caption: 'more sudoku solver (horrible implementation)'
+    - num: '08'
+      caption: 'planning simple linked lists (in c), on a bus ride home'
+    - num: '09'
+      caption: 'another networks assignment'
+    - num: '10'
+      caption: 'more grad course project planning'
+    - num: '11'
+      caption: 'toying with a couple DOM problems'
+    - num: '12'
+      caption: 'apartment hunting in sf'
+    - num: '13'
+      caption: 'attempting to generate an interesting tag cloud (abandoned)'
+    - num: '14'
+      caption: ''
+---
+
+<p>I often carry a small notebook around with me just in case I come up with a cool idea, or find a solution for a problem that I was working on at the time. I go through about two books a year, and I find it really interesting to look back at old things I was working on/thinking about.</p>
+
+<div id='thoughts'>
+	{% for thought in page.thoughts %}
+		<img src='{{ page.path }}{{ thought.num }}.jpg' alt='{{ thought.caption }}'/>
+		<p>{{ thought.caption }}</p>
+	{% endfor %}
+</div>
+

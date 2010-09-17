@@ -1,0 +1,52 @@
+div.month {
+  font-size: 20px;
+  margin: 40px 20px 0 20px;
+  padding: 0 0 0px 5px;
+}
+div.month span { color: #cccccc; }
+div.month div {
+  font-size: 30px;
+  float: left;
+}
+div.month div a { text-decoration: none; }
+div.month.first { margin-top: 0; }
+div.post {
+  clear: both;
+  padding: 10px;
+  margin: 0 40px;
+}
+div.post div {
+  font-size: 30px;
+  float: left;
+}
+div.post div a { text-decoration: none; }
+div.post p {
+  text-indent: 0;
+  margin: 0 0 0 50px;
+  padding: 0;
+}
+div.post p a { text-decoration: none; }
+div.post p.content {
+  margin: 0 0 0 50px;
+  font-size: 80%;
+  color: #aaaaaa;
+}
+div.entry { margin: 20px 40px; }
+div.entry div.month {
+  padding-top: 10px;
+  float: right;
+}
+div.pagination {
+  text-align: center;
+  padding: 20px 0;
+}
+div.pagination div {
+  display: inline;
+  text-align: center;
+}
+div.pagination div.prev { float: left; }
+div.pagination div.next { float: right; }
+div.pagination div span {
+  color: #aaaaaa;
+  font-size: 80%;
+}

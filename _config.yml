@@ -1,0 +1,101 @@
+title:          Andrew Hoyer
+author:         Andrew Hoyer
+description:    Personal playground for Andrew Hoyer
+permalink:      /blog/:year/:month/:day/:title
+url:            http://www.andrew-hoyer.com
+feed:           /atom.xml
+pygments:       true
+
+exclude:
+    - README.md
+    - rakefile
+
+loader:         /resources/images/loader.gif
+
+nav:
+    - name:     Andrew Hoyer
+      url:      /
+
+    - name:     (blog)
+      url:      /blog/
+    
+    - name:     (experiments)
+      url:      /experiments/
+
+    - name:     (thoughts)
+      url:      /thoughts/
+
+contact:
+    - id:       twitter
+      url:      http://www.twitter.com/ndrwhr
+      image:    /resources/images/social/twitter_bw.jpg
+
+    - id:       facebook
+      url:      http://www.facebook.com/ahoyer
+      image:    /resources/images/social/facebook_bw.jpg
+
+    - id:       flickr
+      url:      http://www.flickr.com/people/dolinski
+      image:    /resources/images/social/flickr_bw.jpg
+
+    - id:       linkedin
+      url:      http://ca.linkedin.com/pub/andrew-hoyer/19/b67/728
+      image:    /resources/images/social/linkedin_bw.jpg
+
+    - id:       email
+      url:      mailto:me@andrew-hoyer.com
+      image:    /resources/images/social/email_bw.jpg
+
+css:
+    - css/main.css
+    - css/pygments.css
+    
+js:
+    - js/mootools-1.2.4-core-yc.js
+    - js/main.js
+    
+experiments:
+    - name:     Sudoku Solver
+      date:     July 2010
+      blog:     /blog/2010/06/28/sudoku-solver/
+      url:      /experiments/sudoku/
+      image:    /resources/images/experiments/sudoku.jpg
+
+    - name:     Simple Fractals
+      date:     May 2010
+      blog:     /blog/2010/05/17/fractals/
+      url:      /experiments/fractals/
+      image:    /resources/images/experiments/fractals.jpg
+
+    - name:     Something A Day
+      date:     January 2010
+      url:      /experiments/something_a_day/
+      image:    /resources/images/experiments/somethingaday.jpg
+
+    - name:     Cloth Simulation
+      date:     August 2009
+      blog:     /blog/2009/08/24/the-cloth-simulation/
+      url:      /experiments/cloth/
+      image:    /resources/images/experiments/cloth.jpg
+
+    - name:     Numbers to Words
+      date:     June 2009
+      url:      /experiments/numbers/
+      image:    /resources/images/experiments/numbers.jpg
+
+    - name:     Particle System
+      date:     April 2009
+      blog:     /blog/2009/04/01/particles/
+      url:      /experiments/particle_system/
+      image:    /resources/images/experiments/particles.jpg
+
+    - name:     Drip Sessions
+      date:     February 2009
+      blog:     /blog/2009/02/01/drip-sessions/
+      url:      /experiments/dripsessions/
+      image:    /resources/images/experiments/dripsessions.jpg
+
+    - name:     Robotic Arm
+      date:     December 2008
+      url:      /experiments/robotarm/
+      image:    /resources/images/experiments/robotarm.jpg

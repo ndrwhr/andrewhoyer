@@ -1,0 +1,147 @@
+---
+layout: default
+permalink: /fractals/
+
+js:
+    - exp_src/fractals/JS/gradient.js
+    - exp_src/fractals/JS/canvas.js
+    - exp_src/fractals/JS/tree.js
+    - exp_src/fractals/JS/cantor.js
+    - exp_src/fractals/JS/carpet.js
+    - exp_src/fractals/JS/pythagoras.js
+    - exp_src/fractals/JS/koch.js
+    - exp_src/fractals/JS/fractals.js
+---
+
+<style type="text/css" media="screen">
+div.canvas_wrapper{
+	width:650px;
+	margin:20px auto;
+	padding:0;
+}
+canvas{
+	cursor:pointer;
+	border:1px solid #ddd;
+	margin:0;
+	padding:0;
+}
+#instructions{
+	text-indent:0;
+	padding:10px;
+	margin:20px;
+	text-align:center;
+	font-size:150%;
+	background-color:#eee;
+	border:1px solid #ccc;
+}
+#background{
+	position:absolute;
+	top:0; left:0;
+	width:100%;
+	opacity:0.0;
+	background-color: #000;
+	z-index:50;
+	display:none;
+}
+
+#showcase{
+	position:absolute;
+	top:0; left:0;
+	width:100%; height:100%;
+	margin:0; padding:0;
+	z-index:51;
+	display:none;
+}
+#showcase #canvas_wrapper{
+	position:relative;
+	margin:0 auto;
+	padding: 0 0 5px 0;
+	font-size:15px;
+	text-align:center;
+	background-color:#fff;
+	border:1px solid #777;
+}
+#showcase #canvas_wrapper canvas{
+	border:none;
+	margin:0 0 5px 0;
+	padding:0;
+	background-color:#fff;
+	border-bottom:1px solid #ddd;
+}
+#showcase #canvas_wrapper span#title{
+	font-size:150%;
+}
+</style>
+
+
+<h1>Fractals:</h1>
+
+<p>A fractal is a essentially a geometric (mathematical) pattern. In fact, fractals can be found all around you in your every day life in things like plants, clouds, and even the blood vessels in your body!</p>
+
+
+
+<p id='instructions'>Simply move your mouse over the fractals.<br/> Click to open them in a larger window.</p>
+
+
+
+
+<h2>Cantor Set:</h2>
+<p>The cantor set was one of the first fractals to be studied in detail and is perhaps one of the simplest to generate. Just take a line, remove some percentage of its length from the middle (eg 1/3). Then continually repeat this process for each sub-line (each line on either side of the newly formed gap).</p>
+<div class='canvas_wrapper'>
+	<canvas width='650px' height='400px' id='cantor_canvas'>
+		<div class='no_canvas'>
+			<strong>Sorry, It looks as though your browser does not support the canvas tag...</strong> If you can, I suggest that you should try firefox or Safari.
+		</div>
+	</canvas>
+</div>
+
+
+
+<h2>Pythagoras Tree:</h2>
+<p>The Pythagoras tree starts with a simple square. Next two slightly smaller squares are placed on top such that their corners match up pairwise (forming a triangle composed of two right triangles). This is then repeated for each "branch" of the tree. By moving your mouse up and down in the middle of the canvas below, a true Pythagoras tree can be seen. If the mouse is moved at all to either side, an asymmetric tree is generated.</p>
+<div class='canvas_wrapper'>
+	<canvas width='650px' height='393px' id='pythagoras_canvas'>
+		<div class='no_canvas'>
+			<strong>Sorry, It looks as though your browser does not support the canvas tag...</strong> If you can, I suggest that you should try firefox or Safari.
+		</div>
+	</canvas>
+</div>
+
+
+
+<h2>Koch Curve:</h2>
+<p>The koch curve (if you want to call it a curve) is created by taking a line segment, dividing it into thirds and constructing an equilateral triangle in place of the center third of the original segment. An interesting fact about the Koch curve is that it has infinite length as at each step in the generation process the overall length of the line is increased by one third. As well for the math nerds out there: The Koch curve is continuous but not differentiable.</p>
+<div class='canvas_wrapper'>
+	<canvas width='650px' height='295x' id='koch_canvas'>
+		<div class='no_canvas'>
+			<strong>Sorry, It looks as though your browser does not support the canvas tag...</strong> If you can, I suggest that you should try firefox or Safari.
+		</div>	
+	</canvas>
+</div>
+
+
+<h2>H-Tree:</h2>
+<p>An H-Tree is constructed very much like a real tree (though not random by any means). It gets it's name from the fact that when the angle between the two branches is 180 degrees, an H shape is formed. Oddly enough, this pattern has been found to be useful in designing small antenna.</p>
+<div class='canvas_wrapper'>
+	<canvas width='650px' height='470px' id='tree_canvas'>
+		<div class='no_canvas'>
+			<strong>Sorry, It looks as though your browser does not support the canvas tag...</strong> If you can, I suggest that you should try firefox or Safari.
+		</div>
+</canvas>
+</div>
+
+
+
+
+
+<h2>Sierpinski Carpet:</h2>
+<p>The Sierpinski Carpet is created by dividing the original shape into 9 squares then removing the center square. This process is then repeated recursively for the other 8 squares. Fun fact about the Sierpinski carpet: If an infinite number of iterations is performed, the total surface area of the carpet is eventually reduced to zero.</p>
+<div class='canvas_wrapper'>
+	<canvas width='650px' height='500px' id='carpet_canvas'>
+		<div class='no_canvas'>
+			<strong>Sorry, It looks as though your browser does not support the canvas tag...</strong> If you can, I suggest that you should try firefox or Safari.
+		</div>
+	</canvas>
+</div>
+
+<p>If you're interested, <a href='/blog/2010/05/17/fractals/'>click here to read about some of the implementation details.</a></p>

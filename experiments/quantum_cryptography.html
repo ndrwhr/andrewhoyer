@@ -1,0 +1,423 @@
+---
+layout: default
+permalink: /quantum_cryptography/
+---
+
+<% content_for :styles do %>
+	<%= stylesheet_link_tag 'quantum' %>
+<% end %>
+
+<% content_for :js do %>
+	<script type="text/javascript" src="/javascripts/quantum_crypto.js"></script>
+	<%= javascript_include_tag 'prototype' %>
+<% end %>
+
+
+<div id="debug"></div>
+<h1><span class='<%= randomColor %>'>Quantum Cryptography:</span></h1>
+<div class='medium_spacer'>&nbsp;</div>
+<p>This article/guide/tutorial (or whatever you choose to call it), was written as a project for a cryptography course in the winter semester of 2009 (January-April). As such it is very likely that it will become out of date as the technologies and theories involved in quantum cryptography continue to progress. Please take this article/guide/tutorial as-is and be sure to check other more recent resources (particularly when looking at the ongoing concerns section).</p>
+<div class='medium_spacer'>&nbsp;</div>
+<div id="table_of_contents">
+	<h4>Contents:</h4>
+	<ul>
+		<li><a href="#the_scenario">The Scenario</a></li>
+		<li><a href="#the_quantum_world">The Quantum World</a></li>
+		<li><a href="#how_it_works">How it works</a></li>
+		<li><a href="#why_it_works">Why it works</a></li>
+		<li><a href="#ongoing_concerns">Ongoing Concerns</a></li>
+		<li><a href="#conclusion">Conclusion</a></li>
+		<li><a href="#try_it_out">Try it out</a></li>
+		<li><a href="#references">References</a></li>
+	</ul>
+</div>
+
+<p class='first_paragraph'>The world as it stands today is in a golden age of cryptography as nearly everyone has access to some form of secure encryption. This is mainly due to the spread of public key cryptographic systems through the internet. As has been seen in history even the most secure encryption systems eventually meet their end. Should the day come that the current popular systems no longer provide adequate security, scientists and cryptographers will most likely look towards the science of quantum mechanics and its ability to provide its users with a method of perfect security.</p>
+
+<p>Below I've described the BB84 protocol for Quantum Cryptography (as developed by Charles Bennett and Gilles Brassard in 1984).</p>
+
+<a name="the_scenario"></a>
+<h2><span class='<%= randomColor %>'>The Scenario:</span></h2>
+<p class='first_paragraph'>Lets say there are two people, <strong>Alice and Bob</strong>, who want to communicate some very important information, Alice's grandmother'sf top secret cake recipe, making sure that absolutely no one else can find out the recipe. We should also note that Alice and Bob have an enemy, <strong>Eve</strong>, and she desperately wants to get her hands on the recipe so as to start up a large chain of cake shops.</p>
+
+<p>Alice and Bob know that Eve is a very determined individual, so no matter how they communicate, Eve will definitely be listening in (phone lines can be tapped, letters and emails can be intercepted, carrier pigeons can be captured... etc). Luckily, Alice is a bit of a cryptography buff and she really wants to try her hand at using a one time pad to encrypt the recipe, this way even if Eve gets her hands on the message it'll be impossible for her to decrypt it.</p>
+
+<img style='float:right'src='/images/experiments/quantum/cupcake_folder.jpg' />
+
+<p>But with using a one time pad comes the problem of distributing the key to Bob so that he, unlike Eve, will easily be able to decipher the message. In other words Alice is stuck in a catch 22 situation, she would have to share her secret key with Bob in order to share the secret recipe. To solve this Alice plans on implementing a <strong>Quantum Cryptographic</strong> system.</p>
+
+<p>She knows that Quantum Cryptography isn't exactly what the name suggests, as it isn't actually used to encrypt anything. Rather it is just a solution to the key distribution problem. So really it is more accurate to call Quantum Cryptography <strong>Quantum Key Distribution</strong> (QKD).</p>
+
+<p>The basis for Alice's QKD system revolves around tiny indivisible units of light that obey the laws of quantum mechanics.</p>
+
+<a name="the_quantum_world"></a>
+<h2><span class='<%= randomColor %>'>The Quantum World:</span></h2>
+<p class='first_paragraph'>I know that quantum mechanics has a stigma of being very difficult to understand, but don't worry we're not going to be getting into the real wacky stuff. All you need to know are a couple properties of light.</p>
+
+<p>Light can be thought of as both a particle and a wave, each obeying a set of physical laws. When light is treated as a wave, there are sets of classical physics equations that govern how it behaves. When looked at as a particle, light acts much stranger as it moves to the statistical approach of quantum mechanics for its explanation. These particles are known as photons.</p>
+<p>Though photons have many interesting properties, we're only interested in a couple:</p>
+<ol>
+	<li>They have a unique property called polarization (or sometimes orientation), for the sake of simplicity we will assume there are only 4 different ways light can be polarized.</li>
+	<li><strong>Just the act of observing a photon has the potential to change its polarization.</strong> This is crucial to the functioning of quantum cryptographic systems (we'll see why later).</li>
+</ol>
+
+<table class='photon_table'>
+	
+	<tr>
+		<th>Polarization:</th>
+		<td>Horizontal</td>
+		<td>Up-Down Diagonal</td>
+		<td>Vertical</td>
+		<td>Down-Up Diagonal</td>
+	</tr>
+	<tr>
+		<th>Symbol:</th>	
+		<td><img class='intext' src='/images/experiments/quantum/h.jpg'/></td>
+		<td><img class='intext' src='/images/experiments/quantum/bs.jpg'/></td>	
+		<td><img class='intext' src='/images/experiments/quantum/v.jpg'/></td>
+		<td><img class='intext' src='/images/experiments/quantum/fs.jpg'/></td>	
+	</tr>
+	
+</table>
+
+<p>Above you can see the 4 different orientations we'll be using. Next we need to have a way of categorizing the different types of photons. For that we're going to use what are called polarization filters. A filter takes the incoming photons and filters them according to their orientation:</p>
+
+<table class='photon_table'>
+	
+	<tr>
+		<th>Filter:</th>
+		<td>Horizontal</td>
+		<td>Up-Down Diagonal</td>
+		<td>Vertical</td>
+		<td>Down-Up Diagonal</td>
+	</tr>
+	<tr>
+		<th>Symbol:</th>	
+		<td><img class='intext' src='/images/experiments/quantum/hf.jpg'/></td>
+		<td><img class='intext' src='/images/experiments/quantum/bsf.jpg'/></td>	
+		<td><img class='intext' src='/images/experiments/quantum/vf.jpg'/></td>
+		<td><img class='intext' src='/images/experiments/quantum/fsf.jpg'/></td>	
+	</tr>
+</table>
+
+<p>So a <img class='intext' src='/images/experiments/quantum/hf.jpg'  alt='horizontal'> filter only lets through <img class='intext' src='/images/experiments/quantum/h.jpg'  alt='horizontal'> photons, a <img class='intext' src='/images/experiments/quantum/vf.jpg'  alt='vertical'> filter only <img class='intext' src='/images/experiments/quantum/v.jpg'  alt='vertical'> photons and so on.</p>
+
+
+
+<p>Next we'll look at how to detect them. For that we have two different types of detectors, Rectilinear which detect <img class='intext' src='/images/experiments/quantum/v.jpg'  alt='vertical'> and <img class='intext' src='/images/experiments/quantum/h.jpg'  alt='horizontal'> photons, and Diagonal which detect <img class='intext' src='/images/experiments/quantum/bs.jpg'  alt='Up-Down'>   and <img class='intext' src='/images/experiments/quantum/fs.jpg'  alt='Down-Up'> photons:</p>
+
+
+<table class='photon_table'>
+	<tr>
+		<th>Detector Type:</th>
+		<td>Rectilinear</td>
+		<td>Diagonal</td>
+	</tr>
+	<tr>
+		<th>Symbol:</th>	
+		<td><img class='intext' src='/images/experiments/quantum/rect.jpg'/></td>
+		<td><img class='intext' src='/images/experiments/quantum/diag.jpg'/></td>	
+	</tr>
+</table>
+
+
+<p>This is where the second property of photons comes into play. We already stated that a <img class='intext' src='/images/experiments/quantum/rect.jpg' alt='rectilinear'> detector detects <img class='intext' src='/images/experiments/quantum/h.jpg' alt='horizontal'> and <img class='intext' src='/images/experiments/quantum/v.jpg' alt='vertical'> photons, but what would happen if either of the diagonal photons were to hit the <img class='intext' src='/images/experiments/quantum/rect.jpg' alt='rectilinear'> detector? Well as it turns out the diagonal photon will turn into a <img class='intext' src='/images/experiments/quantum/h.jpg' alt='horizontal'> or <img class='intext' src='/images/experiments/quantum/v.jpg' alt='vertical'> photon. So this means no matter what hits the detector, something is always going to be detected. This same idea applies to the <img class='intext' src='/images/experiments/quantum/diag.jpg' alt='diagonal'> detector (it will flip <img class='intext' src='/images/experiments/quantum/h.jpg' alt='horizontal'> and <img class='intext' src='/images/experiments/quantum/v.jpg' alt='vertical'> photons to one of the diagonals).</p>
+
+<table class='photon_table'>
+	<tr>
+		<th>Input</th>
+		<th>&nbsp;</th>
+		<th>Filter</th>
+		<th>&nbsp;</th>
+		<th>Output</th>
+		<th>&nbsp;</th>
+	</tr>
+	<tr>
+		<td><img class='intext' src='/images/experiments/quantum/fs.jpg'/></td>
+		<td>+</td>
+		<td><img class='intext' src='/images/experiments/quantum/rect.jpg'/></td>
+		<td>=</td>
+		<td><img class='intext' src='/images/experiments/quantum/v.jpg'/></td>
+		<td><img class='intext' src='/images/experiments/quantum/h.jpg'/></td>
+	</tr>
+	<tr>
+		<td><img class='intext' src='/images/experiments/quantum/bs.jpg'/></td>
+		<td>+</td>
+		<td><img class='intext' src='/images/experiments/quantum/rect.jpg'/></td>
+		<td>=</td>
+		<td><img class='intext' src='/images/experiments/quantum/v.jpg'/></td>
+		<td><img class='intext' src='/images/experiments/quantum/h.jpg'/></td>
+	</tr>
+</table>
+
+<a name="how_it_works"></a>
+<h2><span class='<%= randomColor %>'>How it works:</span></h2>
+
+<h3>The Setup:</h3>
+<p>For Alice and Bob to pull this off they're going to need quite a bit of special hardware. Lets make a list:</p>
+<ul>
+	<li>First off both Alice and Bob are going to need a dedicated fiber optic cable between their houses. The data that is transmitted through Quantum Cryptography is very different from the regular optical data (regular data doesn't care at all about polarization or individual photon counts).</li>
+	<li>Alice needs a machine that will produce, as well as filter, individual photons.</li>
+	<li>Bob needs a machine to accurately detect individual photons.</li>
+	<li>Lastly they need to decide on a convention for describing the individual photons. Lets say they came up with this ahead of time:
+		<table class='photon_table'>
+			<tr>
+				<th>Polarization:</th>
+				<td>Horizontal</td>
+				<td>Vertical</td>
+				<td>Up-Down Diagonal</td>
+				<td>Down-Up Diagonal</td>
+			</tr>
+			<tr>
+				<th>Symbol:</th>	
+				<td><img class='intext' src='/images/experiments/quantum/h.jpg'/></td>
+				<td><img class='intext' src='/images/experiments/quantum/v.jpg'/></td>
+				<td><img class='intext' src='/images/experiments/quantum/bs.jpg'/></td>	
+				<td><img class='intext' src='/images/experiments/quantum/fs.jpg'/></td>	
+			</tr>
+			<tr>
+				<th>Representation:</th>
+				<td>1</td>
+				<td>0</td>
+				<td>1</td>
+				<td>0</td>
+			</tr>
+		</table>
+		<p>This is saying that if a <img class='intext' src='/images/experiments/quantum/h.jpg' alt='horizontal'/> or <img class='intext' src='/images/experiments/quantum/bs.jpg' alt='Up-Down'/> photon is detected, a <strong>1</strong> will be recorded. If a <img class='intext' src='/images/experiments/quantum/v.jpg' alt='vertical'/> or <img class='intext' src='/images/experiments/quantum/bs.jpg' alt='Down-Up'/> photon is detected, a <strong>0</strong> will be recorded. This decision is completely arbitrary, so it doesn't really matter who knows this information, all that is important is that both sides agree on the same thing.</p>
+	</li>
+</ul>
+
+
+
+<h3>The Algorithm:</h3>
+<p>Lets go through a quick overview of how this whole process is going to work. Don't worry if you don't understand everything right away, hopefully when we look closer at each step you'll understand how it all fits together.</p>
+<ol>
+	<li>Alice, using her photon emitter, sends a random sequence of 0's and 1's by switching between her 4 different polarization filters making sure to note the polarization of each one she sends. This initial string of photons is generally very large. For example, a 250 character message, Alice should initially transmit around 4000 bits, 8 bits/character (assuming ASCII characters) x 250 characters x 2 (because as we'll see, half of these bits will be lost).</li>
+	<li>On the other end, Bob has no idea what types of photons Alice is sending, so he is forced to switch randomly between his two detectors. With every photon he writes down which detector he used as well as the 0 or 1 result.</li>
+	<li>Once Bob is finished detecting Alice's photons, he phones Alice (fully aware that Eve may be listening) and tells her which detectors he used on each photon. Alice either confirms or denies whether or not Bob used the right detector for a given photon. Both make sure to note which ones he measured incorrectly.</li>
+	<li>They now remove all of the bits for which Bob used the wrong detector. They should now have exactly the same bit sequence, and thus a long one time pad key.</li>
+</ol>
+
+<p>Thats pretty much it. Again I understand that some of these steps may seem a little fuzzy or unclear. Next we'll go through each step and see what is going on.</p>
+ 
+
+
+
+
+
+
+
+
+
+<h3>An Example <span class='note'>(with details)</span>:</h3>
+	
+<p>I understand that the above algorithm is a little high and dry, so lets go through it step by step and explain in more detail what is actually going on.</p>
+<p>Just a couple notes before we start:</p>
+<ul>
+	<li>Alice's initial key length is 4000 bits, but at each step I'm only displaying the first 20 bits.</li>
+	<li>At every step you have the options to generate new sets of data for both Alice and Bob. In a real life implementation this would never happen, either the whole algorithm is executed, or it is stopped and restarted from the beginning using a new random key from Alice. This is to ensure perfect security.</li>
+</ul>
+<div class='small_spacer'>&nbsp;</div>
+<h4>Step 1:</h4>
+<p>The first step of the whole process is for Alice to generate her set of random bits and encode them using her different polarization filters making sure to stick with the convention that her and Bob decided upon earlier (that being that 1 is encoded as <img class='intext' src='/images/experiments/quantum/h.jpg' alt='horizontal'/> or <img class='intext' src='/images/experiments/quantum/bs.jpg' alt='up-down'/> and 0 is encoded as <img class='intext' src='/images/experiments/quantum/v.jpg' alt='vertical'/> or <img class='intext' src='/images/experiments/quantum/fs.jpg' alt='down-up'/> ), sending this sequence through the fiber-optic cable to Bob.</p>
+<div class='demo_output' id="step1_output"></div>
+<p>This step may seem rather weird at first, why would Alice send a completely random sequence to Bob? The whole idea of Quantum Cryptography is to generate a very large random key, so it is obvious that for the key to be random at the end, it needs to be random at the beginning. If you want, you can <a href='javascript:recalc_alice()'>generate another random sequence</a> for Alice. </p>
+
+
+
+<h4>Step 2:</h4>
+<p>Now its Bob's time to shine. Remember, Bob has no idea what polarization of photons Alice is sending down the line, so he has to randomly switch between his two photon detectors making sure to record which detector he used and what bit he detected. His results should look something like this:</p>
+<div class='demo_output' id="step2_output"></div>
+<p>Again this is where quantum mechanics comes into play. Because Bob has no idea what the polarization of each photon is, he has a 50% chance of using the proper detector, but either way he's going to record a result. For example, say Bob uses a <img class='intext' src='/images/experiments/quantum/rect.jpg' alt='rectilinear'/> detector for the first photon, if that photon happens to be a <img class='intext' src='/images/experiments/quantum/h.jpg' alt='horizontal'/> or a <img class='intext' src='/images/experiments/quantum/v.jpg' alt='vertical'/> then he is going to properly record the bit that Alice was trying to send. But if he used a <img class='intext' src='/images/experiments/quantum/diag.jpg' alt='diagonal'/> detector, there would be a 50% chance that he'd record the bit Alice was intending. Remember this same idea applies for if he were trying to detect either of the diagonal photons.</p>
+<p>If you want you can <a href='javascript:recalc_alice()'>generate Alice's sequence again</a>, or you could always <a href="javascript:recalc_bob();">generate Bob's half</a>.</p>
+
+
+
+
+<h4>Step 3:</h4>
+<p>When Bob is done receiving Alice's transmission, he calls Alice over the phone. Together they go over the whole transmission comparing the detectors that Bob used to what he should have, taking note of which ones he got wrong (outlined in red).</p>
+<div class='demo_output' id="step3_output"></div>
+<p>The important thing to remember in this step is that Bob and Alice only talk about which detectors were used properly. This means Alice can't say anything about the random bits or photons she sent, and bob can't say anything about which bits he recorded. If they do let slip some of the bits or types of photons then this whole process has been a waste as you can count on Eve listening in on the phone call, trying to get any information she can.</p>
+<p>If you want you can generate a <a href="javascript:setup_demo()">whole new set of data</a>, or a <a href='javascript:recalc_alice()'>new sequence for Alice</a>, or a <a href="javascript:recalc_bob();">new sequence for Bob</a>.</p>
+
+
+<h4>Step 4:</h4>
+<p>The last thing that Alice and Bob have to do is assemble their final key. To do this they must ignore any bits for which bob used the wrong detector.</p>
+<div class='demo_output' id="step4_output"></div>
+<p>Above you can see that Alice and Bob have just dropped the incorrect bits. When all the bits they agreed upon are put together they have their key:</p>
+<p class='demo_output' id='step4_key_output'></p>
+
+
+<p>Below I've encrypted the recipe using the key generated above (in combination with an extended Vigenere square). For ease of comparison, I've added a space between every character.</p>
+
+<div class='encrypted_recipes'>
+	<div class="recipe_column">
+		<h4>Original Recipe:</h4>
+		<p id='plain_recipe'>I n g r e d i e n t s : 3 c u p s f l o u r , 2 c u p s s u g a r , 2 t s p b a k i n g s o d a , 1 t s p s a l t , 6 T b s p c o c o a p o w d e r , 2 T b s p v i n e g a r , 3 / 4 c u p o i l , 2 t s p v a n i l l a e x t r a c t , 2 c u p s w a t e r . I n s t r u c t i o n s : 1 ) P r e h e a t o v e n t o 3 5 0 F . 2 ) M i x w e t a n d d r y i n g r e d i e n t s s e p a r a t e l y 4 ) M i x w e t i n t o d r y . 5 ) B a k e f o r 3 0 m i n u t e s .</p>
+	</div>
+	<div class="recipe_column">
+		<h4>Encrypted Recipe:</h4>
+		<p id='cipher_recipe'></p>
+	</div>
+	<div class="recipe_column">
+		<h4>Decrypted Recipe:</h4>
+		<p id='decipher_recipe'></p>
+	</div>
+	
+	<div class='empty_spacer'>&nbsp;</div>
+</div>
+<div class="small_spacer">&nbsp;</div>
+<p>One last time. If you want to, you can you can generate a <a href="javascript:setup_demo()">completely new set of data</a>, or a <a href='javascript:recalc_alice()'>new sequence for Alice</a>, or a <a href="javascript:recalc_bob();">new sequence for Bob</a> just to see how everything changes.</p>
+
+<a name="why_it_works"></a>
+<h2><span class='<%= randomColor %>'>Why it works:</span></h2>
+<p>Lets go ahead and look at some of the crucial components of this process and see if there is a way for Eve to get Alice and Bobs key. If we make the assumption that the computers that Alice and Bob use are completely secure, then there are only two areas that Eve can attack:</p>
+
+<h3>Alice and Bob's transmission:</h3>
+
+<p>I know when I first started learning about Quantum Cryptography I thought to myself, 'Why couldn't Eve just "tap" Alice and Bobs fiber optic cable and read all the photons that Alice is sending to Bob?' Unfortunately for Eve, this is a lot more difficult than it sounds.</p>
+
+<p>One of the key properties of this entire set up is that measuring the polarization of a photon has the potential to change its polarization. So this means that if Eve manages to tap the line and starts taking readings of Alice's photons she might end up changing them. This in turn means that the photons which Bob detects may be different from the ones that Alice sent. Below is an example of what this scenario would look like:</p>
+
+<div id='hack_attack_output'></div>
+
+<p>The above table gives lots of information. First off, I've done the usual removing of bits for which Bob used the wrong detector. Next thing to notice is that I've also highlighted the detectors for which Eve used the wrong detector and thus accidently switched one of Alice's photons. Lastly, I've also highlighted the bits for which Alice and Bob did not agree upon (because of Eves meddling).</p>
+
+<p>Lets look at this scenario with a bit of statistics. Because Eve has no idea what orientation of photons Alice is sending, she follows the same procedure as Bob of randomly switching between her detectors. In doing so she is statistically going to get about 50% right and 50% wrong. Bob is going to do the exact same thing, and it turn is also bound to choose the correct detector 50% of the time. Combining these results, on average if Eve measures every single photon that Alice sends, she will inadvertently mess up about 25% of Alice and Bob's final secret key.</p>
+
+<p>So really, all Alice and Bob have to do to ensure the security of their key, is check some of their final bits (and discard them). If a bit does match, then they know Eve is listening in and would abandon the key.</p>
+
+
+<h3>Alice and Bob's Comparison:</h3>
+<p>For the sake of an example, lets assume that in this scenario Eve did not try to "tap" Alice and Bob's photon transmission and detection. Instead she is just going to listen in when they compare their results and try to learn something about their final key.</p>
+
+<p>So after Alice and Bob finish they're transmission they phone each other. Eve then compiles the table we see below.</p>
+
+<div id='listen_attack_output'></div>
+
+<p>Not exactly a lot there... Sure she knows which detectors they used for their key, but what she doesn't know is which photons they detected. This means if she wants to find out the key, she would have to try every possible combination of 0 or 1 for every bit. To put this in perspective, if the final key was say 2000 bits longs this means she would have to check 2^2000 possibilities, a number so large that even <a href='http://www.google.ca/search?q=2^2000'>Google's calculator</a> can't compute it...</p>
+
+<a name="ongoing_concerns"></a>
+<h2><span class='<%= randomColor %>'>Ongoing Concerns:</span></h2>
+<p class='first_paragraph'>Quantum Cryptography as it stands today is not perfect. In this last section I would like to talk about some of the problems that prevent Quantum Cryptography from stepping into public use.</p>
+<h3>Hardware:</h3>
+<p>As you can see from the setup of the example above, QKD depends heavily on hardware components. This is probably the largest limiting factor of the system as a whole as it relies on the proper transmission and detection of individual photons. This is no small feat as photons are sensitive particles and if not treated carefully, can change polarization or sometimes disappear.</p>
+<ul>
+	<li style="list-style-type:none">
+		<h4>Distance of transmission:</h4>
+		<p>Fiber optic cables today generally have a limited distance of transmission. To combat this, fiber optic networks use amplifiers at certain points to read and boost the signals so that there is no data loss. With a quantum cryptographic system, amplifiers cannot be used for two reason. First normal amplifiers don't care about the polarization of individual photons, so any special polarization before the amplifier would be lost. Second, is that even if there were a way to successfully amplify a photon without losing its polarization, it would provide an entry point for an eavesdropper.</p>
+	</li>
+	
+	<li style="list-style-type:none">
+		<h4>Emission of single photons:</h4>
+		<p>Another technical detail is emitting single photons, most systems cannot accurately send individual photons. The problem arises from the fact that photons are actually tiny particles of energy generated by excited molecules. So if when generating photons you accidentally input too much energy you might get several photons out. Many in place QKD systems have ways to combat this, but it is still something that should be noted as it hinders a perfect implementation.</p>
+	</li>
+	
+	<li style="list-style-type:none">
+		<h4>Dedicated fiber lines:</h4>
+		<p>Because the quantum cryptographic protocol is so different from regular optical data transmissions, it would require a dedicated fiber network. As the cost of running fiber optic cable can be expensive, it is very likely that Quantum Cryptography would only be used for the most important communication channels (e.g. between governments), not regular civilian use.</p>
+	</li>
+	
+	<li style="list-style-type:none">
+		<h4>Hardware attacks:</h4>
+		<p>A more interesting problem is that even if all of the above problems are solved and Quantum Cryptography could be properly implemented, a single paperclip has the ability to destroy any secure communications. By pinching a quantum cryptographic fiber cable between a paperclip, photons passing through the kink in the cable would most likely change polarization. This has the effect of not stopping the transmission from taking place but would destroy any attempt at key generation, thus turning encrypted messages into a mess.</p>
+	</li>
+</ul>
+
+<h3>Other cryptographic systems:</h3>
+<p>Perhaps the most influential reason of why Quantum Cryptography isn't further developed, is that many of the encryption systems in place today seem to be doing the job just fine.</p>
+<ul>
+	<li style="list-style-type:none">
+		<h4>Flexibility:</h4>
+		<p>Many public key crypto-systems in use today (PGP and RSA) are readily available and can be used on just about any computer connected to the internet. This alone puts quantum cryptographic systems at a severe disadvantage as it requires so much dedicated hardware. Where as something like PGP requires absolutely no dedicated hardware, just software.</p>
+	</li>
+	
+	<li style="list-style-type:none">
+		<h4>Current strength:</h4>
+		<p>Although this may change in the future, the current strength of public key crypto-systems is rather strong. Some systems boasting that breaking a key would take many times the life of the universe. For most communications this should be enough.</p>
+	</li>
+</ul>
+
+<a name="conclusion"></a>
+<h2><span class='<%= randomColor %>'>Conclusion:</span></h2>
+<p>Quantum Cryptography today, if nothing else, is an interesting experiment bridging two sciences. As such it is bound to grow and evolve with time (like any other science), sometimes going in the right direction and other times, not. What ultimately matters is that it is at least something different from the mathematics based cryptographic systems that are prevalent today. Yes, the quantum cryptographic process I've described above has limitations in its physical implementation, but out weighing those limitations is the soundness of the theory of security embedded in quantum mechanics and as such it is the biggest step we have to the holy grail of 100% perfectly secure communications.</p>
+
+
+<a name="try_it_out"></a>
+<h2><span class='<%= randomColor %>'>Try it out:</span></h2>
+<p>Below you can encrypt some text using a key generated with quantum cryptography.</p>
+
+<table class="try_yourself">
+	<tr>
+		<th>Plain Text:</th>
+		<td><textarea rows="6" cols="50" id="plain_text">Type your message here!</textarea></td>
+	</tr>
+	<tr>
+		<th>&nbsp;</th>
+		<td><input type="button" value="Generate Key and Encrypt" onclick="encrypt()" /></td>
+	</tr>
+	<tr>
+		<th>Key:</th>
+		<td><textarea rows="6" cols="50" id="key"></textarea></td>
+	</tr>
+	<tr>
+		<th>&nbsp;</th>
+		<td><input type="button" value="Decrypt" onclick="decrypt()" /></td>
+	</tr>
+	<tr>
+		<th>Cipher Text:</th>
+		<td><textarea rows="6" cols="50" id="cipher_text"></textarea></td>
+	</tr>
+</table>
+<h3>Note:</h3>
+<ul>
+	<li>To use the key generated by quantum cryptography, it must first be converted into ascii numbers. This is done by dividing the key into 8 bit segments, then converting those to decimal numbers.</li>
+	<li>The messages are encrypted and decrypted using an extended Vigenere Square.</li>
+	<li>It only accepts ASCII characters, it'll strip out anything else.</li>
+	<li>Try to break this: 95R/$Cg14HixR"%Uz* Nw#EUI%"M4ake6g7%wJH,|2]#\{b[3!qN_EdMzE4tvJSmb8&amp;</li>
+</ul>
+
+
+<div class='medium_spacer'>&nbsp;</div>
+<a name="references"></a>
+<h2><span class='<%= randomColor %>'>References and Further Readings:</span></h2>
+<h4>References:</h4>
+<ul>
+	<li>Singh, Simon. The Code Book. Toronto: Anchor Books, 2000.</li>
+	<li>V.K., Stanatuis. “Identifying Vulnerabilities of Quantum Cryptography in Secure Optical Data Transport”, IEEE Security &amp; Privacy, 2007</li>
+	<li>Goelm, Rajni et al. "Research Directions in Quantum Cryptography", ITNG, 2007.</li>
+	<li>Elliott, Chip. “Quantum Cryptography”, IEEE Security &amp; Privacy, 2004</li>
+</ul>
+<div class='small_spacer'>&nbsp;</div>
+<h4>Further Readings:</h4>
+<ul>
+	<li>Simon Singh's book, <a href="http://www.simonsingh.net/The_Code_Book.html">The Code Book</a>, provides a great introduction to the entire field of cryptography and is a great place to start if something on this page has tweaked your interest.</li>
+	<li><a href="http://en.wikipedia.org/wiki/Polarization">Wikipedia's Entry on Light Polarization </a> provides a rather hairy explanation of how physicists deal with the polarization of light (not for the faint of heart).</li>
+	<li><a href="http://en.wikipedia.org/wiki/Quantum_cryptography">Wikipedia's Entry on Quantum Cryptography</a> does a just explanation of other cryptographic systems as well as BB84 (as explained here).</li>
+</ul>
+
+
+
+<script>
+	setup_demo();
+</script>
+
+<!--
+	95R/$Cg14HixR"%Uz* Nw#EUI%"M4ake6g7%wJH,|2]#\{b[3!qN_EdMzE4tvJSmb8&
+	<B^<CQ![D;!`(#xMB97[2s)dBC1^N`OmiYm ('Az(`MI\FmS(|qgx/3;qZ4 11D` :40R*(Aa7#y#04`"$eEE"Gvb"?[`}c]xE%gNE.8*9c #UH,0LMW\Is3l.)&NXuHzS2994
+	VAv"s/UNzI$]y|"%^+n>!MZ`46YY]M-$#GUOt:S(TRQ!$:E{I8VX-<1JLTo|MnDI%(o
+	5T%MvV$+NXLOCG7=F'k.GWyH_FQBJI/dIoT9.apN9.W-x/aVOh`/`PZrH/Q/6_%<OFQ\WZ^vl<.LUEpEL&{`O-J=&Q6\'Gk<MU7$
+	@.f0D<hg`SE'eO0>o-)b>`[Y/{Iu#B^PCK`4tPWS'PB>{:`X\-
+	m>}d(^[ci2[a$1]WH/6MwR87@Kq-(oZ4DJ<]_2QY{9ZC7wr\iG4((.Jv![&56v:0#yYb)%Sbd}kQ\bZ8B^6=t>1-mRlqAJdNpa-s
+	%s-uq=q,V4dQp[LvfYHNY-),<,17*#:X%g:V?s7eDY|UDK@V#O
+	(n`6E[d<AC-Xpv-9e,6F_49K&s{6#1g%<$x*<8$
+	NMR43LgLQXi&k??U&@5Yw.^ec%3f4 {eOxT:+J^E*KC#y-|gL(cdnJ}Yi%K'5_e_}G7
+	aGS1-+N0Hg7OUn0?j@c:o{1B s2`O?4TBPpgxA3
+	FS@sj%H&s%<E-)xZ'|SutaR^Obl#h{2;?$&@d}V(t04ATt96OOSokkDo/W'7X21"/o:!T(\K21Z`3*21`]tIM.KBH%.Yg(b=`W06
+	Q55WpR+Vo"w/N@0L&s}*(8atc8,gH_V;&;7=1A@6>9R+.btg_p0{,>)=mOAM&x2fN$wpFO!]:IZONs!/uMIjlQnI7Us"gI>X}g?!
+	QjnOv8-5 Gr;afXZL\ArO>Y71/h5&)<JxWB2Bq-+{;M)Z5X`Z2
+	NeByZ0j)=]-"y1YM%4V4-8O#a*=1_ItMZ[n54QD
+	*kf-r17=]`l:AUw=-Z/z9;$>b2aNg|wj="ycIvjO,mlv2  _,D'VYA:e&3sri"7\zk6sTjF|>,$Ri25"cc#2TT>eg(DP?x(Z`ot_TWL;]UIw|X3u8p5_H0Say`6E!_9i!'s?K[
+	/;9V!SPYIBlR>:k5\T"VfLZP=?X)JF?qz0rH"eozo\$-L5+J2Bgfy;YH#EW?5@7_|7O
+	95R/$Cg14HixR"%Uz* Nw#EUI%"M4ake6g7%wJH,|2]#\{b[3!qN_EdMzE4tvJSmb8&
+-->

@@ -1,0 +1,16 @@
+
+Options -Indexes +SymLinksIfOwnerMatch
+DirectoryIndex index.html index.htm index.php
+IndexIgnore *
+
+# Redirect errors to a custom page
+
+ErrorDocument 404 /404/
+
+# Rewrites...
+
+RewriteEngine On
+
+# Prevent accessing hidden files
+
+RewriteRule ^(.*/)?\. - [F,NS,L]
