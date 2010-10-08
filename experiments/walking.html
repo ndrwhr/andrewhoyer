@@ -1,0 +1,225 @@
+---
+layout: default
+permalink: /walking/
+---
+
+<style type="text/css" media="screen">
+    #canvas {
+        height: 600px;
+        margin: 0;
+        padding: 0;
+        border: 1px solid black;
+        position: relative;
+    }
+    
+    
+    /* generic styling of all body parts */
+    
+    #canvas div {
+      position: absolute;
+/*      background: white;*/
+/*      border: 1px solid black;*/
+/*      -webkit-border-radius: 500px;*/
+        background-repeat: none;
+        -webkit-animation-duration: 3s;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: cubic-bezier(0.5, 0.4, 0.5, 0.6);
+    }
+
+    .left { -webkit-animation-delay: -1.5s; }
+
+    .me {
+        top: 50px;
+        left: 350px;
+        -webkit-transform: rotate(6deg);
+        -webkit-animation-name: head;
+    }
+    
+    .torso {
+        width: 86px;
+        height: 275px;
+        background-image: url(/resources/exp_src/walking/images/torso.png);
+    }
+    
+    .arm {
+        top: 100px;
+        left: 17px;
+        width: 35px;
+        -webkit-transform-origin: 50% 0;
+        -webkit-animation-name: bicep;
+    }
+    
+    .bicep {
+        background-color: red;
+        height: 100px;
+        width: 35px;
+    }
+
+    .forearm {
+        background-color: blue;
+        top: 90px;
+        width: 30px;
+        height: 110px;
+        -webkit-transform-origin: 0% 0%;
+        -webkit-animation-name: forearm;
+    }
+
+
+    .leg {
+        top: 235px;
+        left: 6px;
+        width: 50px;
+        -webkit-transform-origin: 60% 20px;
+        -webkit-animation-name: thigh;
+    }
+
+    .thigh {
+        width: 70px;
+        height: 145px;
+    }
+    
+    .left.thigh { background-image: url(/resources/exp_src/walking/images/left-thigh.png); }
+    .right.thigh { background-image: url(/resources/exp_src/walking/images/right-thigh.png); }
+
+    .shin {
+        top: 115px;
+        width: 50px;
+        height: 170px;
+        background-image: url(/resources/exp_src/walking/images/shin.png);
+        -webkit-transform-origin: 30px 25px;
+        -webkit-animation-name: shin;
+    }
+
+    .foot {
+        top: 160px;
+        left: 10px;
+        width: 60px;
+        height: 20px;
+        border: 1px solid black;
+        -webkit-transform-origin: 0 50%;
+        -webkit-animation-name: foot;
+    }
+
+    .toes {
+        left: 55px;
+        width: 40px;
+        height: 20px;
+        border: 1px solid black;
+        -webkit-transform-origin: 0% 100%;
+        -webkit-animation-name: toes;
+    }
+
+    /* setting proper z-indexes so that limbs show up correctly */
+    
+    div.right.arm { z-index: 1; }
+    div.left.arm { z-index: -3; }
+    div.arm > div.bicep > div.forearm { z-index: -1; }
+
+    div.right.leg { z-index: -1; }
+    div.left.leg { z-index: -2; }
+    div.leg > div.thigh > div.shin { z-index: -1; }
+
+
+    /* animations */
+
+    @-webkit-keyframes head {
+        0% { -webkit-transform:   rotate(4deg) translate(3px, 0);     }
+        25% { -webkit-transform:  rotate(4deg) translate(-15px, -32px); }
+        50% { -webkit-transform:  rotate(4deg) translate(3px, 0);   }
+        75% { -webkit-transform:  rotate(4deg) translate(-15px, -32px); }
+        100% { -webkit-transform: rotate(4deg) translate(3px, 0);   }
+    }
+
+    @-webkit-keyframes bicep {
+        0% { -webkit-transform: rotate(30deg); }
+        50% { -webkit-transform: rotate(-20deg); }
+        100% { -webkit-transform: rotate(30deg); }
+    }
+
+    @-webkit-keyframes forearm {
+        0% { -webkit-transform: rotate(-5deg); }
+        50% { -webkit-transform: rotate(-50deg); }
+        100% { -webkit-transform: rotate(-5deg); }
+    }
+
+    @-webkit-keyframes thigh {
+        0% { -webkit-transform: rotate(-45deg); }
+        50% { -webkit-transform: rotate(10deg); }
+        100% { -webkit-transform: rotate(-45deg); }
+    }
+
+    @-webkit-keyframes shin {
+        0% { -webkit-transform: rotate(30deg); }
+        25% { -webkit-transform: rotate(20deg); }
+        50% { -webkit-transform: rotate(20deg); }
+        75% { -webkit-transform: rotate(85deg); }
+        100% { -webkit-transform: rotate(30deg); }
+    }
+
+    @-webkit-keyframes foot {
+        0% { -webkit-transform: rotate(-12deg); }
+        25% { -webkit-transform: rotate(-0deg); }
+        50% { -webkit-transform: rotate(-0deg); }
+        75% { -webkit-transform: rotate(-0deg); }
+        100% { -webkit-transform: rotate(-12deg); }
+    }
+
+    @-webkit-keyframes toes {
+        0% { -webkit-transform: rotate(0deg); }
+        25% { -webkit-transform: rotate(-10deg); }
+        50% { -webkit-transform: rotate(-36deg); }
+        75% { -webkit-transform: rotate(-15deg); }
+        100% { -webkit-transform: rotate(0deg); }
+    }
+
+</style>
+
+<div id="canvas" >
+    <div class='me'>
+        <div class="torso">
+            <div class="left leg">
+                <div class="left thigh">
+                    <div class="left shin">
+                        <div class="left foot">
+                            <div class="left toes"></div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- left leg -->
+        
+            <div class="right leg">
+                <div class="right thigh">
+                    <div class="right shin">
+                        <div class="right foot">
+                            <div class="right toes"></div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- right leg -->
+        
+            <div class="left arm">
+                <div class="left bicep">
+                    <div class="left forearm"></div>
+                </div>
+            </div> <!-- left arm -->
+        
+            <div class="right arm">
+                <div class="right bicep">
+                    <div class="right forearm"></div>
+                </div>
+            </div> <!-- right arm -->
+        
+        </div> <!-- torso -->
+    </div> <!-- me -->
+</div> <!-- canvas -->
+
+<ul>
+    <li>naming: classes and ids</li>
+    <li>left and right arms</li>
+    <li>z-indexes 
+        <ul>
+            <li>position fore-arm underneath bicep</li>
+            <li>stopping animations from removing z-indexes</li>
+        </ul>
+    </li>
+</ul>
