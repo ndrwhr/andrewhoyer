@@ -10,28 +10,29 @@ permalink: /walking/
         padding: 0;
         border: 1px solid black;
         position: relative;
+        background: black;
     }
     
     
     /* generic styling of all body parts */
     
     #canvas div {
-      position: absolute;
+        position: absolute;
 /*      background: white;*/
-/*      border: 1px solid black;*/
+/*        border: 1px solid black;*/
 /*      -webkit-border-radius: 500px;*/
-        background-repeat: none;
-        -webkit-animation-duration: 3s;
+        background-repeat: no-repeat;
+        -webkit-animation-duration: 2s;
         -webkit-animation-iteration-count: infinite;
-        -webkit-animation-timing-function: cubic-bezier(0.5, 0.4, 0.5, 0.6);
+        -webkit-animation-timing-function: linear;
     }
 
-    .left { -webkit-animation-delay: -1.5s; }
+    div.left { -webkit-animation-delay: -1s; }
 
-    .me {
+    #canvas div.me {
         top: 50px;
         left: 350px;
-        -webkit-transform: rotate(6deg);
+        -webkit-animation-timing-function: ease-in-out;
         -webkit-animation-name: head;
     }
     
@@ -42,27 +43,32 @@ permalink: /walking/
     }
     
     .arm {
-        top: 100px;
-        left: 17px;
+        top: 93px;
+        left: 12px;
         width: 35px;
-        -webkit-transform-origin: 50% 0;
+        -webkit-transform-origin: 20px 10px;
         -webkit-animation-name: bicep;
     }
     
     .bicep {
-        background-color: red;
-        height: 100px;
-        width: 35px;
+        height: 124px;
+        width: 51px;
     }
+    
+    .right.bicep { background-image: url(/resources/exp_src/walking/images/right-bicep.png); }
+    .left.bicep { background-image: url(/resources/exp_src/walking/images/left-bicep.png); }
 
     .forearm {
-        background-color: blue;
-        top: 90px;
-        width: 30px;
-        height: 110px;
-        -webkit-transform-origin: 0% 0%;
+        top: 108px;
+        left: 14px;
+        width: 36px;
+        height: 121px;
+        -webkit-transform-origin: 3px 7px;
         -webkit-animation-name: forearm;
     }
+
+    .right.forearm { background-image: url(/resources/exp_src/walking/images/right-forearm.png); }
+    .left.forearm { background-image: url(/resources/exp_src/walking/images/left-forearm.png); }
 
 
     .leg {
@@ -91,20 +97,21 @@ permalink: /walking/
     }
 
     .foot {
-        top: 160px;
-        left: 10px;
-        width: 60px;
-        height: 20px;
-        border: 1px solid black;
+        top: 155px;
+        left: 2px;
+        width: 67px;
+        height: 34px;
+        background-image: url(/resources/exp_src/walking/images/foot.png);
         -webkit-transform-origin: 0 50%;
         -webkit-animation-name: foot;
     }
 
     .toes {
-        left: 55px;
-        width: 40px;
-        height: 20px;
-        border: 1px solid black;
+        top: 9px;
+        left: 66px;
+        width: 28px;
+        height: 25px;
+        background-image: url(/resources/exp_src/walking/images/toes.png);
         -webkit-transform-origin: 0% 100%;
         -webkit-animation-name: toes;
     }
@@ -124,9 +131,9 @@ permalink: /walking/
 
     @-webkit-keyframes head {
         0% { -webkit-transform:   rotate(4deg) translate(3px, 0);     }
-        25% { -webkit-transform:  rotate(4deg) translate(-15px, -32px); }
+        25% { -webkit-transform:  rotate(4deg) translate(-15px, -25px); }
         50% { -webkit-transform:  rotate(4deg) translate(3px, 0);   }
-        75% { -webkit-transform:  rotate(4deg) translate(-15px, -32px); }
+        75% { -webkit-transform:  rotate(4deg) translate(-15px, -25px); }
         100% { -webkit-transform: rotate(4deg) translate(3px, 0);   }
     }
 
@@ -138,7 +145,7 @@ permalink: /walking/
 
     @-webkit-keyframes forearm {
         0% { -webkit-transform: rotate(-5deg); }
-        50% { -webkit-transform: rotate(-50deg); }
+        50% { -webkit-transform: rotate(-45deg); }
         100% { -webkit-transform: rotate(-5deg); }
     }
 
@@ -213,6 +220,25 @@ permalink: /walking/
     </div> <!-- me -->
 </div> <!-- canvas -->
 
+<a id='show-skeleton'>Show/Hide Element Borders</a>
+
+
+
+<script type="text/javascript" charset="utf-8">
+
+(function(){
+    var on;
+    document.id('show-skeleton').addEvent('click', function(){
+        on = !on;
+        document.getElements('#canvas div').setStyles({
+            'border': on ? '1px solid black' : '',
+            'background': on ? 'white' : ''
+        });
+    });
+})()
+
+</script>
+
 <ul>
     <li>naming: classes and ids</li>
     <li>left and right arms</li>
@@ -223,3 +249,33 @@ permalink: /walking/
         </ul>
     </li>
 </ul>
+
+
+<style type="text/css" media="screen">
+    #canvas2 div {
+        height: 100px;
+        width: 100px;
+        background: red;
+        -webkit-animation-duration: 4s;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: cubic-bezier(0.5, 0.4, 0.5, 0.6);
+        -webkit-animation-name: anim;
+    }
+    
+    #canvas2 div.delayed {
+        -webkit-animation-delay: 2s;
+    }
+    
+    @-webkit-keyframes anim {
+        0% { padding-left: 0px; }
+        50% { padding-left: 50px; }
+        100% { padding-left: 0px; }
+    }
+</style>
+
+<div id='canvas2'>
+    <div class'normal'></div>
+    <div class='delayed'></div>
+    
+</div>
+
