@@ -8,9 +8,8 @@ permalink: /walking/
         height: 600px;
         margin: 0;
         padding: 0;
-        border: 1px solid black;
         position: relative;
-        background: black;
+        overflow: hidden;
     }
     
     
@@ -18,9 +17,6 @@ permalink: /walking/
     
     #canvas div {
         position: absolute;
-/*      background: white;*/
-/*        border: 1px solid black;*/
-/*      -webkit-border-radius: 500px;*/
         background-repeat: no-repeat;
         -webkit-animation-duration: 2s;
         -webkit-animation-iteration-count: infinite;
@@ -30,7 +26,7 @@ permalink: /walking/
     div.left { -webkit-animation-delay: -1s; }
 
     #canvas div.me {
-        top: 50px;
+        top: 75px;
         left: 350px;
         -webkit-animation-timing-function: ease-in-out;
         -webkit-animation-name: head;
@@ -130,23 +126,23 @@ permalink: /walking/
     /* animations */
 
     @-webkit-keyframes head {
-        0% { -webkit-transform:   rotate(4deg) translate(3px, 0);     }
-        25% { -webkit-transform:  rotate(4deg) translate(-15px, -25px); }
-        50% { -webkit-transform:  rotate(4deg) translate(3px, 0);   }
-        75% { -webkit-transform:  rotate(4deg) translate(-15px, -25px); }
-        100% { -webkit-transform: rotate(4deg) translate(3px, 0);   }
+        0% { -webkit-transform:   rotate(5deg) translate(5px, 0);     }
+        25% { -webkit-transform:  rotate(5deg) translate(-10px, -16px); }
+        50% { -webkit-transform:  rotate(5deg) translate(5px, 0);   }
+        75% { -webkit-transform:  rotate(5deg) translate(-10px, -16px); }
+        100% { -webkit-transform: rotate(5deg) translate(5px, 0);   }
     }
 
     @-webkit-keyframes bicep {
-        0% { -webkit-transform: rotate(30deg); }
+        0% { -webkit-transform: rotate(26deg); }
         50% { -webkit-transform: rotate(-20deg); }
-        100% { -webkit-transform: rotate(30deg); }
+        100% { -webkit-transform: rotate(26deg); }
     }
 
     @-webkit-keyframes forearm {
-        0% { -webkit-transform: rotate(-5deg); }
+        0% { -webkit-transform: rotate(-10deg); }
         50% { -webkit-transform: rotate(-45deg); }
-        100% { -webkit-transform: rotate(-5deg); }
+        100% { -webkit-transform: rotate(-10deg); }
     }
 
     @-webkit-keyframes thigh {
@@ -164,20 +160,29 @@ permalink: /walking/
     }
 
     @-webkit-keyframes foot {
-        0% { -webkit-transform: rotate(-12deg); }
-        25% { -webkit-transform: rotate(-0deg); }
-        50% { -webkit-transform: rotate(-0deg); }
-        75% { -webkit-transform: rotate(-0deg); }
-        100% { -webkit-transform: rotate(-12deg); }
+        0% { -webkit-transform: rotate(-5deg); }
+        25% { -webkit-transform: rotate(-3deg); }
+        50% { -webkit-transform: rotate(-16deg); }
+        75% { -webkit-transform: rotate(-10deg); }
+        100% { -webkit-transform: rotate(-5deg); }
     }
 
     @-webkit-keyframes toes {
         0% { -webkit-transform: rotate(0deg); }
         25% { -webkit-transform: rotate(-10deg); }
-        50% { -webkit-transform: rotate(-36deg); }
-        75% { -webkit-transform: rotate(-15deg); }
+        50% { -webkit-transform: rotate(-10deg); }
+        75% { -webkit-transform: rotate(-25deg); }
         100% { -webkit-transform: rotate(0deg); }
     }
+    
+    .treadmill {
+        top: 265px;
+        left: 100px;
+        height: 335px;
+        width: 595px;
+    }
+    .treadmill.foreground { background-image: url(/resources/exp_src/walking/images/treadmill-foreground.png); }
+    .treadmill.background { background-image: url(/resources/exp_src/walking/images/treadmill-background.png); }
 
 </style>
 
@@ -231,8 +236,7 @@ permalink: /walking/
     document.id('show-skeleton').addEvent('click', function(){
         on = !on;
         document.getElements('#canvas div').setStyles({
-            'border': on ? '1px solid black' : '',
-            'background': on ? 'white' : ''
+            'border': on ? '1px solid black' : ''
         });
     });
 })()
@@ -249,33 +253,3 @@ permalink: /walking/
         </ul>
     </li>
 </ul>
-
-
-<style type="text/css" media="screen">
-    #canvas2 div {
-        height: 100px;
-        width: 100px;
-        background: red;
-        -webkit-animation-duration: 4s;
-        -webkit-animation-iteration-count: infinite;
-        -webkit-animation-timing-function: cubic-bezier(0.5, 0.4, 0.5, 0.6);
-        -webkit-animation-name: anim;
-    }
-    
-    #canvas2 div.delayed {
-        -webkit-animation-delay: 2s;
-    }
-    
-    @-webkit-keyframes anim {
-        0% { padding-left: 0px; }
-        50% { padding-left: 50px; }
-        100% { padding-left: 0px; }
-    }
-</style>
-
-<div id='canvas2'>
-    <div class'normal'></div>
-    <div class='delayed'></div>
-    
-</div>
-
