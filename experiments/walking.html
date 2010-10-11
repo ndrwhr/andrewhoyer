@@ -11,10 +11,7 @@ permalink: /walking/
         position: relative;
         overflow: hidden;
     }
-    
-    
-    /* generic styling of all body parts */
-    
+
     #canvas div {
         position: absolute;
         background-repeat: no-repeat;
@@ -23,34 +20,34 @@ permalink: /walking/
         -webkit-animation-timing-function: linear;
     }
 
-    div.left { -webkit-animation-delay: -1s; }
-
     #canvas div.me {
         top: 75px;
         left: 350px;
         -webkit-animation-timing-function: ease-in-out;
         -webkit-animation-name: head;
     }
-    
+
     .torso {
         width: 86px;
         height: 275px;
         background-image: url(/resources/exp_src/walking/images/torso.png);
     }
-    
+
     .arm {
         top: 93px;
         left: 12px;
         width: 35px;
         -webkit-transform-origin: 20px 10px;
-        -webkit-animation-name: bicep;
     }
-    
+
+    .right.arm { -webkit-animation-name: right-bicep; }
+    .left.arm { -webkit-animation-name: left-bicep; }
+
     .bicep {
         height: 124px;
         width: 51px;
     }
-    
+
     .right.bicep { background-image: url(/resources/exp_src/walking/images/right-bicep.png); }
     .left.bicep { background-image: url(/resources/exp_src/walking/images/left-bicep.png); }
 
@@ -60,12 +57,16 @@ permalink: /walking/
         width: 36px;
         height: 121px;
         -webkit-transform-origin: 3px 7px;
-        -webkit-animation-name: forearm;
     }
 
-    .right.forearm { background-image: url(/resources/exp_src/walking/images/right-forearm.png); }
-    .left.forearm { background-image: url(/resources/exp_src/walking/images/left-forearm.png); }
-
+    .right.forearm {
+        background-image: url(/resources/exp_src/walking/images/right-forearm.png);
+        -webkit-animation-name: right-forearm;
+    }
+    .left.forearm {
+        background-image: url(/resources/exp_src/walking/images/left-forearm.png);
+        -webkit-animation-name: left-forearm;
+    }
 
     .leg {
         top: 235px;
@@ -74,6 +75,9 @@ permalink: /walking/
         -webkit-transform-origin: 60% 20px;
         -webkit-animation-name: thigh;
     }
+
+    .right.leg { -webkit-animation-name: right-thigh; }
+    .left.leg { -webkit-animation-name: left-thigh; }
 
     .thigh {
         width: 70px;
@@ -89,8 +93,10 @@ permalink: /walking/
         height: 170px;
         background-image: url(/resources/exp_src/walking/images/shin.png);
         -webkit-transform-origin: 30px 25px;
-        -webkit-animation-name: shin;
     }
+    
+    .right.shin { -webkit-animation-name: right-shin; }
+    .left.shin { -webkit-animation-name: left-shin; }
 
     .foot {
         top: 155px;
@@ -99,8 +105,10 @@ permalink: /walking/
         height: 34px;
         background-image: url(/resources/exp_src/walking/images/foot.png);
         -webkit-transform-origin: 0 50%;
-        -webkit-animation-name: foot;
     }
+
+    .right.foot { -webkit-animation-name: right-foot; }
+    .left.foot { -webkit-animation-name: left-foot; }
 
     .toes {
         top: 9px;
@@ -109,8 +117,10 @@ permalink: /walking/
         height: 25px;
         background-image: url(/resources/exp_src/walking/images/toes.png);
         -webkit-transform-origin: 0% 100%;
-        -webkit-animation-name: toes;
     }
+    
+    .right.toes { -webkit-animation-name: right-toes; }
+    .left.toes { -webkit-animation-name: left-toes; }
 
     /* setting proper z-indexes so that limbs show up correctly */
     
@@ -126,32 +136,50 @@ permalink: /walking/
     /* animations */
 
     @-webkit-keyframes head {
-        0% { -webkit-transform:   rotate(5deg) translate(5px, 0);     }
-        25% { -webkit-transform:  rotate(5deg) translate(-10px, -16px); }
-        50% { -webkit-transform:  rotate(5deg) translate(5px, 0);   }
-        75% { -webkit-transform:  rotate(5deg) translate(-10px, -16px); }
-        100% { -webkit-transform: rotate(5deg) translate(5px, 0);   }
+        0% { -webkit-transform:   rotate(5deg) translate( 5px,   0px);     }
+        25% { -webkit-transform:  rotate(5deg) translate(-5px, -16px); }
+        50% { -webkit-transform:  rotate(5deg) translate( 5px,   0px);   }
+        75% { -webkit-transform:  rotate(5deg) translate(-5px, -16px); }
+        100% { -webkit-transform: rotate(5deg) translate( 5px,   0px);   }
     }
 
-    @-webkit-keyframes bicep {
+    @-webkit-keyframes right-bicep {
         0% { -webkit-transform: rotate(26deg); }
         50% { -webkit-transform: rotate(-20deg); }
         100% { -webkit-transform: rotate(26deg); }
     }
 
-    @-webkit-keyframes forearm {
+    @-webkit-keyframes left-bicep {
+        0% { -webkit-transform: rotate(-20deg); }
+        50% { -webkit-transform: rotate(26deg); }
+        100% { -webkit-transform: rotate(-20deg); }
+    }
+
+    @-webkit-keyframes right-forearm {
         0% { -webkit-transform: rotate(-10deg); }
         50% { -webkit-transform: rotate(-45deg); }
         100% { -webkit-transform: rotate(-10deg); }
     }
 
-    @-webkit-keyframes thigh {
+    @-webkit-keyframes left-forearm {
+        0% { -webkit-transform: rotate(-45deg); }
+        50% { -webkit-transform: rotate(-10deg); }
+        100% { -webkit-transform: rotate(-45deg); }
+    }
+
+    @-webkit-keyframes right-thigh {
         0% { -webkit-transform: rotate(-45deg); }
         50% { -webkit-transform: rotate(10deg); }
         100% { -webkit-transform: rotate(-45deg); }
     }
 
-    @-webkit-keyframes shin {
+    @-webkit-keyframes left-thigh {
+        0% { -webkit-transform: rotate(10deg); }
+        50% { -webkit-transform: rotate(-45deg); }
+        100% { -webkit-transform: rotate(10deg); }
+    }
+
+    @-webkit-keyframes right-shin {
         0% { -webkit-transform: rotate(30deg); }
         25% { -webkit-transform: rotate(20deg); }
         50% { -webkit-transform: rotate(20deg); }
@@ -159,7 +187,15 @@ permalink: /walking/
         100% { -webkit-transform: rotate(30deg); }
     }
 
-    @-webkit-keyframes foot {
+    @-webkit-keyframes left-shin {
+        0% { -webkit-transform: rotate(20deg); }
+        25% { -webkit-transform: rotate(85deg); }
+        50% { -webkit-transform: rotate(30deg); }
+        75% { -webkit-transform: rotate(20deg); }
+        100% { -webkit-transform: rotate(20deg); }
+    }
+
+    @-webkit-keyframes right-foot {
         0% { -webkit-transform: rotate(-5deg); }
         25% { -webkit-transform: rotate(-3deg); }
         50% { -webkit-transform: rotate(-16deg); }
@@ -167,7 +203,15 @@ permalink: /walking/
         100% { -webkit-transform: rotate(-5deg); }
     }
 
-    @-webkit-keyframes toes {
+    @-webkit-keyframes left-foot {
+        0% { -webkit-transform: rotate(-16deg); }
+        25% { -webkit-transform: rotate(-10deg); }
+        50% { -webkit-transform: rotate(-5deg); }
+        75% { -webkit-transform: rotate(-3deg); }
+        100% { -webkit-transform: rotate(-16deg); }
+    }
+
+    @-webkit-keyframes right-toes {
         0% { -webkit-transform: rotate(0deg); }
         25% { -webkit-transform: rotate(-10deg); }
         50% { -webkit-transform: rotate(-10deg); }
@@ -175,14 +219,13 @@ permalink: /walking/
         100% { -webkit-transform: rotate(0deg); }
     }
     
-    .treadmill {
-        top: 265px;
-        left: 100px;
-        height: 335px;
-        width: 595px;
+    @-webkit-keyframes left-toes {
+        0% { -webkit-transform: rotate(-10deg); }
+        25% { -webkit-transform: rotate(-25deg); }
+        50% { -webkit-transform: rotate(0deg); }
+        75% { -webkit-transform: rotate(-10deg); }
+        100% { -webkit-transform: rotate(-10deg); }
     }
-    .treadmill.foreground { background-image: url(/resources/exp_src/walking/images/treadmill-foreground.png); }
-    .treadmill.background { background-image: url(/resources/exp_src/walking/images/treadmill-background.png); }
 
 </style>
 
@@ -244,8 +287,14 @@ permalink: /walking/
 </script>
 
 <ul>
-    <li>naming: classes and ids</li>
-    <li>left and right arms</li>
+    <li>naming: classes and ids, initial markup</li>
+    <li>left and right arms
+        <ul>
+            <li>first having left and right animations</li>
+            <li>switching to negative delay (does not work on ipad)</li>
+            <li>going back to left and right</li>
+        </ul>
+    </li>
     <li>z-indexes 
         <ul>
             <li>position fore-arm underneath bicep</li>
