@@ -12,10 +12,16 @@ permalink: /walking/
         overflow: hidden;
     }
 
+    #canvas:target div {
+        border: 1px solid black;
+        background: rgba(255, 255, 255, 0.75);
+        margin: -2px;
+    }
+
     #canvas div {
         position: absolute;
         background-repeat: no-repeat;
-        -webkit-animation-duration: 2s;
+        -webkit-animation-duration: 1750ms;
         -webkit-animation-iteration-count: infinite;
         -webkit-animation-timing-function: linear;
     }
@@ -24,7 +30,7 @@ permalink: /walking/
         top: 75px;
         left: 350px;
         -webkit-animation-timing-function: ease-in-out;
-        -webkit-animation-name: head;
+        -webkit-animation-name: torso;
     }
 
     .torso {
@@ -34,14 +40,18 @@ permalink: /walking/
     }
 
     .arm {
-        top: 93px;
         left: 12px;
-        width: 35px;
         -webkit-transform-origin: 20px 10px;
     }
 
-    .right.arm { -webkit-animation-name: right-bicep; }
-    .left.arm { -webkit-animation-name: left-bicep; }
+    .right.arm {
+        top: 93px;
+        -webkit-animation-name: right-bicep;
+    }
+    .left.arm {
+        top: 87px;
+        -webkit-animation-name: left-bicep;
+    }
 
     .bicep {
         height: 124px;
@@ -69,15 +79,20 @@ permalink: /walking/
     }
 
     .leg {
-        top: 235px;
         left: 6px;
-        width: 50px;
-        -webkit-transform-origin: 60% 20px;
+        -webkit-transform-origin: 30px 20px;
         -webkit-animation-name: thigh;
     }
 
-    .right.leg { -webkit-animation-name: right-thigh; }
-    .left.leg { -webkit-animation-name: left-thigh; }
+    .right.leg {
+        top: 235px;
+        -webkit-animation-name: right-thigh;
+    }
+    
+    .left.leg {
+        top: 225px;
+        -webkit-animation-name: left-thigh;
+    }
 
     .thigh {
         width: 70px;
@@ -123,7 +138,7 @@ permalink: /walking/
     .left.toes { -webkit-animation-name: left-toes; }
 
     /* setting proper z-indexes so that limbs show up correctly */
-    
+
     div.right.arm { z-index: 1; }
     div.left.arm { z-index: -3; }
     div.arm > div.bicep > div.forearm { z-index: -1; }
@@ -132,15 +147,14 @@ permalink: /walking/
     div.left.leg { z-index: -2; }
     div.leg > div.thigh > div.shin { z-index: -1; }
 
-
     /* animations */
 
-    @-webkit-keyframes head {
-        0% { -webkit-transform:   rotate(5deg) translate( 5px,   0px);     }
-        25% { -webkit-transform:  rotate(5deg) translate(-5px, -16px); }
-        50% { -webkit-transform:  rotate(5deg) translate( 5px,   0px);   }
-        75% { -webkit-transform:  rotate(5deg) translate(-5px, -16px); }
-        100% { -webkit-transform: rotate(5deg) translate( 5px,   0px);   }
+    @-webkit-keyframes torso {
+        0% { -webkit-transform:   rotate(5deg) translate( 5px,   0px); }
+        25% { -webkit-transform:  rotate(5deg) translate(-5px, -14px); }
+        50% { -webkit-transform:  rotate(5deg) translate( 5px,   0px); }
+        75% { -webkit-transform:  rotate(5deg) translate(-5px, -14px); }
+        100% { -webkit-transform:   rotate(5deg) translate( 5px,   0px); }
     }
 
     @-webkit-keyframes right-bicep {
@@ -197,7 +211,7 @@ permalink: /walking/
 
     @-webkit-keyframes right-foot {
         0% { -webkit-transform: rotate(-5deg); }
-        25% { -webkit-transform: rotate(-3deg); }
+        25% { -webkit-transform: rotate(-7deg); }
         50% { -webkit-transform: rotate(-16deg); }
         75% { -webkit-transform: rotate(-10deg); }
         100% { -webkit-transform: rotate(-5deg); }
@@ -207,7 +221,7 @@ permalink: /walking/
         0% { -webkit-transform: rotate(-16deg); }
         25% { -webkit-transform: rotate(-10deg); }
         50% { -webkit-transform: rotate(-5deg); }
-        75% { -webkit-transform: rotate(-3deg); }
+        75% { -webkit-transform: rotate(-7deg); }
         100% { -webkit-transform: rotate(-16deg); }
     }
 
@@ -226,10 +240,34 @@ permalink: /walking/
         75% { -webkit-transform: rotate(-10deg); }
         100% { -webkit-transform: rotate(-10deg); }
     }
+    
+    #canvas div#overlay {
+        height: 100%;
+        width: 100%;
+        background: url(/resources/exp_src/walking/images/gradient-left.png) repeat-y top left,
+                    url(/resources/exp_src/walking/images/gradient-right.png) repeat-y top right;
+    }
+    
+    #canvas div#sidewalk {
+        bottom: 0;
+        background: url(/resources/exp_src/walking/images/sidewalk.png);
+        height: 200px;
+        width: 1800px;
+        -webkit-animation-name: sidewalk;
+        -webkit-animation-duration: 2600ms;
+    }
+
+    @-webkit-keyframes sidewalk {
+        0% { -webkit-transform:   translate( 0px,0px) }
+        100% { -webkit-transform: translate( -600px,0px) }
+    }
 
 </style>
 
-<div id="canvas" >
+<h1>Thar be no javascript here!</h1>
+<div id="canvas">
+    <div id="sidewalk"></div>
+    
     <div class='me'>
         <div class="torso">
             <div class="left leg">
@@ -266,25 +304,12 @@ permalink: /walking/
         
         </div> <!-- torso -->
     </div> <!-- me -->
+    
+    <div id="overlay"></div>
+    
 </div> <!-- canvas -->
 
-<a id='show-skeleton'>Show/Hide Element Borders</a>
-
-
-
-<script type="text/javascript" charset="utf-8">
-
-(function(){
-    var on;
-    document.id('show-skeleton').addEvent('click', function(){
-        on = !on;
-        document.getElements('#canvas div').setStyles({
-            'border': on ? '1px solid black' : ''
-        });
-    });
-})()
-
-</script>
+<!-- <a href='#canvas'>Show Elements</a> -->
 
 <ul>
     <li>naming: classes and ids, initial markup</li>
@@ -301,4 +326,5 @@ permalink: /walking/
             <li>stopping animations from removing z-indexes</li>
         </ul>
     </li>
+    <li>Backgrounds</li>
 </ul>
