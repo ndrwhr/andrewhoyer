@@ -1,0 +1,31 @@
+---
+layout: post
+title: How I Learned to Walk
+---
+<ul>
+    <li>naming: classes and ids, initial markup</li>
+    <li>left and right arms
+        <ul>
+            <li>first having left and right animations</li>
+            <li>switching to negative delay (does not work on ipad)</li>
+            <li>going back to left and right</li>
+        </ul>
+    </li>
+    <li>z-indexes 
+        <ul>
+            <li>position fore-arm underneath bicep</li>
+            <li>stopping animations from removing z-indexes</li>
+        </ul>
+    </li>
+    <li>Backgrounds</li>
+</ul>
+
+h2. Idea(s) and Inspiration:
+
+something
+
+h2. Structure:
+
+When I first started working on the walking man, I didn't really know where it was going to go so I ended up going through several iterations of markup for the actual skeleton. But in each iteration the css and overall structure of the man got better and better, so I think it worked out for the best.
+
+The key idea behind all of this is the fact that a css transformation applied to an element also applies to all of its children. Without this, I would have had to use all kinds of math to figure out how to make the joints match up. Instead all that work is done for me, all I have to do is animate each limb independently.
