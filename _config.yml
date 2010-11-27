@@ -55,6 +55,11 @@ js:
     - js/main.js
     
 experiments:
+    - name:     Mobeh Dick
+      date:     October 2010
+      url:      /experiments/mobeh/
+      image:    /resources/images/experiments/mobeh.jpg
+
     - name:     Walking With CSS
       date:     October 2010
       url:      /experiments/walking/
