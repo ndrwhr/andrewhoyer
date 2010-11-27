@@ -1,6 +1,7 @@
 ---
 layout: default
 permalink: /walking/
+resource_url: /resources/exp_src/walking/images/
 ---
 
 <style type="text/css" media="screen">
@@ -14,25 +15,31 @@ permalink: /walking/
 
     #canvas div {
         position: absolute;
-        background-repeat: no-repeat;
-        -webkit-animation-duration: 1750ms;
         -webkit-animation-iteration-count: infinite;
         -webkit-animation-timing-function: linear;
     }
 
-    #canvas:target div.me, #canvas:target div.me div {
-        background-color: rgba(255, 255, 255, 0.5);
+    #canvas:target div:not(.overlay) {
         border: 1px solid black;
     }
 
-    #canvas div.me {
+    #canvas:target div.me div{
+        background: rgba(255, 255, 255, 0.25);
+    }
+
+    .me {
         top: 50px; left: 350px;
         -webkit-animation-name: me;
     }
 
+    .me, .me div {
+        background-repeat: no-repeat;
+        -webkit-animation-duration: 1750ms;
+    }
+
     .torso {
         width: 86px; height: 275px;
-        background-image: url(/resources/exp_src/walking/images/torso.png);
+        background-image: url({{ page.resource_url }}me/torso.png);
     }
 
     .arm {
@@ -53,8 +60,8 @@ permalink: /walking/
         height: 124px; width: 51px;
     }
 
-    .right.bicep { background-image: url(/resources/exp_src/walking/images/right-bicep.png); }
-    .left.bicep { background-image: url(/resources/exp_src/walking/images/left-bicep.png); }
+    .right.bicep { background-image: url({{ page.resource_url }}me/right-bicep.png); }
+    .left.bicep { background-image: url({{ page.resource_url }}me/left-bicep.png); }
 
     .forearm {
         top: 108px; left: 14px;
@@ -63,11 +70,12 @@ permalink: /walking/
     }
 
     .right.forearm {
-        background-image: url(/resources/exp_src/walking/images/right-forearm.png);
+        background-image: url({{ page.resource_url }}me/right-forearm.png);
         -webkit-animation-name: right-forearm;
     }
+
     .left.forearm {
-        background-image: url(/resources/exp_src/walking/images/left-forearm.png);
+        background-image: url({{ page.resource_url }}me/left-forearm.png);
         -webkit-animation-name: left-forearm;
     }
 
@@ -91,13 +99,13 @@ permalink: /walking/
         width: 70px; height: 145px;
     }
 
-    .left.thigh { background-image: url(/resources/exp_src/walking/images/left-thigh.png); }
-    .right.thigh { background-image: url(/resources/exp_src/walking/images/right-thigh.png); }
+    .left.thigh { background-image: url({{ page.resource_url }}me/left-thigh.png); }
+    .right.thigh { background-image: url({{ page.resource_url }}me/right-thigh.png); }
 
     .shin {
         top: 115px;
         width: 50px; height: 170px;
-        background-image: url(/resources/exp_src/walking/images/shin.png);
+        background-image: url({{ page.resource_url }}me/shin.png);
         -webkit-transform-origin: 30px 25px;
     }
 
@@ -107,7 +115,7 @@ permalink: /walking/
     .foot {
         top: 155px; left: 2px;
         width: 67px; height: 34px;
-        background-image: url(/resources/exp_src/walking/images/foot.png);
+        background-image: url({{ page.resource_url }}me/foot.png);
         -webkit-transform-origin: 0 50%;
     }
 
@@ -117,7 +125,7 @@ permalink: /walking/
     .toes {
         top: 9px; left: 66px;
         width: 28px; height: 25px;
-        background-image: url(/resources/exp_src/walking/images/toes.png);
+        background-image: url({{ page.resource_url }}me/toes.png);
         -webkit-transform-origin: 0% 100%;
     }
 
@@ -127,7 +135,7 @@ permalink: /walking/
     .shadow {
         width: 200px; height: 70px;
         left: 270px; bottom: 5px;
-        background-image: url(/resources/exp_src/walking/images/shadow.png);
+        background-image: url({{ page.resource_url }}misc/shadow.png);
         -webkit-animation-name: shadow;
     }
 
@@ -144,94 +152,94 @@ permalink: /walking/
     /* animations */
 
     @-webkit-keyframes me {
-        0% { -webkit-transform:     rotate(5deg) translate( 5px,   0px); }
-        25% { -webkit-transform:    rotate(5deg) translate(-5px, -14px); }
-        50% { -webkit-transform:    rotate(5deg) translate( 5px,   0px); }
-        75% { -webkit-transform:    rotate(5deg) translate(-5px, -14px); }
-        100% { -webkit-transform:   rotate(5deg) translate( 5px,   0px); }
+        0% { -webkit-transform:   rotate(5deg) translate( 5px,   0px); }
+        25% { -webkit-transform:  rotate(5deg) translate(-5px, -14px); }
+        50% { -webkit-transform:  rotate(5deg) translate( 5px,   0px); }
+        75% { -webkit-transform:  rotate(5deg) translate(-5px, -14px); }
+        100% { -webkit-transform: rotate(5deg) translate( 5px,   0px); }
     }
 
     @-webkit-keyframes right-bicep {
-        0% { -webkit-transform: rotate(26deg); }
-        50% { -webkit-transform: rotate(-20deg); }
+        0%   { -webkit-transform: rotate(26deg); }
+        50%  { -webkit-transform: rotate(-20deg); }
         100% { -webkit-transform: rotate(26deg); }
     }
 
     @-webkit-keyframes left-bicep {
-        0% { -webkit-transform: rotate(-20deg); }
-        50% { -webkit-transform: rotate(26deg); }
+        0%   { -webkit-transform: rotate(-20deg); }
+        50%  { -webkit-transform: rotate(26deg); }
         100% { -webkit-transform: rotate(-20deg); }
     }
 
     @-webkit-keyframes right-forearm {
-        0% { -webkit-transform: rotate(-10deg); }
-        50% { -webkit-transform: rotate(-45deg); }
+        0%   { -webkit-transform: rotate(-10deg); }
+        50%  { -webkit-transform: rotate(-45deg); }
         100% { -webkit-transform: rotate(-10deg); }
     }
 
     @-webkit-keyframes left-forearm {
-        0% { -webkit-transform: rotate(-45deg); }
-        50% { -webkit-transform: rotate(-10deg); }
+        0%   { -webkit-transform: rotate(-45deg); }
+        50%  { -webkit-transform: rotate(-10deg); }
         100% { -webkit-transform: rotate(-45deg); }
     }
 
     @-webkit-keyframes right-thigh {
-        0% { -webkit-transform: rotate(-45deg); }
-        50% { -webkit-transform: rotate(10deg); }
+        0%   { -webkit-transform: rotate(-45deg); }
+        50%  { -webkit-transform: rotate(10deg); }
         100% { -webkit-transform: rotate(-45deg); }
     }
 
     @-webkit-keyframes left-thigh {
-        0% { -webkit-transform: rotate(10deg); }
-        50% { -webkit-transform: rotate(-45deg); }
+        0%   { -webkit-transform: rotate(10deg); }
+        50%  { -webkit-transform: rotate(-45deg); }
         100% { -webkit-transform: rotate(10deg); }
     }
 
     @-webkit-keyframes right-shin {
-        0% { -webkit-transform: rotate(30deg); }
-        25% { -webkit-transform: rotate(20deg); }
-        50% { -webkit-transform: rotate(20deg); }
-        75% { -webkit-transform: rotate(85deg); }
+        0%   { -webkit-transform: rotate(30deg); }
+        25%  { -webkit-transform: rotate(20deg); }
+        50%  { -webkit-transform: rotate(20deg); }
+        75%  { -webkit-transform: rotate(85deg); }
         100% { -webkit-transform: rotate(30deg); }
     }
 
     @-webkit-keyframes left-shin {
-        0% { -webkit-transform: rotate(20deg); }
-        25% { -webkit-transform: rotate(85deg); }
-        50% { -webkit-transform: rotate(30deg); }
-        75% { -webkit-transform: rotate(20deg); }
+        0%   { -webkit-transform: rotate(20deg); }
+        25%  { -webkit-transform: rotate(85deg); }
+        50%  { -webkit-transform: rotate(30deg); }
+        75%  { -webkit-transform: rotate(20deg); }
         100% { -webkit-transform: rotate(20deg); }
     }
 
     @-webkit-keyframes right-foot {
-        0% { -webkit-transform: rotate(-5deg); }
-        25% { -webkit-transform: rotate(-7deg); }
-        50% { -webkit-transform: rotate(-16deg); }
-        75% { -webkit-transform: rotate(-10deg); }
+        0%   { -webkit-transform: rotate(-5deg); }
+        25%  { -webkit-transform: rotate(-7deg); }
+        50%  { -webkit-transform: rotate(-16deg); }
+        75%  { -webkit-transform: rotate(-10deg); }
         100% { -webkit-transform: rotate(-5deg); }
     }
 
     @-webkit-keyframes left-foot {
-        0% { -webkit-transform: rotate(-16deg); }
-        25% { -webkit-transform: rotate(-10deg); }
-        50% { -webkit-transform: rotate(-5deg); }
-        75% { -webkit-transform: rotate(-7deg); }
+        0%   { -webkit-transform: rotate(-16deg); }
+        25%  { -webkit-transform: rotate(-10deg); }
+        50%  { -webkit-transform: rotate(-5deg); }
+        75%  { -webkit-transform: rotate(-7deg); }
         100% { -webkit-transform: rotate(-16deg); }
     }
 
     @-webkit-keyframes right-toes {
-        0% { -webkit-transform: rotate(0deg); }
-        25% { -webkit-transform: rotate(-10deg); }
-        50% { -webkit-transform: rotate(-10deg); }
-        75% { -webkit-transform: rotate(-25deg); }
+        0%   { -webkit-transform: rotate(0deg); }
+        25%  { -webkit-transform: rotate(-10deg); }
+        50%  { -webkit-transform: rotate(-10deg); }
+        75%  { -webkit-transform: rotate(-25deg); }
         100% { -webkit-transform: rotate(0deg); }
     }
 
     @-webkit-keyframes left-toes {
-        0% { -webkit-transform: rotate(-10deg); }
-        25% { -webkit-transform: rotate(-25deg); }
-        50% { -webkit-transform: rotate(0deg); }
-        75% { -webkit-transform: rotate(-10deg); }
+        0%   { -webkit-transform: rotate(-10deg); }
+        25%  { -webkit-transform: rotate(-25deg); }
+        50%  { -webkit-transform: rotate(0deg); }
+        75%  { -webkit-transform: rotate(-10deg); }
         100% { -webkit-transform: rotate(-10deg); }
     }
 
@@ -243,93 +251,94 @@ permalink: /walking/
         100% { opacity: 1; }
     }
 
-    #canvas div#overlay {
+    .overlay {
         width: 100%; height: 100%;
-        background: url(/resources/exp_src/walking/images/gradient-left.png) repeat-y top left,
-                    url(/resources/exp_src/walking/images/gradient-right.png) repeat-y top right;
+        background: url({{ page.resource_url }}misc/gradient-left.png) repeat-y top left,
+                    url({{ page.resource_url }}misc/gradient-right.png) repeat-y top right;
     }
-    
-    #canvas div.horizon {
-        top: 350px;
-        width: 1800px; height: 50px;
-        background: url(/resources/exp_src/walking/images/horizon.png) repeat-x;
-        -webkit-animation-name: prop-600;
-        -webkit-animation-duration: 40s;
-    }
-    
-    div.cloud-1, div.cloud-2, div.cloud-3, div.cloud-4, 
-    div.cloud-5, div.cloud-6, div.cloud-7, div.cloud-8 {
+
+    .sky div {
+        background-repeat: no-repeat;
         -webkit-animation-name: prop-1200;
     }
-    
-    #canvas div.cloud-1, #canvas div.cloud-2 {
+
+    .cloud-1, .cloud-2 {
         width: 82px; height: 90px;
-        background-image: url(/resources/exp_src/walking/images/cloud-1.png);
+        background-image: url({{ page.resource_url }}clouds/1.png);
         -webkit-animation-duration: 120s;
     }
 
-    #canvas div.cloud-3, #canvas div.cloud-4 {
+    .cloud-3, .cloud-4 {
         top: 70px;
         width: 159px; height: 90px;
-        background-image: url(/resources/exp_src/walking/images/cloud-2.png);
+        background-image: url({{ page.resource_url }}clouds/2.png);
         -webkit-animation-duration: 80s;
     }
 
-    #canvas div.cloud-5, #canvas div.cloud-6 {
+    .cloud-5, .cloud-6 {
         top: 30px;
         width: 287px; height: 62px;
-        background-image: url(/resources/exp_src/walking/images/cloud-3.png);
+        background-image: url({{ page.resource_url }}clouds/3.png);
         -webkit-animation-duration: 140s;
     }
     
-    #canvas div.cloud-7, #canvas div.cloud-8 {
+    .cloud-7, .cloud-8 {
         top: 100px;
         width: 94px; height: 81px;
-        background-image: url(/resources/exp_src/walking/images/cloud-4.png);
+        background-image: url({{ page.resource_url }}clouds/4.png);
         -webkit-animation-duration: 90s;
     }
-    
-    
+
     .cloud-1 { left: 0px; }
     .cloud-2 { left: 1200px; }
-    
+
     .cloud-3 { left: 250px; }
     .cloud-4 { left: 1450px; }
-    
+
     .cloud-5 { left: 500px; }
     .cloud-6 { left: 1700px; }
-    
+
     .cloud-7 { left: 950px; }
     .cloud-8 { left: 2150px; }
 
-    .sign-all-css, .sign-awesome, .sign-best, .sign-lots-of-divs,
-    .sign-no-js, .sign-totally-weird, .sign-webkit-only {
-        width: 160px; height: 188px;
-        background-position: bottom left;
+    .horizon {
+        top: 350px;
+        width: 1800px; height: 50px;
+        background: url({{ page.resource_url }}misc/horizon.png) repeat-x;
+        -webkit-animation-name: prop-600;
+        -webkit-animation-duration: 40s;
+    }
+
+    .ground div {
+        background-repeat: no-repeat;
         -webkit-animation-name: prop-2000;
     }
 
-    #canvas div.sign-all-css {
-        bottom: 85px; left: 1800px;
-        background-image: url(/resources/exp_src/walking/images/sign-all-css.png);
+    .sign-all-css {
+        width: 160px; height: 188px;
+        top: 325px; left: 1600px;
+        background-image: url({{ page.resource_url }}signs/all-css.png);
         -webkit-animation-duration: 35s;
     }
 
-    #canvas div.sign-lots-of-divs {
-        bottom: 120px; left: 1350px;
-        background-image: url(/resources/exp_src/walking/images/sign-lots-of-divs.png);
+    .sign-lots-of-divs {
+        width: 102px; height: 120px;
+        top: 345px; left: 1150px;
+        background-image: url({{ page.resource_url }}signs/lots-of-divs.png);
         -webkit-animation-duration: 56s;
     }
 
-    #canvas div.sign-no-js {
-        bottom: 175px; left: 1350px;
-        background-image: url(/resources/exp_src/walking/images/sign-no-js.png);
+    .sign-no-js {
+        width: 65px; height: 77px;
+        top: 348px; left: 1150px;
+        background-image: url({{ page.resource_url }}signs/no-js.png);
         -webkit-animation-duration: 71s;
     }
 
-    #canvas div.sign-best {
-        bottom: 200px; left: 1200px;
-        background-image: url(/resources/exp_src/walking/images/sign-best.png);
+    .sign-best {
+        width: 43px; height: 50px;
+        top: 350px; left: 1000px;
+        background-image: url({{ page.resource_url }}signs/best.png);
         -webkit-animation-duration: 95s;
     }
 
@@ -342,7 +351,7 @@ permalink: /walking/
         0%   { -webkit-transform: translateX(0px); }
         100% { -webkit-transform: translateX(-1200px); }
     }
-    
+
     @-webkit-keyframes prop-2000 {
         0%   { -webkit-transform: translateX(0px); }
         100% { -webkit-transform: translateX(-2000px); }
@@ -350,30 +359,34 @@ permalink: /walking/
 
 </style>
 
+<p style="text-align: center">This experiment will only work in <b>webkit browsers</b> (chrome and safari).</p>
+
 <div id="canvas">
-    
-    <!-- sky -->
-    <div class="cloud-1"></div>
-    <div class="cloud-2"></div>
-    <div class="cloud-3"></div>
-    <div class="cloud-4"></div>
-    <div class="cloud-5"></div>
-    <div class="cloud-6"></div>
-    <div class="cloud-7"></div>
-    <div class="cloud-8"></div>
-    
+    <div class="sky">
+        <div class="cloud-1"></div>
+        <div class="cloud-2"></div>
+        <div class="cloud-3"></div>
+        <div class="cloud-4"></div>
+        <div class="cloud-5"></div>
+        <div class="cloud-6"></div>
+        <div class="cloud-7"></div>
+        <div class="cloud-8"></div>
+    </div>
+
     <div class="horizon"></div>
-    
-    <!-- signs -->
-    <div class="sign-best"></div>
-    <div class="sign-no-js"></div>
-    <div class="sign-lots-of-divs"></div>
-    <div class="sign-all-css"></div>
-    
+
+    <div class="ground">
+        <div class="sign-best"></div>
+        <div class="sign-no-js"></div>
+        <div class="sign-lots-of-divs"></div>
+        <div class="sign-all-css"></div>
+    </div>
+
     <!-- skeleton and shadow -->
     <div class='shadow'></div>
-    
+
     <div class='me'>
+
         <div class="torso">
             <div class="left leg">
                 <div class="left thigh">
@@ -384,7 +397,7 @@ permalink: /walking/
                     </div>
                 </div>
             </div> <!-- left leg -->
-        
+
             <div class="right leg">
                 <div class="right thigh">
                     <div class="right shin">
@@ -394,26 +407,30 @@ permalink: /walking/
                     </div>
                 </div>
             </div> <!-- right leg -->
-        
+
             <div class="left arm">
                 <div class="left bicep">
                     <div class="left forearm"></div>
                 </div>
             </div> <!-- left arm -->
-        
+
             <div class="right arm">
                 <div class="right bicep">
                     <div class="right forearm"></div>
                 </div>
             </div> <!-- right arm -->
-        
+
         </div> <!-- torso -->
     </div> <!-- me -->
-    
-    <div id="overlay"></div>
-    
+
+    <div class="overlay"></div>
+
 </div> <!-- canvas -->
 
-<!-- <a href='#canvas'>Show Elements</a> -->
+<p style='text-align: center'><a href='#canvas'>Show</a> / <a href="#">Hide</a> Element Borders.</p>
 
+<p style='text-align: center'>Be sure to view this experiment on an iPhone, iPod or iPad. It's super cool!</p>
 
+<p>The above walking man (me), is implemented using only CSS3 animations and simple HTML. You can read more about how it was implemented <a href="/blog/2010/10/21/walking/">here</a>. Or, if you are unable to use Chrome or Safari (even mobile safari will do), check out the video below:</p>
+
+<object width="760" height="460"><param name="movie" value="http://www.youtube.com/v/gQDbxpSsSxs?fs=1&amp;hl=en_US&amp;rel=0&amp;hd=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/gQDbxpSsSxs?fs=1&amp;hl=en_US&amp;rel=0&amp;hd=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="760" height="460"></embed></object>

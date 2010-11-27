@@ -50,3 +50,10 @@ div.pagination div span {
   color: #aaaaaa;
   font-size: 80%;
 }
+pre {
+    max-height: 350px; margin-bottom: 20px;
+}
+
+p.to-experiment {
+    text-align: center; text-indent: 0; font-weight: bold; font-size: 25px;
+}

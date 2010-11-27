@@ -55,6 +55,11 @@ js:
     - js/main.js
     
 experiments:
+    - name:     Walking With CSS
+      date:     October 2010
+      url:      /experiments/walking/
+      image:    /resources/images/experiments/walking.jpg
+
     - name:     Sudoku Solver
       date:     July 2010
       blog:     /blog/2010/06/28/sudoku-solver/
