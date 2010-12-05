@@ -46,6 +46,10 @@ contact:
       url:      mailto:me@andrew-hoyer.com
       image:    /resources/images/social/email_bw.jpg
 
+    - id:       feed
+      url:      /atom.xml
+      image:    /resources/images/social/email_bw.jpg
+
 css:
     - css/main.css
     - css/pygments.css

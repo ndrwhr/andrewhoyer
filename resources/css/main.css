@@ -102,13 +102,14 @@ p.warning strong { color: red; }
   margin-top: 20px;
   clear: both;
 }
+#footer #contact { line-height: 26px; }
 #footer #contact a {
   text-indent: -9999px;
   display: inline-block;
   width: 30px;
   height: 30px;
   padding: 0;
-  margin: 0 3px;
+  margin: 5px 3px 0;
   background-repeat: no-repeat;
   background-position: top center;
 }
@@ -121,6 +122,7 @@ p.warning strong { color: red; }
 #footer #contact #flickr { background-image: url(../images/social/flickr.jpg); }
 #footer #contact #linkedin { background-image: url(../images/social/linkedin.jpg); }
 #footer #contact #email { background-image: url(../images/social/email.jpg); }
+#footer #contact #feed { background-image: url(../images/social/feed.jpg); }
 #chrome-link { text-align: center; }
 #thoughts img {
   width: 700px;
