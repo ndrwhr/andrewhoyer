@@ -38,10 +38,6 @@ contact:
       url:      http://www.flickr.com/people/dolinski
       image:    /resources/images/social/flickr_bw.jpg
 
-    - id:       linkedin
-      url:      http://ca.linkedin.com/pub/andrew-hoyer/19/b67/728
-      image:    /resources/images/social/linkedin_bw.jpg
-
     - id:       email
       url:      mailto:me@andrew-hoyer.com
       image:    /resources/images/social/email_bw.jpg
