@@ -54,18 +54,18 @@
 		<p class='warning'><strong>What?!</strong> No Javascript?! This site has plenty of javascript goodness, I highly suggest you turn it back on!</p>
 	</noscript>
 	
-	<div id='header'>
+	<header>
 		{% include nav.html %}
-	</div>
+	</header>
 
 	<div id='content'>
 		{{ content }}
 	</div>
 	
 	{% if page.no_footer == null %}
-	<div id='footer'>
+	<footer>
 		{% include social.html %}
-	</div>
+	</footer>
 	{% endif %}
 	
 	

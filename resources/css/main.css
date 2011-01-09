@@ -59,28 +59,28 @@ a.red:hover { background-color: #f08080; }
 a.teal:hover { background-color: #75c9ab; }
 a.purple:hover { background-color: #db98d7; }
 a.yellow:hover { background-color: #e0e562; }
-#header {
+header {
   letter-spacing: -0.06em;
   font-size: 30px;
   padding: 15px 0 30px;
 }
-#header a {
+header a {
   color: #777777;
   text-decoration: none;
   padding: 5px 10px;
 }
-#header a:hover { color: white; }
-#footer {
+header a:hover { color: white; }
+footer {
   letter-spacing: -0.06em;
   font-size: 30px;
   padding: 15px 0 30px;
 }
-#footer a {
+footer a {
   color: #777777;
   text-decoration: none;
   padding: 5px 10px;
 }
-#footer a:hover { color: white; }
+footer a:hover { color: white; }
 p.warning {
   display: block;
   margin: 10px 0;
@@ -97,13 +97,13 @@ p.warning strong { color: red; }
   font-size: 95%;
   padding: 10px;
 }
-#footer {
+footer {
   padding: 20px;
   margin-top: 20px;
   clear: both;
 }
-#footer #contact { line-height: 26px; }
-#footer #contact a {
+footer #contact { line-height: 26px; }
+footer #contact a {
   text-indent: -9999px;
   display: inline-block;
   width: 30px;
@@ -113,16 +113,16 @@ p.warning strong { color: red; }
   background-repeat: no-repeat;
   background-position: top center;
 }
-#footer #contact a:hover {
+footer #contact a:hover {
   background-color: transparent;
   background-position: bottom center;
 }
-#footer #contact #twitter { background-image: url(../images/social/twitter.jpg); }
-#footer #contact #facebook { background-image: url(../images/social/facebook.jpg); }
-#footer #contact #flickr { background-image: url(../images/social/flickr.jpg); }
-#footer #contact #linkedin { background-image: url(../images/social/linkedin.jpg); }
-#footer #contact #email { background-image: url(../images/social/email.jpg); }
-#footer #contact #feed { background-image: url(../images/social/feed.jpg); }
+footer #contact #twitter { background-image: url(../images/social/twitter.jpg); }
+footer #contact #facebook { background-image: url(../images/social/facebook.jpg); }
+footer #contact #flickr { background-image: url(../images/social/flickr.jpg); }
+footer #contact #linkedin { background-image: url(../images/social/linkedin.jpg); }
+footer #contact #email { background-image: url(../images/social/email.jpg); }
+footer #contact #feed { background-image: url(../images/social/feed.jpg); }
 #chrome-link { text-align: center; }
 #thoughts img {
   width: 700px;
