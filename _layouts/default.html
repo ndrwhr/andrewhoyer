@@ -1,57 +1,52 @@
 {% capture gen_time %}{{ site.time | date: "%Y%m%d%H%M%S" }}{% endcapture %}
 <!DOCTYPE html>
-
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<meta name="generator" content="Jekyll" />
-	<meta name="author" content="{{ site.author }}" />
-	<meta name="description" content="{{ site.description }}" />
-	
-	<title>{{ site.title }}</title>
-	
-	<link rel="alternate" type="application/atom+xml" title="Recent Entries" href="{{ site.feed }}" />
-	
-	{% for css in site.css %}
-		<link rel="stylesheet" href="/resources/{{ css }}?{{ gen_time }}" type="text/css" />
-	{% endfor %}
-	
-	{% for css in page.css %}
-		<link rel="stylesheet" href="/resources/{{ css }}?{{ gen_time }}" type="text/css" />
-	{% endfor %}
-	
-	{% for js in site.js %}
-		<script src="/resources/{{ js }}?{{ gen_time }}" type="text/javascript" charset="utf-8"></script>
-	{% endfor %}
-	
-	{% for js in page.js %}
-		<script src="/resources/{{ js }}?{{ gen_time }}" type="text/javascript" charset="utf-8"></script>
-	{% endfor %}
-	
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="generator" content="Jekyll" />
+    <meta name="author" content="{{ site.author }}" />
+    <meta name="description" content="{{ site.description }}" />
+    
+    <title>{{ site.title }}</title>
+    
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="{{ site.feed }}" />
+    
+    {% for css in site.css %}
+        <link rel="stylesheet" href="/resources/{{ css }}?{{ gen_time }}" type="text/css" />
+    {% endfor %}
+    
+    {% for css in page.css %}
+        <link rel="stylesheet" href="/resources/{{ css }}?{{ gen_time }}" type="text/css" />
+    {% endfor %}
+    
+    {% for js in site.js %}
+        <script src="/resources/{{ js }}?{{ gen_time }}" type="text/javascript" charset="utf-8"></script>
+    {% endfor %}
+    
+    {% for js in page.js %}
+        <script src="/resources/{{ js }}?{{ gen_time }}" type="text/javascript" charset="utf-8"></script>
+    {% endfor %}
+    
 </head>
-
 <body>
-
-
-	{% include analytics.html %}
-	
-	{% include warnings.html %}
-	
-	<header>
-		{% include nav.html %}
-	</header>
-
-	<div id='content'>
-		{{ content }}
-	</div>
-	
-	{% if page.no_footer == null %}
-	<footer>
-		{% include social.html %}
-	</footer>
-	{% endif %}
-	
-	
-	
+    
+    {% include analytics.html %}
+    
+    {% include warnings.html %}
+    
+    <header>
+        {% include nav.html %}
+    </header>
+    
+    <div id='content'>
+        {{ content }}
+    </div>
+    
+    {% if page.no_footer == null %}
+    <footer>
+        {% include social.html %}
+    </footer>
+    {% endif %}
+    
 </body>
 </html>
