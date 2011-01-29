@@ -1,0 +1,218 @@
+---
+layout: default
+permalink: /waterfall/
+---
+
+<style type="text/css" media="screen">
+
+#waterfall {
+    position: relative;
+    width: 650px;
+    margin: 0 auto;
+    height: 500px;
+    font-size: 30px;
+}
+
+#waterfall div {
+    position: absolute;
+    display: inline-block;
+    -webkit-transition: -webkit-transform 300ms linear;
+}
+
+</style>
+
+<div id="waterfall"></div>
+
+<script type="text/javascript" charset="utf-8">
+
+var Helper = {
+    round: function(number){
+        return Math.round(number * 10) / 10;
+    },
+    
+    random: function(min, max){
+        return Math.random() * (max - min) + min;
+    }
+};
+
+var Stats = {
+    
+    frames: 0,
+    
+    update: function(){
+        this.frames++;
+    },
+    
+    dump: function(){
+        console.log(this.frames);
+        this.frames = 0;
+    },
+    
+    start: function(){
+        this.timer = setInterval(this.dump.bind(this), 1000);
+    },
+    
+    stop: function(){
+        this.timer = clearInterval(this.timer);
+    }
+};
+
+// emitter.
+// particle.
+// waterfall (system)
+
+// runloop:
+// - generate new particle and assign attributes.
+// - extinguish stale particles.
+// - update each particle according to dynamic attributes.
+// - render (maybe not necc).
+
+var Vector = function(x, y){
+    this.x = x || 0;
+    this.y = y || 0;
+};
+
+Vector.random = function(x, y){
+    x = x ? Math.random() : 0;
+    y = y ? Math.random() : 0;
+    return new Vector(x, y);
+};
+
+Vector.prototype = {
+    
+    add: function(vector){
+        return new Vector(this.x + vector.x, this.y + vector.y);
+    },
+    
+    subtract: function(vector){
+        return new Vector(this.x - vector.x, this.y - vector.y);
+    },
+    
+    scale: function(value){
+        return new Vector(this.x * value, this.y * value);
+    },
+    
+    multiply: function(vector){
+        return new Vector(this.x * vector.x, this.y * vector.y);
+    },
+    
+    length: function(){
+        return Math.sqrt(this.x * this.x + this.y * this.y);
+    },
+    
+    round: function(){
+        return new Vector(Helper.round(this.x), Helper.round(this.y));
+    }
+    
+};
+
+var Particle = function(value, current, previous){
+    this.value = value;
+    this.current = current;
+    this.previous = previous;
+    this.rotation = Math.random();
+    this.rotation_step = Helper.random(-0.06, 0.06);
+    this.lifetime = 100;
+    this.element = document.createElement('div');
+};
+
+Particle.prototype = {
+    
+    update: function(acceleration){
+        var temp = this.current;
+        
+        this.current = this.current.add(acceleration.scale(0.04).add(this.current.subtract(this.previous)));
+        this.previous = temp;
+        
+        this.rotation += this.rotation_step;
+        
+        this.element.style.WebkitTransform = this.getTransform();
+    },
+    
+    render: function(container){
+        this.container = container;
+        
+        var element = this.element;
+        element.innerText = this.value;
+        element.style.webkitTransform = this.getTransform();
+        
+        container.appendChild(element);
+        
+        return this;
+    },
+    
+    remove: function(){
+        if (this.container) this.container.removeChild(this.element);
+    },
+    
+    getTransform: function(){
+        var position = this.current.multiply(this.container.size).round(),
+            translation = ['translate(', position.x, 'px,', position.y, 'px)'].join(''),
+            rotation = ['rotate(', Helper.round(this.rotation * 360) || 0, 'deg)'].join('');
+        
+        return [translation, rotation].join(' ');
+    },
+    
+    visible: function(){
+        return this.current.y < 2;
+    }
+    
+};
+
+// remove dead particles
+// generate a some new particles;
+var Waterfall = function(container){
+    
+    container.size = new Vector(container.clientWidth, container.clientHeight);
+    
+    this.container = container;
+    this.gravity = new Vector(0, 0.05);
+    this.letters = '!\"\',.0123456789?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    this.particles = [];
+};
+
+Waterfall.prototype = {
+    
+    simulate: function(){
+        this.addParticle();
+        
+        this.particles.forEach(function(particle, index){
+            particle.update(this.gravity);
+            if (!particle.visible()){
+                particle.remove(this.container);
+                this.particles[index] = this.generate();
+            }
+        }, this);
+        
+        Stats.update();
+        setTimeout(this.simulate.bind(this), 100);
+    },
+    
+    generate: function(){
+        var letter = this.randomLetter(),
+            current = Vector.random(true),
+            previous = current.add(Vector.random(true, true).scale(Helper.random(-0.01, 0.01))),
+            particle = new Particle(letter, current, previous);
+        
+        return particle.render(this.container);
+    },
+    
+    randomLetter: function(){
+        var letters = this.letters;
+        return letters.charAt(Math.random() * letters.length);
+    },
+    
+    addParticle: function(){
+        var particles = this.particles;
+        if (particles.length < 100 && Math.round(Math.random()))
+            particles.push(this.generate());
+    }
+    
+};
+
+var container = document.getElementById('waterfall');
+
+// Stats.start();
+new Waterfall(container).simulate();
+
+</script>
