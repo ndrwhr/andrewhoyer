@@ -7,8 +7,9 @@ permalink: /waterfall/
 
 #waterfall {
     position: relative;
-    width: 650px;
+    width: 100%;
     margin: 0 auto;
+    width: 500px;
     height: 500px;
     font-size: 30px;
 }
@@ -16,7 +17,7 @@ permalink: /waterfall/
 #waterfall div {
     position: absolute;
     display: inline-block;
-    -webkit-transition: -webkit-transform 150ms linear;
+    -webkit-transition: -webkit-transform 300ms linear;
 }
 
 </style>
@@ -69,12 +70,43 @@ Vector.prototype = {
         return new Vector(this.x * vector.x, this.y * vector.y);
     },
     
+    divide: function(vector){
+        return new Vector(this.x / vector.x, this.y / vector.y);
+    },
+    
     length: function(){
         return Math.sqrt(this.x * this.x + this.y * this.y);
     },
     
     round: function(){
         return new Vector(Helper.round(this.x), Helper.round(this.y));
+    },
+    
+    toString: function(){
+        return ['[',this.x, ',', this.y, ']'].join('');
+    }
+    
+};
+
+var Mouse = function(element){
+    this.element = element;
+    this.position = new Vector(-5, -5);
+    this.x; this.y;
+    
+    document.addEventListener('mousemove', this.move.bind(this));
+};
+
+Mouse.prototype = {
+    
+    move: function(event){
+        var element = this.element,
+            position = new Vector(event.pageX, event.pageY);
+            
+        this.position = position.subtract(element.position).divide(element.size);
+    },
+    
+    getPosition: function(){
+        return this.position;
     }
     
 };
@@ -131,9 +163,9 @@ Particle.prototype = {
     
 };
 
-var Waterfall = function(container){
-    container.size = new Vector(container.clientWidth, container.clientHeight);
+var Waterfall = function(container, mouse){
     this.container = container;
+    this.mouse = mouse;
     this.gravity = new Vector(0, 0.0025);
     this.letters = '!\"\',.0123456789?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
     this.particles = [];
@@ -142,6 +174,8 @@ var Waterfall = function(container){
 Waterfall.prototype = {
     
     simulate: function(){
+        var mouse = this.mouse.getPosition();
+        
         this.addParticle();
         
         this.particles.forEach(function(particle, index, particles){
@@ -149,10 +183,17 @@ Waterfall.prototype = {
             if (!particle.visible()){
                 particle.remove(this.container);
                 particles[index] = this.generate();
+            } else {
+                var diff = particle.current.subtract(mouse),
+                    distance = diff.length();
+                
+                if (distance < 0.2){
+                    particle.current = mouse.add(diff.scale(0.2 / distance));
+                }
             }
         }, this);
         
-        setTimeout(this.simulate.bind(this), 100);
+        setTimeout(this.simulate.bind(this), 75);
     },
     
     randomLetter: function(){
@@ -170,12 +211,21 @@ Waterfall.prototype = {
     
     addParticle: function(){
         var particles = this.particles;
-        if (particles.length < 100 && Helper.bool())
+        if (particles.length < 150 && Helper.bool())
             particles.push(this.generate());
     }
     
 };
 
-new Waterfall(document.getElementById('waterfall')).simulate();
+var element = document.getElementById('waterfall');
+var resize = function(){
+    element.size = new Vector(element.clientWidth, element.clientHeight);
+    element.position = new Vector(element.offsetLeft, element.offsetTop);
+};
+resize();
+window.addEventListener('resize', resize);
+
+var mouse = new Mouse(element);
+new Waterfall(element, mouse).simulate();
 
 </script>
