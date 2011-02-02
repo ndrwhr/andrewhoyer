@@ -1,0 +1,88 @@
+---
+layout: post
+title: Function.prototype.bind
+---
+
+In my day job I spend all of my time rolling around in the warmth of Mootools. But lately I've been feeling kinda weird. With all of the things Mootools provides, I began feeling sort of disconnected from the vanilla javascript community. The line between what was native js and what Mootools provided was beginning to blur.
+
+So I decided that for my next side project (which should be up in a week or two), I would take a step back and write a full experiment using only vanilla js. No libraries. I know that some people think this is a silly decision, as Mootools not only provides handy extensions to natives, but also patches over the differences between the various states of browsers. I fully recognize and agree with that fact, but I was just curious what could be done with the latest version of the browsers.
+
+One of my favorite parts of Mootools, is that it has taught me to love passing functions around all over the place, but as we all know maintaining @this@ can be a tricky task. A classic example and solution to @this@ problem (har har), would look like:
+
+{% highlight js %}
+
+var Mouse = function(){
+    // assign this to that.
+    var that = this;
+    
+    this.position = [0, 0];
+    
+    document.addEventListener('mousemove', function(event){
+        that.move(event);
+    });
+};
+
+Mouse.prototype.move = function(){
+    this.position = [event.pageX, event.pageY];
+    this.log();
+},
+
+Mouse.prototype.log = function(){
+    console.log(this.position);
+};
+
+new Mouse();
+
+{% endhighlight %}
+
+What I've done here, is just assigned @this@, which is a reference to the mouse class, to a variable and then referenced it inside of an anonymous function which will be called whenever the mouse moves. Although this works, I personally find it looks quite gross. Thankfully there is a better solution.
+
+Poking around the Function documentation on MDC, I recently discovered that JavaScript 1.8.5 implements a "new bind method":https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/bind. This methods takes the current function, wraps it up in a closure and returns a new function that will maintain the passed in binding. Basically, it does something like this:
+
+{% highlight js %}
+
+var bind = function(fn, binding){
+    return function(){
+        fn.apply(binding, arguments);
+    };
+};
+
+var myFunction = function(arg){
+    console.log(this.message);
+};
+
+var wrappedUp = bind(myFunction, { message: 'hello world' });
+
+myFunction(); // logs 'undefined'
+wrappedUp(); // logs 'hello world'
+
+{% endhighlight %}
+
+This to me is a godsend, as it was one of my most missed 'features' provided my Mootools. The Mouse class can now be simplified a little:
+
+{% highlight js %}
+
+var Mouse = function(){
+    // Look! no that = this!
+    this.position = [0, 0];
+    document.addEventListener('mousemove', this.move.bind(this));
+};
+
+Mouse.prototype.move = function(){
+    this.position = position = [event.pageX, event.pageY];
+    this.log();
+},
+
+Mouse.prototype.log = function(){
+    console.log(this.position);
+};
+
+new Mouse();
+
+{% endhighlight %}
+
+Unfortunately though, the bind method doesn't seem to be supported yet in the Webkit Nightlies or Safari. But if you do want to check it out, just open up the most recent version of Chrome or Firefox 4 and start natively binding your functions!
+
+All in all, I'm quite happy with how working with native JS has been going, sure I miss some of the nicer array methods from Mootools (invoke, erase etc.), but seeing just how many of them (most of the iterators) have made their way in to browser implementations makes me incredibly happy.
+
+For browsers that don't support bind natively, be sure to try out Mootools or at least steal "their implementation":https://github.com/mootools/mootools-core/blob/master/Source/Types/Function.js (but show them some love of course).
