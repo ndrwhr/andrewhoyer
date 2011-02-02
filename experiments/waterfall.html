@@ -1,9 +1,25 @@
 ---
-layout: default
+layout: experiment
 permalink: /waterfall/
 ---
 
 <style type="text/css" media="screen">
+
+body, div {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+#screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-height: 500px;
+    overflow: hidden;
+    border: 1px solid green;
+}
 
 #waterfall {
     position: relative;
@@ -29,11 +45,32 @@ permalink: /waterfall/
     -webkit-transition: -webkit-transform 10ms linear;
 }
 
+#cloud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: rgba(0,0,0,0.2);
+}
+
 </style>
 
-<div id="waterfall"></div>
+<div id="screen">
+    <div id="waterfall"></div>
+    <did id="cloud"></did>
+</div>
 
 <script type="text/javascript" charset="utf-8">
+
+if (!Function.prototype.bind) 
+    Function.prototype.bind = function (bind, args){
+        var self = this;
+        if (args != null) args = Array.from(args);
+        return function(){
+            return self.apply(bind, args || arguments);
+        };
+    };
 
 var Helper = {
     round: function(number){
@@ -175,7 +212,7 @@ Particle.prototype = {
     update: function(acceleration){
         var temp = this.current;
         
-        this.current = this.current.add(acceleration.add(this.current.subtract(this.previous)));
+        this.current = this.current.scale(2).subtract(this.previous).add(acceleration);
         this.previous = temp;
         
         this.rotation += this.rotation_step;
@@ -263,6 +300,7 @@ Waterfall.prototype = {
 };
 
 var element = document.getElementById('waterfall');
+
 var resize = function(){
     element.size = new Vector(element.clientWidth, element.clientHeight);
     element.position = new Vector(element.offsetLeft, element.offsetTop);
