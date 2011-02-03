@@ -1,9 +1,9 @@
 ---
 layout: default
 permalink: /sudoku/
-js:
-    - exp_src/sudoku/helpers.js
-    - exp_src/sudoku/sudoku.js
+exp_js:
+    - sudoku/helpers.js
+    - sudoku/sudoku.js
 ---
 
 <style type="text/css" media="screen">
@@ -23,9 +23,10 @@ js:
 
 	table#sudoku caption{
 		color: #000;
-		padding-left: 25px;
+		margin-left: 25px;
 		font-size: 80%;
         font-family: georgia;
+        text-align: center;
 	}
 
 	table#sudoku, table#sudoku tr td,
@@ -34,6 +35,7 @@ js:
 		border-collapse: collapse;
 		margin:0;
 		padding:0;
+		text-align: center;
 	}
 
 	table.horizontal-labels {
@@ -46,6 +48,10 @@ js:
 		border-width: 0px;
 		font-weight: bold;
 		font-size: 22pt;
+	}
+	
+	table.block td {
+	    font-weight: bold;
 	}
 
 	table.block#b11, table.block#b12, table.block#b13 {

@@ -46,14 +46,15 @@ contact:
       url:      /atom.xml
       image:    /resources/images/social/email_bw.jpg
 
-css:
-    - css/main.css
-    - css/pygments.css
-    
-js:
-    - js/mootools-1.2.4-core-yc.js
-    - js/main.js
-    
+default_css:
+    - main.css
+minimal_css:
+    - minimal.css
+
+default_js:
+    - mootools-1.2.4-core-yc.js
+    - main.js
+
 experiments:
     - name:     Mobeh Dick
       date:     October 2010

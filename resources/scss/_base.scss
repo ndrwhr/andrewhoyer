@@ -1,0 +1,56 @@
+@import "compass/reset";
+@import "pygments";
+
+$site-color: #777;
+
+@mixin link-hover($name, $color){
+    &.#{$name}:hover { background-color: $color };
+}
+
+body {
+    // the reset from compass fucks everything up.
+    line-height: inherit;
+    color: $site-color;
+    font-family: georgia, serif;
+}
+
+a {
+    text-decoration: underline;
+    color: #777;
+    &:hover {
+        text-decoration: none;
+        background-color: #87c6d0;
+        color: white;
+    }
+    
+    @include link-hover(orange, #f3a271);
+    @include link-hover(green, #7acf6f);
+    @include link-hover(red, #F08080);
+    @include link-hover(teal, #75c9ab);
+    @include link-hover(purple, #db98d7);
+    @include link-hover(yellow, #e0e562);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    display: inline-block;
+    font-weight: normal;
+    letter-spacing: -0.06em;
+    background-color: #eee;
+    margin-bottom: 15px;
+}
+
+h1 { font-size: 30px; }
+h2 { font-size: 25px; }
+h3 { font-size: 20px; }
+h4 { font-size: 15px; }
+h5 { font-size: 10px; }
+h6 { font-size:  5px; }
+
+pre {
+    font-family: monaco, monospace;
+    font-size: 0.8em;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    padding: 5px 10px;
+    overflow: auto;
+}

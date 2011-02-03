@@ -16,7 +16,7 @@ end
 desc "Serve on Localhost with port 4000"
 task :default do
   compass("watch &")
-  jekyll("--server --auto")
+  jekyll("--server --auto &> /dev/null")
 end
 
 desc "Deploy to Dev"

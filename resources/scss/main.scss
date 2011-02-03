@@ -1,187 +1,166 @@
-$site-color: #777;
+@import "base";
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, font, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center, dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    font-size: 100%;
-    vertical-align: baseline;
-    background: transparent;
+@mixin social($name){
+    ##{$name} {
+        background-image: url(../images/social/#{$name}.jpg);
+    }
 }
 
 body {
-	width: 800px;
-	margin: 0px auto;
-	text-align: center;
-	color: $site-color;
-	background-image: url(../images/background.jpg);
-	background-position: top center;
-	background-repeat: repeat-x;
-	font-family: georgia, serif;
+    width: 800px;
+    margin: 0px auto;
+    text-align: center;
+    color: $site-color;
+    background: {
+        image: url(../images/background.jpg);
+        position: top center;
+        repeat: repeat-x;
+    }
 }
 
 p {
-	text-indent: 1em;
-	margin-bottom: 15px;
+    text-indent: 1em;
+    margin-bottom: 15px;
 }
-
-h1, h2, h3, h4, h5, h6 {
-	display: inline-block;
-	font-weight: normal;
-	letter-spacing: -0.06em;
-	background-color: #eee;
-	margin-bottom: 15px;
-}
-
-h1 { font-size: 30px; }
-h2 { font-size: 25px; }
-h3 { font-size: 20px; }
-h4 { font-size: 15px; }
-h5 { font-size: 10px; }
-h6 { font-size:  5px; }
 
 ul {
-	margin: 0 20px 20px;
-	li {
-		list-style: circle;
-		margin: 0;
-	}
-}
-
-pre {
-	border: 1px solid #ccc;
-	overflow: auto;
+    margin: 0 20px 20px;
+    li {
+        list-style: circle;
+        margin: 0;
+    }
 }
 
 iframe {
-	overflow: hidden;
+    overflow: hidden;
 }
-
-a {
-	text-decoration: underline;
-	color: #777;
-}
-
-a:hover {
-	text-decoration: none;
-	background-color: #87c6d0;
-	color: white;
-}
-
-a.orange:hover { background-color:#f3a271; }
-
-a.green:hover { background-color:#7acf6f; }
-
-a.red:hover { background-color:#F08080; }
-
-a.teal:hover { background-color:#75c9ab; }
-
-a.purple:hover { background-color:#db98d7; }
-
-a.yellow:hover { background-color:#e0e562; }
-
 
 header, footer {
-	letter-spacing: -0.06em;
-	font-size: 30px;
-	padding: 15px 0 30px;
-	
-	a {
-		color: $site-color;
-		text-decoration: none;
-		padding: 5px 10px;
-		:hover { color: white }
-	}
+    letter-spacing: -0.06em;
+    font-size: 30px;
+    padding: 15px 0 30px;
+    
+    a {
+        color: $site-color;
+        text-decoration: none;
+        padding: 5px 10px;
+        :hover { color: white }
+    }
 }
 
 p.warning {
-	display: block;
-	margin: 10px 0;
-	font-size: 30px;
-	strong {
-		color: red;
-	}
+    display: block;
+    margin: 10px 0;
+    font-size: 30px;
+    strong {
+        color: red;
+    }
 }
 
 #content {
-	text-align: left;
-	padding: 0 20px;
-	
-	#intro {
-		text-indent: 0;
-		text-align: center;
-		font-size: 95%;
-		padding: 10px;
-	}
+    text-align: left;
+    padding: 0 20px;
+    
+    #intro {
+        text-indent: 0;
+        text-align: center;
+        font-size: 95%;
+        padding: 10px;
+    }
 }
 
 footer {
-	padding: 20px;
-	margin-top: 20px;
-	clear: both;
-	
-	#contact {
-	  line-height: 26px;
-		a {
-			text-indent: -9999px;
-			display: inline-block;
-			width: 30px;
-			height: 30px;
-			padding: 0;
-			margin: 5px 3px 0;
-			background-repeat: no-repeat;
-			background-position: top center;
-		}
-		a:hover {
-			background-color: transparent;
-			background-position: bottom center;
-		}
-		#twitter {
-			background-image: url(../images/social/twitter.jpg);
-		}
-		#facebook {
-			background-image: url(../images/social/facebook.jpg);
-		}
-		#flickr {
-			background-image: url(../images/social/flickr.jpg);
-		}
-		#linkedin {
-			background-image: url(../images/social/linkedin.jpg);
-		}
-		#email {
-			background-image: url(../images/social/email.jpg);
-		}
-		#feed {
-			background-image: url(../images/social/feed.jpg);
-		}
-	}
+    padding: 20px;
+    margin-top: 20px;
+    clear: both;
+    
+    #contact {
+      line-height: 26px;
+        a {
+            text-indent: -9999px;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            padding: 0;
+            margin: 5px 3px 0;
+            background-repeat: no-repeat;
+            background-position: top center;
+            &:hover {
+                background-color: transparent;
+                background-position: bottom center;
+            }
+        }
+        @include social(twitter);
+        @include social(facebook);
+        @include social(flickr);
+        @include social(email);
+        @include social(feed);
+    }
 }
 
 #chrome-link {
-	text-align: center;
+    text-align: center;
 }
 
 #thoughts {
-	
-	img {
-		width: 700px;
-		margin: 0;
-		margin-left: 29px;
-		border: 1px solid #777;
-	}
-	
-	p {
-		font-size: 90%;
-		text-align: center;
-		text-indent: 0;
-		margin-bottom: 20px;
-	}
-	
+    
+    img {
+        width: 700px;
+        margin: 0;
+        margin-left: 29px;
+        border: 1px solid #777;
+    }
+    
+    p {
+        font-size: 90%;
+        text-align: center;
+        text-indent: 0;
+        margin-bottom: 20px;
+    }
+    
+}
+
+
+ul#experiments {
+    margin: 0;
+    padding: 10px 0;
+    
+    li {
+        float: left;
+        width: 350px;
+        height: 185px;
+        margin-top: 5px;
+        list-style: none;
+        
+        text-align: center;
+        
+        a.thumb {
+            display: block;
+            width: 350px;
+            height: 100px;
+            margin-bottom: 5px;
+            
+            img {
+                border: 1px solid #ddd;
+            }
+        }
+        
+        a.link {
+            text-decoration: none;
+            font-size: 30px;
+        }
+        
+        span {
+            color: #aaa;
+        }
+        
+        p {
+            text-indent: 0;
+            margin-top: 5px;
+            text-align: left;
+        }
+    }
+    li.odd {
+        margin-right: 50px;
+    }
 }

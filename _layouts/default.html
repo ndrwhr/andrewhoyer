@@ -12,20 +12,28 @@
     
     <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="{{ site.feed }}" />
     
-    {% for css in site.css %}
-        <link rel="stylesheet" href="/resources/{{ css }}?{{ gen_time }}" type="text/css" />
+    {% for css in site.default_css %}
+        <link rel="stylesheet" href="/resources/css/{{ css }}?{{ gen_time }}" type="text/css" />
     {% endfor %}
     
     {% for css in page.css %}
-        <link rel="stylesheet" href="/resources/{{ css }}?{{ gen_time }}" type="text/css" />
+        <link rel="stylesheet" href="/resources/css/{{ css }}?{{ gen_time }}" type="text/css" />
     {% endfor %}
     
-    {% for js in site.js %}
-        <script src="/resources/{{ js }}?{{ gen_time }}" type="text/javascript" charset="utf-8"></script>
+    {% for css in page.exp_css %}
+        <link rel="stylesheet" href="/resources/exp_src/{{ css }}?{{ gen_time }}" type="text/css" />
+    {% endfor %}
+    
+    {% for js in site.default_js %}
+        <script src="/resources/js/{{ js }}?{{ gen_time }}" type="text/javascript" charset="utf-8"></script>
     {% endfor %}
     
     {% for js in page.js %}
         <script src="/resources/{{ js }}?{{ gen_time }}" type="text/javascript" charset="utf-8"></script>
+    {% endfor %}
+    
+    {% for js in page.exp_js %}
+        <script src="/resources/exp_src/{{ js }}?{{ gen_time }}" type="text/javascript" charset="utf-8"></script>
     {% endfor %}
     
 </head>
