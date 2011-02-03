@@ -1,7 +1,9 @@
+/* line 2, ../scss/experiments.scss */
 ul#experiments {
   margin: 0;
   padding: 10px 0;
 }
+/* line 6, ../scss/experiments.scss */
 ul#experiments li {
   float: left;
   width: 350px;
@@ -10,21 +12,33 @@ ul#experiments li {
   list-style: none;
   text-align: center;
 }
+/* line 15, ../scss/experiments.scss */
 ul#experiments li a.thumb {
   display: block;
   width: 350px;
   height: 100px;
   margin-bottom: 5px;
 }
-ul#experiments li a.thumb img { border: 1px solid #dddddd; }
+/* line 21, ../scss/experiments.scss */
+ul#experiments li a.thumb img {
+  border: 1px solid #ddd;
+}
+/* line 26, ../scss/experiments.scss */
 ul#experiments li a.link {
   text-decoration: none;
   font-size: 30px;
 }
-ul#experiments li span { color: #aaaaaa; }
+/* line 31, ../scss/experiments.scss */
+ul#experiments li span {
+  color: #aaa;
+}
+/* line 35, ../scss/experiments.scss */
 ul#experiments li p {
   text-indent: 0;
   margin-top: 5px;
   text-align: left;
 }
-ul#experiments li.odd { margin-right: 50px; }
+/* line 41, ../scss/experiments.scss */
+ul#experiments li.odd {
+  margin-right: 50px;
+}

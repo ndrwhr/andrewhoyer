@@ -1,4 +1,11 @@
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
+/* line 9, ../scss/main.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend {
   margin: 0;
   padding: 0;
   border: 0;
@@ -7,6 +14,8 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   vertical-align: baseline;
   background: transparent;
 }
+
+/* line 19, ../scss/main.scss */
 body {
   width: 800px;
   margin: 0px auto;
@@ -17,93 +26,173 @@ body {
   background-repeat: repeat-x;
   font-family: georgia, serif;
 }
+
+/* line 30, ../scss/main.scss */
 p {
   text-indent: 1em;
   margin-bottom: 15px;
 }
+
+/* line 35, ../scss/main.scss */
 h1, h2, h3, h4, h5, h6 {
   display: inline-block;
   font-weight: normal;
   letter-spacing: -0.06em;
-  background-color: #eeeeee;
+  background-color: #eee;
   margin-bottom: 15px;
 }
-h1 { font-size: 30px; }
-h2 { font-size: 25px; }
-h3 { font-size: 20px; }
-h4 { font-size: 15px; }
-h5 { font-size: 10px; }
-h6 { font-size: 5px; }
-ul { margin: 0 20px 20px; }
+
+/* line 43, ../scss/main.scss */
+h1 {
+  font-size: 30px;
+}
+
+/* line 44, ../scss/main.scss */
+h2 {
+  font-size: 25px;
+}
+
+/* line 45, ../scss/main.scss */
+h3 {
+  font-size: 20px;
+}
+
+/* line 46, ../scss/main.scss */
+h4 {
+  font-size: 15px;
+}
+
+/* line 47, ../scss/main.scss */
+h5 {
+  font-size: 10px;
+}
+
+/* line 48, ../scss/main.scss */
+h6 {
+  font-size: 5px;
+}
+
+/* line 50, ../scss/main.scss */
+ul {
+  margin: 0 20px 20px;
+}
+/* line 52, ../scss/main.scss */
 ul li {
   list-style: circle;
   margin: 0;
 }
+
+/* line 58, ../scss/main.scss */
 pre {
+<<<<<<< Updated upstream
   padding: 10px 15px;
   border: 1px solid #cccccc;
+=======
+  border: 1px solid #ccc;
+>>>>>>> Stashed changes
   overflow: auto;
 }
-iframe { overflow: hidden; }
+
+/* line 63, ../scss/main.scss */
+iframe {
+  overflow: hidden;
+}
+
+/* line 67, ../scss/main.scss */
 a {
   text-decoration: underline;
-  color: #777777;
+  color: #777;
 }
+
+/* line 72, ../scss/main.scss */
 a:hover {
   text-decoration: none;
   background-color: #87c6d0;
   color: white;
 }
-a.orange:hover { background-color: #f3a271; }
-a.green:hover { background-color: #7acf6f; }
-a.red:hover { background-color: #f08080; }
-a.teal:hover { background-color: #75c9ab; }
-a.purple:hover { background-color: #db98d7; }
-a.yellow:hover { background-color: #e0e562; }
-header {
+
+/* line 78, ../scss/main.scss */
+a.orange:hover {
+  background-color: #f3a271;
+}
+
+/* line 80, ../scss/main.scss */
+a.green:hover {
+  background-color: #7acf6f;
+}
+
+/* line 82, ../scss/main.scss */
+a.red:hover {
+  background-color: #F08080;
+}
+
+/* line 84, ../scss/main.scss */
+a.teal:hover {
+  background-color: #75c9ab;
+}
+
+/* line 86, ../scss/main.scss */
+a.purple:hover {
+  background-color: #db98d7;
+}
+
+/* line 88, ../scss/main.scss */
+a.yellow:hover {
+  background-color: #e0e562;
+}
+
+/* line 91, ../scss/main.scss */
+header, footer {
   letter-spacing: -0.06em;
   font-size: 30px;
   padding: 15px 0 30px;
 }
-header a {
+/* line 96, ../scss/main.scss */
+header a, footer a {
   color: #777777;
   text-decoration: none;
   padding: 5px 10px;
 }
-header a:hover { color: white; }
-footer {
-  letter-spacing: -0.06em;
-  font-size: 30px;
-  padding: 15px 0 30px;
+/* line 100, ../scss/main.scss */
+header a :hover, footer a :hover {
+  color: white;
 }
-footer a {
-  color: #777777;
-  text-decoration: none;
-  padding: 5px 10px;
-}
-footer a:hover { color: white; }
+
+/* line 104, ../scss/main.scss */
 p.warning {
   display: block;
   margin: 10px 0;
   font-size: 30px;
 }
-p.warning strong { color: red; }
+/* line 108, ../scss/main.scss */
+p.warning strong {
+  color: red;
+}
+
+/* line 113, ../scss/main.scss */
 #content {
   text-align: left;
   padding: 0 20px;
 }
+/* line 117, ../scss/main.scss */
 #content #intro {
   text-indent: 0;
   text-align: center;
   font-size: 95%;
   padding: 10px;
 }
+
+/* line 125, ../scss/main.scss */
 footer {
   padding: 20px;
   margin-top: 20px;
   clear: both;
 }
-footer #contact { line-height: 26px; }
+/* line 130, ../scss/main.scss */
+footer #contact {
+  line-height: 26px;
+}
+/* line 132, ../scss/main.scss */
 footer #contact a {
   text-indent: -9999px;
   display: inline-block;
@@ -114,23 +203,49 @@ footer #contact a {
   background-repeat: no-repeat;
   background-position: top center;
 }
+/* line 142, ../scss/main.scss */
 footer #contact a:hover {
   background-color: transparent;
   background-position: bottom center;
 }
-footer #contact #twitter { background-image: url(../images/social/twitter.jpg); }
-footer #contact #facebook { background-image: url(../images/social/facebook.jpg); }
-footer #contact #flickr { background-image: url(../images/social/flickr.jpg); }
-footer #contact #linkedin { background-image: url(../images/social/linkedin.jpg); }
-footer #contact #email { background-image: url(../images/social/email.jpg); }
-footer #contact #feed { background-image: url(../images/social/feed.jpg); }
-#chrome-link { text-align: center; }
+/* line 146, ../scss/main.scss */
+footer #contact #twitter {
+  background-image: url(../images/social/twitter.jpg);
+}
+/* line 149, ../scss/main.scss */
+footer #contact #facebook {
+  background-image: url(../images/social/facebook.jpg);
+}
+/* line 152, ../scss/main.scss */
+footer #contact #flickr {
+  background-image: url(../images/social/flickr.jpg);
+}
+/* line 155, ../scss/main.scss */
+footer #contact #linkedin {
+  background-image: url(../images/social/linkedin.jpg);
+}
+/* line 158, ../scss/main.scss */
+footer #contact #email {
+  background-image: url(../images/social/email.jpg);
+}
+/* line 161, ../scss/main.scss */
+footer #contact #feed {
+  background-image: url(../images/social/feed.jpg);
+}
+
+/* line 167, ../scss/main.scss */
+#chrome-link {
+  text-align: center;
+}
+
+/* line 173, ../scss/main.scss */
 #thoughts img {
   width: 700px;
   margin: 0;
   margin-left: 29px;
-  border: 1px solid #777777;
+  border: 1px solid #777;
 }
+/* line 180, ../scss/main.scss */
 #thoughts p {
   font-size: 90%;
   text-align: center;
