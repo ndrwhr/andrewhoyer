@@ -30,17 +30,17 @@ body, div {
     font-size: 30px;
 }
 
-
 #waterfall div {
     position: absolute;
     display: inline-block;
     -webkit-transition: -webkit-transform 100ms linear;
 }
 
-#waterfall div.cursor {
-    z-index: -100;
+#waterfall div#cursor {
     background: #f2f2f2;
     border: 1px solid #ddd;
+    height: 27.5%;
+    width: 27.5%;
     -webkit-border-radius: 300px;
     -webkit-transition: -webkit-transform 10ms linear;
 }
@@ -57,7 +57,9 @@ body, div {
 </style>
 
 <div id="screen">
-    <div id="waterfall"></div>
+    <div id="waterfall">
+        <div id="cursor"></div>
+    </div>
     <did id="cloud"></did>
 </div>
 
@@ -73,23 +75,15 @@ if (!Function.prototype.bind)
     };
 
 var Helper = {
+    
     round: function(number){
         return Math.round(number * 10) / 10;
     },
-    random: function(min, max){
-        min = min || 0;
-        max = max || 1;
-        return Math.random() * (max - min) + min;
-    },
-    randomInt: function(min, max){
-        return Math.floor(this.random(min, max));
-    },
-    bool: function(){
-        return !!Math.round(this.random());
-    },
+    
     translate: function(vector){
         return ['translate(', vector.x, 'px,', vector.y, 'px)'].join('');
     },
+    
     rotate: function(value){
         return ['rotate(', this.round(value), 'deg)'].join('');
     }
@@ -102,7 +96,7 @@ var Vector = function(x, y){
 };
 
 Vector.random = function(min, max){
-    return new Vector(Helper.random(min, max), Helper.random(min, max));
+    return new Vector(Generator.random(min, max), Generator.random(min, max));
 };
 
 Vector.prototype = {
@@ -141,54 +135,73 @@ Vector.prototype = {
     
 };
 
+var Generator = {
+    
+    letters: '!\"\',.0123456789?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split(''),
+    
+    random: function(min, max){
+        min = min || 0;
+        max = max || 1;
+        return Math.random() * (max - min) + min;
+    },
+    
+    randomInt: function(min, max){
+        return Math.floor(this.random(min, max));
+    },
+    
+    randomLetter: function(){
+        return this.letters[this.randomInt(0, this.letters.length)];
+    },
+    
+    bool: function(){
+        return !!Math.round(this.random());
+    },
+    
+    particle: function(container){
+        var letter = this.randomLetter(),
+            current = new Vector(this.random()),
+            previous = current.add(Vector.random(-0.01, 0.01));
+        return new Particle(letter, current, previous, container);
+    }
+    
+};
+
 var Cursor = function(container){
     this.container = container;
     this.radius = 0.2;
     
-    this.clear();
-    this.createElement();
+    this.element = document.getElementById('cursor');
+    this.move({
+        pageX: -100,
+        pageY: -100
+    });
     
     document.addEventListener('mousemove', this.move.bind(this));
 };
 
 Cursor.prototype = {
     
-    createElement: function(){
-        var container = this.container,
-            dimensions = container.size.scale(this.radius + 0.075),
-            element = this.element = document.createElement('div');
-        
-        element.className = 'cursor';
-        element.style.width = dimensions.x + 'px';
-        element.style.height = dimensions.y + 'px';
-        
-        this.moveElement();
-        
-        container.appendChild(element);
-    },
-    
-    clear: function(){
-        this.position = new Vector(-5, -5);
-    },
-    
     move: function(event){
         var container = this.container,
             position = new Vector(event.pageX, event.pageY);
+            actual = position.subtract(container.position);
         
-        this.position = position.subtract(container.position).divide(container.size);
+        this.actual = actual;
+        this.scaled = this.actual.divide(container.size);
+        
         this.moveElement();
     },
     
     moveElement: function(){
         var element = this.element,
             offset = new Vector(element.clientWidth, element.clientHeight).scale(0.5);
-            position = this.position.multiply(this.container.size).subtract(offset);
+            position = this.actual.subtract(offset);
         
         element.style.WebkitTransform = Helper.translate(position);
     },
     
     adjustParticle: function(particle){
-        var position = this.position,
+        var position = this.scaled,
             diff = particle.current.subtract(position),
             distance = diff.length();
         
@@ -198,16 +211,27 @@ Cursor.prototype = {
     
 };
 
-var Particle = function(value, current, previous){
+var Particle = function(value, current, previous, container){
     this.value = value;
     this.current = current;
     this.previous = previous;
-    this.rotation = Helper.random();
-    this.rotation_step = Helper.random(-0.05, 0.05);
-    this.element = document.createElement('div');
+    this.container = container;
+    this.rotation = Generator.random();
+    this.rotation_step = Generator.random(-0.05, 0.05);
+    this.element = this.createElement();
 };
 
 Particle.prototype = {
+    
+    createElement: function(){
+        var element = document.createElement('div');
+        element.innerText = this.value;
+        element.style.WebkitTransform = this.getTransform();
+        
+        this.container.appendChild(element);
+        
+        return element;
+    },
     
     update: function(acceleration){
         var temp = this.current;
@@ -218,18 +242,6 @@ Particle.prototype = {
         this.rotation += this.rotation_step;
         
         this.element.style.WebkitTransform = this.getTransform();
-    },
-    
-    render: function(container){
-        this.container = container;
-        
-        var element = this.element;
-        element.innerText = this.value;
-        element.style.WebkitTransform = this.getTransform();
-        
-        container.appendChild(element);
-        
-        return this;
     },
     
     remove: function(){
@@ -254,7 +266,7 @@ var Waterfall = function(container, cursor){
     this.container = container;
     this.cursor = cursor;
     this.gravity = new Vector(0, 0.0025);
-    this.letters = '!\"\',.0123456789?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+    this.num_particles = 150;
     this.particles = [];
 };
 
@@ -269,8 +281,8 @@ Waterfall.prototype = {
             if (particle.visible()){
                 this.cursor.adjustParticle(particle);
             } else {
-                particle.remove(this.container);
-                particles[index] = this.generate();
+                particle.remove();
+                particles[index] = Generator.particle(this.container);
             }
             
         }, this);
@@ -278,37 +290,38 @@ Waterfall.prototype = {
         setTimeout(this.simulate.bind(this), 75);
     },
     
-    randomLetter: function(){
-        return this.letters[Helper.randomInt(0, this.letters.length)];
-    },
-    
-    generate: function(){
-        var letter = this.randomLetter(),
-            current = new Vector(Helper.random()),
-            previous = current.add(Vector.random(-0.01, 0.01)),
-            particle = new Particle(letter, current, previous);
-        
-        return particle.render(this.container);
-    },
-    
     addParticle: function(){
         var particles = this.particles;
-        if (particles.length < 150 && Helper.bool())
-            particles.push(this.generate());
+        if (particles.length < this.num_particles && Generator.bool())
+            particles.push(Generator.particle(this.container));
     }
     
 };
 
-var element = document.getElementById('waterfall');
-
-var resize = function(){
-    element.size = new Vector(element.clientWidth, element.clientHeight);
-    element.position = new Vector(element.offsetLeft, element.offsetTop);
+var Simulation = function(){
+    var container = this.container = document.getElementById('waterfall');
+    
+    window.addEventListener('resize', this.resize.bind(this));
+    this.resize();
+    
+    this.waterfall = new Waterfall(container, new Cursor(container));
+    this.run();
 };
-resize();
-window.addEventListener('resize', resize);
 
-var cursor = new Cursor(element);
-new Waterfall(element, cursor).simulate();
+Simulation.prototype = {
+    
+    resize: function(){
+        var container = this.container;
+        container.size = new Vector(container.clientWidth, container.clientHeight);
+        container.position = new Vector(container.offsetLeft, container.offsetTop);
+    },
+    
+    run: function(){
+        this.waterfall.simulate();
+    }
+};
+
+new Simulation();
+
 
 </script>
