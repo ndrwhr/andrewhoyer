@@ -68,14 +68,19 @@ body {
 
 <script type="text/javascript" charset="utf-8">
 
-if (!Function.prototype.bind) 
-    Function.prototype.bind = function (bind, args){
-        var self = this;
-        if (args != null) args = Array.from(args);
-        return function(){
-            return self.apply(bind, args || arguments);
-        };
+(function(){
+
+if (Function.prototype.bind) return;
+
+Function.prototype.bind = function (bind, args){
+    var self = this;
+    if (args != null) args = Array.from(args);
+    return function(){
+        return self.apply(bind, args || arguments);
     };
+};
+
+})();
 
 var Helper = {
     
