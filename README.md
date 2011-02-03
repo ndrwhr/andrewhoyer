@@ -7,6 +7,12 @@ This is the repo for [andrew-hoyer.com][1] and is right now a more or less basic
 
 If you have any questions or comments. Please feel free to contact [me@andrew-hoyer.com][3]
 
+###Dependancies:
+
+ * [jekyll][2]
+ * [sass][4]
+ * [compass][5]
+
 MIT License:
 
 Copyright (c) 2011 Andrew Hoyer
@@ -32,3 +38,5 @@ THE SOFTWARE.
 [1]: http://andrew-hoyer.com/ "andrew-hoyer.com"
 [2]: http://jekyllrb.com/ "jekyll"
 [3]: mailto:me@andrew-hoyer.com "via the emails"
+[4]: http://sass-lang.com/ "sass"
+[5]: http://compass-style.org/ "compass"
