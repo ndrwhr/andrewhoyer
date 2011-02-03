@@ -1,15 +1,21 @@
 def jekyll(opts = "")
-  sh "rm -rfv _site"
+  sh "rm -rf _site"
   sh "jekyll " + opts
+end
+
+def compass(opts = "compile")
+  sh "compass " + opts
 end
 
 desc "Build site using Jekyll"
 task :build do
+  compass
   jekyll
 end
 
 desc "Serve on Localhost with port 4000"
 task :default do
+  compass("watch &")
   jekyll("--server --auto")
 end
 
