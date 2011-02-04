@@ -53,8 +53,14 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 100px;
-    background: rgba(0,0,0,0.2);
+    height: 200px;
+    width: 600px;
+    background: black;
+}
+
+#cloud div {
+    color: white;
+    position: absolute;
 }
 
 </style>
@@ -84,6 +90,7 @@ var helpers = {
 };
 
 var element = HTMLElement.prototype;
+
 element.transform = function(translation, rotation){
     translation = helpers.translate(translation);
     rotation = rotation ? helpers.rotate(rotation) : '';
@@ -95,12 +102,15 @@ element.transform = function(translation, rotation){
     return this;
 };
 
+element.color = function(color){
+    this.style = color;
+};
+
 if (!Function.prototype.bind){
-    Function.prototype.bind = function (bind, args){
+    Function.prototype.bind = function (bind){
         var self = this;
-        if (args != null) args = Array.from(args);
         return function(){
-            return self.apply(bind, args || arguments);
+            return self.apply(bind, arguments);
         };
     };
 }
@@ -265,6 +275,35 @@ Particle.prototype = {
     
 };
 
+
+var Cloud = function(element){
+    this.element = element;
+    console.time('cloud');
+    this.generate();
+    console.timeEnd('cloud');
+};
+
+Cloud.prototype = {
+    
+    generate: function(){
+        
+        
+        var fragment = document.createDocumentFragment();
+        
+        Generator.randomInt(0, 360);
+        var i = 1000;
+        while(i--){
+            var letter = Generator.randomLetter();
+            fragment.appendChild(letter);
+        }
+        
+        this.element.appendChild(fragment);
+    }
+    
+};
+
+new Cloud(document.getElementById('cloud'));
+
 var Waterfall = function(container, cursor){
     this.container = container;
     this.cursor = cursor;
@@ -324,7 +363,7 @@ Simulation.prototype = {
     }
 };
 
-new Simulation();
+// new Simulation();
 
 
 </script>
