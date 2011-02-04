@@ -8,6 +8,9 @@ permalink: /waterfall/
 body, div {
     margin: 0;
     padding: 0;
+    font-family: georgia;
+    -webkit-user-select: none;
+    -moz-user-select: none;
 }
 
 body {
@@ -27,9 +30,10 @@ body {
 
 #waterfall {
     position: relative;
-    margin: 0 auto;
-    width: 500px;
-    height: 500px;
+    top: 120px;
+    left: 75px;
+    width: 450px;
+    height: 450px;
     font-size: 30px;
 }
 
@@ -55,11 +59,11 @@ body {
     right: 0;
     height: 200px;
     width: 600px;
-    background: black;
+    font-weight: bold;
+    font-size: 35px;
 }
 
 #cloud div {
-    color: white;
     position: absolute;
 }
 
@@ -278,6 +282,8 @@ Particle.prototype = {
 
 var Cloud = function(element){
     this.element = element;
+    this.centers = [];
+    
     console.time('cloud');
     this.generate();
     console.timeEnd('cloud');
@@ -286,18 +292,64 @@ var Cloud = function(element){
 Cloud.prototype = {
     
     generate: function(){
-        
-        
-        var fragment = document.createDocumentFragment();
+        var fragment = document.createDocumentFragment(),
+            centers = this.centers;
         
         Generator.randomInt(0, 360);
-        var i = 1000;
-        while(i--){
-            var letter = Generator.randomLetter();
-            fragment.appendChild(letter);
-        }
+        
+        centers.forEach(function(center){
+            this.circle(fragment, center.add(Vector.random(-10, 10)));
+        }, this);
+        
+        this.circle(fragment, new Vector( 50, 120));
+        this.circle(fragment, new Vector(100, 120));
+        this.circle(fragment, new Vector(175, 130));
+        this.circle(fragment, new Vector(250, 120));
+        this.circle(fragment, new Vector(325, 120));
+        this.circle(fragment, new Vector(400, 120));
+        this.circle(fragment, new Vector(475, 130));
+        this.circle(fragment, new Vector(550, 140));
+        
+        this.circle(fragment, new Vector(150, 70));
+        this.circle(fragment, new Vector(175, 60));
+        this.circle(fragment, new Vector(250, 60));
+        this.circle(fragment, new Vector(325, 70));
+        this.circle(fragment, new Vector(420, 60));
+        this.circle(fragment, new Vector(500, 70));
+        
+        this.circle(fragment, new Vector(250, 20));
+        this.circle(fragment, new Vector(325, 10));
+        this.circle(fragment, new Vector(400, 20));
         
         this.element.appendChild(fragment);
+    },
+    
+    circle: function(fragment, center){
+        var container = document.createElement('div'),
+            radius = Generator.randomInt(40, 50),
+            count = 30;
+        
+        while (count--){
+            var postion, length, particle;
+            
+            do {
+                position = Vector.random(-radius, radius);
+                length = position.length();
+            } while(length > radius);
+            
+            particle = this.particle(position, Generator.randomInt(0, 360));
+            
+            container.appendChild(particle);
+        }
+        
+        container.style.left = center.x + 'px';
+        container.style.top = center.y + 'px';
+        
+        fragment.appendChild(container);
+    },
+    
+    particle: function(position, rotation){
+        return Generator.randomLetter().transform(position, rotation);
     }
     
 };
@@ -308,7 +360,7 @@ var Waterfall = function(container, cursor){
     this.container = container;
     this.cursor = cursor;
     this.gravity = new Vector(0, 0.0025);
-    this.num_particles = 150;
+    this.num_particles = 100;
     this.particles = [];
 };
 
@@ -363,7 +415,7 @@ Simulation.prototype = {
     }
 };
 
-// new Simulation();
+new Simulation();
 
 
 </script>
