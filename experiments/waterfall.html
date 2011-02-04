@@ -70,33 +70,42 @@ body {
 
 (function(){
 
-if (Function.prototype.bind) return;
-
-Function.prototype.bind = function (bind, args){
-    var self = this;
-    if (args != null) args = Array.from(args);
-    return function(){
-        return self.apply(bind, args || arguments);
-    };
-};
-
-})();
-
-var Helper = {
-    
+// Extend a few natives to help me out:
+var helpers = {
     round: function(number){
         return Math.round(number * 10) / 10;
     },
-    
     translate: function(vector){
-        return ['translate(', vector.x, 'px,', vector.y, 'px)'].join('');
+        return ['translate(', this.round(vector.x), 'px,', this.round(vector.y), 'px)'].join('');
     },
-    
     rotate: function(value){
         return ['rotate(', this.round(value), 'deg)'].join('');
     }
-    
 };
+
+var element = HTMLElement.prototype;
+element.transform = function(translation, rotation){
+    translation = helpers.translate(translation);
+    rotation = rotation ? helpers.rotate(rotation) : '';
+    
+    var transform = translation + ' ' + rotation;
+    
+    this.style.MozTransform = this.style.WebkitTransform = transform;
+    
+    return this;
+};
+
+if (!Function.prototype.bind){
+    Function.prototype.bind = function (bind, args){
+        var self = this;
+        if (args != null) args = Array.from(args);
+        return function(){
+            return self.apply(bind, args || arguments);
+        };
+    };
+}
+
+})();
 
 var Vector = function(x, y){
     this.x = x || 0;
@@ -133,10 +142,6 @@ Vector.prototype = {
         return Math.sqrt(this.x * this.x + this.y * this.y);
     },
     
-    round: function(){
-        return new Vector(Helper.round(this.x), Helper.round(this.y));
-    },
-    
     toString: function(){
         return ['[',this.x, ',', this.y, ']'].join('');
     }
@@ -158,7 +163,9 @@ var Generator = {
     },
     
     randomLetter: function(){
-        return this.letters[this.randomInt(0, this.letters.length)];
+        var element = document.createElement('div');
+        element.innerText = this.letters[this.randomInt(0, this.letters.length)];
+        return element;
     },
     
     bool: function(){
@@ -166,10 +173,9 @@ var Generator = {
     },
     
     particle: function(container){
-        var letter = this.randomLetter(),
-            current = new Vector(this.random()),
+        var current = new Vector(this.random()),
             previous = current.add(Vector.random(-0.01, 0.01));
-        return new Particle(letter, current, previous, container);
+        return new Particle(this.randomLetter(), current, previous, container);
     }
     
 };
@@ -179,6 +185,8 @@ var Cursor = function(container){
     this.radius = 0.2;
     
     this.element = document.getElementById('cursor');
+    this.offset = this.calcOffset();
+    
     this.move({
         pageX: -100,
         pageY: -100
@@ -189,23 +197,19 @@ var Cursor = function(container){
 
 Cursor.prototype = {
     
+    calcOffset: function(){
+        var element = this.element;
+        return new Vector(element.clientWidth, element.clientHeight).scale(0.5);
+    },
+    
     move: function(event){
         var container = this.container,
             position = new Vector(event.pageX, event.pageY);
             actual = position.subtract(container.position);
         
-        this.actual = actual;
-        this.scaled = this.actual.divide(container.size);
+        this.scaled = actual.divide(container.size);
         
-        this.moveElement();
-    },
-    
-    moveElement: function(){
-        var element = this.element,
-            offset = new Vector(element.clientWidth, element.clientHeight).scale(0.5);
-            position = this.actual.subtract(offset);
-        
-        element.style.WebkitTransform = Helper.translate(position);
+        this.element.transform(actual.subtract(this.offset));
     },
     
     adjustParticle: function(particle){
@@ -219,26 +223,20 @@ Cursor.prototype = {
     
 };
 
-var Particle = function(value, current, previous, container){
-    this.value = value;
+var Particle = function(element, current, previous, container){
+    this.element = element;
     this.current = current;
     this.previous = previous;
     this.container = container;
-    this.rotation = Generator.random();
-    this.rotation_step = Generator.random(-0.05, 0.05);
-    this.element = this.createElement();
+    this.rotation = Generator.randomInt(0, 360);
+    this.rotation_step = Generator.randomInt(-20, 20);
+    this.initElement();
 };
 
 Particle.prototype = {
     
-    createElement: function(){
-        var element = document.createElement('div');
-        element.innerText = this.value;
-        element.style.WebkitTransform = this.getTransform();
-        
-        this.container.appendChild(element);
-        
-        return element;
+    initElement: function(){
+        this.container.appendChild(this.style());
     },
     
     update: function(acceleration){
@@ -249,19 +247,16 @@ Particle.prototype = {
         
         this.rotation += this.rotation_step;
         
-        this.element.style.WebkitTransform = this.getTransform();
+        this.style();
     },
     
     remove: function(){
         this.container.removeChild(this.element);
     },
     
-    getTransform: function(){
-        var position = this.current.multiply(this.container.size).round(),
-            translation = Helper.translate(position),
-            rotation = Helper.rotate(this.rotation * 360);
-        
-        return [translation, rotation].join(' ');
+    style: function(){
+        var position = this.current.multiply(this.container.size);
+        return this.element.transform(position, this.rotation);
     },
     
     visible: function(){
