@@ -113,7 +113,8 @@ element.position = function(position){
 };
 
 element.color = function(color){
-    this.style = color;
+    this.style.color = color;
+    return this;
 };
 
 if (!Function.prototype.bind){
@@ -194,8 +195,37 @@ var Generator = {
     
     particle: function(container){
         var current = new Vector(this.random()),
-            previous = current.add(Vector.random(-0.01, 0.01));
+            previous = current.add(Vector.random(-0.005, 0.005));
         return new Particle(this.randomLetter(), current, previous, container);
+    },
+    
+    gradient: function(stop1, stop2){
+        var regex = /#([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})/i,
+            steps, diff, i, j;
+        
+        // convert stops to integer values.
+        var stops = [stop1, stop2].map(function(stop){
+            return regex.exec(stop).slice(1).map(function(color){
+                return parseInt(color, 16);
+            });
+        });
+        
+        for (diff = i = 0; i < 3; i++)
+            diff = Math.max(diff, Math.abs(stops[0][i] - stops[1][i]));
+        
+        for (steps = [], i = 0; i < diff + 1; i++){
+            var step = [];
+            
+            for (j = 0; j < 3; j++){
+                var value = stops[0][j] + (i * ((stops[1][j] - stops[0][j]) / diff));
+                value = Math.round(value).toString(16);
+                step.push(value.length < 2 ? '0' + value : value);
+            }
+            
+            steps.push('#' + step.join(''));
+        }
+        
+        return steps;
     }
     
 };
@@ -287,8 +317,9 @@ Particle.prototype = {
 
 var Cloud = function(container){
     this.container = container;
+    this.colors = Generator.gradient('#777777', '#aaaaaa');
     this.centers = [
-        [ 25, 120], [ 85, 120], [145, 125], [195, 125], [250, 120], [320, 120], [380, 125], [450, 120],
+        [ 25, 120], [ 85, 120], [145, 125], [195, 125], [250, 120], [320, 120], [380, 125], [440, 120],
         [ 80,  80], [145,  70], [220,  70], [280,  70], [360,  80],
         [200,  45],[280,  50]
     ];
@@ -324,7 +355,8 @@ Cloud.prototype = {
             } while(position.length() > radius);
             
             var rotation = Generator.randomInt(0, 360),
-                particle = this.particle(position, rotation);
+                color = this.colors[Generator.randomInt(0, this.colors.length)],
+                particle = this.particle(position, rotation, color);
             
             element.appendChild(particle);
         }
@@ -340,8 +372,8 @@ Cloud.prototype = {
         return element;
     },
     
-    particle: function(position, rotation){
-        return Generator.randomLetter().transform(position, rotation);
+    particle: function(position, rotation, color){
+        return Generator.randomLetter().transform(position, rotation).color(color);
     },
     
     update: function(){
@@ -409,10 +441,14 @@ Simulation.prototype = {
     },
     
     run: function(){
+        this.updateWaterfall();
+    },
+    
+    updateWaterfall: function(){
         this.waterfall.update();
-        this.cloud.update();
-        setTimeout(this.run.bind(this), 75);
+        setTimeout(this.updateWaterfall.bind(this), 75);
     }
+    
 };
 
 new Simulation();
