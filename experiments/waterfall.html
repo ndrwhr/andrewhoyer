@@ -19,22 +19,32 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
-    
 }
 
 #screen {
+    position: relative;
     width: 100%;
     height: 100%;
     overflow: hidden;
 }
 
+#cursor {
+    position: absolute;
+    background: #f2f2f2;
+    border: 1px solid #ddd;
+    height: 100px;
+    width: 100px;
+    -webkit-border-radius: 300px;
+}
+
 #waterfall {
     position: relative;
-    top: 120px;
-    left: 75px;
+    top: 130px;
     width: 450px;
     height: 450px;
+    margin: 0 auto;
     font-size: 30px;
+    color: #669BB3;
 }
 
 #waterfall div {
@@ -43,24 +53,14 @@ body {
     -webkit-transition: -webkit-transform 100ms linear;
 }
 
-#waterfall div#cursor {
-    background: #f2f2f2;
-    border: 1px solid #ddd;
-    height: 27.5%;
-    width: 27.5%;
-    -webkit-border-radius: 300px;
-    -webkit-transition: -webkit-transform 10ms linear;
-}
-
 #cloud {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    position: relative;
+    top: -450px;
+    width: 500px;
     height: 200px;
-    width: 600px;
+    margin: 0 auto;
     font-weight: bold;
-    font-size: 35px;
+    font-size: 30px;
 }
 
 #cloud div {
@@ -70,10 +70,9 @@ body {
 </style>
 
 <div id="screen">
-    <div id="waterfall">
-        <div id="cursor"></div>
-    </div>
-    <did id="cloud"></did>
+    <div id="cursor"></div>
+    <div id="waterfall"></div>
+    <div id="cloud"></div>
 </div>
 
 <script type="text/javascript" charset="utf-8">
@@ -93,6 +92,8 @@ var helpers = {
     }
 };
 
+document.id = document.getElementById;
+
 var element = HTMLElement.prototype;
 
 element.transform = function(translation, rotation){
@@ -104,6 +105,11 @@ element.transform = function(translation, rotation){
     this.style.MozTransform = this.style.WebkitTransform = transform;
     
     return this;
+};
+
+element.position = function(position){
+    this.style.left = position.x + 'px';
+    this.style.top = position.y + 'px';
 };
 
 element.color = function(color){
@@ -194,11 +200,12 @@ var Generator = {
     
 };
 
-var Cursor = function(container){
+var Cursor = function(element, container){
+    this.element = element;
     this.container = container;
-    this.radius = 0.2;
     
-    this.element = document.getElementById('cursor');
+    this.radius = 0.18;
+    
     this.offset = this.calcOffset();
     
     this.move({
@@ -219,11 +226,10 @@ Cursor.prototype = {
     move: function(event){
         var container = this.container,
             position = new Vector(event.pageX, event.pageY);
-            actual = position.subtract(container.position);
         
-        this.scaled = actual.divide(container.size);
+        this.scaled = position.subtract(container.position).divide(container.size);
         
-        this.element.transform(actual.subtract(this.offset));
+        this.element.transform(position.subtract(this.offset));
     },
     
     adjustParticle: function(particle){
@@ -279,14 +285,17 @@ Particle.prototype = {
     
 };
 
-
-var Cloud = function(element){
-    this.element = element;
-    this.centers = [];
+var Cloud = function(container){
+    this.container = container;
+    this.centers = [
+        [ 25, 120], [ 85, 120], [145, 125], [195, 125], [250, 120], [320, 120], [380, 125], [450, 120],
+        [ 80,  80], [145,  70], [220,  70], [280,  70], [360,  80],
+        [200,  45],[280,  50]
+    ];
     
-    console.time('cloud');
+    this.puffs = [];
+    
     this.generate();
-    console.timeEnd('cloud');
 };
 
 Cloud.prototype = {
@@ -295,78 +304,66 @@ Cloud.prototype = {
         var fragment = document.createDocumentFragment(),
             centers = this.centers;
         
-        Generator.randomInt(0, 360);
-        
         centers.forEach(function(center){
-            this.circle(fragment, center.add(Vector.random(-10, 10)));
+            fragment.appendChild(this.puff(new Vector(center[0], center[1])));
         }, this);
         
-        this.circle(fragment, new Vector( 50, 120));
-        this.circle(fragment, new Vector(100, 120));
-        this.circle(fragment, new Vector(175, 130));
-        this.circle(fragment, new Vector(250, 120));
-        this.circle(fragment, new Vector(325, 120));
-        this.circle(fragment, new Vector(400, 120));
-        this.circle(fragment, new Vector(475, 130));
-        this.circle(fragment, new Vector(550, 140));
-        
-        this.circle(fragment, new Vector(150, 70));
-        this.circle(fragment, new Vector(175, 60));
-        this.circle(fragment, new Vector(250, 60));
-        this.circle(fragment, new Vector(325, 70));
-        this.circle(fragment, new Vector(420, 60));
-        this.circle(fragment, new Vector(500, 70));
-        
-        this.circle(fragment, new Vector(250, 20));
-        this.circle(fragment, new Vector(325, 10));
-        this.circle(fragment, new Vector(400, 20));
-        
-        this.element.appendChild(fragment);
+        this.container.appendChild(fragment);
     },
     
-    circle: function(fragment, center){
-        var container = document.createElement('div'),
+    puff: function(center){
+        var element = document.createElement('div'),
             radius = Generator.randomInt(40, 50),
-            count = 30;
+            count = 15;
         
         while (count--){
-            var postion, length, particle;
+            var postion;
             
             do {
                 position = Vector.random(-radius, radius);
-                length = position.length();
-            } while(length > radius);
+            } while(position.length() > radius);
             
-            particle = this.particle(position, Generator.randomInt(0, 360));
+            var rotation = Generator.randomInt(0, 360),
+                particle = this.particle(position, rotation);
             
-            container.appendChild(particle);
+            element.appendChild(particle);
         }
         
-        container.style.left = center.x + 'px';
-        container.style.top = center.y + 'px';
+        element.position(center);
         
-        fragment.appendChild(container);
+        this.puffs.push({
+            element: element,
+            rotation: 0,
+            rotation_step: Generator.random(-0.2, 0.2)
+        });
+        
+        return element;
     },
     
     particle: function(position, rotation){
         return Generator.randomLetter().transform(position, rotation);
+    },
+    
+    update: function(){
+        var position = new Vector();
+        this.puffs.forEach(function(puff){
+            puff.element.transform(position, puff.rotation += puff.rotation_step);
+        });
     }
     
 };
-
-new Cloud(document.getElementById('cloud'));
 
 var Waterfall = function(container, cursor){
     this.container = container;
     this.cursor = cursor;
     this.gravity = new Vector(0, 0.0025);
-    this.num_particles = 100;
+    this.num_particles = 75;
     this.particles = [];
 };
 
 Waterfall.prototype = {
     
-    simulate: function(){
+    update: function(){
         this.addParticle();
         
         this.particles.forEach(function(particle, index, particles){
@@ -380,8 +377,6 @@ Waterfall.prototype = {
             }
             
         }, this);
-        
-        setTimeout(this.simulate.bind(this), 75);
     },
     
     addParticle: function(){
@@ -393,12 +388,15 @@ Waterfall.prototype = {
 };
 
 var Simulation = function(){
-    var container = this.container = document.getElementById('waterfall');
+    var cursor = document.id('cursor'),
+        container = this.container = document.id('waterfall'),
+        cloud = document.id('cloud');
     
     window.addEventListener('resize', this.resize.bind(this));
     this.resize();
     
-    this.waterfall = new Waterfall(container, new Cursor(container));
+    this.waterfall = new Waterfall(container, new Cursor(cursor, container));
+    this.cloud = new Cloud(cloud);
     this.run();
 };
 
@@ -411,7 +409,9 @@ Simulation.prototype = {
     },
     
     run: function(){
-        this.waterfall.simulate();
+        this.waterfall.update();
+        this.cloud.update();
+        setTimeout(this.run.bind(this), 75);
     }
 };
 
