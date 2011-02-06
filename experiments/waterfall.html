@@ -1,6 +1,6 @@
 ---
 layout: experiment
-permalink: /waterfall/
+permalink: /rain/
 ---
 
 <style type="text/css" media="screen">
@@ -38,7 +38,7 @@ body {
     -webkit-user-select: none;
 }
 
-#waterfall {
+#rain {
     position: relative;
     top: 130px;
     width: 450px;
@@ -48,7 +48,7 @@ body {
     color: #669BB3;
 }
 
-#waterfall div {
+#rain div {
     position: absolute;
     display: inline-block;
     -webkit-transition: -webkit-transform 100ms linear;
@@ -80,7 +80,7 @@ body {
 
 <div id="screen">
     <div id="cursor"></div>
-    <div id="waterfall"></div>
+    <div id="rain"></div>
     <div id="cloud"></div>
     <div id="controls">
         <label for="gravity">Gravity</label> <input id="gravity" type="range" step="0.01" min="0.5" max="2" value="1"/><br/>
@@ -415,7 +415,7 @@ Cloud.prototype = {
     
 };
 
-var Waterfall = function(container, cursor){
+var Rain = function(container, cursor){
     this.container = container;
     this.colors = Generator.gradient('#496980', '#6795B5');
     this.cursor = cursor;
@@ -424,7 +424,7 @@ var Waterfall = function(container, cursor){
     this.particles = [];
 };
 
-Waterfall.prototype = {
+Rain.prototype = {
     
     update: function(){
         this.addParticle();
@@ -460,13 +460,13 @@ Waterfall.prototype = {
 
 var Simulation = function(){
     var cursor = document.id('cursor'),
-        container = this.container = document.id('waterfall'),
+        container = this.container = document.id('rain'),
         cloud = document.id('cloud');
     
     window.addEventListener('resize', this.resize.bind(this));
     this.resize();
     
-    this.waterfall = new Waterfall(container, new Cursor(cursor, container));
+    this.rain = new Rain(container, new Cursor(cursor, container));
     this.cloud = new Cloud(cloud);
     
     this.initControls();
@@ -484,19 +484,19 @@ Simulation.prototype = {
     initControls: function(){
         var gravity = document.id('gravity'),
             particles = document.id('particles'),
-            waterfall = this.waterfall;
+            rain = this.rain;
         
         gravity.addEventListener('change', function(){
-            waterfall.changeGravity(gravity.value);
+            rain.changeGravity(gravity.value);
         });
         
         particles.addEventListener('onchange', function(){
-            waterfall.changeParticles(particles.value);
+            rain.changeParticles(particles.value);
         });
     },
     
     run: function(){
-        this.waterfall.update();
+        this.rain.update();
         setTimeout(this.run.bind(this), 75);
     }
     
