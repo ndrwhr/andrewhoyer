@@ -30,10 +30,12 @@ body {
 
 #cursor {
     position: absolute;
-    border: 2px dashed #ddd;
+    border: 2px dashed #aaa;
     height: 100px;
     width: 100px;
+    z-index: -1;
     -webkit-border-radius: 300px;
+    -webkit-user-select: none;
 }
 
 #waterfall {
@@ -66,12 +68,24 @@ body {
     position: absolute;
 }
 
+#controls {
+    position: fixed;
+    top: 0;
+    right: 0;
+    text-align: right;
+    background: white;
+}
+
 </style>
 
 <div id="screen">
     <div id="cursor"></div>
     <div id="waterfall"></div>
     <div id="cloud"></div>
+    <div id="controls">
+        <label for="gravity">Gravity</label> <input id="gravity" type="range" step="0.01" min="0.5" max="2" value="1"/><br/>
+        <label for="particle">Particles</label> <input id="particles" type="range" step="0.01" min="0.5" max="1.5" value="1"/>
+    </div>
 </div>
 
 <script type="text/javascript" charset="utf-8">
@@ -405,7 +419,7 @@ var Waterfall = function(container, cursor){
     this.container = container;
     this.colors = Generator.gradient('#496980', '#6795B5');
     this.cursor = cursor;
-    this.gravity = new Vector(0, 0.0025);
+    this.gravity = this.base_gravity = new Vector(0, 0.0025);
     this.num_particles = 50;
     this.particles = [];
 };
@@ -435,7 +449,14 @@ Waterfall.prototype = {
             color = this.colors[Generator.randomInt(0, this.colors.length)];
             particles.push(Generator.particle(this.container, color));
         }
-            
+    },
+    
+    changeCount: function(value){
+        
+    },
+    
+    changeGravity: function(value){
+        this.gravity = this.base_gravity.scale(value);
     }
     
 };
@@ -450,6 +471,8 @@ var Simulation = function(){
     
     this.waterfall = new Waterfall(container, new Cursor(cursor, container));
     this.cloud = new Cloud(cloud);
+    
+    this.initControls();
     this.run();
 };
 
@@ -461,13 +484,23 @@ Simulation.prototype = {
         container.position = new Vector(container.offsetLeft, container.offsetTop);
     },
     
-    run: function(){
-        this.updateWaterfall();
+    initControls: function(){
+        var gravity = document.id('gravity'),
+            particles = document.id('particles'),
+            waterfall = this.waterfall;
+        
+        gravity.addEventListener('change', function(){
+            waterfall.changeGravity(gravity.value);
+        });
+        
+        particles.addEventListener('onchange', function(){
+            waterfall.changeParticles(particles.value);
+        });
     },
     
-    updateWaterfall: function(){
+    run: function(){
         this.waterfall.update();
-        setTimeout(this.updateWaterfall.bind(this), 75);
+        setTimeout(this.run.bind(this), 75);
     }
     
 };
