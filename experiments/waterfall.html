@@ -98,10 +98,10 @@ var helpers = {
         return Math.round(number * 10) / 10;
     },
     translate: function(vector){
-        return ['translate(', this.round(vector.x), 'px,', this.round(vector.y), 'px)'].join('');
+        return 'translate(' + vector.x + 'px,' + vector.y + 'px)';
     },
     rotate: function(value){
-        return ['rotate(', this.round(value), 'deg)'].join('');
+        return 'rotate(' + value + 'deg)';
     }
 };
 
@@ -113,9 +113,7 @@ element.transform = function(translation, rotation){
     translation = helpers.translate(translation);
     rotation = rotation ? helpers.rotate(rotation) : '';
     
-    var transform = translation + ' ' + rotation;
-    
-    this.style.MozTransform = this.style.WebkitTransform = transform;
+    this.style.WebkitTransform = translation + ' ' + rotation;
     
     return this;
 };
