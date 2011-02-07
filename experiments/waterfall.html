@@ -84,7 +84,7 @@ body {
     <div id="cloud"></div>
     <div id="controls">
         <label for="gravity">Gravity</label> <input id="gravity" type="range" step="0.01" min="0.5" max="2" value="1"/><br/>
-        <label for="particle">Particles</label> <input id="particles" type="range" step="0.01" min="0.5" max="1.5" value="1"/>
+        <label for="particle">Particles</label> <input id="particles" type="range" step="0.01" min="0.1" max="3" value="1"/>
     </div>
 </div>
 
@@ -136,6 +136,10 @@ element.show = function(){
 element.hide = function(){
     this.style.display = 'none';
     return this;
+};
+
+Array.prototype.random = function(){
+    return this[Math.floor(Math.random() * this.length)];
 };
 
 if (!Function.prototype.bind){
@@ -307,9 +311,9 @@ var Particle = function(element, current, previous, color, container){
 
 Particle.prototype = {
     
-    reset: function(position){
+    reset: function(){
         var element = this.element.hide();
-        this.previous = this.current = position;
+        this.previous = this.current = new Vector(Generator.random());
     },
     
     initElement: function(){
@@ -326,6 +330,8 @@ Particle.prototype = {
         this.rotation += this.rotation_step;
         
         this.style();
+        
+        return this;
     },
     
     remove: function(){
@@ -415,39 +421,49 @@ Cloud.prototype = {
 
 var Rain = function(container, cursor){
     this.container = container;
-    this.colors = Generator.gradient('#496980', '#6795B5');
     this.cursor = cursor;
+    this.colors = Generator.gradient('#496980', '#6795B5');
     this.gravity = this.base_gravity = new Vector(0, 0.0025);
-    this.num_particles = 50;
-    this.particles = [];
+    this.drop_limit = this.base_drop_limit = 50;
+    this.drops = [];
 };
 
 Rain.prototype = {
     
     update: function(){
-        this.addParticle();
+        this.formDrop();
         
-        this.particles.forEach(function(particle, index, particles){
-            particle.update(this.gravity);
-            
-            if (particle.visible()){
-                this.cursor.adjustParticle(particle);
-            } else {
-                particle.reset(new Vector(Generator.random()));
-            }
-        }, this);
+        var drops = this.drops,
+            limit = Math.min(this.drop_limit, drops.length),
+            drop;
+        
+        for (var i = 0; i < limit; i++){
+            drop = drops[i].update(this.gravity);
+            if (!drop.visible()) drop.reset();
+            else this.cursor.adjustParticle(drop);
+        }
     },
     
-    addParticle: function(){
-        var particles = this.particles, color;
-        if (particles.length < this.num_particles && Generator.bool()){
-            color = this.colors[Generator.randomInt(0, this.colors.length)];
-            particles.push(Generator.particle(this.container, color));
+    formDrop: function(){
+        var drops = this.drops;
+        if (drops.length < this.drop_limit && Generator.bool()){
+            drops.push(Generator.particle(this.container, this.colors.random()));
         }
     },
     
     changeCount: function(value){
+        var new_limit = Math.floor(this.base_drop_limit * value),
+            current = this.drop_limit,
+            drop;
         
+        while (current > new_limit) {
+            drop = this.drops[current - 1];
+            if (drop) drop.reset();
+            else break;
+            current--;
+        }
+        
+        this.drop_limit = new_limit;
     },
     
     changeGravity: function(value){
@@ -488,8 +504,8 @@ Simulation.prototype = {
             rain.changeGravity(gravity.value);
         });
         
-        particles.addEventListener('onchange', function(){
-            rain.changeParticles(particles.value);
+        particles.addEventListener('change', function(){
+            rain.changeCount(particles.value);
         });
     },
     
