@@ -121,6 +121,7 @@ element.transform = function(translation, rotation){
 element.position = function(position){
     this.style.left = position.x + 'px';
     this.style.top = position.y + 'px';
+    return this;
 };
 
 element.color = function(color){
@@ -208,20 +209,14 @@ var Generator = {
         return Math.floor(this.random(min, max));
     },
     
-    randomLetter: function(){
+    randomLetter: function(color){
         var element = document.createElement('div');
         element.innerText = this.letters[this.randomInt(0, this.letters.length)];
-        return element;
+        return element.color(color);
     },
     
     bool: function(){
         return !!Math.round(this.random());
-    },
-    
-    particle: function(container, color){
-        var current = new Vector(this.random()),
-            previous = current.add(Vector.random(-0.005, 0.005));
-        return new Particle(this.randomLetter(), current, previous, color, container);
     },
     
     gradient: function(stop1, stop2){
@@ -298,15 +293,16 @@ Cursor.prototype = {
     
 };
 
-var Particle = function(element, current, previous, color, container){
+var Particle = function(element, container, current, previous){
     this.element = element;
+    this.container = container;
     this.current = current;
     this.previous = previous;
-    this.color = color;
-    this.container = container;
+    
     this.rotation = Generator.randomInt(0, 360);
     this.rotation_step = Generator.randomInt(-20, 20);
-    this.initElement();
+    
+    container.appendChild(element);
 };
 
 Particle.prototype = {
@@ -317,7 +313,6 @@ Particle.prototype = {
     },
     
     initElement: function(){
-        this.element.color(this.color);
         this.container.appendChild(this.style());
     },
     
@@ -352,13 +347,14 @@ Particle.prototype = {
 var Cloud = function(container){
     this.container = container;
     this.colors = Generator.gradient('#777777', '#aaaaaa');
+    this.puff_radius = 45;
+    this.puff_particles = 25;
     this.centers = [
-        [ 25, 120], [ 85, 120], [145, 125], [195, 125], [250, 120], [320, 120], [380, 125], [440, 120],
-        [ 80,  80], [145,  70], [220,  70], [280,  70], [360,  80],
-        [200,  45],[280,  50]
+        [ 25, 120], [ 85, 120], [145, 125], [195, 125],
+        [250, 120], [320, 120], [380, 125], [440, 120],
+        [ 80,  80], [145,  70], [220,  70], [280,  70],
+        [360,  80], [200,  45], [280,  50]
     ];
-    
-    this.puffs = [];
     
     this.generate();
 };
@@ -370,51 +366,35 @@ Cloud.prototype = {
             centers = this.centers;
         
         centers.forEach(function(center){
-            fragment.appendChild(this.puff(new Vector(center[0], center[1])));
+            center = new Vector(center[0], center[1]);
+            fragment.appendChild(this.generatePuff(center));
         }, this);
         
         this.container.appendChild(fragment);
     },
     
-    puff: function(center){
+    generatePuff: function(center){
         var element = document.createElement('div'),
-            radius = Generator.randomInt(40, 50),
-            count = 25;
+            radius = this.puff_radius,
+            count = this.puff_particles;
         
         while (count--){
-            var postion;
+            var rotation = Generator.randomInt(0, 360),
+                postion;
             
             do {
                 position = Vector.random(-radius, radius);
             } while(position.length() > radius);
             
-            var rotation = Generator.randomInt(0, 360),
-                color = this.colors[Generator.randomInt(0, this.colors.length)],
-                particle = this.particle(position, rotation, color);
-            
-            element.appendChild(particle);
+            element.appendChild(this.generateParticle(position, rotation));
         }
         
-        element.position(center);
-        
-        this.puffs.push({
-            element: element,
-            rotation: 0,
-            rotation_step: Generator.random(-0.2, 0.2)
-        });
-        
-        return element;
+        return element.position(center);
     },
     
-    particle: function(position, rotation, color){
-        return Generator.randomLetter().transform(position, rotation).color(color);
-    },
-    
-    update: function(){
-        var position = new Vector();
-        this.puffs.forEach(function(puff){
-            puff.element.transform(position, puff.rotation += puff.rotation_step);
-        });
+    generateParticle: function(position, rotation){
+        var letter = Generator.randomLetter(this.colors.random());
+        return letter.transform(position, rotation);
     }
     
 };
@@ -446,9 +426,16 @@ Rain.prototype = {
     
     formDrop: function(){
         var drops = this.drops;
-        if (drops.length < this.drop_limit && Generator.bool()){
-            drops.push(Generator.particle(this.container, this.colors.random()));
-        }
+        if (drops.length < this.drop_limit && Generator.bool())
+            drops.push(this.createDrop());
+    },
+    
+    createDrop: function(){
+        var current = new Vector(Generator.random()),
+            previous = current.add(Vector.random(-0.005, 0.005)),
+            element = Generator.randomLetter(this.colors.random());
+        
+        return new Particle(element, this.container, current, previous);
     },
     
     changeCount: function(value){
