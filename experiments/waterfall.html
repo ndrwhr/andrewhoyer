@@ -302,6 +302,8 @@ var Particle = function(element, container, current, previous){
     this.rotation = Generator.randomInt(0, 360);
     this.rotation_step = Generator.randomInt(-20, 20);
     
+    this.style();
+    
     container.appendChild(element);
 };
 
@@ -310,10 +312,6 @@ Particle.prototype = {
     reset: function(){
         var element = this.element.hide();
         this.previous = this.current = new Vector(Generator.random());
-    },
-    
-    initElement: function(){
-        this.container.appendChild(this.style());
     },
     
     update: function(acceleration){
