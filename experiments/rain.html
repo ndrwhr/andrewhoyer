@@ -457,8 +457,8 @@ Rain.prototype = {
 };
 
 var Simulation = function(){
-    var cursor = document.id('cursor'),
-        container = this.container = document.id('rain'),
+    var container = this.container = document.id('rain'),
+        cursor = document.id('cursor'),
         cloud = document.id('cloud');
     
     window.addEventListener('resize', this.resize.bind(this));
