@@ -269,8 +269,7 @@ var Cursor = function(element, container){
 Cursor.prototype = {
     
     calcOffset: function(){
-        var element = this.element;
-        return new Vector(element.clientWidth, element.clientHeight).scale(0.5);
+        return new Vector(this.element.clientWidth, this.element.clientHeight).scale(0.5);
     },
     
     move: function(event){
