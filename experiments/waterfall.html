@@ -293,7 +293,7 @@ Cursor.prototype = {
     
 };
 
-var Particle = function(element, container, current, previous){
+var Drop = function(element, container, current, previous){
     this.element = element;
     this.container = container;
     this.current = current;
@@ -307,7 +307,7 @@ var Particle = function(element, container, current, previous){
     container.appendChild(element);
 };
 
-Particle.prototype = {
+Drop.prototype = {
     
     reset: function(){
         var element = this.element.hide();
@@ -433,7 +433,7 @@ Rain.prototype = {
             previous = current.add(Vector.random(-0.005, 0.005)),
             element = Generator.randomLetter(this.colors.random());
         
-        return new Particle(element, this.container, current, previous);
+        return new Drop(element, this.container, current, previous);
     },
     
     changeCount: function(value){
