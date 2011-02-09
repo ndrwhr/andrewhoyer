@@ -452,7 +452,7 @@ Rain.prototype = {
     
     createDrop: function(){
         var current = new Vector(Generator.random()),
-            previous = current.add(Vector.random(-0.005, 0.005)),
+            previous = current.add(Vector.random(-0.0075, 0.0075)),
             element = Generator.randomLetter(this.colors.random());
         
         return new Drop(element, this.container, current, previous);
