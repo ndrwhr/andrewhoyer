@@ -107,37 +107,45 @@ var helpers = {
 
 document.id = document.getElementById;
 
-var element = HTMLElement.prototype;
-
-element.transform = function(translation, rotation){
-    translation = helpers.translate(translation);
-    rotation = rotation ? helpers.rotate(rotation) : '';
+var methods = {
+    transform: function(translation, rotation){
+        translation = helpers.translate(translation);
+        rotation = rotation ? helpers.rotate(rotation) : '';
+        
+        this.style.WebkitTransform = translation + ' ' + rotation;
+        
+        return this;
+    },
     
-    this.style.WebkitTransform = translation + ' ' + rotation;
+    opacity: function(value){
+        this.style.opacity = value;
+        return this;
+    },
     
-    return this;
+    position: function(position){
+        this.style.left = position.x + 'px';
+        this.style.top = position.y + 'px';
+        return this;
+    },
+    
+    color: function(color){
+        this.style.color = color;
+        return this;
+    },
+    
+    show: function(){
+        this.style.display = '';
+        return this;
+    },
+    
+    hide: function(){
+        this.style.display = 'none';
+        return this;
+    }
 };
 
-element.position = function(position){
-    this.style.left = position.x + 'px';
-    this.style.top = position.y + 'px';
-    return this;
-};
-
-element.color = function(color){
-    this.style.color = color;
-    return this;
-};
-
-element.show = function(){
-    this.style.display = '';
-    return this;
-};
-
-element.hide = function(){
-    this.style.display = 'none';
-    return this;
-};
+for (var method in methods)
+    HTMLElement.prototype[method] = methods[method];
 
 Array.prototype.random = function(){
     return this[Math.floor(Math.random() * this.length)];
@@ -331,12 +339,16 @@ Drop.prototype = {
     },
     
     style: function(){
-        var position = this.current.multiply(this.container.size);
-        return this.element.show().transform(position, this.rotation);
+        var element = this.element,
+            current = this.current,
+            location = current.multiply(this.container.size);
+        
+        element.opacity(Math.max(0, Math.min(1, 1.5 - current.y)));
+        element.transform(location, this.rotation).show();
     },
     
     visible: function(){
-        return this.current.y < 2;
+        return this.current.y < 1.5;
     }
     
 };
