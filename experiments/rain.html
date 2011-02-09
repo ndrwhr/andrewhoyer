@@ -160,6 +160,17 @@ if (!Function.prototype.bind){
     };
 }
 
+Function.prototype.wait = function(time){
+    var fn = this, args, timer;
+    return function(){
+        args = arguments;
+        if (!timer) timer = setTimeout(function(){
+            fn.apply(null, args);
+            timer = clearTimeout(timer);
+        }, time);
+    };
+};
+
 })();
 
 var Vector = function(x, y){
@@ -449,16 +460,15 @@ Rain.prototype = {
     
     changeCount: function(value){
         var new_limit = Math.floor(this.base_drop_limit * value),
-            current = this.drop_limit,
-            drop;
+            current = this.drop_limit - 1;
+            drops = this.drops;
         
-        while (current > new_limit) {
-            drop = this.drops[current - 1];
-            if (drop) drop.reset();
-            else break;
+        while (new_limit <= current){
+            if (drops[current]) drops[current].remove();
             current--;
         }
         
+        this.drops = drops.slice(0, new_limit);
         this.drop_limit = new_limit;
     },
     
@@ -496,13 +506,13 @@ Simulation.prototype = {
             particles = document.id('particles'),
             rain = this.rain;
         
-        gravity.addEventListener('change', function(){
+        gravity.addEventListener('change', (function(){
             rain.changeGravity(gravity.value);
-        });
+        }).wait(100));
         
-        particles.addEventListener('change', function(){
+        particles.addEventListener('change', (function(){
             rain.changeCount(particles.value);
-        });
+        }).wait(100));
     },
     
     run: function(){
@@ -513,6 +523,5 @@ Simulation.prototype = {
 };
 
 new Simulation();
-
 
 </script>
