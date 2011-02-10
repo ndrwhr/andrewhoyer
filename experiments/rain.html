@@ -160,17 +160,6 @@ if (!Function.prototype.bind){
     };
 }
 
-Function.prototype.wait = function(time){
-    var fn = this, args, timer;
-    return function(){
-        args = arguments;
-        if (!timer) timer = setTimeout(function(){
-            fn.apply(null, args);
-            timer = clearTimeout(timer);
-        }, time);
-    };
-};
-
 })();
 
 var Vector = function(x, y){
@@ -234,8 +223,8 @@ var Generator = {
         return element.color(color);
     },
     
-    bool: function(){
-        return !!Math.round(this.random());
+    bool: function(bias){
+        return !!Math.round(this.random() + (bias || 0));
     },
     
     gradient: function(stop1, stop2){
@@ -431,10 +420,10 @@ var Rain = function(container, cursor){
 Rain.prototype = {
     
     update: function(){
-        this.formDrop();
+        this.adjustCount();
         
         var drops = this.drops,
-            limit = Math.min(this.drop_limit, drops.length),
+            limit = drops.length,
             drop;
         
         for (var i = 0; i < limit; i++){
@@ -444,10 +433,15 @@ Rain.prototype = {
         }
     },
     
-    formDrop: function(){
-        var drops = this.drops;
-        if (drops.length < this.drop_limit && Generator.bool())
+    adjustCount: function(){
+        var drops = this.drops,
+            length = drops.length,
+            limit = this.drop_limit;
+        
+        if (length < limit && Generator.bool(0.25))
             drops.push(this.createDrop());
+        else if (drops.length > limit)
+            drops.pop().remove();
     },
     
     createDrop: function(){
@@ -459,17 +453,7 @@ Rain.prototype = {
     },
     
     changeCount: function(value){
-        var new_limit = Math.floor(this.base_drop_limit * value),
-            current = this.drop_limit - 1;
-            drops = this.drops;
-        
-        while (new_limit <= current){
-            if (drops[current]) drops[current].remove();
-            current--;
-        }
-        
-        this.drops = drops.slice(0, new_limit);
-        this.drop_limit = new_limit;
+        this.drop_limit = Math.floor(this.base_drop_limit * value);
     },
     
     changeGravity: function(value){
@@ -506,13 +490,13 @@ Simulation.prototype = {
             particles = document.id('particles'),
             rain = this.rain;
         
-        gravity.addEventListener('change', (function(){
+        gravity.addEventListener('change', function(){
             rain.changeGravity(gravity.value);
-        }).wait(100));
+        });
         
-        particles.addEventListener('change', (function(){
+        particles.addEventListener('change', function(){
             rain.changeCount(particles.value);
-        }).wait(100));
+        });
     },
     
     run: function(){
