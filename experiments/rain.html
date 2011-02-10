@@ -77,10 +77,11 @@ body {
 
 #controls {
     position: fixed;
-    top: 0;
-    right: 0;
-    text-align: right;
-    background: white;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background: rgba(255,255,255,0.7);
 }
 
 </style>
@@ -92,8 +93,8 @@ body {
     </div>
     <div id="cloud"></div>
     <div id="controls">
-        <label for="gravity">Gravity</label> <input id="gravity" type="range" step="0.01" min="0.25" max="3" value="1"/><br/>
-        <label for="particle">Particles</label> <input id="particles" type="range" step="0.01" min="0.1" max="5" value="1"/>
+        <label for="gravity">Gravity</label> <input id="gravity" type="range" step="0.01" min="0.25" max="3" value="1"/>
+        <label for="particle">Drops</label> <input id="particles" type="range" step="0.01" min="0.25" max="5" value="1"/>
     </div>
 </div>
 
