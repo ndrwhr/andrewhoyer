@@ -54,6 +54,13 @@ body {
     -webkit-transition: -webkit-transform 100ms linear;
 }
 
+#rain p {
+    position: absolute;
+    top: 75px;
+    text-align: justify;
+    opacity: 0.3;
+}
+
 #cloud {
     position: relative;
     top: -450px;
@@ -80,7 +87,9 @@ body {
 
 <div id="screen">
     <div id="cursor"></div>
-    <div id="rain"></div>
+    <div id="rain">
+        <p>Gravity: <span id="current-gravity">100%</span><br/>Number of Drops: <span id="active-particles">0</span></p>
+    </div>
     <div id="cloud"></div>
     <div id="controls">
         <label for="gravity">Gravity</label> <input id="gravity" type="range" step="0.01" min="0.25" max="3" value="1"/><br/>
@@ -408,8 +417,10 @@ Cloud.prototype = {
     
 };
 
-var Rain = function(container, cursor){
+var Rain = function(container, particle_counter, current_gravity, cursor){
     this.container = container;
+    this.particle_counter = particle_counter;
+    this.current_gravity = current_gravity;
     this.cursor = cursor;
     this.colors = Generator.gradient('#496980', '#6795B5');
     this.gravity = this.base_gravity = new Vector(0, 0.0025);
@@ -431,6 +442,8 @@ Rain.prototype = {
             if (!drop.visible()) drop.reset();
             else this.cursor.adjustParticle(drop);
         }
+        
+        this.particle_counter.innerHTML = limit;
     },
     
     adjustCount: function(){
@@ -457,6 +470,7 @@ Rain.prototype = {
     },
     
     changeGravity: function(value){
+        this.current_gravity.innerHTML = Math.round(value * 100) + '%';
         this.gravity = this.base_gravity.scale(value);
     }
     
@@ -464,13 +478,15 @@ Rain.prototype = {
 
 var Simulation = function(){
     var container = this.container = document.id('rain'),
+        counter = document.id('active-particles'),
+        gravity = document.id('current-gravity'),
         cursor = document.id('cursor'),
         cloud = document.id('cloud');
     
     window.addEventListener('resize', this.resize.bind(this));
     this.resize();
     
-    this.rain = new Rain(container, new Cursor(cursor, container));
+    this.rain = new Rain(container, counter, gravity, new Cursor(cursor, container));
     this.cloud = new Cloud(cloud);
     
     this.initControls();
