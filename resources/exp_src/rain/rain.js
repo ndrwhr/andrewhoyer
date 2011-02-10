@@ -422,7 +422,6 @@ Simulation.prototype = {
     
 };
 
-
 document.addEventListener('DOMContentLoaded', function(){
     new Simulation();
 });
