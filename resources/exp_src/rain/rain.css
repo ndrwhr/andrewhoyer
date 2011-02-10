@@ -1,0 +1,95 @@
+
+body, div {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+body {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#cursor {
+    position: absolute;
+    border: 2px dashed #aaa;
+    height: 100px;
+    width: 100px;
+    z-index: -1;
+    -webkit-border-radius: 300px;
+    -webkit-user-select: none;
+}
+
+#rain {
+    position: relative;
+    top: 130px;
+    width: 450px;
+    height: 450px;
+    margin: 0 auto;
+    font-size: 30px;
+    color: #669BB3;
+}
+
+#rain div {
+    position: absolute;
+    display: inline-block;
+    -webkit-transition: -webkit-transform 100ms linear;
+}
+
+#rain #placeholder {
+    display: block;
+    position: absolute;
+    top: 100px;
+    text-align: center;
+    opacity: 0.3;
+}
+
+#placeholder p {
+    margin-bottom: 20px;
+}
+
+#cloud {
+    position: relative;
+    top: -450px;
+    width: 500px;
+    height: 200px;
+    margin: 0 auto;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+#cloud div {
+    position: absolute;
+}
+
+table.controls {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 5px 15px;
+    background: rgba(255,255,255,0.75);
+    border-top: 1px solid #eee;
+    
+}
+
+table.controls td.controls {
+    font-size: 2em;
+    text-align: center;
+}
+
+table.controls td.navigation {
+    text-align: left;
+}
+table.controls td.social {
+    text-align: right;
+}
+

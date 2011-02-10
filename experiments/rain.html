@@ -9,12 +9,30 @@ exp_css:
 
 <div id="screen">
     <div id="cursor"></div>
+    
     <div id="rain">
-        <p>Gravity: <span id="current-gravity">100%</span><br/>Number of Drops: <span id="active-particles">0</span></p>
+        <div id="placeholder">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p>Current Gravity: <span id="current-gravity">100%</span></p>
+            <p>Active Particle: <span id="active-particles">0</span></p>
+        </div>
     </div>
+    
     <div id="cloud"></div>
-    <div id="controls">
-        <label for="gravity">Gravity</label> <input id="gravity" type="range" step="0.01" min="0.25" max="3" value="1"/>
-        <label for="particle">Drops</label> <input id="particles" type="range" step="0.01" min="0.25" max="5" value="1"/>
-    </div>
+    
+    <table class="controls">
+        <tr>
+            <td class="navigation">
+                <a href="/">(Andrew Hoyer)</a> <a href="/experiments">(Experiments)</a> <a href="/blog">(blog)</a>
+            </td>
+            <td class="controls">
+                <label for="gravity">Gravity</label> <input id="gravity" type="range" step="0.01" min="0.25" max="3" value="1"/>
+                <label for="particle">Drops</label> <input id="particles" type="range" step="0.01" min="0.25" max="5" value="1"/>
+            </td>
+            <td class="social">
+                <iframe src="http://www.facebook.com/plugins/like.php?href=www.andrew-hoyer.com%2Fexperiments%2Frain%2F&amp;layout=button_count&amp;show_faces=false&amp;width=90&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true"></iframe>
+                <a href="http://twitter.com/share" class="twitter-share-button" data-text="CSS3 rain by Andrew Hoyer" data-count="horizontal" data-via="ndrwhr">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+            </td>
+        </tr>
+    </table>
 </div>
