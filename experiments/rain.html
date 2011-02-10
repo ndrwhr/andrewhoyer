@@ -365,7 +365,7 @@ Drop.prototype = {
 
 var Cloud = function(container){
     this.container = container;
-    this.colors = Generator.gradient('#666666', '#aaaaaa');
+    this.colors = Generator.gradient('#999999', '#cccccc');
     this.puff_radius = 45;
     this.puff_particles = 25;
     this.centers = [
@@ -423,7 +423,7 @@ var Rain = function(container, particle_counter, current_gravity, cursor){
     this.particle_counter = particle_counter;
     this.current_gravity = current_gravity;
     this.cursor = cursor;
-    this.colors = Generator.gradient('#496980', '#6795B5');
+    this.colors = Generator.gradient('#6795B5', '#aaaaaa');
     this.gravity = this.base_gravity = new Vector(0, 0.0025);
     this.drop_limit = this.base_drop_limit = 50;
     this.drops = [];
