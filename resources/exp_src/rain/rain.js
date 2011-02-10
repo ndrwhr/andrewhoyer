@@ -209,59 +209,6 @@ Cursor.prototype = {
     
 };
 
-var Drop = function(element, container, current, previous){
-    this.element = element;
-    this.container = container;
-    this.current = current;
-    this.previous = previous;
-    
-    this.rotation = Generator.randomInt(0, 360);
-    this.rotation_step = Generator.randomInt(-20, 20);
-    
-    this.style();
-    
-    container.appendChild(element);
-};
-
-Drop.prototype = {
-    
-    reset: function(){
-        var element = this.element.hide();
-        this.previous = this.current = new Vector(Generator.random());
-    },
-    
-    update: function(acceleration){
-        var temp = this.current;
-        
-        this.current = this.current.scale(2).subtract(this.previous).add(acceleration);
-        this.previous = temp;
-        
-        this.rotation += this.rotation_step;
-        
-        this.style();
-        
-        return this;
-    },
-    
-    remove: function(){
-        this.container.removeChild(this.element);
-    },
-    
-    style: function(){
-        var element = this.element,
-            current = this.current,
-            location = current.multiply(this.container.size);
-        
-        element.opacity(Math.max(0, Math.min(1, 1.5 - current.y)));
-        element.transform(location, this.rotation).show();
-    },
-    
-    visible: function(){
-        return this.current.y < 1.5;
-    }
-    
-};
-
 var Cloud = function(container){
     this.container = container;
     this.colors = Generator.gradient('#999999', '#cccccc');
@@ -313,6 +260,59 @@ Cloud.prototype = {
     generateParticle: function(position, rotation){
         var letter = Generator.randomLetter(this.colors.random());
         return letter.transform(position, rotation);
+    }
+    
+};
+
+var Drop = function(element, container, current, previous){
+    this.element = element;
+    this.container = container;
+    this.current = current;
+    this.previous = previous;
+    
+    this.rotation = Generator.randomInt(0, 360);
+    this.rotation_step = Generator.randomInt(-20, 20);
+    
+    this.style();
+    
+    container.appendChild(element);
+};
+
+Drop.prototype = {
+    
+    reset: function(){
+        var element = this.element.hide();
+        this.previous = this.current = new Vector(Generator.random());
+    },
+    
+    update: function(acceleration){
+        var temp = this.current;
+        
+        this.current = this.current.scale(2).subtract(this.previous).add(acceleration);
+        this.previous = temp;
+        
+        this.rotation += this.rotation_step;
+        
+        this.style();
+        
+        return this;
+    },
+    
+    remove: function(){
+        this.container.removeChild(this.element);
+    },
+    
+    style: function(){
+        var element = this.element,
+            current = this.current,
+            location = current.multiply(this.container.size);
+        
+        element.opacity(Math.max(0, Math.min(1, 1.5 - current.y)));
+        element.transform(location, this.rotation).show();
+    },
+    
+    visible: function(){
+        return this.current.y < 1.5;
     }
     
 };
