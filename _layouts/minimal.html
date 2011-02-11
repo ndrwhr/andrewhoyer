@@ -20,6 +20,10 @@
         <link rel="stylesheet" href="/resources/exp_src/{{ css }}?{{ gen_time }}" type="text/css" />
     {% endfor %}
     
+    {% for js in site.minimal_js %}
+        <script src="/resources/js/{{ js }}?{{ gen_time }}" type="text/javascript" charset="utf-8"></script>
+    {% endfor %}
+    
     {% for js in page.exp_js %}
         <script src="/resources/exp_src/{{ js }}?{{ gen_time }}" type="text/javascript" charset="utf-8"></script>
     {% endfor %}
