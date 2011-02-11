@@ -7,10 +7,10 @@ var helpers = {
         return Math.round(number * 10) / 10;
     },
     translate: function(vector){
-        return 'translate(' + vector.x + 'px,' + vector.y + 'px)';
+        return 'translate3d(' + (vector.x | 0) + 'px,' + (vector.y | 0)  + 'px,0px)';
     },
     rotate: function(value){
-        return 'rotate(' + value + 'deg)';
+        return 'rotate(' + (value | 0) + 'deg)';
     }
 };
 
@@ -271,7 +271,7 @@ var Drop = function(element, container, current, previous){
     this.previous = previous;
     
     this.rotation = Generator.randomInt(0, 360);
-    this.rotation_step = Generator.randomInt(-20, 20);
+    this.rotation_step = Generator.randomInt(-10, 10);
     
     this.style();
     
@@ -323,7 +323,7 @@ var Rain = function(container, particle_counter, current_gravity, cursor){
     this.current_gravity = current_gravity;
     this.cursor = cursor;
     this.colors = Generator.gradient('#6795B5', '#aaaaaa');
-    this.gravity = this.base_gravity = new Vector(0, 0.0025);
+    this.gravity = this.base_gravity = new Vector(0, 0.00075);
     this.drop_limit = this.base_drop_limit = 50;
     this.drops = [];
 };
@@ -417,7 +417,7 @@ Simulation.prototype = {
     
     run: function(){
         this.rain.update();
-        setTimeout(this.run.bind(this), 75);
+        setTimeout(this.run.bind(this), 30);
     }
     
 };

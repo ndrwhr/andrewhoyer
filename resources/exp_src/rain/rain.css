@@ -40,7 +40,7 @@ body {
 #rain div {
     position: absolute;
     display: inline-block;
-    -webkit-transition: -webkit-transform 100ms linear;
+/*    -webkit-transition: -webkit-transform 100ms linear;*/
 }
 
 #rain #placeholder {
