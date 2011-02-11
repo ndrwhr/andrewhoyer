@@ -35,6 +35,27 @@
     
     {% include warnings.html %}
     
+    {% if page.context != null %}
+    {% assign context = page.context %}
+    <div class="context">
+        <p class="header"><a href="/">Andrew Hoyer</a>/<a href="/experiments/">Experiments</a></p>
+        
+        {% if context.description %}<p class="description">{{ context.description}}</p>{% endif %}
+        
+        {% if context.social %}
+        {% assign social = context.social %}
+        <div class="social">
+            {% if social.facebook %}<iframe src="http://www.facebook.com/plugins/like.php?href={{ site.url }}{{ page.url }}&amp;layout=button_count&amp;show_faces=false&amp;width=90&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true"></iframe>{% endif %}
+            {% if social.twitter %}<a href="http://twitter.com/share" class="twitter-share-button" data-text="{{ social.twitter.text }}" data-count="horizontal" data-via="ndrwhr">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>{% endif %}
+        </div>
+        {% endif %}
+        
+        {% if context.description %}
+        <a class="context-control">less...</a>
+        {% endif %}
+    </div>
+    {% endif %}
+    
     {{ content }}
     
 </body>

@@ -1,1 +1,37 @@
 @import "base";
+
+div.context {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 220px;
+    padding: 10px;
+    margin: 5px;
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid #eee;
+    z-index: 1000;
+    
+    p.header, p.description {
+        margin-bottom: 10px;
+    }
+    
+    &.less p.description {
+        display: none;
+    }
+    
+    div.social {
+        text-align: center;
+        margin-bottom: 5px
+    }
+    
+    a.context-control {
+        display: block;
+        width: 100%;
+        text-align: center;
+        color: #ccc;
+        border-radius: 3px;
+        &:hover {
+            color: white;
+        }
+    }
+}
