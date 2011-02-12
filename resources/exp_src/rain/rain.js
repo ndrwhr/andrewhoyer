@@ -19,7 +19,7 @@ var transform_property,
         'WebkitTransform',
         'MozTransform',
         'msTransform',
-        'Otransform'
+        'OTransform'
     ]);
     
     supports_3d = test_properties([
