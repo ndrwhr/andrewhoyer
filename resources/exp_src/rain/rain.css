@@ -15,16 +15,22 @@ body {
     overflow: hidden;
     -webkit-user-select: none;
     -moz-user-select: none;
+    cursor: pointer;
+}
+
+#screen.dev div {
+    border: 1px solid #aaa;
 }
 
 #cursor {
     position: absolute;
-    border: 2px dashed #aaa;
+    border: 1px dashed #aaa;
     height: 100px;
     width: 100px;
     z-index: -1;
     -webkit-border-radius: 300px;
     -webkit-user-select: none;
+    cursor: pointer;
 }
 
 #rain {
@@ -33,14 +39,19 @@ body {
     width: 450px;
     height: 450px;
     margin: 0 auto;
-    font-size: 30px;
+    font-size: 25px;
     color: #669BB3;
 }
 
 #rain div {
     position: absolute;
     display: inline-block;
+    background: rgba(103, 149, 181, 0.2);
 /*    -webkit-transition: -webkit-transform 100ms linear;*/
+}
+
+#rain div#placeholder{
+    background: none;
 }
 
 #rain #placeholder {
@@ -67,6 +78,7 @@ body {
 
 #cloud div {
     position: absolute;
+    background: rgba(0,0,0,0.05);
 }
 
 table.controls {
