@@ -40,7 +40,9 @@
     <div class="context">
         <p class="header"><a href="/">Andrew Hoyer</a>/<a href="/experiments/">Experiments</a></p>
         
-        {% if context.description %}<p class="description">{{ context.description}}</p>{% endif %}
+        {% for description in context.description %}
+        <p class="description">{{description}}</p>
+        {% endfor %}
         
         {% if context.social %}
         {% assign social = context.social %}
