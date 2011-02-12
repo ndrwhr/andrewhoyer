@@ -69,6 +69,17 @@ if (!Function.prototype.bind){
     };
 }
 
+Function.prototype.wait = function(delay, bind){
+    var self = this, timer, args;
+    return function(){
+        args = arguments;
+        if (!timer) timer = setTimeout(function(){
+            timer = clearTimeout(timer);
+            self.apply(bind, args);
+        }, delay);
+    };
+};
+
 })();
 
 var Vector = function(x, y){
@@ -180,7 +191,7 @@ var Cursor = function(element, container){
         pageY: -100
     });
     
-    document.addEventListener('mousemove', this.move.bind(this));
+    document.addEventListener('mousemove', this.move.wait(10, this));
 };
 
 Cursor.prototype = {
@@ -195,7 +206,7 @@ Cursor.prototype = {
         
         this.scaled = position.subtract(container.position).divide(container.size);
         
-        this.element.transform(position.subtract(this.offset));
+        this.element.position(position.subtract(this.offset));
     },
     
     adjustParticle: function(particle){
