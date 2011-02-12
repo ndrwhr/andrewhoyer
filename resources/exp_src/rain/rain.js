@@ -1,12 +1,45 @@
 
 (function(){
 
+
+var transform_property,
+    supports_3d;
+
+(function(){
+    var styles = document.createElement('div').style;
+    
+    var test_properties = function(properties){
+        return properties.filter(function(prop){
+            return (styles[prop] !== undefined);
+        })[0];
+    };
+    
+    transform_property = test_properties([
+        'transform',
+        'WebkitTransform',
+        'MozTransform',
+        'msTransform',
+        'Otransform'
+    ]);
+    
+    supports_3d = test_properties([
+        'perspectiveProperty',
+        'WebkitPerspective',
+        'MozPerspective',
+        'msPerspective',
+        'OPerspective'
+    ]);
+})();
+
 // Extend a few natives to help me out:
 var helpers = {
     round: function(number){
         return Math.round(number * 10) / 10;
     },
-    translate: function(vector){
+    translate3d: function(vector){
+        return 'translate3d(' + (vector.x | 0) + 'px,' + (vector.y | 0)  + 'px, 0px)';
+    },
+    translate2d: function(vector){
         return 'translate(' + (vector.x | 0) + 'px,' + (vector.y | 0)  + 'px)';
     },
     rotate: function(value){
@@ -14,21 +47,7 @@ var helpers = {
     }
 };
 
-var transform_property;
-
-document.addEventListener('DOMContentLoaded', function(){
-    var properties = [
-        'transform',
-        'WebkitTransform',
-        'MozTransform',
-        'MsTransform',
-        'Otransform'
-    ];
-    
-    transform_property = properties.filter(function(prop){
-        return (document.body.style[prop] !== undefined);
-    })[0];
-}, false);
+helpers.translate = (supports_3d) ? helpers.translate3d : helpers.translate2d;
 
 var methods = {
     transform: function(translation, rotation){
