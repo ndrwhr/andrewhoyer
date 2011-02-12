@@ -436,13 +436,13 @@ Simulation.prototype = {
         this.drop_counter = document.find('p.drop-counter span');
         
         var map = [{
-            input: controls.find('input[name="gravity"]'),
+            input: controls.find('*[name="gravity"]'),
             method: 'changeGravity'
         }, {
-            input: controls.find('input[name="drops"]'),
+            input: controls.find('*[name="drops"]'),
             method: 'changeCount'
         }, {
-            input: controls.find('input[name="font-size"]'),
+            input: controls.find('*[name="font-size"]'),
             method: 'changeFont'
         }];
         
@@ -462,6 +462,21 @@ Simulation.prototype = {
 
 document.addEventListener('DOMContentLoaded', function(){
     
-    new Simulation(document.find('div.controls'));
+    var controls = document.find('div.controls'),
+        hidden = document.find('div.controls.hidden'),
+        input = document.createElement('input');
+    
+    input.setAttribute('type', 'range');
+    
+    if (input.type != 'range'){
+        // hide the current controls;
+        controls.className += ' hidden';
+        // reveal the alternate controls
+        hidden.className = hidden.className.replace('hidden', '');
+        // reasign the controls to the hidden ones
+        controls = hidden;
+    }
+    
+    new Simulation(controls);
     
 }, false);

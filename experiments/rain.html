@@ -38,4 +38,27 @@ context:
         <label for="drops">Drops</label> <input name="drops" type="range" step="0.01" min="0.25" max="4" value="1"/>
         <label for="font-size">font-size</label> <input name="font-size" type="range" step="0.01" min="0.5" max="1.5" value="1"/>
     </div>
+    
+    <div class="controls hidden">
+        <label for="gravity">Gravity</label>
+        <select name="gravity">
+            <option value="0.25">Low</option>
+            <option selected value="1">Normal</option>
+            <option value="2">High</option>
+        </select>
+        
+        <label for="drops">Drops</label>
+        <select name="drops">
+            <option value="0.25">Few</option>
+            <option selected value="1">Default</option>
+            <option value="2.5">Many</option>
+            <option value="4">Tons!</option>
+        </select>
+        <label for="font-size">font-size</label>
+        <select name="font-size">
+            <option value="0.5">Small</option>
+            <option selected value="1">Normal</option>
+            <option value="1.5">Large</option>
+        </select>
+    </div>
 </div>
