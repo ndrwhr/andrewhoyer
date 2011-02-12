@@ -8,7 +8,6 @@ body {
 }
 
 #screen {
-    
     position: relative;
     width: 100%;
     height: 100%;
@@ -16,6 +15,7 @@ body {
     -webkit-user-select: none;
     -moz-user-select: none;
     cursor: pointer;
+    font-size: 25px;
 }
 
 #screen.dev div {
@@ -39,7 +39,6 @@ body {
     width: 450px;
     height: 450px;
     margin: 0 auto;
-    font-size: 25px;
     color: #669BB3;
 }
 
@@ -47,23 +46,20 @@ body {
     position: absolute;
     display: inline-block;
     background: rgba(103, 149, 181, 0.2);
-/*    -webkit-transition: -webkit-transform 100ms linear;*/
 }
 
-#rain div#placeholder{
-    background: none;
-}
-
-#rain #placeholder {
+#placeholder {
     display: block;
     position: absolute;
-    top: 100px;
+    top: 240px;
+    width: 100%;
     text-align: center;
-    opacity: 0.3;
+    color: #ddd;
 }
 
 #placeholder p {
-    margin-bottom: 20px;
+    width: 500px;
+    margin: 0 auto 20px;
 }
 
 #cloud {
@@ -81,25 +77,14 @@ body {
     background: rgba(0,0,0,0.05);
 }
 
-table.controls {
+div.controls {
     position: fixed;
     bottom: 0;
     width: 100%;
     padding: 5px 15px;
-    background: rgba(255,255,255,0.75);
-    border-top: 1px solid #eee;
-    
-}
-
-table.controls td.controls {
-    font-size: 2em;
     text-align: center;
-}
-
-table.controls td.navigation {
-    text-align: left;
-}
-table.controls td.social {
-    text-align: right;
+    font-size: 20px;
+    border-top: 1px solid #eee;
+    background: rgba(255,255,255,0.75);
 }
 

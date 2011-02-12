@@ -372,6 +372,10 @@ Rain.prototype = {
     changeGravity: function(value){
         this.current_gravity.innerHTML = Math.round(value * 100) + '%';
         this.gravity = this.base_gravity.scale(value);
+    },
+    
+    changeFont: function(value){
+        this.container.style.fontSize = Math.round(value * 100) + '%';
     }
     
 };
@@ -404,6 +408,7 @@ Simulation.prototype = {
     initControls: function(){
         var gravity = document.id('gravity'),
             particles = document.id('particles'),
+            font = document.id('font-size'),
             rain = this.rain;
         
         gravity.addEventListener('change', function(){
@@ -412,6 +417,10 @@ Simulation.prototype = {
         
         particles.addEventListener('change', function(){
             rain.changeCount(particles.value);
+        });
+        
+        font.addEventListener('change', function(){
+            rain.changeFont(font.value);
         });
     },
     
