@@ -69,17 +69,6 @@ if (!Function.prototype.bind){
     };
 }
 
-Function.prototype.wait = function(delay, bind){
-    var self = this, timer, args;
-    return function(){
-        args = arguments;
-        if (!timer) timer = setTimeout(function(){
-            timer = clearTimeout(timer);
-            self.apply(bind, args);
-        }, delay);
-    };
-};
-
 })();
 
 var Vector = function(x, y){
@@ -191,7 +180,7 @@ var Cursor = function(element, container){
         pageY: -100
     });
     
-    document.addEventListener('mousemove', this.move.wait(10, this));
+    document.addEventListener('mousemove', this.move.bind(this));
 };
 
 Cursor.prototype = {
