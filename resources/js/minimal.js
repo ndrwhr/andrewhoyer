@@ -21,6 +21,6 @@ document.addEventListener('DOMContentLoaded', function(){
                 context.className = context.className.replace('less', '');
                 control.innerHTML = 'less...';
             }
-        });
+        }, false);
     }
-});
+}, false);

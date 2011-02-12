@@ -29,7 +29,9 @@ body {
     width: 100px;
     z-index: -1;
     -webkit-border-radius: 300px;
+    -moz-border-radius: 300px;
     -webkit-user-select: none;
+    -moz-user-select: none;
     cursor: pointer;
 }
 
@@ -66,7 +68,7 @@ div.flavor p {
     margin-bottom: 20px;
 }
 
-div.flavor p.active-particles {
+div.flavor p.drop-counter {
     font-size: 80%;
 }
 

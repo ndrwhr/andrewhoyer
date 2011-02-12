@@ -7,21 +7,35 @@ var helpers = {
         return Math.round(number * 10) / 10;
     },
     translate: function(vector){
-        return 'translate3d(' + (vector.x | 0) + 'px,' + (vector.y | 0)  + 'px,0px)';
+        return 'translate(' + (vector.x | 0) + 'px,' + (vector.y | 0)  + 'px)';
     },
     rotate: function(value){
         return 'rotate(' + (value | 0) + 'deg)';
     }
 };
 
-document.id = document.getElementById;
+var transform_property;
+
+document.addEventListener('DOMContentLoaded', function(){
+    var properties = [
+        'transform',
+        'WebkitTransform',
+        'MozTransform',
+        'MsTransform',
+        'Otransform'
+    ];
+    
+    transform_property = properties.filter(function(prop){
+        return (document.body.style[prop] !== undefined);
+    })[0];
+}, false);
 
 var methods = {
     transform: function(translation, rotation){
         translation = helpers.translate(translation);
         rotation = rotation ? helpers.rotate(rotation) : '';
         
-        this.style.WebkitTransform = translation + ' ' + rotation;
+        this.style[transform_property] = translation + ' ' + rotation;
         
         return this;
     },
@@ -50,8 +64,21 @@ var methods = {
     hide: function(){
         this.style.display = 'none';
         return this;
+    },
+    
+    search: function(selector){
+        return this.querySelectorAll(selector);
+    },
+    
+    find: function(selector){
+        return this.querySelector(selector);
     }
 };
+
+document.id = document.getElementById;
+
+document.search = methods.search;
+document.find = methods.find;
 
 for (var method in methods)
     HTMLElement.prototype[method] = methods[method];
@@ -128,7 +155,7 @@ var Generator = {
     
     randomLetter: function(color){
         var element = document.createElement('div');
-        element.innerText = this.letters[this.randomInt(0, this.letters.length)];
+        element.innerHTML = this.letters[this.randomInt(0, this.letters.length)];
         return element.color(color);
     },
     
@@ -180,7 +207,7 @@ var Cursor = function(element, container){
         pageY: -100
     });
     
-    document.addEventListener('mousemove', this.move.bind(this));
+    document.addEventListener('mousemove', this.move.bind(this), false);
 };
 
 Cursor.prototype = {
@@ -317,10 +344,8 @@ Drop.prototype = {
     
 };
 
-var Rain = function(container, particle_counter, current_gravity, cursor){
+var Rain = function(container, cursor){
     this.container = container;
-    this.particle_counter = particle_counter;
-    this.current_gravity = current_gravity;
     this.cursor = cursor;
     this.colors = Generator.gradient('#6795B5', '#aaaaaa');
     this.gravity = this.base_gravity = new Vector(0, 0.00075);
@@ -343,7 +368,7 @@ Rain.prototype = {
             else this.cursor.adjustParticle(drop);
         }
         
-        this.particle_counter.innerHTML = limit;
+        return limit;
     },
     
     adjustCount: function(){
@@ -366,7 +391,7 @@ Rain.prototype = {
     },
     
     changeCount: function(value){
-        this.drop_limit = Math.floor(this.base_drop_limit * value);
+        return (this.drop_limit = Math.floor(this.base_drop_limit * value));
     },
     
     changeGravity: function(value){
@@ -379,17 +404,17 @@ Rain.prototype = {
     
 };
 
-var Simulation = function(){
+var Simulation = function(controls){
     var container = this.container = document.id('rain'),
-        counter = document.id('active-particles'),
-        gravity = document.id('current-gravity'),
         cursor = document.id('cursor'),
         cloud = document.id('cloud');
     
-    window.addEventListener('resize', this.resize.bind(this));
+    this.controls = controls;
+    
+    window.addEventListener('resize', this.resize.bind(this), false);
     this.resize();
     
-    this.rain = new Rain(container, counter, gravity, new Cursor(cursor, container));
+    this.rain = new Rain(container, new Cursor(cursor, container));
     this.cloud = new Cloud(cloud);
     
     this.initControls();
@@ -405,31 +430,38 @@ Simulation.prototype = {
     },
     
     initControls: function(){
-        var gravity = document.id('gravity'),
-            particles = document.id('particles'),
-            font = document.id('font-size'),
+        var controls = this.controls,
             rain = this.rain;
         
-        gravity.addEventListener('change', function(){
-            rain.changeGravity(gravity.value);
-        });
+        this.drop_counter = document.find('p.drop-counter span');
         
-        particles.addEventListener('change', function(){
-            rain.changeCount(particles.value);
-        });
+        var map = [{
+            input: controls.find('input[name="gravity"]'),
+            method: 'changeGravity'
+        }, {
+            input: controls.find('input[name="drops"]'),
+            method: 'changeCount'
+        }, {
+            input: controls.find('input[name="font-size"]'),
+            method: 'changeFont'
+        }];
         
-        font.addEventListener('change', function(){
-            rain.changeFont(font.value);
+        map.forEach(function(control){
+            control.input.addEventListener('change', function(){
+                rain[control.method](control.input.value);
+            }, false);
         });
     },
     
     run: function(){
-        this.rain.update();
+        this.drop_counter.innerHTML = this.rain.update();
         setTimeout(this.run.bind(this), 30);
     }
     
 };
 
 document.addEventListener('DOMContentLoaded', function(){
-    new Simulation();
-});
+    
+    new Simulation(document.find('div.controls'));
+    
+}, false);
