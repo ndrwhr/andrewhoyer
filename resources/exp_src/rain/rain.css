@@ -48,18 +48,26 @@ body {
     background: rgba(103, 149, 181, 0.2);
 }
 
-#placeholder {
-    display: block;
+div.flavor-wrapper {
     position: absolute;
+    display: block;
     top: 240px;
     width: 100%;
+}
+
+div.flavor {
+    width: 500px;
+    margin: 0 auto;
     text-align: center;
     color: #ddd;
 }
 
-#placeholder p {
-    width: 500px;
-    margin: 0 auto 20px;
+div.flavor p {
+    margin-bottom: 20px;
+}
+
+div.flavor p.active-particles {
+    font-size: 80%;
 }
 
 #cloud {

@@ -370,7 +370,6 @@ Rain.prototype = {
     },
     
     changeGravity: function(value){
-        this.current_gravity.innerHTML = Math.round(value * 100) + '%';
         this.gravity = this.base_gravity.scale(value);
     },
     
