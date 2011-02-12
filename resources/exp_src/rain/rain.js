@@ -324,7 +324,7 @@ var Rain = function(container, particle_counter, current_gravity, cursor){
     this.cursor = cursor;
     this.colors = Generator.gradient('#6795B5', '#aaaaaa');
     this.gravity = this.base_gravity = new Vector(0, 0.00075);
-    this.drop_limit = this.base_drop_limit = 50;
+    this.drop_limit = this.base_drop_limit = 75;
     this.drops = [];
 };
 
