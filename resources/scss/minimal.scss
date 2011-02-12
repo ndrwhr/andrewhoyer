@@ -4,15 +4,25 @@ div.context {
     position: absolute;
     top: 0;
     left: 0;
-    width: 220px;
+    width: 230px;
     padding: 10px;
     margin: 5px;
     background: rgba(255, 255, 255, 0.75);
     border: 1px solid #eee;
     z-index: 1000;
+    text-align: center;
+    
+    strong {
+        font-weight: bold;
+    }
     
     p.header, p.description {
         margin-bottom: 10px;
+    }
+    
+    p.description {
+        text-indent: 1em;
+        text-align: left;
     }
     
     &.less p.description {
@@ -20,14 +30,12 @@ div.context {
     }
     
     div.social {
-        text-align: center;
         margin-bottom: 5px
     }
     
     a.context-control {
         display: block;
         width: 100%;
-        text-align: center;
         border-radius: 3px;
     }
 }
