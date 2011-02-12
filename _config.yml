@@ -58,6 +58,11 @@ minimal_js:
     - minimal.js
 
 experiments:
+    - name:     Type Rain
+      date:     February 2011
+      url:      /experiments/rain/
+      image:    /resources/images/experiments/rain.jpg
+
     - name:     Mobeh Dick
       date:     October 2010
       url:      /experiments/mobeh/
