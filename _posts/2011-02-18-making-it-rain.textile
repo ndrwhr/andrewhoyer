@@ -18,11 +18,11 @@ images:
 ---
 
 
-If you haven't already seen the CSS/HTML rain experiment I highly suggest you "check it out":{{page.links.rain}} before reading more. Or if you're stuck using an older browser, you can just watch the video below.
+If you haven't already seen my CSS/HTML Rain experiment I highly suggest you "check it out":{{page.links.rain}} before reading more. Or if you're stuck using an older browser, you can just watch the video below.
 
 Basically I built a rain simulation using only HTML, CSS and Javascript. No canvas, no images. Just a webpage.
 
-Over the last few months I had been racking my brain for an idea worth fully implementing. I went through several iterations of this one, including ideas of having live twitter data flow over a waterfall or turning paragraphs of a novel into some kind of bound fluid simulation. It wasn't until about two weeks ago that I actually decided to take a big step back and just try to create something simple. In doing so, I found that the simpler idea would not only be easier to implement, but would probably look a lot better than something complicated.
+Over the last few months I had been racking my brain for an idea worth fully implementing. I went through several iterations of this one, including ideas of having live twitter data flow over a waterfall or turning paragraphs of a novel into some kind of bound fluid simulation. It wasn't until about two weeks ago that I actually decided to take a big step back and just try to create something simple. In doing so, I found that the simpler idea would not only be easier to implement, but also probably look a lot better than something complicated.
 
 h2. Y U NO Use Canvas?
 
@@ -66,7 +66,7 @@ update: function(acceleration){
 
 {% endhighlight %}
 
-If you've seen some of my other work on things like the "cloth":{{page.links.cloth}} and "particle simulations":{{page.links.particles}}, you know that I'm a fan of "Verlet integration":{{page.links.verlet}} in my simulations. What Verlet gives you over "Euler":{{page.links.euler}}, is that you no longer need to store information about an objects velocity. Instead you can easily calculate a similar metric using the object's current and previous positions.
+If you've seen some of my other work on things like the "cloth":{{page.links.cloth}} and "particle simulation":{{page.links.particles}}, you know that I'm a fan of "Verlet integration":{{page.links.verlet}} in my simulations. What Verlet gives you over "Euler":{{page.links.euler}}, is that you no longer need to store information about an objects velocity. Instead you can easily calculate a similar metric using the object's current and previous positions.
 
 Lastly to take care of the mouse interaction I added the following method to my Cursor object, such that it can take a particle and move it if it happens to intersect with the cursors radius. The following code has been modified slightly from what is actually in the source, just for readabilities sake.
 
@@ -101,13 +101,13 @@ h2. DOM Optimizations:
 
 One problem that I was concerned about from the start, was how to deal with actually generating the rain drops. The general idea was that I would have some set number of drops in the simulation at any given iteration, then I could simply loop over this list to move the simulation ahead each time step.
 
-My first approach was the simplest. The basic idea was: keep adding drops (read: keep dumping divs into the DOM) until I reach the limit. If a given drop is past some threshold (generally some distance off the page) then actually remove that drop from the DOM and generate a brand new one in it's place. This method actually got me pretty far in terms of getting the look and feel of the physics right, but it certainly wasn't all that efficient. The problems started when I tried adding more than 50 drops at a time. Basically, the cost of updating the DOM was actually starting to slow down my simulation.
+My first approach was the simplest. The basic idea was: keep adding drops (read: keep dumping divs into the DOM) until I reach the at set limit. If a given drop is past some threshold (generally some distance off the page) then actually remove that drop from the DOM and generate a brand new one in it's place. This method actually got me pretty far in terms of getting the look and feel of the physics right, but it certainly wasn't all that efficient. The problems started when I tried adding more than 50 drops. Basically, the cost of updating the DOM was actually starting to slow down my simulation.
 
-There were quite a few intermediate solutions that each provided their own benefits. But the final solution was actually quite similar to the first. Just like before I would keep adding elements to DOM until I reached my limit, I also used the same threshold idea for when elements fell out of sight. But instead of removing the element from the DOM, I would just hide it, reset its position to the top, then show it at the start of the next iteration. This way, once the simulation is up and running with a lot of particles, there is no further DOM manipulation, just CSS updates.
+There were quite a few intermediate solutions that each provided their own benefits. But the final solution was actually quite similar to the first. Just like before I would keep adding elements to DOM until I reached my limit, I also used the same threshold idea for when elements fell out of sight. But instead of removing the element from the DOM, I would just hide it (with display:none), reset its position to the top, then show it at the start of the next iteration. This way, once the simulation is up and running with a lot of particles, there is no further DOM manipulation, just CSS updates.
 
-You can actually see this when you drop the simulation down to very few particles, you'll see the same small subset of letters appearing over and over again. I also fade the particles out as they go down the page, so it's not obvious that I'm recycling.
+You can actually see this when you drop the simulation down to very few particles, you'll see the same small subset of letters appearing over and over again. I also fade the drops out as they go down the page, so it's not obvious that I'm recycling.
 
-Another thing I had to optimize was the generation of the clouds. Initially I was just going to draw up an image of a cloud and slap it on top of the simulation, but quickly realized it would be so much cooler if I could do it with text. The problem with that is that I would like to make sure it reasonably covers up the generation area, but doesn't slow down the page load time.
+Another thing I had to optimize was the generation of the clouds. Initially I was just going to draw up an image of a cloud and slap it on top of the simulation, but quickly realized it would be so much cooler if I could do it with text. The problem with that is that I would like to make sure it reasonably covers up the generation area, but doesn't slow down the page load time or overall simulation.
 
 The basic idea behind the clouds, is that I strategically chose a set of points that I would like to have covered up, then generate a bunch of random letters in a circle around that point. In the end, I decided there were 15 points that I would like to be covered up. For each of these points I would then generate 25 random letters and inject them into a document fragment, before finally injecting that fragment into the actual DOM.
 
@@ -121,13 +121,13 @@ Optimizing the CSS turned out to be a bit of a gong show.
 
 One of the first ideas I had toyed around with, was using css transitions to tween between animation frames. The hope of this, was that I would be able to cram in more expensive computation at a lower frame rate while still maintaining smooth animations. In theory this could have been awesome, but instead it turned out to be the opposite.
 
-It wasn't until I read "an article":{{page.links.facebook_games}} from a developer at facebook that I realized I was doing it wrong. Basically the article goes through different ways of optimizing HTML5 games. One of the things they mention is that on desktop browsers, it is actually more efficient to turn off transitions and just manually move things on the page. I guess this kinda makes sense, as the browser probably has to do some serious math to try and tween something. Where as if I just tell it what to do, it doesn't really have to figure anything out.
+It wasn't until I read "an article":{{page.links.facebook_games}} from a developer at facebook that I realized I was doing it wrong. Basically the article goes through different ways of optimizing HTML5 games. One of the things they mention is that on desktop browsers, it is actually more efficient to turn off transitions and just manually move things on the page. I guess this kinda makes sense, as the browser probably has to do some serious math to try and tween something. Where as if I just tell it what to do, it doesn't really have to figure anything out. The down side of this approach is that you'll be killing performance on mobile devices, which are generally pretty good at transitions on certain properties, while not being good at executing javascript quickly.
 
 The other relatively big struggle I had to deal with was figuring out what css transformations worked in which browsers. Initially I had been using the tranform @translate3d(x, y, 0)@, but that would cause Firefox 4 to barf. So instead I switched to using just the regular @translate(x, y)@ which appeared to work. But when I went back to test in Safari, the performance was now horrible. I know this was mentioned in the above facebook article, but I didn't realize how big of an impact it would have.
 
 Eventually I just fell to the level of writing another feature sniffer that would check if a browser supported 3d transforms. I should also note, that I learned that chrome pretends that it has support for 3d transforms, so it uses the @translate3d(x, y, z)@ transform, but basically has the same performance of @translate(x, y)@.
 
-The last little optimization I employed, was to use integer values in my transforms. I was honestly quite surprised by this. Simply truncating your numbers using @value | 0@ made an actual significant difference in the overall performance.
+The last little optimization I employed, was to use integer values in my transforms. I was honestly quite surprised by this. Simply truncating my numbers using @value | 0@ made an actual significant difference in the overall performance.
 
 h2. What I learned:
 
@@ -135,7 +135,7 @@ The biggest thing I took away from this experiment, is that it is most certainly
 
 All the browsers seem to have a lot of work to do in order to make developing easier. But when that day comes, I'm sure we'll see some really interesting and beautiful experiments.
 
-By the way, if you're planning on delving into an experiment using some of the latest technologies, I highly suggest you take a look at some feature detection libraries (personally I think "modernizr":{{page.links.modernizr}} is pretty cool). I didn't use one for this experiment as I was only dealing with a subset of features, plus I was interested in learning how to do it myself.
+By the way, if you're planning on delving into an experiment using some of the latest technologies, I highly suggest you take a look at some feature detection libraries (personally I think "modernizr":{{page.links.modernizr}} is pretty cool). I didn't use one for this experiment as I was only dealing with a small subset of features, plus I was interested in learning how to do it myself.
 
 h2. Links:
 
