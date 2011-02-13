@@ -1,0 +1,56 @@
+---
+layout: post
+---
+
+Over the last few months I had been wracking my brain for an idea worth fully implementing. I went through several iterations of this one, including ideas of having live twitter data flow over a waterfall or turning paragraphs of a novel into some kind of bound fluid simulation. It wasn't until about two weeks ago that I actually decided to take a big step back and just try to create something simple. In doing so, I found that the simpler idea would not only be easier to implement, but would probably look a lot better than something complicated.
+
+If you haven't already seen the CSS/HTML rain experiment I highly suggest you "check it out":/experiments/rain/ before reading more. Or if you're stuck using a non-webkit browser, you can just watch the video below.
+
+Or If you're too lazy to do any of the above, I can just describe it. Basically I built a rain simulation using only HTML, CSS and Javascript. No canvas, no images. Just a webpage.
+
+h2. Y U NO Use Canvas?
+
+Lately I've been kinda tired of the canvas. I know you can do some pretty amazing things with it, but when it really comes down to it, all you're doing is painting a flat image over and over again. I think when I started with this experiment I was interested in creating a simulation that would use actual objects as particles, not just circles or letters drawn to a surface.
+
+Another major reason for doing this, is that I wanted to play around with inserting and removing large amounts of elements to and from the DOM and manipulating them via css transforms in realtime.
+
+h2. How it all works:
+
+
+
+h2. The physics of it:
+
+When this idea first started brewing, I spent quite a bit of time reading papers on how to do real time fluid/waterfall simulations. This, as it would turn out, would all be in vain.
+
+The computation to accurately model a fluid, as you might guess, is extremely complicated. Each particle has to somehow interact with its surrounding particles, be it slightly tugging or pushing apart. This is what makes the effects of surface tension and viscosity look realistic. But what this also means, is that for every frame of your animation/simulation, you're expending a huge amount of computing power calculating things like distances and forces between all of the particles.
+
+Doing these kind of computations is not really feasible in the current browser environment. Instead of doing a full blown, completely accurate, I opted to do a much simpler simulation where each particle acts independently of every other particle and only interacts with the mouse.
+
+Each particle really only has two constraints then. One equation to govern how the particle moves over time, and another that make sure particles don't pass through the users cursor. Both equations are interesting:
+
+For the particles motion, I used just a simple parabolic motion equation that you would see in any high school physics class:
+
+new position = current position + (gravity * dt ^2^) + (current position - old position)
+
+What this says, is that the new position of the particle is equal to its current position plus some extra speed because its accelerating (due to gravity) plus its current speed (which can be calculated by subtracting its old position from its current).
+
+
+h2. Generating clouds:
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+h2. Recycling elements:
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+h2. Making things easier:
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+h2. CSS Transitions:
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+h2. What I learned:
+
+https://developers.facebook.com/blog/post/460
