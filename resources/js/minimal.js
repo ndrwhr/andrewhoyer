@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function(){
     // Color links
     var colors = ['blue', 'orange', 'green', 'red', 'teal', 'purple', 'yellow'];
-    Array.prototype.slice.call(document.querySelectorAll('a')).forEach(function(link){
+    Array.prototype.forEach.call(document.querySelectorAll('a'), function(link){
         link.className += ' ' + colors[Math.floor(Math.random() * colors.length)];
     });
     
