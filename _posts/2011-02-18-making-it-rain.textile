@@ -113,6 +113,12 @@ The last little optimization I employed, was to use integer values in my transfo
 
 h2. What I learned:
 
+The biggest thing I took away from this experiment, is that it is most certainly possible to build interesting simulations using the DOM and css transforms. That being said, at the end of all this, I'm not terribly thrilled with how all the browsers are currently handling css transformations (with the exception of Safari).
+
+All the browsers seem to have a lot of work to do in order to make developing easier. But when that day comes, I'm sure we'll see some really interesting and beautiful experiments.
+
+By the way, if you're planning on delving into an experiment using some of the latest technologies, I highly suggest you take a look at some feature detection libraries (personally I think "modernizr":{{page.links.modernizr}} is pretty cool). I didn't use one for this experiment as I was only dealing with a subset of features, plus I was interested in learning how to do it myself.
+
 h2. Links:
 
 * "Verlet Integration":{{page.links.verlet}}
