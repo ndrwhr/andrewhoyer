@@ -1,7 +1,11 @@
 
+// Scroll to the bottom to see the entry point.
+
 (function(){
 
-
+// Doing a bit of browser detection:
+// I need to know which browser prefix as well
+// whether or not to use 3d translations.
 var transform_property,
     supports_3d;
 
@@ -49,6 +53,7 @@ var helpers = {
 
 helpers.translate = (supports_3d) ? helpers.translate3d : helpers.translate2d;
 
+// Theses methods will be applied to HTMLElements
 var methods = {
     transform: function(translation, rotation){
         translation = helpers.translate(translation);
@@ -94,11 +99,12 @@ var methods = {
     }
 };
 
+// Add just a few helpers to the document object.
 document.id = document.getElementById;
-
 document.search = methods.search;
 document.find = methods.find;
 
+// Actually apply methods to HTMLElement.
 for (var method in methods)
     HTMLElement.prototype[method] = methods[method];
 
@@ -106,6 +112,7 @@ Array.prototype.random = function(){
     return this[Math.floor(Math.random() * this.length)];
 };
 
+// Implement a super simple version of bind, if not already there.
 if (!Function.prototype.bind){
     Function.prototype.bind = function (bind){
         var self = this;
@@ -115,8 +122,9 @@ if (!Function.prototype.bind){
     };
 }
 
-})();
+})(); // Finished extending prototypes.
 
+// Super simple 2d vector class.
 var Vector = function(x, y){
     this.x = x || 0;
     this.y = y || 0;
@@ -182,6 +190,7 @@ var Generator = {
         return !!Math.round(this.random() + (bias || 0));
     },
     
+    // Generates an array of hex colors based on two inputs.
     gradient: function(stop1, stop2){
         var regex = /#([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})/i,
             steps, diff, i, j;
@@ -221,6 +230,7 @@ var Cursor = function(element, container){
     
     this.offset = this.calcOffset();
     
+    // initialize the cursor to be off the screen.
     this.move({
         pageX: -100,
         pageY: -100
@@ -231,19 +241,24 @@ var Cursor = function(element, container){
 
 Cursor.prototype = {
     
+    // the offset is used to center the cursor div on the actual mouse.
     calcOffset: function(){
         return new Vector(this.element.clientWidth, this.element.clientHeight).scale(0.5);
     },
     
+    // called when ever the mouse moves.
     move: function(event){
         var container = this.container,
             position = new Vector(event.pageX, event.pageY);
         
+        // calculate a normalize position relative the the rain container.
         this.scaled = position.subtract(container.position).divide(container.size);
         
+        // actually move the cursor element.
         this.element.position(position.subtract(this.offset));
     },
     
+    // in the run loop, every particle gets passed here.
     adjustParticle: function(particle){
         var position = this.scaled,
             diff = particle.current.subtract(position),
@@ -293,6 +308,7 @@ Cloud.prototype = {
             var rotation = Generator.randomInt(0, 360),
                 postion;
             
+            // make sure we generate a div within the radius.
             do {
                 position = Vector.random(-radius, radius);
             } while(position.length() > radius);
@@ -310,7 +326,7 @@ Cloud.prototype = {
     
 };
 
-var Drop = function(element, container, current, previous){
+var RainDrop = function(element, container, current, previous){
     this.element = element;
     this.container = container;
     this.current = current;
@@ -324,16 +340,19 @@ var Drop = function(element, container, current, previous){
     container.appendChild(element);
 };
 
-Drop.prototype = {
+RainDrop.prototype = {
     
-    reset: function(){
+    // this is called when a drop falls off the page.
+    // just hides the element, reset its position to something random.
+    reset: function(position){
         var element = this.element.hide();
-        this.previous = this.current = new Vector(Generator.random());
+        this.previous = this.current = position;
     },
     
     update: function(acceleration){
         var temp = this.current;
         
+        // simple parabolic motion equation.
         this.current = this.current.scale(2).subtract(this.previous).add(acceleration);
         this.previous = temp;
         
@@ -374,6 +393,7 @@ var Rain = function(container, cursor){
 
 Rain.prototype = {
     
+    // called in the run loop.
     update: function(){
         this.adjustCount();
         
@@ -383,7 +403,7 @@ Rain.prototype = {
         
         for (var i = 0; i < limit; i++){
             drop = drops[i].update(this.gravity);
-            if (!drop.visible()) drop.reset();
+            if (!drop.visible()) drop.reset(new Vector(Generator.random()));
             else this.cursor.adjustParticle(drop);
         }
         
@@ -406,7 +426,7 @@ Rain.prototype = {
             previous = current.add(Vector.random(-0.0075, 0.0075)),
             element = Generator.randomLetter(this.colors.random());
         
-        return new Drop(element, this.container, current, previous);
+        return new RainDrop(element, this.container, current, previous);
     },
     
     changeCount: function(value){
@@ -431,7 +451,7 @@ var Simulation = function(controls){
     this.controls = controls;
     
     window.addEventListener('resize', this.resize.bind(this), false);
-    this.resize();
+    this.resize(); // cache the containers position and dimensions.
     
     this.rain = new Rain(container, new Cursor(cursor, container));
     this.cloud = new Cloud(cloud);
