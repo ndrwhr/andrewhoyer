@@ -2,6 +2,8 @@
 layout: post
 
 links:
+    particles: /experiments/particle_system/
+    cloth: /experiments/cloth/
     euler: http://en.wikipedia.org/wiki/Euler_method
     verlet: http://en.wikipedia.org/wiki/Verlet_integration
     facebook_games: https://developers.facebook.com/blog/post/460
@@ -53,7 +55,7 @@ update: function(acceleration){
 
 {% endhighlight %}
 
-If you've seen some of my other work on things like the cloth and particle simulations, you know that I'm a fan of "Verlet integration":{{page.links.verlet}} in my simulations. What Verlet gives you over "Euler":{{page.links.euler}}, is that you no longer need to store information about an objects velocity. Instead you can easily calculate a similar metric using the object's current and previous positions.
+If you've seen some of my other work on things like the "cloth":{{page.links.cloth}} and "particle simulations":{{page.links.particles}}, you know that I'm a fan of "Verlet integration":{{page.links.verlet}} in my simulations. What Verlet gives you over "Euler":{{page.links.euler}}, is that you no longer need to store information about an objects velocity. Instead you can easily calculate a similar metric using the object's current and previous positions.
 
 Lastly to take care of the mouse interaction I added the following method to my Cursor object, such that it can take a particle and move it if it happens to intersect with the cursors radius. The following code has been modified slightly from what is actually in the source, just for readabilities sake.
 
@@ -95,4 +97,8 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
 h2. What I learned:
 
 h2. Links:
+
+* "Verlet Integration":{{page.links.verlet}}
+* "Euler Method":{{page.links.euler}}
+* "Facebook article about HTML5 games":{{page.links.facebook_games}}
 
