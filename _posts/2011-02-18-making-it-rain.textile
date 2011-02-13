@@ -98,7 +98,17 @@ The speed of this is actually quite striking. Seeing as at every page load I'm d
 
 h2. CSS Optimizations:
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Optimizing the CSS turned out to be a bit of a gong show.
+
+One of the first ideas I had toyed around with, was using css transitions to tween between animation frames. The hope of this, was that I would be able to cram in more expensive computation at a lower frame rate while still maintaining smooth animations. In theory this could have been awesome, but instead it turned out to be the opposite.
+
+It wasn't until I read "an article":{{page.links.facebook_games}} from a developer at facebook that I realized I was doing it wrong. Basically the article goes through different ways of optimizing HTML5 games. One of the things they mention is that on desktop browsers, it is actually more efficient to turn off transitions and just manually move things on the page. I guess this kinda makes sense, as the browser probably has to do some serious math to try and tween something. Where as if I just tell it what to do, it doesn't really have to figure anything out.
+
+The other relatively big struggle I had to deal with was figuring out what css transformations worked in which browsers. Initially I had been using the tranform @translate3d(x, y, 0)@, but that would cause Firefox 4 to barf. So instead I switched to using just the regular @translate(x, y)@ which appeared to work. But when I went back to test in Safari, the performance was now horrible. I know this was mentioned in the above facebook article, but I didn't realize how big of an impact it would have.
+
+Eventually I just fell to the level of writing another feature sniffer that would check if a browser supported 3d transforms. I should also note, that I learned that chrome pretends that it has support for 3d transforms, so it uses the @translate3d(x, y, z)@ transform, but basically has the same performance of @translate(x, y)@.
+
+The last little optimization I employed, was to use integer values in my transforms. I was honestly quite surprised by this. Simply truncating your numbers using @value | 0@ made an actual significant difference in the overall performance.
 
 h2. What I learned:
 
