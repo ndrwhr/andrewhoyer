@@ -1,5 +1,10 @@
 ---
 layout: post
+
+links:
+    euler: http://en.wikipedia.org/wiki/Euler_method
+    verlet: http://en.wikipedia.org/wiki/Verlet_integration
+    facebook_games: https://developers.facebook.com/blog/post/460
 ---
 
 Over the last few months I had been wracking my brain for an idea worth fully implementing. I went through several iterations of this one, including ideas of having live twitter data flow over a waterfall or turning paragraphs of a novel into some kind of bound fluid simulation. It wasn't until about two weeks ago that I actually decided to take a big step back and just try to create something simple. In doing so, I found that the simpler idea would not only be easier to implement, but would probably look a lot better than something complicated.
@@ -10,47 +15,84 @@ Or If you're too lazy to do any of the above, I can just describe it. Basically 
 
 h2. Y U NO Use Canvas?
 
-Lately I've been kinda tired of the canvas. I know you can do some pretty amazing things with it, but when it really comes down to it, all you're doing is painting a flat image over and over again. I think when I started with this experiment I was interested in creating a simulation that would use actual objects as particles, not just circles or letters drawn to a surface.
+Lately I've been kinda tired of the canvas. I know you can do some amazing things with it, but when it comes down to it, all you're doing is painting a flat image over and over again. I think when I started with this experiment I was interested in creating a simulation that would use actual objects as particles, not just circles or letters drawn to a surface that I would manually have to repaint every iteration.
 
 Another major reason for doing this, is that I wanted to play around with inserting and removing large amounts of elements to and from the DOM and manipulating them via css transforms in realtime.
 
-h2. How it all works:
-
-
-
 h2. The physics of it:
 
-When this idea first started brewing, I spent quite a bit of time reading papers on how to do real time fluid/waterfall simulations. This, as it would turn out, would all be in vain.
+When this idea first started brewing, I spent quite a bit of time reading papers on how to do realtime fluid/waterfall simulations. This, as it would turn out, would all be in vain.
 
-The computation to accurately model a fluid, as you might guess, is extremely complicated. Each particle has to somehow interact with its surrounding particles, be it slightly tugging or pushing apart. This is what makes the effects of surface tension and viscosity look realistic. But what this also means, is that for every frame of your animation/simulation, you're expending a huge amount of computing power calculating things like distances and forces between all of the particles.
+The calculations to accurately model a fluid, as you might guess, are extremely complicated. Each particle has to somehow interact with its surrounding particles, be it slightly tugging or pushing apart. This is what makes the effects of surface tension and viscosity look realistic. But what this also means, is that for every frame of your animation/simulation, you're expending a huge amount of computing power calculating things like distances and forces between all of the particles.
 
-Doing these kind of computations is not really feasible in the current browser environment. Instead of doing a full blown, completely accurate, I opted to do a much simpler simulation where each particle acts independently of every other particle and only interacts with the mouse.
+Doing that kind of computation is not really feasible in the current browser environment, as not only do I have to deal with Javascript not being as fast a C or C++ implementations, but I also have to worry about the cost of the DOM repainting. So instead of doing a full blown, completely accurate simulation, I opted to take a much simpler approach such that each particle (or drop as I call them in my code) acts independently of every other particle and only interacts with the mouse.
 
-Each particle really only has two constraints then. One equation to govern how the particle moves over time, and another that make sure particles don't pass through the users cursor. Both equations are interesting:
+Each rain drop really only has two constraints then, one equation to govern how the particle moves over time, and another that make sure particles don't pass through the users cursor.
 
-For the particles motion, I used just a simple parabolic motion equation that you would see in any high school physics class:
+To do the updating of each particle, I employed a small amount of vector math in the following code:
 
-new position = current position + (gravity * dt ^2^) + (current position - old position)
+{% highlight js %}
 
-What this says, is that the new position of the particle is equal to its current position plus some extra speed because its accelerating (due to gravity) plus its current speed (which can be calculated by subtracting its old position from its current).
+update: function(acceleration){
+    var temp = this.current;
+    
+    // basically new_position = (current_position * 2) - previous_position + acceleration
+    // where the acceleration is actually a gravity constant scaled by some factor.
+    this.current = this.current.scale(2).subtract(this.previous).add(acceleration);
+    this.previous = temp;
+    
+    // rotation is completely independent of everything and just
+    // does whatever it wants based on random initial conditions.
+    this.rotation += this.rotation_step;
+    
+    // apply the position and rotation we just calculated
+    this.style();
+    
+    return this;
+},
 
+{% endhighlight %}
 
-h2. Generating clouds:
+If you've seen some of my other work on things like the cloth and particle simulations, you know that I'm a fan of "Verlet integration":{{page.links.verlet}} in my simulations. What Verlet gives you over "Euler":{{page.links.euler}}, is that you no longer need to store information about an objects velocity. Instead you can easily calculate a similar metric using the object's current and previous positions.
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Lastly to take care of the mouse interaction I added the following method to my Cursor object, such that it can take a particle and move it if it happens to intersect with the cursors radius. The following code has been modified slightly from what is actually in the source, just for readabilities sake.
 
-h2. Recycling elements:
+{% highlight js %}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+adjustParticle: function(particle){
+    // current position of the mouse.
+    var position = this.position;
+    
+    // find out the distance between the cursor and the given particle.
+    var diff = particle.current.subtract(position),
+        distance = diff.length();
+    
+    if (distance < this.radius){
+        
+        // if the particle is inside the radius of the mouse, set the
+        // current position of the particle so that it is some distance
+        // in the opposite direction of entrance.
+        particle.current = position.add(diff.scale(this.radius / distance));
+    }
+}
 
-h2. Making things easier:
+{% endhighlight %}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+The above code is actually quite neat as it adds a tiny bit of bounce whenever a particle hits the cursor. This is because I change the position of conflicting particle so that it is reflected back on the direction it was coming from. If you watch the youtube video above, you can see me using this to bounce particles up and down.
 
-h2. CSS Transitions:
+h2. DOM Optimizations:
+
+One problem that I was concerned about from the start, was how to deal with actually generating rain drops. The general idea was that I would have some set number of drops in the simulation at any given number, I could then loop over this list to move the simulation ahead each time step.
+
+My first approach was the simplest. The basic idea was: keep adding drops until I reach the limit. If a given drop is past some threshold (generally some distance off the page) then actually remove that drop from the DOM and generate a brand new one in it's place. This method actually got me pretty far in terms getting the look and feel of the physics right, but it certainly wasn't all that efficient. The problems started when I tried adding more than 50 drops at a time in the simulation.
+
+There were quite a few intermediate solutions that each provided their own benefit. But the final solution was actually quite similar to the first.
+
+h2. CSS Optimizations:
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 h2. What I learned:
 
-https://developers.facebook.com/blog/post/460
+h2. Links:
+
