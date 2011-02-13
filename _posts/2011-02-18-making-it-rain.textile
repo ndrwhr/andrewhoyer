@@ -6,6 +6,7 @@ links:
     cloth: /experiments/cloth/
     euler: http://en.wikipedia.org/wiki/Euler_method
     verlet: http://en.wikipedia.org/wiki/Verlet_integration
+    modernizr: http://www.modernizr.com/
     facebook_games: https://developers.facebook.com/blog/post/460
 ---
 
@@ -117,4 +118,5 @@ h2. Links:
 * "Verlet Integration":{{page.links.verlet}}
 * "Euler Method":{{page.links.euler}}
 * "Facebook article about HTML5 games":{{page.links.facebook_games}}
+* "Modernizr, handy feature sniffer":{{page.links.modernizr}}
 
