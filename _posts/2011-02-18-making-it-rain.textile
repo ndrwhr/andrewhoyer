@@ -14,6 +14,7 @@ images:
     cloud: /resources/images/blog/rain-simulation-cloud-screen.jpg
     cursor: /resources/images/blog/rain-simulation-cursor-screen.jpg
     yuno: /resources/images/blog/rain-simulation-yuno.jpg
+    fading: /resources/images/blog/rain-simulation-fading-screen.jpg
 ---
 
 
@@ -96,11 +97,15 @@ The above code is actually quite neat as it adds a tiny bit of bounce whenever a
 
 h2. DOM Optimizations:
 
+!{{page.images.fading}}!
+
 One problem that I was concerned about from the start, was how to deal with actually generating the rain drops. The general idea was that I would have some set number of drops in the simulation at any given iteration, then I could simply loop over this list to move the simulation ahead each time step.
 
 My first approach was the simplest. The basic idea was: keep adding drops (read: keep dumping divs into the DOM) until I reach the limit. If a given drop is past some threshold (generally some distance off the page) then actually remove that drop from the DOM and generate a brand new one in it's place. This method actually got me pretty far in terms of getting the look and feel of the physics right, but it certainly wasn't all that efficient. The problems started when I tried adding more than 50 drops at a time. Basically, the cost of updating the DOM was actually starting to slow down my simulation.
 
-There were quite a few intermediate solutions that each provided their own benefits. But the final solution was actually quite similar to the first. Just like before I would keep adding elements to DOM until I reached my limit, I also used the same threshold idea for when elements fell out of sight. But instead of removing the element from the DOM, I would just hide it, reset its position to the top, then show it at the start of the next iteration. This way, once the simulation is up and running with a lot of particles, there is no further DOM manipulation, just CSS updates. You can actually see this when you drop the simulation down to very few particles, you'll see the same small subset of letters appearing over and over again.
+There were quite a few intermediate solutions that each provided their own benefits. But the final solution was actually quite similar to the first. Just like before I would keep adding elements to DOM until I reached my limit, I also used the same threshold idea for when elements fell out of sight. But instead of removing the element from the DOM, I would just hide it, reset its position to the top, then show it at the start of the next iteration. This way, once the simulation is up and running with a lot of particles, there is no further DOM manipulation, just CSS updates.
+
+You can actually see this when you drop the simulation down to very few particles, you'll see the same small subset of letters appearing over and over again. I also fade the particles out as they go down the page, so it's not obvious that I'm recycling.
 
 Another thing I had to optimize was the generation of the clouds. Initially I was just going to draw up an image of a cloud and slap it on top of the simulation, but quickly realized it would be so much cooler if I could do it with text. The problem with that is that I would like to make sure it reasonably covers up the generation area, but doesn't slow down the page load time.
 
