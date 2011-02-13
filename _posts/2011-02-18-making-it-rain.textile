@@ -92,7 +92,7 @@ There were quite a few intermediate solutions that each provided their own benef
 
 Another thing I had to optimize was the generation of the clouds. Initially I was just going to draw up an image of a cloud and slap it on top of the simulation, but quickly realized it would be so much cooler if I could do it with text. The problem with that is that I would like to make sure it reasonably covers up the generation area, but doesn't slow down the page load time.
 
-The basic idea behind the clouds, is that I strategically chose a set of points that I would like to have covered up, then generate a bunch of random letters in a circle around that point. In the end, I decided there were 15 points that I would like to have cover up. For each of these points I would then generate 25 random letters and inject them into a document fragment. Before finally injecting that fragment into the actual DOM.
+The basic idea behind the clouds, is that I strategically chose a set of points that I would like to have covered up, then generate a bunch of random letters in a circle around that point. In the end, I decided there were 15 points that I would like to be covered up. For each of these points I would then generate 25 random letters and inject them into a document fragment, before finally injecting that fragment into the actual DOM.
 
 The speed of this is actually quite striking. Seeing as at every page load I'm dynamically creating and inserting 375 divs in just a few milliseconds. Pretty neat.
 
