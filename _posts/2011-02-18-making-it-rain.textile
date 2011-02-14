@@ -9,6 +9,8 @@ links:
     verlet: http://en.wikipedia.org/wiki/Verlet_integration
     modernizr: http://www.modernizr.com/
     facebook_games: https://developers.facebook.com/blog/post/460
+    exp_html: https://github.com/ndrwhr/andrewhoyer/blob/master/experiments/rain.html
+    exp_js_css: https://github.com/ndrwhr/andrewhoyer/tree/master/resources/exp_src/rain
 
 images:
     cloud: /resources/images/blog/rain-simulation-cloud-screen.jpg
@@ -139,6 +141,7 @@ By the way, if you're planning on delving into an experiment using some of the l
 
 h2. Links:
 
+* Source for this experiment: "HTML":{{page.links.exp_html}} and "everything else":{{page.links.exp_js_css}}
 * "Verlet Integration":{{page.links.verlet}}
 * "Euler Method":{{page.links.euler}}
 * "Facebook article about HTML5 games":{{page.links.facebook_games}}
