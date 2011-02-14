@@ -21,8 +21,30 @@ body {
     font-size: 25px;
 }
 
+#screen.not-supported {
+    overflow: auto;
+    cursor: default;
+}
+
 #screen.dev div {
     border: 1px solid #aaa;
+}
+
+div.fallback-video {
+    display: none;
+    width: 640px;
+    float: right;
+    margin-right: 50px;
+}
+
+#screen.not-supported div.fallback-video{
+    display: block;
+}
+
+div.fallback-video p {
+    font-size: 125%;
+    margin-top: 0.25em;
+    margin-bottom: 0.5em;
 }
 
 #cursor {
@@ -39,6 +61,10 @@ body {
     cursor: pointer;
 }
 
+#screen.not-supported #cursor {
+    display: none;
+}
+
 #rain {
     position: relative;
     top: 130px;
@@ -46,6 +72,10 @@ body {
     height: 450px;
     margin: 0 auto;
     color: #669BB3;
+}
+
+#screen.not-supported #rain {
+    display: none;
 }
 
 #rain div {
@@ -59,6 +89,10 @@ div.flavor-wrapper {
     display: block;
     top: 240px;
     width: 100%;
+}
+
+#screen.not-supported div.flavor-wrapper {
+    display: none;
 }
 
 div.flavor {
@@ -92,6 +126,10 @@ div.flavor p.drop-counter {
     font-size: 30px;
 }
 
+#screen.not-supported #cloud {
+    display: none;
+}
+
 #cloud div {
     position: absolute;
     background: rgba(0,0,0,0.05);
@@ -106,6 +144,10 @@ div.controls {
     font-size: 20px;
     border-top: 1px solid #eee;
     background: rgba(255,255,255,0.75);
+}
+
+#screen.not-supported div.controls {
+    display: none;
 }
 
 div.controls.hidden {

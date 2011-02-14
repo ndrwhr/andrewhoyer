@@ -10,6 +10,10 @@
 // - Rain: The controller of the rain drops...
 // - Simulation: actually holds the run loop and ties together rain controls.
 
+(function(document){
+
+var ExperimentSupported = false;
+
 (function(){
 
 // Doing a bit of browser detection:
@@ -43,6 +47,8 @@ var transform_property,
         'OPerspective'
     ]);
 })();
+
+ExperimentSupported = !!transform_property;
 
 // Extend a few natives to help me out:
 var helpers = {
@@ -525,6 +531,9 @@ document.addEventListener('DOMContentLoaded', function(){
         controls = hidden;
     }
     
-    new Simulation(controls);
+    if (ExperimentSupported) new Simulation(controls);
+    else document.id('screen').className += ' not-supported';
     
 }, false);
+
+})(document);
