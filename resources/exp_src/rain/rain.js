@@ -1,6 +1,15 @@
 
 // Scroll to the bottom to see the entry point.
 
+// Classes:
+// - Generator: singleton used for making things (random ints for example).
+// - Vector: very simple 2d vector class.
+// - Cursor: manages the mouse position and interaction with particles.
+// - Cloud: generates the cloud of letters.
+// - RainDrop: maintains the state of a single particle in motion.
+// - Rain: The controller of the rain drops...
+// - Simulation: actually holds the run loop and ties together rain controls.
+
 (function(){
 
 // Doing a bit of browser detection:
