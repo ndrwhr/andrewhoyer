@@ -24,7 +24,7 @@ If you haven't already seen my CSS/HTML Rain experiment I highly suggest you "ch
 
 Basically I built a rain simulation using only HTML, CSS and Javascript. No canvas, no images. Just a webpage.
 
-<iframe title="YouTube video player" width="640" height="390" src="http://www.youtube.com/embed/izxmHpuCeJ8" frameborder="0" allowfullscreen></iframe>
+<object width="640" height="390"><param name="movie" value="http://www.youtube.com/v/izxmHpuCeJ8?fs=1&amp;hl=en_US&amp;rel=0"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/izxmHpuCeJ8?fs=1&amp;hl=en_US&amp;rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="390"></embed></object>
 
 Over the last few months I had been racking my brain for an idea worth fully implementing. I went through several iterations of this one, including ideas of having live twitter data flow over a waterfall or turning paragraphs of a novel into some kind of bound fluid simulation. It wasn't until about two weeks ago that I actually decided to take a big step back and just try to create something simple. In doing so, I found that the simpler idea would not only be easier to implement, but also probably look a lot better than something complicated.
 
