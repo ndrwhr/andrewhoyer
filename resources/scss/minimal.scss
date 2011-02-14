@@ -21,7 +21,8 @@ div.context {
     }
     
     p.description {
-        text-indent: 1em;
+        font-size: 0.9em;
+        text-indent: 0.5em;
         text-align: left;
     }
     
@@ -37,5 +38,6 @@ div.context {
         display: block;
         width: 100%;
         border-radius: 3px;
+        cursor: pointer;
     }
 }
