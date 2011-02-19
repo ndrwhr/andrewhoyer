@@ -141,29 +141,51 @@ div.hands {
     left: 46%;
 }
 
-div.hands div {
+div.hands > div {
     position: absolute;
     bottom: 0;
     background: white;
     -webkit-transform-origin: 50% 100%;
 }
 
-div.hands div.hour {
+div.hands > div.hour {
     top: 30%;
     right: 20%;
     left: 20%;
+    -webkit-transform: translate;
 }
 
-div.hands div.minute {
+div.hands > div.minute {
     top: 0;
     right: 32%;
     left: 32%;
 }
 
-div.hands div.second {
+div.hands > div.second {
     top: 0;
     right: 45%;
     left: 45%;
+}
+
+div.hands div.top {
+    width: 100%;
+    height: 10%;
+    -webkit-transform: rotateX(-90deg);
+    -webkit-transform-origin: 0 0;
+}
+
+div.hands div.right {
+    width: 100%;
+    height: 100%;
+    -webkit-transform: rotateY(-90deg);
+    -webkit-transform-origin: 100% 0;
+}
+
+div.hands div.left {
+    width: 100%;
+    height: 100%;
+    -webkit-transform: rotateY(90deg);
+    -webkit-transform-origin: 0 0;
 }
 
 </style>
@@ -193,9 +215,9 @@ div.hands div.second {
         </div>
         
         <div class="hands">
-            <div class="hour"></div>
-            <div class="minute"></div>
-            <div class="second"></div>
+            <div class="hour"> <div class="top"></div> <div class="right"></div> <div class="left"></div> </div>
+            <div class="minute"> <div class="top"></div> <div class="right"></div> <div class="left"></div> </div>
+            <div class="second"> <div class="top"></div> <div class="right"></div> <div class="left"></div> </div>
         </div>
         
     </div>
