@@ -1,0 +1,271 @@
+---
+layout: minimal
+permalink: /clock/
+---
+
+<style type="text/css" media="screen">
+
+body {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: black;
+}
+
+div.screen {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    -webkit-perspective: 1000;
+    -webkit-transform-style: preserve-3d;
+}
+
+div.clock {
+    position: relative;
+    height: 500px;
+    width: 500px;
+    top: 30px;
+    margin: 0 auto;
+    -webkit-transform-style: preserve-3d;
+    -webkit-animation-name: rotate;
+    -webkit-animation-duration: 15s;
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-transform: rotateY(45deg);
+}
+
+
+div.clock div {
+    -webkit-transform-style: preserve-3d;
+}
+
+@-webkit-keyframes rotate {
+    0% { -webkit-transform: rotateY(45deg); }
+    50% { -webkit-transform: rotateY(-45deg); }
+    100% { -webkit-transform: rotateY(45deg); }
+}
+
+div.top, div.right, div.bottom, div.left {
+    position:absolute;
+    background: #aaa;
+    height: 100%;
+    width: 100%;
+}
+
+div.top {
+    -webkit-transform: rotateX(-90deg);
+    -webkit-transform-origin: 0 0;
+}
+
+div.right {
+    -webkit-transform: rotateY(-90deg);
+    -webkit-transform-origin: 100% 0;
+}
+
+div.left {
+    -webkit-transform: rotateY(90deg);
+    -webkit-transform-origin: 0 0;
+}
+
+div.bottom {
+    -webkit-transform: rotateX(90deg);
+    -webkit-transform-origin: 0 100%;
+}
+
+div.facets {
+    position: relative;
+    width: 27.5%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+div.facets > div {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    -webkit-transform-origin: 50% 50%;
+}
+
+div.facets > div > div {
+    text-align: center;
+    height: 4%;
+    width: 100%;
+    background: white;
+}
+
+div.facets > div:nth-child(1){
+    -webkit-transform: rotate(15deg);
+}
+
+div.facets > div:nth-child(2){
+    -webkit-transform: rotate(45deg);
+}
+
+div.facets > div:nth-child(3){
+    -webkit-transform: rotate(75deg);
+}
+
+div.facets > div:nth-child(4){
+    -webkit-transform: rotate(105deg);
+}
+
+div.facets > div:nth-child(5){
+    -webkit-transform: rotate(135deg);
+}
+
+div.facets > div:nth-child(6){
+    -webkit-transform: rotate(165deg);
+}
+
+div.facets > div:nth-child(7){
+    -webkit-transform: rotate(195deg);
+}
+
+div.facets > div:nth-child(8){
+    -webkit-transform: rotate(225deg);
+}
+
+div.facets > div:nth-child(9){
+    -webkit-transform: rotate(255deg);
+}
+
+div.facets > div:nth-child(10){
+    -webkit-transform: rotate(285deg);
+}
+
+div.facets > div:nth-child(11){
+    -webkit-transform: rotate(315deg);
+}
+
+div.facets > div:nth-child(12){
+    -webkit-transform: rotate(345deg);
+}
+
+div.pin {
+    position: absolute;
+    top: 46%;
+    right: 46%;
+    bottom: 46%;
+    left: 46%;
+}
+
+div.pin div {
+    position: absolute;
+    background: white;
+    left: 20%;
+    right: 20%;
+    height: 100%;
+}
+
+div.pin > div:nth-child(1){
+    -webkit-transform: rotate(0deg);
+}
+
+div.pin > div:nth-child(2){
+    -webkit-transform: rotate(60deg);
+}
+
+div.pin > div:nth-child(3){
+    -webkit-transform: rotate(120deg);
+}
+
+div.hands {
+    position: absolute;
+    top: 7%;
+    right: 46%;
+    bottom: 50%;
+    left: 46%;
+}
+
+div.hands div {
+    position: absolute;
+    bottom: 0;
+    background: white;
+    -webkit-transform-origin: 50% 100%;
+/*    -webkit-transition: -webkit-transform 100ms ease-in-out;*/
+}
+
+div.hands div.hour {
+    top: 30%;
+    right: 20%;
+    left: 20%;
+}
+
+div.hands div.minute {
+    top: 0;
+    right: 32%;
+    left: 32%;
+}
+
+div.hands div.second {
+    top: 0;
+    right: 45%;
+    left: 45%;
+}
+
+</style>
+
+<div class="screen">
+    
+    <div class="clock">
+        <div class="facets">
+            <div><div><div class="bottom"></div><div class="top"></div></div></div>
+            <div><div><div class="bottom"></div><div class="top"></div></div></div>
+            <div><div><div class="bottom"></div><div class="top"></div></div></div>
+            <div><div><div class="bottom"></div><div class="top"></div></div></div>
+            <div><div><div class="bottom"></div><div class="top"></div></div></div>
+            <div><div><div class="bottom"></div><div class="top"></div></div></div>
+            <div><div><div class="bottom"></div><div class="top"></div></div></div>
+            <div><div><div class="bottom"></div><div class="top"></div></div></div>
+            <div><div><div class="bottom"></div><div class="top"></div></div></div>
+            <div><div><div class="bottom"></div><div class="top"></div></div></div>
+            <div><div><div class="bottom"></div><div class="top"></div></div></div>
+            <div><div><div class="bottom"></div><div class="top"></div></div></div>
+        </div>
+        
+        <div class="pin">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        
+        <div class="hands">
+            <div class="hour"></div>
+            <div class="minute"></div>
+            <div class="second"></div>
+        </div>
+        
+    </div>
+    
+</div>
+
+<script type="text/javascript" charset="utf-8">
+
+
+HTMLElement.prototype.rotate = function(value){
+    this.style.webkitTransform = 'rotate(' + (value * 360) + 'deg)';
+};
+
+var hands = {
+    hour: document.querySelector('div.hands div.hour'),
+    minute: document.querySelector('div.hands div.minute'),
+    second: document.querySelector('div.hands div.second')
+};
+
+var update = function(){
+    var date = new Date(),
+        seconds = date.getSeconds(),
+        minutes = (date.getMinutes() * 60),
+        hours = ((date.getHours() % 12) * 60 * 60);
+    
+    hands.second.rotate(seconds / 60);
+    hands.minute.rotate((minutes + seconds) / 3600);
+    hands.hour.rotate((hours + minutes + seconds) / (12 * 60 * 60));
+};
+
+update();
+setInterval(update, 1000);
+
+</script>
