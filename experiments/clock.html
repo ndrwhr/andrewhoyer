@@ -54,26 +54,6 @@ div.top, div.right, div.bottom, div.left {
     width: 100%;
 }
 
-div.top {
-    -webkit-transform: rotateX(-90deg);
-    -webkit-transform-origin: 0 0;
-}
-
-div.right {
-    -webkit-transform: rotateY(-90deg);
-    -webkit-transform-origin: 100% 0;
-}
-
-div.left {
-    -webkit-transform: rotateY(90deg);
-    -webkit-transform-origin: 0 0;
-}
-
-div.bottom {
-    -webkit-transform: rotateX(90deg);
-    -webkit-transform-origin: 0 100%;
-}
-
 div.facets {
     position: relative;
     width: 27.5%;
@@ -95,52 +75,27 @@ div.facets > div > div {
     background: white;
 }
 
-div.facets > div:nth-child(1){
-    -webkit-transform: rotate(15deg);
+div.facets > div:nth-child(1){ -webkit-transform: rotate(15deg); }
+div.facets > div:nth-child(2){ -webkit-transform: rotate(45deg); }
+div.facets > div:nth-child(3){ -webkit-transform: rotate(75deg); }
+div.facets > div:nth-child(4){ -webkit-transform: rotate(105deg); }
+div.facets > div:nth-child(5){ -webkit-transform: rotate(135deg); }
+div.facets > div:nth-child(6){ -webkit-transform: rotate(165deg); }
+div.facets > div:nth-child(7){ -webkit-transform: rotate(195deg); }
+div.facets > div:nth-child(8){ -webkit-transform: rotate(225deg); }
+div.facets > div:nth-child(9){ -webkit-transform: rotate(255deg); }
+div.facets > div:nth-child(10){ -webkit-transform: rotate(285deg); }
+div.facets > div:nth-child(11){ -webkit-transform: rotate(315deg); }
+div.facets > div:nth-child(12){ -webkit-transform: rotate(345deg); }
+
+div.facets div.top {
+    -webkit-transform: rotateX(-90deg);
+    -webkit-transform-origin: 0 0;
 }
 
-div.facets > div:nth-child(2){
-    -webkit-transform: rotate(45deg);
-}
-
-div.facets > div:nth-child(3){
-    -webkit-transform: rotate(75deg);
-}
-
-div.facets > div:nth-child(4){
-    -webkit-transform: rotate(105deg);
-}
-
-div.facets > div:nth-child(5){
-    -webkit-transform: rotate(135deg);
-}
-
-div.facets > div:nth-child(6){
-    -webkit-transform: rotate(165deg);
-}
-
-div.facets > div:nth-child(7){
-    -webkit-transform: rotate(195deg);
-}
-
-div.facets > div:nth-child(8){
-    -webkit-transform: rotate(225deg);
-}
-
-div.facets > div:nth-child(9){
-    -webkit-transform: rotate(255deg);
-}
-
-div.facets > div:nth-child(10){
-    -webkit-transform: rotate(285deg);
-}
-
-div.facets > div:nth-child(11){
-    -webkit-transform: rotate(315deg);
-}
-
-div.facets > div:nth-child(12){
-    -webkit-transform: rotate(345deg);
+div.facets div.bottom {
+    -webkit-transform: rotateX(90deg);
+    -webkit-transform-origin: 0 100%;
 }
 
 div.pin {
@@ -151,7 +106,7 @@ div.pin {
     left: 46%;
 }
 
-div.pin div {
+div.pin > div {
     position: absolute;
     background: white;
     left: 20%;
@@ -159,17 +114,9 @@ div.pin div {
     height: 100%;
 }
 
-div.pin > div:nth-child(1){
-    -webkit-transform: rotate(0deg);
-}
-
-div.pin > div:nth-child(2){
-    -webkit-transform: rotate(60deg);
-}
-
-div.pin > div:nth-child(3){
-    -webkit-transform: rotate(120deg);
-}
+div.pin > div:nth-child(1){ -webkit-transform: rotate(0deg); }
+div.pin > div:nth-child(2){ -webkit-transform: rotate(60deg); }
+div.pin > div:nth-child(3){ -webkit-transform: rotate(120deg); }
 
 div.hands {
     position: absolute;
@@ -184,7 +131,6 @@ div.hands div {
     bottom: 0;
     background: white;
     -webkit-transform-origin: 50% 100%;
-/*    -webkit-transition: -webkit-transform 100ms ease-in-out;*/
 }
 
 div.hands div.hour {
@@ -211,24 +157,24 @@ div.hands div.second {
     
     <div class="clock">
         <div class="facets">
-            <div><div><div class="bottom"></div><div class="top"></div></div></div>
-            <div><div><div class="bottom"></div><div class="top"></div></div></div>
-            <div><div><div class="bottom"></div><div class="top"></div></div></div>
-            <div><div><div class="bottom"></div><div class="top"></div></div></div>
-            <div><div><div class="bottom"></div><div class="top"></div></div></div>
-            <div><div><div class="bottom"></div><div class="top"></div></div></div>
-            <div><div><div class="bottom"></div><div class="top"></div></div></div>
-            <div><div><div class="bottom"></div><div class="top"></div></div></div>
-            <div><div><div class="bottom"></div><div class="top"></div></div></div>
-            <div><div><div class="bottom"></div><div class="top"></div></div></div>
-            <div><div><div class="bottom"></div><div class="top"></div></div></div>
-            <div><div><div class="bottom"></div><div class="top"></div></div></div>
+            <div><div> <div class="top"></div> <div class="bottom"></div> </div></div>
+            <div><div> <div class="top"></div> <div class="bottom"></div> </div></div>
+            <div><div> <div class="top"></div> <div class="bottom"></div> </div></div>
+            <div><div> <div class="top"></div> <div class="bottom"></div> </div></div>
+            <div><div> <div class="top"></div> <div class="bottom"></div> </div></div>
+            <div><div> <div class="top"></div> <div class="bottom"></div> </div></div>
+            <div><div> <div class="top"></div> <div class="bottom"></div> </div></div>
+            <div><div> <div class="top"></div> <div class="bottom"></div> </div></div>
+            <div><div> <div class="top"></div> <div class="bottom"></div> </div></div>
+            <div><div> <div class="top"></div> <div class="bottom"></div> </div></div>
+            <div><div> <div class="top"></div> <div class="bottom"></div> </div></div>
+            <div><div> <div class="top"></div> <div class="bottom"></div> </div></div>
         </div>
         
         <div class="pin">
-            <div></div>
-            <div></div>
-            <div></div>
+            <div><div></div></div>
+            <div><div></div></div>
+            <div><div></div></div>
         </div>
         
         <div class="hands">
