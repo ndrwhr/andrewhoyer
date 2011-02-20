@@ -114,17 +114,19 @@ div.pin > div:nth-child(1){ -webkit-transform: rotate(0deg); }
 div.pin > div:nth-child(2){ -webkit-transform: rotate(60deg); }
 div.pin > div:nth-child(3){ -webkit-transform: rotate(120deg); }
 
-div.pin div.top {
+div.pin div.top,
+div.pin div.bottom {
     height: 60%;
     width: 100%;
+}
+
+div.pin div.top {
     -webkit-transform: rotateX(-90deg);
     -webkit-transform-origin: 0 0;
 }
 
 div.pin div.bottom {
     bottom: 0;
-    height: 60%;
-    width: 100%;
     -webkit-transform: rotateX(90deg);
     -webkit-transform-origin: 0 100%;
 }
@@ -148,7 +150,16 @@ div.hands > div.hour {
     top: 30%;
     right: 20%;
     left: 20%;
-    -webkit-transform: rotate(90deg);
+}
+
+div.hands > div.hour div.top {
+    height: 16%;
+}
+
+div.hands > div.hour div.right,
+div.hands > div.hour div.left {
+    width: 100%;
+    height: 100%;
 }
 
 div.hands > div.minute {
@@ -157,29 +168,54 @@ div.hands > div.minute {
     left: 32%;
 }
 
+div.hands > div.minute div.top {
+    height: 11.5%;
+}
+
+div.hands > div.minute div.right,
+div.hands > div.minute div.left {
+    width: 165%;
+    height: 100%;
+}
+
+div.hands > div.minute div.right {
+    top: 0;
+    right: 0;
+}
+
 div.hands > div.second {
     top: 0;
     right: 45%;
     left: 45%;
+    -webkit-transform: rotate(90deg);
+}
+
+div.hands > div.second div.top {
+    height: 11.5%;
+}
+
+div.hands > div.second div.right,
+div.hands > div.second div.left {
+    width: 560%;
+    height: 100%;
+}
+
+div.hands > div.second div.right {
+    top: 0;
+    right: 0;
 }
 
 div.hands div.top {
-    width: 100%;
-    height: 10%;
     -webkit-transform: rotateX(-90deg);
     -webkit-transform-origin: 0 0;
 }
 
 div.hands div.right {
-    width: 100%;
-    height: 100%;
     -webkit-transform: rotateY(-90deg);
     -webkit-transform-origin: 100% 0;
 }
 
 div.hands div.left {
-    width: 100%;
-    height: 100%;
     -webkit-transform: rotateY(90deg);
     -webkit-transform-origin: 0 0;
 }
