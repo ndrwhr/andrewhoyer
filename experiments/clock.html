@@ -54,6 +54,30 @@ div.top, div.right, div.bottom, div.left {
     width: 100%;
 }
 
+div.top {
+    top: 0;
+    -webkit-transform: rotateX(-90deg);
+    -webkit-transform-origin: 0 0;
+}
+
+div.right {
+    top: 0;
+    right: 0;
+    -webkit-transform: rotateY(-90deg);
+    -webkit-transform-origin: 100% 0;
+}
+
+div.bottom {
+    bottom: 0;
+    -webkit-transform: rotateX(90deg);
+    -webkit-transform-origin: 0 100%;
+}
+
+div.left {
+    -webkit-transform: rotateY(90deg);
+    -webkit-transform-origin: 0 0;
+}
+
 div.facets {
     position: relative;
     width: 100%;
@@ -84,16 +108,6 @@ div.facets > div:nth-child(10){ -webkit-transform: rotate(285deg); }
 div.facets > div:nth-child(11){ -webkit-transform: rotate(315deg); }
 div.facets > div:nth-child(12){ -webkit-transform: rotate(345deg); }
 
-div.facets div.top {
-    -webkit-transform: rotateX(-90deg);
-    -webkit-transform-origin: 0 0;
-}
-
-div.facets div.bottom {
-    -webkit-transform: rotateX(90deg);
-    -webkit-transform-origin: 0 100%;
-}
-
 div.pin {
     position: absolute;
     top: 46%;
@@ -118,17 +132,6 @@ div.pin div.top,
 div.pin div.bottom {
     height: 60%;
     width: 100%;
-}
-
-div.pin div.top {
-    -webkit-transform: rotateX(-90deg);
-    -webkit-transform-origin: 0 0;
-}
-
-div.pin div.bottom {
-    bottom: 0;
-    -webkit-transform: rotateX(90deg);
-    -webkit-transform-origin: 0 100%;
 }
 
 div.hands {
@@ -168,7 +171,8 @@ div.hands > div.minute {
     left: 32%;
 }
 
-div.hands > div.minute div.top {
+div.hands > div.minute div.top,
+div.hands > div.second div.top {
     height: 11.5%;
 }
 
@@ -178,46 +182,16 @@ div.hands > div.minute div.left {
     height: 100%;
 }
 
-div.hands > div.minute div.right {
-    top: 0;
-    right: 0;
-}
-
 div.hands > div.second {
     top: 0;
     right: 45%;
     left: 45%;
-    -webkit-transform: rotate(90deg);
-}
-
-div.hands > div.second div.top {
-    height: 11.5%;
 }
 
 div.hands > div.second div.right,
 div.hands > div.second div.left {
     width: 560%;
     height: 100%;
-}
-
-div.hands > div.second div.right {
-    top: 0;
-    right: 0;
-}
-
-div.hands div.top {
-    -webkit-transform: rotateX(-90deg);
-    -webkit-transform-origin: 0 0;
-}
-
-div.hands div.right {
-    -webkit-transform: rotateY(-90deg);
-    -webkit-transform-origin: 100% 0;
-}
-
-div.hands div.left {
-    -webkit-transform: rotateY(90deg);
-    -webkit-transform-origin: 0 0;
 }
 
 </style>
