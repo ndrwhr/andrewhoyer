@@ -1,4 +1,36 @@
 
+// Implement a super simple (non-standard) version of bind, if not already there.
+if (!Function.prototype.bind){
+    Function.prototype.bind = function (bind){
+        var self = this;
+        return function(){
+            return self.apply(bind, arguments);
+        };
+    };
+}
+
+// Find out some specific browser stuff
+var CSS = {};
+(function(){
+    
+    var styles = document.createElement('div').style;
+    
+    var test_properties = function(properties){
+        return properties.filter(function(prop){
+            return (styles[prop] !== undefined);
+        })[0];
+    };
+    
+    CSS.transform = test_properties([
+        'transform',
+        'WebkitTransform',
+        'MozTransform',
+        'msTransform',
+        'OTransform'
+    ]);
+    
+})();
+
 document.addEventListener('DOMContentLoaded', function(){
     // Color links
     var colors = ['blue', 'orange', 'green', 'red', 'teal', 'purple', 'yellow'];
