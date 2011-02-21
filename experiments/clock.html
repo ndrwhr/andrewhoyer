@@ -309,6 +309,14 @@ Clock.prototype = {
     
 };
 
-new Clock();
+document.addEventListener('DOMContentLoaded', function(){
+    
+    if (Modernizr.csstransforms3d){
+        new Clock();
+    } else {
+        // Display an incompatibility message
+    }
+    
+}, false);
 
 </script>
