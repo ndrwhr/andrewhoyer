@@ -1,6 +1,8 @@
 ---
 layout: minimal
 permalink: /clock/
+js:
+    - modernizr-1.6.min.js
 ---
 
 <style type="text/css" media="screen">
@@ -243,16 +245,6 @@ div.hands > div.second div.left {
 </div>
 
 <script type="text/javascript" charset="utf-8">
-
-// Implement a super simple version of bind, if not already there.
-if (!Function.prototype.bind){
-    Function.prototype.bind = function (bind){
-        var self = this;
-        return function(){
-            return self.apply(bind, arguments);
-        };
-    };
-}
 
 HTMLElement.prototype.rotate = function(value){
     this.style.webkitTransform = 'rotate(' + (value * 360) + 'deg)';
