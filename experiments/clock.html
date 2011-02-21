@@ -22,14 +22,18 @@ div.screen {
     -webkit-transform-style: preserve-3d;
 }
 
+div.clock-wrapper {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    bottom: 10%;
+    left: 10%;
+}
+
 div.clock {
     position: absolute;
-    height: 500px;
-    width: 500px;
-    left: -250px;
-    margin-left: 50%;
-    top: -250px;
     margin-top: 50%;
+    margin-left: 50%;
     -webkit-transform-style: preserve-3d;
     -webkit-animation-name: rotate;
     -webkit-animation-duration: 15s;
@@ -203,34 +207,37 @@ div.hands > div.second div.left {
 
 <div class="screen">
     
-    <div class="clock">
-        <div class="facets">
-            <div> <div class="top"></div> <div class="bottom"></div> </div>
-            <div> <div class="top"></div> <div class="bottom"></div> </div>
-            <div> <div class="top"></div> <div class="bottom"></div> </div>
-            <div> <div class="top"></div> <div class="bottom"></div> </div>
-            <div> <div class="top"></div> <div class="bottom"></div> </div>
-            <div> <div class="top"></div> <div class="bottom"></div> </div>
-            <div> <div class="top"></div> <div class="bottom"></div> </div>
-            <div> <div class="top"></div> <div class="bottom"></div> </div>
-            <div> <div class="top"></div> <div class="bottom"></div> </div>
-            <div> <div class="top"></div> <div class="bottom"></div> </div>
-            <div> <div class="top"></div> <div class="bottom"></div> </div>
-            <div> <div class="top"></div> <div class="bottom"></div> </div>
+    <div class="clock-wrapper">
+        <div class="clock">
+            
+            <div class="facets">
+                <div> <div class="top"></div> <div class="bottom"></div> </div>
+                <div> <div class="top"></div> <div class="bottom"></div> </div>
+                <div> <div class="top"></div> <div class="bottom"></div> </div>
+                <div> <div class="top"></div> <div class="bottom"></div> </div>
+                <div> <div class="top"></div> <div class="bottom"></div> </div>
+                <div> <div class="top"></div> <div class="bottom"></div> </div>
+                <div> <div class="top"></div> <div class="bottom"></div> </div>
+                <div> <div class="top"></div> <div class="bottom"></div> </div>
+                <div> <div class="top"></div> <div class="bottom"></div> </div>
+                <div> <div class="top"></div> <div class="bottom"></div> </div>
+                <div> <div class="top"></div> <div class="bottom"></div> </div>
+                <div> <div class="top"></div> <div class="bottom"></div> </div>
+            </div>
+            
+            <div class="pin">
+                <div> <div class="top"></div> <div class="bottom"></div> </div>
+                <div> <div class="top"></div> <div class="bottom"></div> </div>
+                <div> <div class="top"></div> <div class="bottom"></div> </div>
+            </div>
+            
+            <div class="hands">
+                <div class="hour"> <div class="top"></div> <div class="right"></div> <div class="left"></div> </div>
+                <div class="minute"> <div class="top"></div> <div class="right"></div> <div class="left"></div> </div>
+                <div class="second"> <div class="top"></div> <div class="right"></div> <div class="left"></div> </div>
+            </div>
+            
         </div>
-        
-        <div class="pin">
-            <div> <div class="top"></div> <div class="bottom"></div> </div>
-            <div> <div class="top"></div> <div class="bottom"></div> </div>
-            <div> <div class="top"></div> <div class="bottom"></div> </div>
-        </div>
-        
-        <div class="hands">
-            <div class="hour"> <div class="top"></div> <div class="right"></div> <div class="left"></div> </div>
-            <div class="minute"> <div class="top"></div> <div class="right"></div> <div class="left"></div> </div>
-            <div class="second"> <div class="top"></div> <div class="right"></div> <div class="left"></div> </div>
-        </div>
-        
     </div>
     
 </div>
@@ -251,16 +258,20 @@ HTMLElement.prototype.rotate = function(value){
     this.style.webkitTransform = 'rotate(' + (value * 360) + 'deg)';
 };
 
-var Clock = function(clock, hour, minute, second){
+var Clock = function(){
     this.elements = {
-        container: document.querySelector(clock),
-        hour: document.querySelector(hour),
-        minute: document.querySelector(minute),
-        second: document.querySelector(second)
+        wrapper: document.querySelector('div.clock-wrapper'),
+        clock: document.querySelector('div.clock'),
+        hour: document.querySelector('div.hands div.hour'),
+        minute: document.querySelector('div.hands div.minute'),
+        second: document.querySelector('div.hands div.second')
     };
     
     this.tick();
     setInterval(this.tick.bind(this), 1000);
+    
+    this.resize();
+    window.addEventListener('resize', this.resize.bind(this), false);
 };
 
 Clock.prototype = {
@@ -292,10 +303,20 @@ Clock.prototype = {
             default: time /= 60;
         }
         return time;
+    },
+    
+    resize: function(){
+        var elements = this.elements,
+            style = elements.clock.style,
+            wrapper = elements.wrapper,
+            dimension = Math.min(wrapper.clientWidth, wrapper.clientHeight);
+        
+        style.left = style.top = (-dimension / 2) + 'px';
+        style.height = style.width = dimension + 'px';
     }
     
 };
 
-new Clock('div.clock', 'div.hands div.hour', 'div.hands div.minute', 'div.hands div.second');
+new Clock();
 
 </script>
