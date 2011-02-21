@@ -271,7 +271,7 @@ Clock.prototype = {
     tick: function(){
         var time = new Date(),
             millis = time.getMilliseconds(),
-            seconds = this.toMillis('second', time.getSeconds()),
+            seconds = this.toMillis('second', time.getSeconds()) + millis,
             minutes = this.toMillis('minute', time.getMinutes()),
             hours = this.toMillis('hour', time.getHours() % 12),
             elements = this.elements;
