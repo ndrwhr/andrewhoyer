@@ -32,8 +32,11 @@ div.clock-wrapper {
     left: 10%;
 }
 
-div.clock {
+div.clock-wrapper div {
     position: absolute;
+}
+
+div.clock {
     margin-top: 50%;
     margin-left: 50%;
     -webkit-transform-style: preserve-3d;
@@ -55,7 +58,6 @@ div.clock div {
 }
 
 div.top, div.right, div.bottom, div.left {
-    position:absolute;
     background: #aaa;
     height: 100%;
     width: 100%;
@@ -86,17 +88,14 @@ div.left {
 }
 
 div.facets {
-    position: relative;
     width: 100%;
     height: 100%;
-    margin: 0 auto;
 }
 
 div.facets > div {
-    position: absolute;
     top: 0%;
-    left: 36.5%;
-    right: 36.5%;
+    left: 36.7%;
+    right: 36.7%;
     height: 4%;
     background: white;
     -webkit-transform-origin: 50% 1250%;
@@ -116,7 +115,6 @@ div.facets > div:nth-child(11){ -webkit-transform: rotate(315deg); }
 div.facets > div:nth-child(12){ -webkit-transform: rotate(345deg); }
 
 div.pin {
-    position: absolute;
     top: 46%;
     right: 46%;
     bottom: 46%;
@@ -124,10 +122,9 @@ div.pin {
 }
 
 div.pin > div {
-    position: absolute;
     background: white;
-    left: 20%;
-    right: 20%;
+    left: 22%;
+    right: 22%;
     height: 100%;
 }
 
@@ -137,20 +134,18 @@ div.pin > div:nth-child(3){ -webkit-transform: rotate(120deg); }
 
 div.pin div.top,
 div.pin div.bottom {
-    height: 60%;
+    height: 45%;
     width: 100%;
 }
 
 div.hands {
-    position: absolute;
-    top: 7%;
+    top: 8%;
     right: 46%;
     bottom: 50%;
     left: 46%;
 }
 
 div.hands > div {
-    position: absolute;
     bottom: 0;
     background: white;
     -webkit-transform-origin: 50% 100%;
