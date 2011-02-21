@@ -237,29 +237,65 @@ div.hands > div.second div.left {
 
 <script type="text/javascript" charset="utf-8">
 
+// Implement a super simple version of bind, if not already there.
+if (!Function.prototype.bind){
+    Function.prototype.bind = function (bind){
+        var self = this;
+        return function(){
+            return self.apply(bind, arguments);
+        };
+    };
+}
 
 HTMLElement.prototype.rotate = function(value){
     this.style.webkitTransform = 'rotate(' + (value * 360) + 'deg)';
 };
 
-var hands = {
-    hour: document.querySelector('div.hands div.hour'),
-    minute: document.querySelector('div.hands div.minute'),
-    second: document.querySelector('div.hands div.second')
-};
-
-var update = function(){
-    var date = new Date(),
-        seconds = date.getSeconds(),
-        minutes = (date.getMinutes() * 60),
-        hours = ((date.getHours() % 12) * 60 * 60);
+var Clock = function(clock, hour, minute, second){
+    this.elements = {
+        container: document.querySelector(clock),
+        hour: document.querySelector(hour),
+        minute: document.querySelector(minute),
+        second: document.querySelector(second)
+    };
     
-    hands.second.rotate(seconds / 60);
-    hands.minute.rotate((minutes + seconds) / 3600);
-    hands.hour.rotate((hours + minutes + seconds) / (12 * 60 * 60));
+    this.tick();
+    setInterval(this.tick.bind(this), 1000);
 };
 
-update();
-setInterval(update, 1000);
+Clock.prototype = {
+    
+    tick: function(){
+        var time = new Date(),
+            millis = time.getMilliseconds(),
+            seconds = this.toMillis('second', time.getSeconds()),
+            minutes = this.toMillis('minute', time.getMinutes()),
+            hours = this.toMillis('hour', time.getHours() % 12),
+            elements = this.elements;
+        
+        elements.second.rotate(this.toFraction('second', seconds));
+        elements.minute.rotate(this.toFraction('minute', minutes + seconds));
+        elements.hour.rotate(this.toFraction('hour', hours + minutes + seconds));
+    },
+    
+    toMillis: function(unit, time){
+        var times = ['second', 'minute', 'hour'].indexOf(unit);
+        for (time *= 1000; times > 0; time *= 60, times--);
+        return time;
+    },
+    
+    toFraction: function(unit, time){
+        time /= 60000;
+        switch (unit){
+            case 'second': break;
+            case 'hour': time /= 12;
+            default: time /= 60;
+        }
+        return time;
+    }
+    
+};
+
+new Clock('div.clock', 'div.hands div.hour', 'div.hands div.minute', 'div.hands div.second');
 
 </script>
