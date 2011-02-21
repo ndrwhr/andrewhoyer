@@ -247,7 +247,7 @@ div.hands > div.second div.left {
 <script type="text/javascript" charset="utf-8">
 
 HTMLElement.prototype.rotate = function(value){
-    this.style.webkitTransform = 'rotate(' + (value * 360) + 'deg)';
+    this.style[CSS.transform] = 'rotate(' + (value * 360) + 'deg)';
 };
 
 var Clock = function(){
