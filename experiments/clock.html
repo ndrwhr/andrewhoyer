@@ -40,20 +40,11 @@ div.clock {
     margin-top: 50%;
     margin-left: 50%;
     -webkit-transform-style: preserve-3d;
-    -webkit-animation-name: rotate;
-    -webkit-animation-duration: 15s;
-    -webkit-animation-timing-function: ease-in-out;
-    -webkit-animation-iteration-count: infinite;
+    -webkit-transition: -webkit-transform 1000ms ease-in-out;
 }
 
 div.clock div {
     -webkit-transform-style: preserve-3d;
-}
-
-@-webkit-keyframes rotate {
-    0% { -webkit-transform: rotateY(45deg); }
-    50% { -webkit-transform: rotateY(-45deg); }
-    100% { -webkit-transform: rotateY(45deg); }
 }
 
 div.top, div.right, div.bottom, div.left {
@@ -243,6 +234,16 @@ HTMLElement.prototype.rotate = function(value){
     this.style[CSS.transform] = 'rotate(' + (value * 360) + 'deg)';
 };
 
+HTMLElement.prototype.rotate3d = function(x, y){
+    this.style[CSS.transform] = 'rotateX(' + (x * 50) + 'deg) rotateY(' + (y * 50) + 'deg)';
+};
+
+var Generator = {
+    random: function(min, max){
+        return Math.random() * (max - min) + min;
+    }
+};
+
 var Clock = function(){
     this.elements = {
         wrapper: document.querySelector('div.clock-wrapper'),
@@ -272,6 +273,8 @@ Clock.prototype = {
         elements.second.rotate(this.toFraction('second', seconds));
         elements.minute.rotate(this.toFraction('minute', minutes + seconds));
         elements.hour.rotate(this.toFraction('hour', hours + minutes + seconds));
+        
+        elements.clock.rotate3d(Generator.random(-1, 1), Generator.random(-1, 1));
     },
     
     toMillis: function(unit, time){
