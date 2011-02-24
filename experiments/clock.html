@@ -259,7 +259,7 @@ var Generator = {
 var Clock = function(){
     var mousemove = this.movement.bind(this).wait(30);
     
-    this.max_rotation = 45;
+    this.max_rotation = 80;
     
     this.elements = {
         wrapper: document.querySelector('div.clock-wrapper'),
@@ -341,7 +341,9 @@ Clock.prototype = {
         x = Math.min(Math.max(x, -1), 1);
         y = Math.min(Math.max(y, -1), 1);
         
-        clock.rotate3d(-y, x, 0, this.max_rotation);
+        var scale = Math.min(Math.sqrt(x * x + y * y), 1);
+        
+        clock.rotate3d(-y, x, 0, scale * this.max_rotation);
     }
     
 };
