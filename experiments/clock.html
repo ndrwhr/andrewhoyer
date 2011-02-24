@@ -252,6 +252,12 @@ HTMLElement.prototype.rotate3d = function(x, y, z, deg){
     this.style[CSS.transform] = 'rotate3d(' + [x, y, z, deg + 'deg'].join(',') + ')';
 };
 
+var Helper = {
+    cap: function(value, min, max){
+        return Math.min(Math.max(value, min), max);
+    }
+};
+
 var Generator = {
     random: function(min, max){
         return Math.random() * (max - min) + min;
@@ -259,8 +265,6 @@ var Generator = {
 };
 
 var Clock = function(){
-    var mousemove = this.movement.bind(this);
-    
     this.max_rotation = 80;
     
     this.elements = {
@@ -274,17 +278,8 @@ var Clock = function(){
     this.tick();
     setInterval(this.tick.bind(this), 1000);
     
-    this.resize();
-    window.addEventListener('resize', this.resize.bind(this), false);
-    
-    document.addEventListener('mousedown', function(event){
-        mousemove(event);
-        document.addEventListener('mousemove', mousemove, false);
-    }, false);
-    
-    document.addEventListener('mouseup', function(){
-        document.removeEventListener('mousemove', mousemove, false);
-    }, false);
+    this.initResize();
+    this.initInteraction();
 };
 
 Clock.prototype = {
@@ -318,34 +313,51 @@ Clock.prototype = {
         return time;
     },
     
-    resize: function(){
-        var elements = this.elements,
-            style = elements.clock.style,
-            wrapper = elements.wrapper,
-            dimension = Math.min(wrapper.clientWidth, wrapper.clientHeight);
+    initResize: function(){
+        var resize = (function(){
+            var elements = this.elements,
+                clock = elements.clock,
+                wrapper = elements.wrapper,
+                style = clock.style,
+                dimension = Math.min(wrapper.clientWidth, wrapper.clientHeight);
+            
+            style.left = style.top = (-dimension / 2) + 'px';
+            style.height = style.width = dimension + 'px';
+            
+            clock.top = clock.offsetTop + wrapper.offsetTop;
+            clock.left = clock.offsetLeft + wrapper.offsetLeft;
+            clock.halfWidth = dimension / 2;
+            clock.halfHeight = dimension / 2;
+        }).bind(this);
         
-        style.left = style.top = (-dimension / 2) + 'px';
-        style.height = style.width = dimension + 'px';
+        window.addEventListener('resize', resize() || resize, false);
     },
     
-    movement: function(event){
-        var clock = this.elements.clock,
-            wrapper = this.elements.wrapper,
-            top = clock.offsetTop + wrapper.offsetTop,
-            left = clock.offsetLeft + wrapper.offsetLeft,
-            width = clock.clientWidth / 2,
-            height = clock.clientHeight / 2,
-            x, y;
+    initInteraction: function(){
+        var calculatePerspective = (function(event){
+            var clock = this.elements.clock,
+                width = clock.halfWidth,
+                height = clock.halfHeight;
+            
+            var x = (event.clientX - clock.left - width) / width;
+            var y = (event.clientY - clock.top - height) / height;
+            
+            this.changePerspective(Helper.cap(x, -1, 1), Helper.cap(y, -1, 1));
+        }).bind(this);
         
-        x = (event.clientX - left - width) / width;
-        y = (event.clientY - top - height) / height;
+        document.addEventListener('mousedown', function(event){
+            calculatePerspective(event);
+            document.addEventListener('mousemove', calculatePerspective, false);
+        }, false);
         
-        x = Math.min(Math.max(x, -1), 1);
-        y = Math.min(Math.max(y, -1), 1);
-        
+        document.addEventListener('mouseup', function(){
+            document.removeEventListener('mousemove', calculatePerspective, false);
+        }, false);
+    },
+    
+    changePerspective: function(x, y){
         var scale = Math.min(Math.sqrt(x * x + y * y), 1);
-        
-        clock.rotate3d(-y, x, 0, scale * this.max_rotation);
+        this.elements.clock.rotate3d(-y, x, 0, scale * this.max_rotation);
     }
     
 };
