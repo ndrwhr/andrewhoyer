@@ -37,10 +37,10 @@ div.clock-wrapper div {
 }
 
 div.clock {
+    position: relative;
     margin-top: 50%;
     margin-left: 50%;
     -webkit-transform-style: preserve-3d;
-    -webkit-transition: -webkit-transform 1000ms ease-in-out;
 }
 
 div.clock div {
@@ -230,12 +230,24 @@ div.hands > div.second div.left {
 
 <script type="text/javascript" charset="utf-8">
 
+Function.prototype.wait = function(delay){
+    var self = this, timer;
+    
+    return function(){
+        var args = arguments;
+        if (!timer) timer = setTimeout(function(){
+            timer = clearTimeout(timer);
+            self.apply(self, args);
+        }, delay || 50);
+    };
+};
+
 HTMLElement.prototype.rotate = function(value){
     this.style[CSS.transform] = 'rotate(' + (value * 360) + 'deg)';
 };
 
-HTMLElement.prototype.rotate3d = function(x, y){
-    this.style[CSS.transform] = 'rotateX(' + (x * 50) + 'deg) rotateY(' + (y * 50) + 'deg)';
+HTMLElement.prototype.rotate3d = function(x, y, z, deg){
+    this.style[CSS.transform] = 'rotate3d(' + [x, y, z, deg + 'deg'].join(',') + ')';
 };
 
 var Generator = {
@@ -245,6 +257,10 @@ var Generator = {
 };
 
 var Clock = function(){
+    var mousemove = this.movement.bind(this).wait(30);
+    
+    this.max_rotation = 45;
+    
     this.elements = {
         wrapper: document.querySelector('div.clock-wrapper'),
         clock: document.querySelector('div.clock'),
@@ -258,6 +274,15 @@ var Clock = function(){
     
     this.resize();
     window.addEventListener('resize', this.resize.bind(this), false);
+    
+    document.addEventListener('mousedown', function(event){
+        mousemove(event);
+        document.addEventListener('mousemove', mousemove, false);
+    }, false);
+    
+    document.addEventListener('mouseup', function(){
+        document.removeEventListener('mousemove', mousemove, false);
+    }, false);
 };
 
 Clock.prototype = {
@@ -273,8 +298,6 @@ Clock.prototype = {
         elements.second.rotate(this.toFraction('second', seconds));
         elements.minute.rotate(this.toFraction('minute', minutes + seconds));
         elements.hour.rotate(this.toFraction('hour', hours + minutes + seconds));
-        
-        elements.clock.rotate3d(Generator.random(-1, 1), Generator.random(-1, 1));
     },
     
     toMillis: function(unit, time){
@@ -301,6 +324,24 @@ Clock.prototype = {
         
         style.left = style.top = (-dimension / 2) + 'px';
         style.height = style.width = dimension + 'px';
+    },
+    
+    movement: function(event){
+        var clock = this.elements.clock,
+            wrapper = this.elements.wrapper,
+            top = clock.offsetTop + wrapper.offsetTop,
+            left = clock.offsetLeft + wrapper.offsetLeft,
+            width = clock.clientWidth / 2,
+            height = clock.clientHeight / 2,
+            x, y;
+        
+        x = (event.clientX - left - width) / width;
+        y = (event.clientY - top - height) / height;
+        
+        x = Math.min(Math.max(x, -1), 1);
+        y = Math.min(Math.max(y, -1), 1);
+        
+        clock.rotate3d(-y, x, 0, this.max_rotation);
     }
     
 };
