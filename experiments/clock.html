@@ -45,6 +45,10 @@ div.clock {
     -webkit-transform-style: preserve-3d;
 }
 
+div.clock.autopilot {
+    -webkit-transition: -webkit-transform 1750ms ease-in-out;
+}
+
 div.clock div {
     -webkit-transform-style: preserve-3d;
 }
@@ -244,13 +248,45 @@ Function.prototype.wait = function(delay){
     };
 };
 
-HTMLElement.prototype.rotate = function(value){
-    this.style[CSS.transform] = 'rotate(' + (value * 360) + 'deg)';
+Array.slice = function(){
+    var slice = Array.prototype.slice;
+    return slice.apply(arguments[0], slice.call(arguments, 1));
 };
 
-HTMLElement.prototype.rotate3d = function(x, y, z, deg){
-    this.style[CSS.transform] = 'rotate3d(' + [x, y, z, deg + 'deg'].join(',') + ')';
+var methods = {
+    
+    rotate: function(value){
+        this.style[CSS.transform] = 'rotate(' + (value * 360) + 'deg)';
+    },
+    
+    rotate3d: function(x, y, z, deg){
+        this.style[CSS.transform] = 'rotate3d(' + [x, y, z, deg + 'deg'].join(',') + ')';
+    },
+    
+    addClass: function(){
+        var existing = this.className.split(' ');
+        
+        Array.slice(arguments).forEach(function(className){
+            if (existing.indexOf(className) < 0) existing.push(className);
+        });
+        
+        this.className = existing.join(' ');
+    },
+    
+    removeClass: function(){
+        var existing = this.className.split(' '),
+            args = Array.slice(arguments);
+        
+        this.className = existing.filter(function(className){
+            return args.indexOf(className) < 0;
+        }).join(' ');
+    }
+    
 };
+
+for(var method in methods){
+    HTMLElement.prototype[method] = methods[method];
+}
 
 var Helper = {
     cap: function(value, min, max){
@@ -334,9 +370,40 @@ Clock.prototype = {
     },
     
     initInteraction: function(){
+        var clock = this.elements.clock,
+            movementTimer, autopilotTimer;
+        
+        // check every 5 seconds if there has been any user interaction.
+        // if not, start moving the clock for them.
+        var movement = (function(){
+            
+            clock.removeClass('autopilot');
+            
+            clearTimeout(movementTimer);
+            clearInterval(autopilotTimer);
+            
+            movementTimer = setTimeout(function(){
+                
+                clock.addClass('autopilot');
+                
+                clearInterval(autopilotTimer);
+                
+                autopilotTimer = setInterval(function(){
+                    var x = Generator.random(-1, 1),
+                        y = Generator.random(-1, 1);
+                    this.changePerspective(x, y);
+                }.bind(this), 2000);
+                
+            }.bind(this), 5000);
+            
+        }).bind(this);
+        
+        movement(); // get the ball rolling...
+        
         var calculatePerspective = (function(event){
-            var clock = this.elements.clock,
-                width = clock.halfWidth,
+            movement();
+            
+            var width = clock.halfWidth,
                 height = clock.halfHeight;
             
             var x = (event.clientX - clock.left - width) / width;
