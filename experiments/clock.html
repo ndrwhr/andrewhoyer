@@ -350,11 +350,11 @@ Clock.prototype = {
     },
     
     initResize: function(){
-        var resize = (function(){
-            var elements = this.elements,
-                clock = elements.clock,
-                wrapper = elements.wrapper,
-                style = clock.style,
+        var wrapper = this.elements.wrapper,
+            clock = this.elements.clock;
+        
+        var resize = function(){
+            var style = clock.style,
                 dimension = Math.min(wrapper.clientWidth, wrapper.clientHeight);
             
             style.left = style.top = (-dimension / 2) + 'px';
@@ -364,18 +364,21 @@ Clock.prototype = {
             clock.left = clock.offsetLeft + wrapper.offsetLeft;
             clock.halfWidth = dimension / 2;
             clock.halfHeight = dimension / 2;
-        }).bind(this);
+            
+            return resize;
+        };
         
-        window.addEventListener('resize', resize() || resize, false);
+        window.addEventListener('resize', resize(), false);
     },
     
     initInteraction: function(){
         var clock = this.elements.clock,
+            changePerspective = this.changePerspective.bind(this),
             movementTimer, autopilotTimer;
         
         // check every 5 seconds if there has been any user interaction.
         // if not, start moving the clock for them.
-        var movement = (function(){
+        var movement = function(){
             
             clock.removeClass('autopilot');
             
@@ -391,16 +394,16 @@ Clock.prototype = {
                 autopilotTimer = setInterval(function(){
                     var x = Generator.random(-1, 1),
                         y = Generator.random(-1, 1);
-                    this.changePerspective(x, y);
-                }.bind(this), 2000);
+                    changePerspective(x, y);
+                }, 2000);
                 
-            }.bind(this), 5000);
+            }, 5000);
             
-        }).bind(this);
+        };
         
         movement(); // get the ball rolling...
         
-        var calculatePerspective = (function(event){
+        var calculatePerspective = function(event){
             movement();
             
             var width = clock.halfWidth,
@@ -409,12 +412,13 @@ Clock.prototype = {
             var x = (event.clientX - clock.left - width) / width;
             var y = (event.clientY - clock.top - height) / height;
             
-            this.changePerspective(Helper.cap(x, -1, 1), Helper.cap(y, -1, 1));
-        }).bind(this);
+            changePerspective(Helper.cap(x, -1, 1), Helper.cap(y, -1, 1));
+            
+            return calculatePerspective;
+        };
         
         document.addEventListener('mousedown', function(event){
-            calculatePerspective(event);
-            document.addEventListener('mousemove', calculatePerspective, false);
+            document.addEventListener('mousemove', calculatePerspective(event), false);
         }, false);
         
         document.addEventListener('mouseup', function(){
