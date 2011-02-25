@@ -236,6 +236,8 @@ div.hands > div.second div.left {
 
 <script type="text/javascript" charset="utf-8">
 
+(function(){
+
 Function.prototype.wait = function(delay){
     var self = this, timer;
     
@@ -287,6 +289,8 @@ var methods = {
 for(var method in methods){
     HTMLElement.prototype[method] = methods[method];
 }
+
+})(); // end prototype modifications.
 
 var Helper = {
     cap: function(value, min, max){
