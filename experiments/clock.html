@@ -400,8 +400,8 @@ Clock.prototype = {
                 clearInterval(autopilotTimer);
                 
                 autopilotTimer = setInterval(function(){
-                    var x = Generator.random(-1, 1),
-                        y = Generator.random(-1, 1);
+                    var x = Generator.random(-0.75, 0.75),
+                        y = Generator.random(-0.5, 0.5);
                     changePerspective(x, y);
                 }, 2000);
                 
