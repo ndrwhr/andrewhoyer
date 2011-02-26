@@ -40,6 +40,10 @@ div.clock-wrapper div {
 
 div.clock {
     position: relative;
+    width: 500px;
+    height: 500px;
+    top: -250px;
+    left: -250px;
     margin-top: 50%;
     margin-left: 50%;
     -webkit-transform-style: preserve-3d;
@@ -359,15 +363,15 @@ Clock.prototype = {
         
         var resize = function(){
             var style = clock.style,
-                dimension = Math.min(wrapper.clientWidth, wrapper.clientHeight);
+                dimension = Math.min(wrapper.clientWidth, wrapper.clientHeight),
+                scale = dimension / clock.clientWidth;
             
-            style.left = style.top = (-dimension / 2) + 'px';
-            style.height = style.width = dimension + 'px';
+            style.zoom = (scale * 100) + '%';
             
-            clock.top = clock.offsetTop + wrapper.offsetTop;
-            clock.left = clock.offsetLeft + wrapper.offsetLeft;
-            clock.halfWidth = dimension / 2;
-            clock.halfHeight = dimension / 2;
+            clock.halfHeight = clock.halfWidth = dimension / 2;
+            
+            clock.top = wrapper.offsetTop + (wrapper.clientHeight / 2) - clock.halfHeight;
+            clock.left = wrapper.offsetLeft + (wrapper.clientWidth / 2) - clock.halfWidth;
             
             return resize;
         };
