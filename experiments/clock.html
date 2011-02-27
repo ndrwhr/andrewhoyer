@@ -371,6 +371,12 @@ Clock.prototype = {
             changePerspective = this.changePerspective.bind(this),
             movementTimer, autopilotTimer;
         
+        var randomPosition = function(){
+            var x = Generator.random(-0.75, 0.75),
+                y = Generator.random(-0.5, 0.5);
+            changePerspective(x, y);
+        };
+        
         // check every 5 seconds if there has been any user interaction.
         // if not, start moving the clock for them.
         var movement = function(){
@@ -386,17 +392,14 @@ Clock.prototype = {
                 
                 clearInterval(autopilotTimer);
                 
-                autopilotTimer = setInterval(function(){
-                    var x = Generator.random(-0.75, 0.75),
-                        y = Generator.random(-0.5, 0.5);
-                    changePerspective(x, y);
-                }, 2000);
+                autopilotTimer = setInterval(randomPosition, 2000);
                 
             }, 5000);
             
         };
         
         movement(); // get the ball rolling...
+        randomPosition();
         
         var calculatePerspective = function(event){
             movement();
