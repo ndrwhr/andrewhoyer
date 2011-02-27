@@ -59,8 +59,6 @@ div.clock div {
 
 div.top, div.right, div.bottom, div.left {
     background: #777;
-    height: 100%;
-    width: 100%;
 }
 
 div.top {
@@ -93,10 +91,9 @@ div.facets {
 }
 
 div.facets > div {
-    top: 0%;
-    left: 36.7%;
-    right: 36.7%;
-    height: 4%;
+    left: 183px;
+    width: 134px;
+    height: 20px;
     background: white;
     -webkit-transform-origin: 50% 1250%;
 }
@@ -114,35 +111,44 @@ div.facets > div:nth-child(10){ -webkit-transform: rotate(285deg); }
 div.facets > div:nth-child(11){ -webkit-transform: rotate(315deg); }
 div.facets > div:nth-child(12){ -webkit-transform: rotate(345deg); }
 
+div.facets > div > div.top,
+div.facets > div > div.bottom {
+    width: 134px;
+    height: 20px;
+}
+
 div.pin {
-    top: 46%;
-    right: 46%;
-    bottom: 46%;
-    left: 46%;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    top: -20px;
+    left: -20px;
+    margin-top: 50%;
+    margin-left: 50%;
 }
 
 div.pin > div {
     background: white;
-    left: 22%;
-    right: 22%;
-    height: 100%;
+    left: 8px;
+    width: 24px;
+    height: 40px;
 }
 
 div.pin > div:nth-child(1){ -webkit-transform: rotate(0deg); }
 div.pin > div:nth-child(2){ -webkit-transform: rotate(60deg); }
 div.pin > div:nth-child(3){ -webkit-transform: rotate(120deg); }
 
-div.pin div.top,
-div.pin div.bottom {
-    height: 45%;
-    width: 100%;
+div.pin > div > div.top,
+div.pin > div > div.bottom {
+    width: 24px;
+    height: 20px;
 }
 
 div.hands {
-    top: 8%;
-    right: 46%;
-    bottom: 50%;
-    left: 46%;
+    top: 40px;
+    left: 230px;
+    width: 40px;
+    height: 210px;
 }
 
 div.hands > div {
@@ -157,30 +163,10 @@ div.hands > div.hour {
     left: 20%;
 }
 
-div.hands > div.hour div.top {
-    height: 14%;
-}
-
-div.hands > div.hour div.right,
-div.hands > div.hour div.left {
-    width: 75%;
-    height: 100%;
-}
-
 div.hands > div.minute {
     top: 0;
     right: 32%;
     left: 32%;
-}
-
-div.hands > div.minute div.top {
-    height: 10%;
-}
-
-div.hands > div.minute div.right,
-div.hands > div.minute div.left {
-    width: 115%;
-    height: 100%;
 }
 
 div.hands > div.second {
@@ -189,13 +175,14 @@ div.hands > div.second {
     left: 45%;
 }
 
-div.hands > div.second div.top {
-    height: 9%;
+div.hands div.top {
+    width: 100%;
+    height: 20px;
 }
 
-div.hands > div.second div.right,
-div.hands > div.second div.left {
-    width: 470%;
+div.hands div.right,
+div.hands div.left {
+    width: 20px;
     height: 100%;
 }
 
