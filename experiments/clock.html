@@ -381,6 +381,19 @@ for(var method in methods){
     HTMLElement.prototype[method] = methods[method];
 }
 
+document.addEvent = function(eventName, eventHandler){
+    this.addEventListener(eventName, eventHandler, false);
+};
+
+document.addEvents = function(events){
+    for (var eventName in events)
+        this.addEvent(eventName, events[eventName]);
+};
+
+document.removeEvent = function(eventName, eventHandler){
+    this.removeEventListener(eventName, eventHandler, false);
+};
+
 })(); // end prototype modifications.
 
 var Helper = {
@@ -517,28 +530,26 @@ Clock.prototype = {
             return calculatePerspective;
         };
         
-        document.addEventListener('mousedown', function(event){
-            document.addEventListener('mousemove', calculatePerspective(event), false);
-        }, false);
+        var moveStart = function(eventName){
+            return function(event){
+                event.preventDefault();
+                document.addEvent(eventName, calculatePerspective(event));
+            };
+        };
         
-        document.addEventListener('mouseup', function(){
-            document.removeEventListener('mousemove', calculatePerspective, false);
-        }, false);
+        var moveEnd = function(eventName){
+            return function(){
+                document.removeEvent(eventName, calculatePerspective);
+            };
+        };
         
-        document.addEventListener('touchstart', function(event){
-            event.preventDefault();
-            document.addEventListener('touchmove', calculatePerspective(event), false);
-        }, false);
-        
-        document.addEventListener('touchend', function(event){
-            event.preventDefault();
-            document.removeEventListener('touchmove', calculatePerspective, false);
-        }, false);
-        
-        document.addEventListener('touchcancel', function(event){
-            event.preventDefault();
-            document.removeEventListener('touchmove', calculatePerspective, false);
-        }, false);
+        document.addEvents({
+            'mousedown': moveStart('mousemove'),
+            'touchstart': moveStart('touchmove'),
+            'mouseup': moveEnd('mousemove'),
+            'touchend': moveEnd('touchmove'),
+            'touchcancel': moveEnd('touchmove')
+        });
     },
     
     changePerspective: function(x, y){
@@ -548,7 +559,7 @@ Clock.prototype = {
     
 };
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEvent('DOMContentLoaded', function(){
     
     if (Modernizr.csstransforms3d){
         new Clock();
@@ -556,6 +567,6 @@ document.addEventListener('DOMContentLoaded', function(){
         // Display an incompatibility message
     }
     
-}, false);
+});
 
 </script>
