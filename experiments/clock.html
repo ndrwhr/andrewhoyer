@@ -504,6 +504,8 @@ Clock.prototype = {
         var calculatePerspective = function(event){
             movement();
             
+            if (event.touches) event = event.touches[0];
+            
             var width = clock.halfWidth,
                 height = clock.halfHeight;
             
@@ -521,6 +523,21 @@ Clock.prototype = {
         
         document.addEventListener('mouseup', function(){
             document.removeEventListener('mousemove', calculatePerspective, false);
+        }, false);
+        
+        document.addEventListener('touchstart', function(event){
+            event.preventDefault();
+            document.addEventListener('touchmove', calculatePerspective(event), false);
+        }, false);
+        
+        document.addEventListener('touchend', function(event){
+            event.preventDefault();
+            document.removeEventListener('touchmove', calculatePerspective, false);
+        }, false);
+        
+        document.addEventListener('touchcancel', function(event){
+            event.preventDefault();
+            document.removeEventListener('touchmove', calculatePerspective, false);
         }, false);
     },
     
