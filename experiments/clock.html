@@ -418,18 +418,15 @@ Clock.prototype = {
     
     initInteraction: function(){
         var clock = this.elements.clock,
-            changePerspective = this.changePerspective.bind(this),
             movementTimer, autopilotTimer;
         
-        var randomPosition = function(){
-            var x = Generator.random(-0.75, 0.75),
-                y = Generator.random(-0.5, 0.5);
-            changePerspective(x, y);
-        };
+        // hoist a couple functions for use inside deep callbacks.
+        var randomPerspective = this.randomPerspective.bind(this),
+            calculatePerspective = this.calculatePerspective.bind(this);
         
         // check every 5 seconds if there has been any user interaction.
         // if not, start moving the clock for them.
-        var movement = function(){
+        var autopilot = function(){
             
             clock.removeClass('autopilot');
             
@@ -442,41 +439,36 @@ Clock.prototype = {
                 
                 clearInterval(autopilotTimer);
                 
-                autopilotTimer = setInterval(randomPosition, 2000);
+                autopilotTimer = setInterval(randomPerspective, 2000);
                 
             }, 5000);
             
         };
         
-        movement(); // get the ball rolling...
-        randomPosition();
+        autopilot(); // start the autopilot up.
+        randomPerspective(); // rotate to a random angle initially
         
-        var calculatePerspective = function(event){
-            movement();
+        // called every time the users input moves.
+        var movement = function(event){
+            autopilot(); // reset autopilot
             
             if (event.touches) event = event.touches[0];
             
-            var width = clock.halfWidth,
-                height = clock.halfHeight;
+            calculatePerspective(event.pageX, event.pageY);
             
-            var x = (event.clientX - clock.left - width) / width;
-            var y = (event.clientY - clock.top - height) / height;
-            
-            changePerspective(Helper.cap(x, -1, 1), Helper.cap(y, -1, 1));
-            
-            return calculatePerspective;
+            return movement;
         };
         
         var moveStart = function(eventName){
             return function(event){
                 event.preventDefault();
-                document.addEvent(eventName, calculatePerspective(event));
+                document.addEvent(eventName, movement(event));
             };
         };
         
         var moveEnd = function(eventName){
             return function(){
-                document.removeEvent(eventName, calculatePerspective);
+                document.removeEvent(eventName, movement);
             };
         };
         
@@ -487,6 +479,26 @@ Clock.prototype = {
             'touchend': moveEnd('touchmove'),
             'touchcancel': moveEnd('touchmove')
         });
+    },
+    
+    calculatePerspective: function(x, y){
+        var clock = this.elements.clock;
+        
+        if (event.touches) event = event.touches[0];
+        
+        var xOffset = clock.left + clock.halfWidth,
+            yOffset = clock.top + clock.halfHeight;
+        
+        x = Helper.cap((x - xOffset) / clock.halfWidth, -1, 1);
+        y = Helper.cap((y - yOffset) / clock.halfHeight, -1, 1);
+        
+        this.changePerspective(x, y);
+    },
+    
+    randomPerspective: function(){
+        var x = Generator.random(-0.75, 0.75),
+            y = Generator.random(-0.5, 0.5);
+        this.changePerspective(x, y);
     },
     
     changePerspective: function(x, y){
