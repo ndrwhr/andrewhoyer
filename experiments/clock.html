@@ -87,6 +87,12 @@ div.left {
     -webkit-transform-origin: 0 0;
 }
 
+div.back {
+    height: 100%;
+    width: 100%;
+    background: #444;
+}
+
 div.facets {
     width: 100%;
     height: 100%;
@@ -119,6 +125,10 @@ div.facets > div > div.bottom {
     height: 20px;
 }
 
+div.facets > div > div.back {
+    -webkit-transform: translateZ(-20px);
+}
+
 div.pin {
     position: relative;
     width: 40px;
@@ -145,6 +155,10 @@ div.pin > div > div.top,
 div.pin > div > div.bottom {
     width: 24px;
     height: 16px;
+}
+
+div.pin > div > div.back {
+    -webkit-transform: translateZ(-16px);
 }
 
 div.hands {
@@ -205,6 +219,10 @@ div.hands div.right,
 div.hands div.left {
     width: 5px;
     height: 100%;
+}
+
+div.hands div.back {
+    -webkit-transform: translateZ(-5px);
 }
 
 </style>
@@ -330,7 +348,7 @@ var Generator = {
 };
 
 var Clock = function(){
-    this.max_rotation = 80;
+    this.max_rotation = 180;
     
     this.elements = {
         wrapper: document.querySelector('div.clock-wrapper'),
@@ -408,7 +426,7 @@ Clock.prototype = {
         var boxes = Array.slice(document.querySelectorAll('div.box'));
         
         boxes.forEach(function(box){
-            ['top', 'right', 'bottom', 'left'].forEach(function(className){
+            ['top', 'right', 'bottom', 'left', 'back'].forEach(function(className){
                 var side = document.createElement('div');
                 side.className = className;
                 box.appendChild(side);
@@ -496,8 +514,8 @@ Clock.prototype = {
     },
     
     randomPerspective: function(){
-        var x = Generator.random(-0.75, 0.75),
-            y = Generator.random(-0.5, 0.5);
+        var x = Generator.random(-0.40, 0.40),
+            y = Generator.random(-0.20, 0.20);
         this.changePerspective(x, y);
     },
     
