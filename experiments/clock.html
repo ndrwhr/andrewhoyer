@@ -368,31 +368,14 @@ Clock.prototype = {
     
     tick: function(){
         var time = new Date(),
-            millis = time.getMilliseconds(),
-            seconds = this.toMillis('second', time.getSeconds()) + millis,
-            minutes = this.toMillis('minute', time.getMinutes()),
-            hours = this.toMillis('hour', time.getHours() % 12),
+            seconds = time.getSeconds(),
+            minutes = time.getMinutes() * 60,
+            hours = (time.getHours() % 12) * 3600,
             elements = this.elements;
         
-        elements.second.rotate(this.toFraction('second', seconds));
-        elements.minute.rotate(this.toFraction('minute', minutes + seconds));
-        elements.hour.rotate(this.toFraction('hour', hours + minutes + seconds));
-    },
-    
-    toMillis: function(unit, time){
-        var times = ['second', 'minute', 'hour'].indexOf(unit);
-        for (time *= 1000; times > 0; time *= 60, times--);
-        return time;
-    },
-    
-    toFraction: function(unit, time){
-        time /= 60000;
-        switch (unit){
-            case 'second': break;
-            case 'hour': time /= 12;
-            default: time /= 60;
-        }
-        return time;
+        elements.second.rotate(seconds / 60);
+        elements.minute.rotate((minutes + seconds) / 3600);
+        elements.hour.rotate((hours + minutes + seconds) / 43200);
     },
     
     initResize: function(){
