@@ -57,6 +57,7 @@ div.clock.autopilot {
 
 div.clock div {
     -webkit-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
 }
 
 div.top, div.right, div.bottom, div.left {
@@ -64,27 +65,27 @@ div.top, div.right, div.bottom, div.left {
 }
 
 div.top {
-    top: 0;
-    -webkit-transform: rotateX(-90deg);
-    -webkit-transform-origin: 0 0;
-}
-
-div.right {
-    top: 0;
-    right: 0;
-    -webkit-transform: rotateY(-90deg);
-    -webkit-transform-origin: 100% 0;
-}
-
-div.bottom {
-    bottom: 0;
+    bottom: 100%;
     -webkit-transform: rotateX(90deg);
     -webkit-transform-origin: 0 100%;
 }
 
-div.left {
+div.right {
+    left: 100%;
     -webkit-transform: rotateY(90deg);
     -webkit-transform-origin: 0 0;
+}
+
+div.bottom {
+    top: 100%;
+    -webkit-transform: rotateX(-90deg);
+    -webkit-transform-origin: 0 0;
+}
+
+div.left {
+    right: 100%;
+    -webkit-transform: rotateY(-90deg);
+    -webkit-transform-origin: 100% 0;
 }
 
 div.back {
@@ -126,7 +127,7 @@ div.facets > div > div.bottom {
 }
 
 div.facets > div > div.back {
-    -webkit-transform: translateZ(-20px);
+    -webkit-transform: translateZ(-20px) rotateX(180deg);
 }
 
 div.pin {
@@ -158,7 +159,7 @@ div.pin > div > div.bottom {
 }
 
 div.pin > div > div.back {
-    -webkit-transform: translateZ(-16px);
+    -webkit-transform: translateZ(-16px) rotateX(180deg);
 }
 
 div.hands {
@@ -222,7 +223,7 @@ div.hands div.left {
 }
 
 div.hands div.back {
-    -webkit-transform: translateZ(-5px);
+    -webkit-transform: translateZ(-5px) rotateX(180deg);
 }
 
 </style>
