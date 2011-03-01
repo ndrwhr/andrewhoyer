@@ -288,36 +288,30 @@ div.hands div.left {
             </div>
             
             <div class="facets">
-                <div> <div class="top"></div> <div class="bottom"></div> </div>
-                <div> <div class="top"></div> <div class="bottom"></div> </div>
-                <div> <div class="top"></div> <div class="bottom"></div> </div>
-                <div> <div class="top"></div> <div class="bottom"></div> </div>
-                <div> <div class="top"></div> <div class="bottom"></div> </div>
-                <div> <div class="top"></div> <div class="bottom"></div> </div>
-                <div> <div class="top"></div> <div class="bottom"></div> </div>
-                <div> <div class="top"></div> <div class="bottom"></div> </div>
-                <div> <div class="top"></div> <div class="bottom"></div> </div>
-                <div> <div class="top"></div> <div class="bottom"></div> </div>
-                <div> <div class="top"></div> <div class="bottom"></div> </div>
-                <div> <div class="top"></div> <div class="bottom"></div> </div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
             </div>
             
             <div class="pin">
-                <div> <div class="top"></div> <div class="bottom"></div> </div>
-                <div> <div class="top"></div> <div class="bottom"></div> </div>
-                <div> <div class="top"></div> <div class="bottom"></div> </div>
+                <div class="box"></div>
+                <div class="box"></div>
+                <div class="box"></div>
             </div>
             
             <div class="hands">
-                <div class="hour-wrapper">
-                    <div class="hour"> <div class="top"></div> <div class="right"></div> <div class="left"></div> </div>
-                </div>
-                <div class="minute-wrapper">
-                    <div class="minute"> <div class="top"></div> <div class="right"></div> <div class="left"></div> </div>
-                </div>
-                <div class="second-wrapper">
-                    <div class="second"> <div class="top"></div> <div class="right"></div> <div class="left"></div> </div>
-                </div>
+                <div class="hour-wrapper"> <div class="hour box"></div> </div>
+                <div class="minute-wrapper"> <div class="minute box"></div> </div>
+                <div class="second-wrapper"> <div class="second box"></div> </div>
             </div>
             
         </div>
@@ -423,7 +417,6 @@ var Clock = function(){
     setInterval(this.tick.bind(this), 1000);
     
     this.initResize();
-    this.initInteraction();
 };
 
 Clock.prototype = {
@@ -477,6 +470,23 @@ Clock.prototype = {
         };
         
         window.addEventListener('resize', resize(), false);
+    },
+    
+    makeInteractive: function(){
+        this.init3d();
+        this.initInteraction();
+    },
+    
+    init3d: function(){
+        var boxes = Array.slice(document.querySelectorAll('div.box'));
+        
+        boxes.forEach(function(box){
+            ['top', 'right', 'bottom', 'left'].forEach(function(className){
+                var side = document.createElement('div');
+                side.className = className;
+                box.appendChild(side);
+            });
+        });
     },
     
     initInteraction: function(){
@@ -561,8 +571,10 @@ Clock.prototype = {
 
 document.addEvent('DOMContentLoaded', function(){
     
+    var clock = new Clock();
+    
     if (Modernizr.csstransforms3d){
-        new Clock();
+        clock.makeInteractive();
     } else {
         // Display an incompatibility message
     }
