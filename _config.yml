@@ -9,6 +9,7 @@ pygments:       true
 exclude:
     - README.md
     - rakefile
+    - config.rb
 
 loader:         /resources/images/loader.gif
 
