@@ -348,6 +348,58 @@ var Generator = {
     }
 };
 
+var Cursor = function(){
+    
+    // binding an instance method...
+    this.movement = this.movement.bind(this);
+    
+    var moveStart = this.moveStart.bind(this),
+        moveEnd = this.moveEnd.bind(this);
+    
+    document.addEvents({
+        'mousedown': moveStart('mousemove'),
+        'touchstart': moveStart('touchmove'),
+        'mouseup': moveEnd('mousemove'),
+        'touchend': moveEnd('touchmove'),
+        'touchcancel': moveEnd('touchmove')
+    });
+    
+};
+
+Cursor.prototype = {
+    
+    callbacks: [],
+    
+    moveStart: function(eventName){
+        var movement = this.movement; // this has be statically bound...
+        return function(event){
+            event.preventDefault();
+            movement(event); // move on the initial 'click'
+            document.addEvent(eventName, movement); // move on subsequent moves
+        };
+    },
+    
+    moveEnd: function(eventName){
+        var movement = this.movement; // this has be statically bound...
+        return function(){
+            document.removeEvent(eventName, movement);
+        };
+    },
+    
+    movement: function(event){
+        if (event.touches) event = event.touches[0];
+        
+        this.callbacks.forEach(function(callback){
+            callback(event.pageX, event.pageY);
+        });
+    },
+    
+    addMovementListener: function(callback){
+        this.callbacks.push(callback);
+    }
+    
+};
+
 var Clock = function(){
     this.max_rotation = 180;
     
@@ -403,7 +455,9 @@ Clock.prototype = {
     
     makeInteractive: function(){
         this.init3d();
+        this.initAutopilot();
         this.initInteraction();
+        this.randomPerspective();
     },
     
     init3d: function(){
@@ -418,16 +472,11 @@ Clock.prototype = {
         });
     },
     
-    initInteraction: function(){
+    initAutopilot: function(){
         var clock = this.elements.clock,
+            randomPerspective = this.randomPerspective.bind(this),
             movementTimer, autopilotTimer;
         
-        // hoist a couple functions for use inside deep callbacks.
-        var randomPerspective = this.randomPerspective.bind(this),
-            calculatePerspective = this.calculatePerspective.bind(this);
-        
-        // check every 5 seconds if there has been any user interaction.
-        // if not, start moving the clock for them.
         var autopilot = function(){
             
             clock.removeClass('autopilot');
@@ -445,42 +494,17 @@ Clock.prototype = {
                 
             }, 5000);
             
+            return autopilot;
         };
         
-        autopilot(); // start the autopilot up.
-        randomPerspective(); // rotate to a random angle initially
-        
-        // called every time the users input moves.
-        var movement = function(event){
-            autopilot(); // reset autopilot
-            
-            if (event.touches) event = event.touches[0];
-            
-            calculatePerspective(event.pageX, event.pageY);
-            
-            return movement;
-        };
-        
-        var moveStart = function(eventName){
-            return function(event){
-                event.preventDefault();
-                document.addEvent(eventName, movement(event));
-            };
-        };
-        
-        var moveEnd = function(eventName){
-            return function(){
-                document.removeEvent(eventName, movement);
-            };
-        };
-        
-        document.addEvents({
-            'mousedown': moveStart('mousemove'),
-            'touchstart': moveStart('touchmove'),
-            'mouseup': moveEnd('mousemove'),
-            'touchend': moveEnd('touchmove'),
-            'touchcancel': moveEnd('touchmove')
-        });
+        this.autopilot = autopilot();
+    },
+    
+    initInteraction: function(){
+        new Cursor().addMovementListener((function(x, y){
+            this.autopilot();
+            this.calculatePerspective(x, y);
+        }).bind(this));
     },
     
     calculatePerspective: function(x, y){
