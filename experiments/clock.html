@@ -417,7 +417,7 @@ Cursor.prototype = {
         var movement = this.movement; // this has be statically bound...
         return (function(event){
             event.preventDefault();
-            delete this.previous;
+            this.reset();
             document.addEvent(eventName, movement); // move on subsequent moves
         }).bind(this);
     },
@@ -426,12 +426,17 @@ Cursor.prototype = {
         var movement = this.movement; // this has be statically bound...
         return (function(){
             document.removeEvent(eventName, movement);
-            delete this.previous;
+            this.momentum();
         }).bind(this);
     },
     
-    movement: function(event){
-        var delta = this.calculateDelta(event);
+    reset: function(){
+        delete this.previous;
+        this.stopMomentum();
+    },
+    
+    movement: function(event, delta){
+        if (!delta) delta = this.calculateDelta(event);
         this.callbacks.forEach(function(callback){
             callback(delta);
         });
@@ -447,7 +452,28 @@ Cursor.prototype = {
         var delta = position.subtract(this.previous);
         this.previous = position;
         
-        return delta;
+        return this.lastDelta = delta;
+    },
+    
+    stopMomentum: function(){
+        this.momentumTimer = clearTimeout(this.momentumTimer);
+    },
+    
+    momentum: function(){
+        var delta = this.lastDelta,
+            damp = 0.94, delay = 30;
+        
+        if (this.momentumTimer) this.stopMomentum();
+        
+        var calcMomentum = (function(){
+            if (delta.length() < 0.1) return;
+            
+            this.movement(null, (delta = delta.scale(damp)));
+            
+            this.momentumTimer = setTimeout(calcMomentum, delay);
+        }).bind(this);
+        
+        calcMomentum();
     },
     
     addMovementListener: function(callback){
