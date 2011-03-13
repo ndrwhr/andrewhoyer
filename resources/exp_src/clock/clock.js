@@ -1,18 +1,6 @@
 
 (function(){
 
-Function.prototype.wait = function(delay){
-    var self = this, timer;
-    
-    return function(){
-        var args = arguments;
-        if (!timer) timer = setTimeout(function(){
-            timer = clearTimeout(timer);
-            self.apply(self, args);
-        }, delay || 50);
-    };
-};
-
 Array.slice = function(){
     var slice = Array.prototype.slice;
     return slice.apply(arguments[0], slice.call(arguments, 1));
