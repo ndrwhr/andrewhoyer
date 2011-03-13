@@ -59,10 +59,7 @@ document.removeEvent = function(eventName, eventHandler){
 var Helper = {
     cap: function(value, min, max){
         return Math.min(Math.max(value, min), max);
-    }
-};
-
-var Generator = {
+    },
     random: function(min, max){
         return Math.random() * (max - min) + min;
     }
@@ -264,8 +261,8 @@ Clock.prototype = {
     },
     
     randomPerspective: function(){
-        var x = Generator.random(-0.20, 0.20),
-            y = Generator.random(-0.10, 0.10);
+        var x = Helper.random(-0.20, 0.20),
+            y = Helper.random(-0.10, 0.10);
         this.updatePerspective(new Vector(x, y));
     },
     
