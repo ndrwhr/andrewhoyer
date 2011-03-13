@@ -292,8 +292,8 @@ var methods = {
         this.style[CSS.transform] = 'rotate(' + (value * 360) + 'deg)';
     },
     
-    rotate3d: function(x, y, z, deg){
-        this.style[CSS.transform] = 'rotate3d(' + [x, y, z, deg + 'deg'].join(',') + ')';
+    rotateXY: function(x, y){
+        this.style[CSS.transform] = 'rotateX(' + (x % 360) + 'deg) rotateY(' + (y % 360) + 'deg)';
     },
     
     addClass: function(){
@@ -348,6 +348,49 @@ var Generator = {
     }
 };
 
+// Super simple 2d vector class.
+var Vector = function(x, y){
+    this.x = x || 0;
+    this.y = y || 0;
+};
+
+Vector.random = function(min, max){
+    return new Vector(Generator.random(min, max), Generator.random(min, max));
+};
+
+Vector.prototype = {
+    
+    add: function(vector){
+        return new Vector(this.x + vector.x, this.y + vector.y);
+    },
+    
+    subtract: function(vector){
+        return new Vector(this.x - vector.x, this.y - vector.y);
+    },
+    
+    scale: function(value){
+        return new Vector(this.x * value, this.y * value);
+    },
+    
+    multiply: function(vector){
+        return new Vector(this.x * vector.x, this.y * vector.y);
+    },
+    
+    divide: function(vector){
+        return new Vector(this.x / vector.x, this.y / vector.y);
+    },
+    
+    length: function(){
+        return Math.sqrt(this.x * this.x + this.y * this.y);
+    },
+    
+    toString: function(){
+        return ['[',this.x, ',', this.y, ']'].join('');
+    }
+    
+};
+
+
 var Cursor = function(){
     
     // binding an instance method...
@@ -372,26 +415,39 @@ Cursor.prototype = {
     
     moveStart: function(eventName){
         var movement = this.movement; // this has be statically bound...
-        return function(event){
+        return (function(event){
             event.preventDefault();
-            movement(event); // move on the initial 'click'
+            delete this.previous;
             document.addEvent(eventName, movement); // move on subsequent moves
-        };
+        }).bind(this);
     },
     
     moveEnd: function(eventName){
         var movement = this.movement; // this has be statically bound...
-        return function(){
+        return (function(){
             document.removeEvent(eventName, movement);
-        };
+            delete this.previous;
+        }).bind(this);
     },
     
     movement: function(event){
+        var delta = this.calculateDelta(event);
+        this.callbacks.forEach(function(callback){
+            callback(delta);
+        });
+    },
+    
+    calculateDelta: function(event){
         if (event.touches) event = event.touches[0];
         
-        this.callbacks.forEach(function(callback){
-            callback(event.pageX, event.pageY);
-        });
+        var position = new Vector(event.pageX, event.pageY);
+        
+        if (!this.previous) this.previous = position;
+        
+        var delta = position.subtract(this.previous);
+        this.previous = position;
+        
+        return delta;
     },
     
     addMovementListener: function(callback){
@@ -401,8 +457,6 @@ Cursor.prototype = {
 };
 
 var Clock = function(){
-    this.max_rotation = 180;
-    
     this.elements = {
         wrapper: document.querySelector('div.clock-wrapper'),
         clock: document.querySelector('div.clock'),
@@ -436,16 +490,10 @@ Clock.prototype = {
             clock = this.elements.clock;
         
         var resize = function(){
-            var style = clock.style,
-                dimension = Math.min(wrapper.clientWidth, wrapper.clientHeight),
-                scale = dimension / clock.clientWidth;
+            var dimension = Math.min(wrapper.clientWidth, wrapper.clientHeight);
             
-            style.zoom = (scale * 100) + '%';
-            
-            clock.halfHeight = clock.halfWidth = dimension / 2;
-            
-            clock.top = wrapper.offsetTop + (wrapper.clientHeight / 2) - clock.halfHeight;
-            clock.left = wrapper.offsetLeft + (wrapper.clientWidth / 2) - clock.halfWidth;
+            clock.style.zoom = ((dimension / clock.clientWidth) * 100) + '%';
+            clock.size = dimension;
             
             return resize;
         };
@@ -501,35 +549,26 @@ Clock.prototype = {
     },
     
     initInteraction: function(){
-        new Cursor().addMovementListener((function(x, y){
+        new Cursor().addMovementListener((function(delta){
             this.autopilot();
-            this.calculatePerspective(x, y);
+            this.shiftPerspective(delta);
         }).bind(this));
     },
     
-    calculatePerspective: function(x, y){
-        var clock = this.elements.clock;
-        
-        if (event.touches) event = event.touches[0];
-        
-        var xOffset = clock.left + clock.halfWidth,
-            yOffset = clock.top + clock.halfHeight;
-        
-        x = Helper.cap((x - xOffset) / clock.halfWidth, -1, 1);
-        y = Helper.cap((y - yOffset) / clock.halfHeight, -1, 1);
-        
-        this.changePerspective(x, y);
+    shiftPerspective: function(shift){
+        var width = this.elements.clock.size;
+        this.updatePerspective(this.perspective.add(shift.scale(1 / width)));
     },
     
     randomPerspective: function(){
-        var x = Generator.random(-0.40, 0.40),
-            y = Generator.random(-0.20, 0.20);
-        this.changePerspective(x, y);
+        var x = Generator.random(-0.20, 0.20),
+            y = Generator.random(-0.10, 0.10);
+        this.updatePerspective(new Vector(x, y));
     },
     
-    changePerspective: function(x, y){
-        var scale = Math.min(Math.sqrt(x * x + y * y), 1);
-        this.elements.clock.rotate3d(-y, x, 0, scale * this.max_rotation);
+    updatePerspective: function(perspective){
+        this.perspective = perspective;
+        this.elements.clock.rotateXY(-perspective.y * 360, perspective.x * 360);
     }
     
 };
