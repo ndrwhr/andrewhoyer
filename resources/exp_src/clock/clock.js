@@ -12,8 +12,11 @@ var methods = {
         this.style[CSS.transform] = 'rotate(' + (value * 360) + 'deg)';
     },
     
-    rotateXY: function(x, y){
-        this.style[CSS.transform] = 'rotateX(' + (x % 360) + 'deg) rotateY(' + (y % 360) + 'deg)';
+    rotateXY: function(x, y, s){
+        var rotate = 'rotateX(' + (x % 360) + 'deg) rotateY(' + (y % 360) + 'deg)',
+            scale = 'scaleX(' + s + ') scaleY(' + s + ') scaleZ(' + s + ')';
+        
+        this.style[CSS.transform] = rotate + ' ' + scale;
     },
     
     addClass: function(){
@@ -189,14 +192,17 @@ Clock.prototype = {
         var wrapper = this.elements.wrapper,
             clock = this.elements.clock;
         
-        var resize = function(){
-            var dimension = Math.min(wrapper.clientWidth, wrapper.clientHeight);
+        var resize = (function(){
+            var dimension = Math.min(wrapper.clientWidth, wrapper.clientHeight),
+                scale = (dimension / clock.clientWidth);
             
-            clock.style.zoom = ((dimension / clock.clientWidth) * 100) + '%';
+            clock.scale = scale;
             clock.size = dimension;
             
+            this.updatePerspective(this.perspective || new Vector(0, 0));
+            
             return resize;
-        };
+        }).bind(this);
         
         window.addEventListener('resize', resize(), false);
     },
@@ -267,8 +273,9 @@ Clock.prototype = {
     },
     
     updatePerspective: function(perspective){
+        var scale = this.elements.clock.scale;
         this.perspective = perspective;
-        this.elements.clock.rotateXY(-perspective.y * 360, perspective.x * 360);
+        this.elements.clock.rotateXY(-perspective.y * 360, perspective.x * 360, scale);
     }
     
 };
