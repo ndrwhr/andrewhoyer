@@ -12,9 +12,25 @@ div.screen {
     position: absolute;
     height: 100%;
     width: 100%;
+    
+    perspective: 500;
     -webkit-perspective: 500;
+       -moz-perspective: 500;
+        -ms-perspective: 500;
+         -o-perspective: 500;
+    
+    transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
+       -moz-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+         -o-transform-style: preserve-3d;
+    
+    user-select: none;
     -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+         -o-user-select: none;
+    
     cursor: move;
     overflow: hidden;
 }
@@ -39,16 +55,34 @@ div.clock {
     left: -250px;
     margin-top: 50%;
     margin-left: 50%;
+    
+    transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
+       -moz-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+         -o-transform-style: preserve-3d;
 }
 
 div.clock.autopilot {
+    transition: transform 1750ms ease-in-out;
     -webkit-transition: -webkit-transform 1750ms ease-in-out;
+       -moz-transition: -moz-transform 1750ms ease-in-out;
+        -ms-transition: -ms-transform 1750ms ease-in-out;
+         -o-transition: -o-transform 1750ms ease-in-out;
 }
 
 div.clock div {
+    transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
+       -moz-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+         -o-transform-style: preserve-3d;
+    
+    backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+       -moz-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+         -o-backface-visibility: hidden;
 }
 
 div.top, div.right, div.bottom, div.left {
@@ -57,26 +91,62 @@ div.top, div.right, div.bottom, div.left {
 
 div.top {
     bottom: 100%;
+    transform: rotateX(90deg);
     -webkit-transform: rotateX(90deg);
+       -moz-transform: rotateX(90deg);
+        -ms-transform: rotateX(90deg);
+         -o-transform: rotateX(90deg);
+    
+    transform-origin: 0 100%;
     -webkit-transform-origin: 0 100%;
+       -moz-transform-origin: 0 100%;
+        -ms-transform-origin: 0 100%;
+         -o-transform-origin: 0 100%;
 }
 
 div.right {
     left: 100%;
+    transform: rotateY(90deg);
     -webkit-transform: rotateY(90deg);
+       -moz-transform: rotateY(90deg);
+        -ms-transform: rotateY(90deg);
+         -o-transform: rotateY(90deg);
+    
+    transform-origin: 0 0;
     -webkit-transform-origin: 0 0;
+       -moz-transform-origin: 0 0;
+        -ms-transform-origin: 0 0;
+         -o-transform-origin: 0 0;
 }
 
 div.bottom {
     top: 100%;
+    transform: rotateX(-90deg);
     -webkit-transform: rotateX(-90deg);
+       -moz-transform: rotateX(-90deg);
+        -ms-transform: rotateX(-90deg);
+         -o-transform: rotateX(-90deg);
+    
+    transform-origin: 0 0;
     -webkit-transform-origin: 0 0;
+       -moz-transform-origin: 0 0;
+        -ms-transform-origin: 0 0;
+         -o-transform-origin: 0 0;
 }
 
 div.left {
     right: 100%;
+    transform: rotateY(-90deg);
     -webkit-transform: rotateY(-90deg);
+       -moz-transform: rotateY(-90deg);
+        -ms-transform: rotateY(-90deg);
+         -o-transform: rotateY(-90deg);
+    
+    transform-origin: 100% 0;
     -webkit-transform-origin: 100% 0;
+       -moz-transform-origin: 100% 0;
+        -ms-transform-origin: 100% 0;
+         -o-transform-origin: 100% 0;
 }
 
 div.back {
@@ -95,21 +165,108 @@ div.facets > div {
     width: 134px;
     height: 20px;
     background: white;
+    transform-origin: 50% 1250%;
     -webkit-transform-origin: 50% 1250%;
+       -moz-transform-origin: 50% 1250%;
+        -ms-transform-origin: 50% 1250%;
+         -o-transform-origin: 50% 1250%;
 }
 
-div.facets > div:nth-child(1){ -webkit-transform: rotate(15deg); }
-div.facets > div:nth-child(2){ -webkit-transform: rotate(45deg); }
-div.facets > div:nth-child(3){ -webkit-transform: rotate(75deg); }
-div.facets > div:nth-child(4){ -webkit-transform: rotate(105deg); }
-div.facets > div:nth-child(5){ -webkit-transform: rotate(135deg); }
-div.facets > div:nth-child(6){ -webkit-transform: rotate(165deg); }
-div.facets > div:nth-child(7){ -webkit-transform: rotate(195deg); }
-div.facets > div:nth-child(8){ -webkit-transform: rotate(225deg); }
-div.facets > div:nth-child(9){ -webkit-transform: rotate(255deg); }
-div.facets > div:nth-child(10){ -webkit-transform: rotate(285deg); }
-div.facets > div:nth-child(11){ -webkit-transform: rotate(315deg); }
-div.facets > div:nth-child(12){ -webkit-transform: rotate(345deg); }
+div.facets > div:nth-child(1) {
+    transform: rotate(15deg);
+    -webkit-transform: rotate(15deg);
+       -moz-transform: rotate(15deg);
+        -ms-transform: rotate(15deg);
+         -o-transform: rotate(15deg);
+}
+
+div.facets > div:nth-child(2) {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+       -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+         -o-transform: rotate(45deg);
+}
+
+div.facets > div:nth-child(3) {
+    transform: rotate(75deg);
+    -webkit-transform: rotate(75deg);
+       -moz-transform: rotate(75deg);
+        -ms-transform: rotate(75deg);
+         -o-transform: rotate(75deg);
+}
+
+div.facets > div:nth-child(4) {
+    transform: rotate(105deg);
+    -webkit-transform: rotate(105deg);
+       -moz-transform: rotate(105deg);
+        -ms-transform: rotate(105deg);
+         -o-transform: rotate(105deg);
+}
+
+div.facets > div:nth-child(5) {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+       -moz-transform: rotate(135deg);
+        -ms-transform: rotate(135deg);
+         -o-transform: rotate(135deg);
+}
+
+div.facets > div:nth-child(6) {
+    transform: rotate(165deg);
+    -webkit-transform: rotate(165deg);
+       -moz-transform: rotate(165deg);
+        -ms-transform: rotate(165deg);
+         -o-transform: rotate(165deg);
+}
+
+div.facets > div:nth-child(7) {
+    transform: rotate(195deg);
+    -webkit-transform: rotate(195deg);
+       -moz-transform: rotate(195deg);
+        -ms-transform: rotate(195deg);
+         -o-transform: rotate(195deg);
+}
+
+div.facets > div:nth-child(8) {
+    transform: rotate(225deg);
+    -webkit-transform: rotate(225deg);
+       -moz-transform: rotate(225deg);
+        -ms-transform: rotate(225deg);
+         -o-transform: rotate(225deg);
+}
+
+div.facets > div:nth-child(9) {
+    transform: rotate(255deg);
+    -webkit-transform: rotate(255deg);
+       -moz-transform: rotate(255deg);
+        -ms-transform: rotate(255deg);
+         -o-transform: rotate(255deg);
+}
+
+div.facets > div:nth-child(10) {
+    transform: rotate(285deg);
+    -webkit-transform: rotate(285deg);
+       -moz-transform: rotate(285deg);
+        -ms-transform: rotate(285deg);
+         -o-transform: rotate(285deg);
+}
+
+div.facets > div:nth-child(11) {
+    transform: rotate(315deg);
+    -webkit-transform: rotate(315deg);
+       -moz-transform: rotate(315deg);
+        -ms-transform: rotate(315deg);
+         -o-transform: rotate(315deg);
+}
+
+div.facets > div:nth-child(12) {
+    transform: rotate(345deg);
+    -webkit-transform: rotate(345deg);
+       -moz-transform: rotate(345deg);
+        -ms-transform: rotate(345deg);
+         -o-transform: rotate(345deg);
+}
 
 div.facets > div > div.top,
 div.facets > div > div.bottom {
@@ -118,7 +275,11 @@ div.facets > div > div.bottom {
 }
 
 div.facets > div > div.back {
+    transform: translateZ(-20px) rotateX(180deg);
     -webkit-transform: translateZ(-20px) rotateX(180deg);
+       -moz-transform: translateZ(-20px) rotateX(180deg);
+        -ms-transform: translateZ(-20px) rotateX(180deg);
+         -o-transform: translateZ(-20px) rotateX(180deg);
 }
 
 div.pin {
@@ -129,7 +290,11 @@ div.pin {
     left: -20px;
     margin-top: 50%;
     margin-left: 50%;
+    transform: translateZ(-4px);
     -webkit-transform: translateZ(-4px);
+       -moz-transform: translateZ(-4px);
+        -ms-transform: translateZ(-4px);
+         -o-transform: translateZ(-4px);
 }
 
 div.pin > div {
@@ -139,9 +304,29 @@ div.pin > div {
     height: 40px;
 }
 
-div.pin > div:nth-child(1){ -webkit-transform: rotate(0deg); }
-div.pin > div:nth-child(2){ -webkit-transform: rotate(60deg); }
-div.pin > div:nth-child(3){ -webkit-transform: rotate(120deg); }
+div.pin > div:nth-child(1) {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+       -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+         -o-transform: rotate(0deg);
+}
+
+div.pin > div:nth-child(2) {
+    transform: rotate(60deg);
+    -webkit-transform: rotate(60deg);
+       -moz-transform: rotate(60deg);
+        -ms-transform: rotate(60deg);
+         -o-transform: rotate(60deg);
+}
+
+div.pin > div:nth-child(3) {
+    transform: rotate(120deg);
+    -webkit-transform: rotate(120deg);
+       -moz-transform: rotate(120deg);
+        -ms-transform: rotate(120deg);
+         -o-transform: rotate(120deg);
+}
 
 div.pin > div > div.top,
 div.pin > div > div.bottom {
@@ -150,7 +335,11 @@ div.pin > div > div.bottom {
 }
 
 div.pin > div > div.back {
+    transform: translateZ(-16px) rotateX(180deg);
     -webkit-transform: translateZ(-16px) rotateX(180deg);
+       -moz-transform: translateZ(-16px) rotateX(180deg);
+        -ms-transform: translateZ(-16px) rotateX(180deg);
+         -o-transform: translateZ(-16px) rotateX(180deg);
 }
 
 div.hands {
@@ -158,7 +347,11 @@ div.hands {
     left: 230px;
     width: 40px;
     height: 210px;
+    transform: translateZ(-6px);
     -webkit-transform: translateZ(-6px);
+       -moz-transform: translateZ(-6px);
+        -ms-transform: translateZ(-6px);
+         -o-transform: translateZ(-6px);
 }
 
 div.hands div.hour,
@@ -166,7 +359,11 @@ div.hands div.minute,
 div.hands div.second {
     bottom: 0;
     background: white;
+    transform-origin: 50% 100%;
     -webkit-transform-origin: 50% 100%;
+       -moz-transform-origin: 50% 100%;
+        -ms-transform-origin: 50% 100%;
+         -o-transform-origin: 50% 100%;
 }
 
 div.hands > div.hour-wrapper,
@@ -177,7 +374,11 @@ div.hands > div.second-wrapper {
 }
 
 div.hands > div.hour-wrapper {
+    transform: translateZ(-10px);
     -webkit-transform: translateZ(-10px);
+       -moz-transform: translateZ(-10px);
+        -ms-transform: translateZ(-10px);
+         -o-transform: translateZ(-10px);
 }
 
 div.hands div.hour {
@@ -187,7 +388,11 @@ div.hands div.hour {
 }
 
 div.hands > div.minute-wrapper {
+    transform: translateZ(-5px);
     -webkit-transform: translateZ(-5px);
+       -moz-transform: translateZ(-5px);
+        -ms-transform: translateZ(-5px);
+         -o-transform: translateZ(-5px);
 }
 
 div.hands div.minute {
@@ -214,5 +419,9 @@ div.hands div.left {
 }
 
 div.hands div.back {
+    transform: translateZ(-5px) rotateX(180deg);
     -webkit-transform: translateZ(-5px) rotateX(180deg);
+       -moz-transform: translateZ(-5px) rotateX(180deg);
+        -ms-transform: translateZ(-5px) rotateX(180deg);
+         -o-transform: translateZ(-5px) rotateX(180deg);
 }
