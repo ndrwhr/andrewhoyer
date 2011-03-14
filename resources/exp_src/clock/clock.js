@@ -208,6 +208,8 @@ Clock.prototype = {
             clock = this.elements.clock;
         
         var resize = (function(){
+            if (this.autopilot) this.autopilot();
+            
             var width = container.clientWidth,
                 height = container.clientHeight,
                 dimension = Math.min(width, height);
