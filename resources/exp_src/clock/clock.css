@@ -6,13 +6,28 @@ body {
     bottom: 0;
     left: 0;
     background: black;
+    overflow: hidden;
+    cursor: move;
+    
+    user-select: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+         -o-user-select: none;
 }
 
-div.screen {
+div.clock-container {
     position: absolute;
-    height: 100%;
-    width: 100%;
-    
+    top: 10%;
+    right: 10%;
+    bottom: 10%;
+    left: 10%;
+}
+
+div.clock-wrapper {
+    position: absolute;
+    width: 500px;
+    height: 500px;
     perspective: 500;
     -webkit-perspective: 500;
        -moz-perspective: 500;
@@ -24,23 +39,6 @@ div.screen {
        -moz-transform-style: preserve-3d;
         -ms-transform-style: preserve-3d;
          -o-transform-style: preserve-3d;
-    
-    user-select: none;
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-         -o-user-select: none;
-    
-    cursor: move;
-    overflow: hidden;
-}
-
-div.clock-wrapper {
-    position: absolute;
-    top: 10%;
-    right: 10%;
-    bottom: 10%;
-    left: 10%;
 }
 
 div.clock-wrapper div {
@@ -49,13 +47,8 @@ div.clock-wrapper div {
 
 div.clock {
     position: relative;
-    width: 500px;
-    height: 500px;
-    top: -250px;
-    left: -250px;
-    margin-top: 50%;
-    margin-left: 50%;
-    
+    width: 100%;
+    height: 100%;
     transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
        -moz-transform-style: preserve-3d;

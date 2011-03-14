@@ -6,17 +6,30 @@ Array.slice = function(){
     return slice.apply(arguments[0], slice.call(arguments, 1));
 };
 
+var scaleTransform = Modernizr.csstransforms3d ? function(scale){
+    return 'scale3d(' + [scale, scale, scale].join(',') + ')';
+} : function(scale){
+    return 'scale(' + scale + ')';
+};
+
 var methods = {
     
     rotate: function(value){
         this.style[CSS.transform] = 'rotate(' + (value * 360) + 'deg)';
     },
     
-    rotateXY: function(x, y, s){
-        var rotate = 'rotateX(' + (x % 360) + 'deg) rotateY(' + (y % 360) + 'deg)',
-            scale = 'scaleX(' + s + ') scaleY(' + s + ') scaleZ(' + s + ')';
-        
-        this.style[CSS.transform] = rotate + ' ' + scale;
+    scale: function(scale){
+        this.style[CSS.transform] = scaleTransform(scale);
+    },
+    
+    rotateXY: function(x, y){
+        var rotate = 'rotateX(' + (x % 360) + 'deg) rotateY(' + (y % 360) + 'deg)';
+        this.style[CSS.transform] = rotate;
+    },
+    
+    position: function(x, y){
+        this.style.left = x + 'px';
+        this.style.top = y + 'px';
     },
     
     addClass: function(){
@@ -161,6 +174,7 @@ Cursor.prototype = {
 
 var Clock = function(){
     this.elements = {
+        container: document.querySelector('div.clock-container'),
         wrapper: document.querySelector('div.clock-wrapper'),
         clock: document.querySelector('div.clock'),
         hour: document.querySelector('div.hands div.hour'),
@@ -189,17 +203,21 @@ Clock.prototype = {
     },
     
     initResize: function(){
-        var wrapper = this.elements.wrapper,
+        var container = this.elements.container,
+            wrapper = this.elements.wrapper,
             clock = this.elements.clock;
         
         var resize = (function(){
-            var dimension = Math.min(wrapper.clientWidth, wrapper.clientHeight),
-                scale = (dimension / clock.clientWidth);
+            var width = container.clientWidth,
+                height = container.clientHeight,
+                dimension = Math.min(width, height);
             
-            clock.scale = scale;
+            var x = (width / 2) - (clock.clientWidth / 2),
+                y = (height / 2) - (clock.clientHeight / 2);
+            
+            wrapper.position(x, y);
+            wrapper.scale(dimension / wrapper.clientWidth);
             clock.size = dimension;
-            
-            this.updatePerspective(this.perspective || new Vector(0, 0));
             
             return resize;
         }).bind(this);
@@ -273,9 +291,8 @@ Clock.prototype = {
     },
     
     updatePerspective: function(perspective){
-        var scale = this.elements.clock.scale;
         this.perspective = perspective;
-        this.elements.clock.rotateXY(-perspective.y * 360, perspective.x * 360, scale);
+        this.elements.clock.rotateXY(-perspective.y * 360, perspective.x * 360);
     }
     
 };
