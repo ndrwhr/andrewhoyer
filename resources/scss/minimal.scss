@@ -11,6 +11,11 @@ div.context {
     border: 1px solid #eee;
     z-index: 1000;
     text-align: center;
+    transform: translateZ(1000px);
+    -webkit-transform: translateZ(1000px);
+       -moz-transform: translateZ(1000px);
+        -ms-transform: translateZ(1000px);
+         -o-transform: translateZ(1000px);
     
     strong {
         font-weight: bold;
