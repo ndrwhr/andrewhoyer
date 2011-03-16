@@ -7,13 +7,39 @@ body {
     left: 0;
     background: black;
     overflow: hidden;
-    cursor: move;
-    
-    user-select: none;
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-         -o-user-select: none;
+}
+
+#support-message {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 500px;
+    padding: 10px;
+    margin: 5px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #555;
+    font-size: 20px;
+    color: white;
+    display: none;
+}
+
+#support-message.visible {
+    display: block;
+}
+
+#support-message p {
+    text-indent: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+#support-message p span, #support-message p a {
+    font-size: 130%;
+    color: #FF96B0;
+    text-decoration: none;
+}
+
+#support-message p a:hover {
+    color: white;
 }
 
 div.clock-container {
@@ -22,6 +48,21 @@ div.clock-container {
     right: 10%;
     bottom: 10%;
     left: 10%;
+    cursor: move;
+    user-select: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+         -o-user-select: none;
+}
+
+div.clock-container.partially-supported,
+div.clock-container.not-supported {
+    cursor: default;
+}
+
+div.clock-container.not-supported {
+    display: none;
 }
 
 div.clock-wrapper {

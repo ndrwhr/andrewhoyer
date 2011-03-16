@@ -300,17 +300,21 @@ Clock.prototype = {
 };
 
 document.addEvent('DOMContentLoaded', function(){
+    var support = document.getElementById('support-message'),
+        container = document.getElementById('clock');
     
-    if (Modernizr.csstransforms){
-        var clock = new Clock();
+    if (!Modernizr.csstransforms){
+        container.addClass('not-supported');
+        support.addClass('visible');
+    } else {
         
+        var clock = new Clock();
         if (Modernizr.csstransforms3d){
             clock.makeInteractive();
         } else {
-            // display video
+            container.addClass('partially-supported');
+            support.addClass('visible');
         }
-    } else {
-        // Display an incompatibility message
     }
     
 });
