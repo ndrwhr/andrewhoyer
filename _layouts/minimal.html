@@ -41,7 +41,7 @@
     
     {% if page.context != null %}
     {% assign context = page.context %}
-    <div class="context">
+    <div class="context {{ context.style }}">
         <p class="header"><a href="/">Andrew Hoyer</a>/<a href="/experiments/">Experiments</a></p>
         
         {% for description in context.description %}

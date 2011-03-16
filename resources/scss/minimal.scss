@@ -17,6 +17,20 @@ div.context {
         -ms-transform: translateZ(1000px);
          -o-transform: translateZ(1000px);
     
+    &.dark {
+        color: white;
+        background: rgba(0, 0, 0, 0.8);
+        border: 1px solid #777;
+        
+        a {
+            color: $red;
+        }
+        
+        a:hover {
+            color: white;
+        }
+    }
+    
     strong {
         font-weight: bold;
     }
