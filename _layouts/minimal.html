@@ -24,6 +24,10 @@
         <script src="/resources/js/{{ js }}?{{ gen_time }}" type="text/javascript" charset="utf-8"></script>
     {% endfor %}
     
+    {% for js in page.js %}
+        <script src="/resources/js/{{ js }}?{{ gen_time }}" type="text/javascript" charset="utf-8"></script>
+    {% endfor %}
+    
     {% for js in page.exp_js %}
         <script src="/resources/exp_src/{{ js }}?{{ gen_time }}" type="text/javascript" charset="utf-8"></script>
     {% endfor %}
@@ -37,7 +41,7 @@
     
     {% if page.context != null %}
     {% assign context = page.context %}
-    <div class="context">
+    <div class="context {{ context.style }}">
         <p class="header"><a href="/">Andrew Hoyer</a>/<a href="/experiments/">Experiments</a></p>
         
         {% for description in context.description %}

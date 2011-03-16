@@ -59,6 +59,11 @@ minimal_js:
     - minimal.js
 
 experiments:
+    - name:     CSS3-D Clock
+      date:     March 2011
+      url:      /experiments/clock/
+      image:    /resources/images/experiments/clock.jpg
+
     - name:     Type Rain
       date:     February 2011
       url:      /experiments/rain/
