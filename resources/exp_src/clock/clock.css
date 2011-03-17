@@ -14,7 +14,7 @@ body {
     top: 0;
     right: 0;
     width: 500px;
-    padding: 10px;
+    padding: 10px 25px 10px 10px;
     margin: 5px;
     background: rgba(0, 0, 0, 0.8);
     border: 1px solid #555;
@@ -33,14 +33,24 @@ body {
     margin-bottom: 0.5em;
 }
 
-#support-message p span, #support-message p a {
+#support-message p span, #support-message a {
     font-size: 130%;
     color: #FF96B0;
     text-decoration: none;
 }
 
-#support-message p a:hover {
+#support-message a:hover {
     color: white;
+}
+
+#close-button {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+#close-button:hover {
+    background: none;
 }
 
 div.clock-container {

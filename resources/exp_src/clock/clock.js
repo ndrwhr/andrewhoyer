@@ -317,4 +317,7 @@ document.addEvent('DOMContentLoaded', function(){
         }
     }
     
+    document.getElementById('close-button').addEventListener('click', function(){
+        support.style.display = 'none';
+    }, false);
 });
