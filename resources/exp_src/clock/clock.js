@@ -307,7 +307,6 @@ document.addEvent('DOMContentLoaded', function(){
         container.addClass('not-supported');
         support.addClass('visible');
     } else {
-        
         var clock = new Clock();
         if (Modernizr.csstransforms3d){
             clock.makeInteractive();
