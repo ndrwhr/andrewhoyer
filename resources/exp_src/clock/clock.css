@@ -29,6 +29,7 @@ body {
 
 #support-message p {
     text-indent: 0.5em;
+    line-height: 130%;
     margin-bottom: 0.5em;
 }
 
