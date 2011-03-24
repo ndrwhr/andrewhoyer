@@ -508,8 +508,20 @@ Simulation.prototype = {
     },
     
     run: function(){
-        this.drop_counter.innerHTML = this.rain.update();
-        setTimeout(this.run.bind(this), 30);
+        var counter = this.drop_counter,
+            rain = this.rain,
+            time = +new Date;
+        
+        (function loop(){
+            var current = +new Date;
+            
+            if ((current - time) > 25){ // cap at 25 ms/frame
+                counter.innerHTML = rain.update();
+                time = current;
+            }
+            
+            requestAnimFrame(loop);
+        })();
     }
     
 };
