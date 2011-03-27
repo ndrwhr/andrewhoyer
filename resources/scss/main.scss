@@ -11,6 +11,7 @@ body {
     margin: 0px auto;
     text-align: center;
     color: $site-color;
+    text-shadow:  1px 1px lighten($site-color, 45%);
     background: {
         image: url(../images/background.jpg);
         position: top center;

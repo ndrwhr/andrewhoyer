@@ -28,6 +28,7 @@ a {
         text-decoration: none;
         background-color: #87c6d0;
         color: white;
+        text-shadow: none;
     }
     
     @include link-hover(orange, $orange);
