@@ -1,0 +1,36 @@
+---
+layout: minimal
+---
+<style type="text/css" media="screen">
+    #box {
+        position: absolute;
+        height: 100px;
+        width: 100px;
+        background: blue;
+        -webkit-transition: -webkit-transform 30s linear;
+    }
+    
+    #box.out {
+        -webkit-transform: translate(100px, 100px);
+    }
+    
+    #box.in {
+        -webkit-transform: translate(0, 0);
+    }
+</style>
+
+<div id="box"></div>
+
+<script type="text/javascript" charset="utf-8">
+
+var on;
+
+var transition = function(){
+    document.getElementById('box').className = on ? 'in' : 'out';
+    on = !on;
+    return transition;
+};
+
+setInterval(transition(), 30000);
+
+</script>
