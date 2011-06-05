@@ -1,0 +1,3 @@
+[submodule "experiments/clock"]
+	path = experiments/clock
+	url = git@github.com:ndrwhr/css3d-clock.git
