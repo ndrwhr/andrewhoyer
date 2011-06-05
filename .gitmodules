@@ -4,3 +4,6 @@
 [submodule "experiments/rain"]
 	path = experiments/rain
 	url = git@github.com:ndrwhr/typographic-rain.git
+[submodule "experiments/mobeh"]
+	path = experiments/mobeh
+	url = git@github.com:ndrwhr/mobeh-dick.git
