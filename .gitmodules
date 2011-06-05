@@ -1,3 +1,6 @@
 [submodule "experiments/clock"]
 	path = experiments/clock
 	url = git@github.com:ndrwhr/css3d-clock.git
+[submodule "experiments/rain"]
+	path = experiments/rain
+	url = git@github.com:ndrwhr/typographic-rain.git
