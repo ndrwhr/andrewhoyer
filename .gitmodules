@@ -10,3 +10,6 @@
 [submodule "experiments/walking"]
 	path = experiments/walking
 	url = git@github.com:ndrwhr/css3-walking-man.git
+[submodule "experiments/sudoku"]
+	path = experiments/sudoku
+	url = git@github.com:ndrwhr/simple-sudoku-solver.git
