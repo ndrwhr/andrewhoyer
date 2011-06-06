@@ -7,3 +7,6 @@
 [submodule "experiments/mobeh"]
 	path = experiments/mobeh
 	url = git@github.com:ndrwhr/mobeh-dick.git
+[submodule "experiments/walking"]
+	path = experiments/walking
+	url = git@github.com:ndrwhr/css3-walking-man.git
