@@ -16,3 +16,6 @@
 [submodule "experiments/fractals"]
 	path = experiments/fractals
 	url = git@github.com:ndrwhr/simple-fractals.git
+[submodule "experiments/something_a_day"]
+	path = experiments/something_a_day
+	url = git@github.com:ndrwhr/something-a-day.git
