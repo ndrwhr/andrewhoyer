@@ -13,3 +13,6 @@
 [submodule "experiments/sudoku"]
 	path = experiments/sudoku
 	url = git@github.com:ndrwhr/simple-sudoku-solver.git
+[submodule "experiments/fractals"]
+	path = experiments/fractals
+	url = git@github.com:ndrwhr/simple-fractals.git
