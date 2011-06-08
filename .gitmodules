@@ -22,3 +22,6 @@
 [submodule "experiments/numbers"]
 	path = experiments/numbers
 	url = git@github.com:ndrwhr/numbers-to-words.git
+[submodule "experiments/cloth"]
+	path = experiments/cloth
+	url = git@github.com:ndrwhr/cloth-simulation.git
