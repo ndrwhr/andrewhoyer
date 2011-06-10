@@ -28,3 +28,6 @@
 [submodule "experiments/robotarm"]
 	path = experiments/robotarm
 	url = git@github.com:ndrwhr/robotic-arm.git
+[submodule "experiments/particle_system"]
+	path = experiments/particle_system
+	url = git@github.com:ndrwhr/particle-system.git
