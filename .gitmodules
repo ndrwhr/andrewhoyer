@@ -25,3 +25,6 @@
 [submodule "experiments/cloth"]
 	path = experiments/cloth
 	url = git@github.com:ndrwhr/cloth-simulation.git
+[submodule "experiments/robotarm"]
+	path = experiments/robotarm
+	url = git@github.com:ndrwhr/robotic-arm.git
