@@ -31,3 +31,6 @@
 [submodule "experiments/particle_system"]
 	path = experiments/particle_system
 	url = git@github.com:ndrwhr/particle-system.git
+[submodule "experiments/dripsessions"]
+	path = experiments/dripsessions
+	url = git@github.com:ndrwhr/drip-sessions.git
