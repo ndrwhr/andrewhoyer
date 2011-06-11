@@ -15,13 +15,15 @@ loader:         /resources/images/loader.gif
 
 nav:
     - name:     Andrew Hoyer
-      url:      /
 
-    - name:     (blog)
+    - name:     experiments
+      url:      /experiments/
+
+    - name:     blog
       url:      /blog/
 
-    - name:     (experiments)
-      url:      /experiments/
+    - name:     about
+      url:      /about/
 
 contact:
     - id:       twitter

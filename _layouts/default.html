@@ -28,7 +28,19 @@
     {% include warnings.html %}
     
     <header>
-        {% include nav.html %}
+        <nav>
+            <ul>
+                {% for link in site.nav %}
+                <li>
+                    {% if link.url %}
+                        <a href="{{ link.url }}" {% if page.name == link.name %}class="current"{% endif %}>{{ link.name }}</a>
+                    {% else %}
+                        {{ link.name }}
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
     </header>
     
     <section class="content">
