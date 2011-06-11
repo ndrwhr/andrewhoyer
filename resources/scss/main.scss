@@ -1,1 +1,136 @@
 @import "base";
+@import "pygments";
+@import "variables";
+
+body {
+    font-family: lucida grande, serif;
+    color: $font-color;
+    letter-spacing: -0.07em;
+    font-size: 12px;
+    background: $background-color;
+    line-height: 1.2em;
+}
+
+a {
+    color: $link-color;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+h3 {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+}
+
+nav {
+    height: 75px;
+    margin: 40px;
+    ul li {
+        display: inline;
+        margin: 10px 3px;
+        color: #ddd;
+
+        a {
+            padding: 3px 7px 4px;
+            border-radius: 5px;
+            color: $font-color;
+            text-decoration: none;
+
+            &.current {
+                background: #ddd;
+            }
+
+            &:hover {
+                background: #e5e5e5;
+            }
+        }
+    }
+}
+
+header, section.content {
+    width: 980px;
+    margin: 0 auto;
+}
+
+section.content {
+    font-size: 0.9em;
+}
+
+section.recent-blog-posts {
+    width: 200px;
+    float: right;
+    margin-right: 20px;
+    padding-top: 20px;
+
+    p.post-date {
+        color: #aaa;
+    }
+}
+
+section.experiments {
+    margin: 0 200px 0 20px;
+
+    canvas {
+        display: block;
+        background: white;
+        border-radius: 5px;
+        margin-bottom: 1em;
+        box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.1);
+    }
+
+    ul {
+        display: inline-block;
+    }
+
+    ul li {
+        display: inline-block;
+        float: left;
+        width: 200px;
+        padding: 20px;
+
+        a {
+            color: $font-color;
+            text-decoration: none;
+        }
+
+        &.new::before, &.newish::before {
+            content: "new";
+            position: absolute;
+            width: 75px;
+            padding: 2px 7px;
+            color: white;
+            background: #D61B2C;
+            font-size: 0.9em;
+            font-weight: bold;
+            border-top-left-radius: 5px;
+        }
+
+        &.newish::before {
+            content: "new-ish";
+            background: #D61B2C;
+            opacity: 0.25;
+        }
+    }
+
+    &::after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+}
+
+footer {
+    border-top: 1px solid #eee;
+    font-size: 0.8em;
+    color: #aaa;
+    padding: 40px;
+}
+
+footer p {
+    width: 50%;
+}
