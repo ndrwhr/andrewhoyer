@@ -54,12 +54,14 @@ default_js:
 
 experiments:
     - name:     CSS3-D Clock
+      label:    new
       date:     March 2011
       url:      /experiments/clock/
       image:    /resources/images/experiments/clock.jpg
       description: A fully 3D clock implemented using nothing but divs and CSS3 3D-transforms.
 
     - name:     Type Rain
+      label:    newish
       date:     February 2011
       url:      /experiments/rain/
       image:    /resources/images/experiments/rain.jpg

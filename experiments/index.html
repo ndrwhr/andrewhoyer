@@ -9,7 +9,7 @@ name: experiments
         <div class="post">
             <h3>{{ post.title }}</h3>
             <p class="post-date">Posted on {{ post.date | date:"%B %d" }}</p>
-            <p>{{ post.content | strip_html | truncate: 250 }}</p>
+            <p>{{ post.content | strip_html | truncate: 350 }}</p>
             <p><a href="{{ post.url }}">Read More...</a></p>
         </div>
     {% endfor %}
@@ -22,11 +22,10 @@ name: experiments
         <ul>
         {% for experiment in site.experiments limit:3 offset:offset %}
 
-            <li>
+            <li class="{{ experiment.label }}">
                 <a href="{{ experiment.url }}">
-                    <canvas></canvas>
+                    <canvas width="200px" height="125px"></canvas>
                     <h3>{{ experiment.name }}</h3>
-                    <p>{{ experiment.date }}</p>
                     <p>{{ experiment.description }}</p>
                 </a>
             </li>
