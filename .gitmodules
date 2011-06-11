@@ -1,0 +1,36 @@
+[submodule "experiments/clock"]
+	path = experiments/clock
+	url = git@github.com:ndrwhr/css3d-clock.git
+[submodule "experiments/rain"]
+	path = experiments/rain
+	url = git@github.com:ndrwhr/typographic-rain.git
+[submodule "experiments/mobeh"]
+	path = experiments/mobeh
+	url = git@github.com:ndrwhr/mobeh-dick.git
+[submodule "experiments/walking"]
+	path = experiments/walking
+	url = git@github.com:ndrwhr/css3-walking-man.git
+[submodule "experiments/sudoku"]
+	path = experiments/sudoku
+	url = git@github.com:ndrwhr/simple-sudoku-solver.git
+[submodule "experiments/fractals"]
+	path = experiments/fractals
+	url = git@github.com:ndrwhr/simple-fractals.git
+[submodule "experiments/something_a_day"]
+	path = experiments/something_a_day
+	url = git@github.com:ndrwhr/something-a-day.git
+[submodule "experiments/numbers"]
+	path = experiments/numbers
+	url = git@github.com:ndrwhr/numbers-to-words.git
+[submodule "experiments/cloth"]
+	path = experiments/cloth
+	url = git@github.com:ndrwhr/cloth-simulation.git
+[submodule "experiments/robotarm"]
+	path = experiments/robotarm
+	url = git@github.com:ndrwhr/robotic-arm.git
+[submodule "experiments/particle_system"]
+	path = experiments/particle_system
+	url = git@github.com:ndrwhr/particle-system.git
+[submodule "experiments/dripsessions"]
+	path = experiments/dripsessions
+	url = git@github.com:ndrwhr/drip-sessions.git
