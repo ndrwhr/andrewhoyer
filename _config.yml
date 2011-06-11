@@ -46,14 +46,9 @@ contact:
 
 default_css:
     - main.css
-minimal_css:
-    - minimal.css
 
 default_js:
-    - mootools-1.2.4-core-yc.js
     - main.js
-minimal_js:
-    - minimal.js
 
 experiments:
     - name:     CSS3-D Clock
