@@ -19,12 +19,9 @@ nav:
 
     - name:     (blog)
       url:      /blog/
-    
+
     - name:     (experiments)
       url:      /experiments/
-
-    - name:     (thoughts)
-      url:      /thoughts/
 
 contact:
     - id:       twitter
