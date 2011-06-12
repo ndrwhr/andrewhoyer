@@ -8,7 +8,7 @@ body {
     letter-spacing: -0.07em;
     font-size: 12px;
     background: $background-color;
-    line-height: 1.2em;
+    line-height: 1.3em;
 }
 
 a {
@@ -19,10 +19,39 @@ p {
     margin-bottom: 1em;
 }
 
-h3 {
+pre {
+    overflow: auto;
+    margin: 10px 10px 30px;
+    padding: 20px;
+    border: 1px solid #e5e5e5;
+}
+
+code {
+    font-family: courier, monospace;
+}
+
+h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
-    font-size: 1.2em;
     margin-bottom: 0.5em;
+}
+
+h1 {
+    font-size: 1.6em;
+}
+
+h2 {
+    font-size: 1.4em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+.clearfix {
+    margin: 0;
+    padding: 0;
+    height: 0;
+    clear: both;
 }
 
 nav {
@@ -78,7 +107,7 @@ section.experiments {
         background: white;
         border-radius: 5px;
         margin-bottom: 1em;
-        box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.1);
+        // box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.1);
     }
 
     ul {
@@ -121,6 +150,78 @@ section.experiments {
         height: 0;
         clear: both;
         visibility: hidden;
+    }
+}
+
+section.posts {
+    margin: 0 40px;
+
+    ul {
+        display: inline-block;
+    }
+
+    ul li {
+        float: left;
+        display: inline-block;
+        width: 410px;
+        padding: 0 40px 40px 0;
+
+        h3 a {
+            color: $font-color;
+        }
+
+        p.post-date {
+            color: #aaa;
+        }
+    }
+
+    &::after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+}
+
+article {
+    font-size: 1.1em;
+    line-height: 1.3em;
+    width: 700px;
+    margin: 0 auto;
+
+    h2, h3, h4, h5, h6 {
+        margin-bottom: 1.3em;
+    }
+
+    p.post-date {
+        color: #aaa;
+        margin-bottom: 2em;
+    }
+
+    p, ul, ol {
+        margin-bottom: 2em;
+    }
+
+    img {
+        display: block;
+        margin: 0 auto;
+    }
+
+    ul li {
+        margin: 0 0 0.5em 3em;
+        list-style: circle;
+    }
+
+    .pagination {
+        margin-bottom: 40px;
+        .next {
+            float: right;
+            text-align: right;
+        }
+        .prev {
+            float: left;
+        }
     }
 }
 

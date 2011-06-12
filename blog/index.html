@@ -1,35 +1,23 @@
 ---
 layout: default
-css:
-    - blog.css
+name: blog
 ---
 
-<p id='intro'>I honestly used to hate the idea of having a blog, but now look at me... <strong>*lowers chin and shakes head*</strong></p>
-
-{% assign prev_month = '' %}
-{% assign prev_year = '' %}
-
-{% assign current_month = '' %}
-{% assign current_year = '' %}
-
-{% for post in site.posts %}
-	{% assign current = post.date %}
-	{% capture current_year %}{{ current | date: "%Y" }}{% endcapture %}
-	{% capture current_month %}{{ current | date: "%B" }}{% endcapture %}
-	
-	{% if current_year != prev_year or current_month != prev_month %}
-	    <div class='month {% if prev_month == '' %}first{% endif %}'>{{ current_month }} <span>({{ current_year }})</span></div>
-	    {% assign prev_month = current_month %}
-	    {% assign prev_year = current_year %}
-	{% endif %}
-	
-	<div class='post'>
-		<div><a href='{{ post.url }}'>{{ current | date: "%d"}}</a></div>
-		<p><a href='{{ post.url }}'>{{ post.title | downcase }} &rsaquo;</a></p>
-		<p class='content'>
-			{{ post.content | strip_html | truncate: 250 | downcase }}
-			<a href='{{ post.url }}'>(read more…)</a>
-		</p>
-	</div>	
-{% endfor %}
-
+<section class="posts">
+    {% capture iterations %}{{ site.posts | size | divided_by:2 | minus:1 }}{% endcapture %}
+    {% for iteration in (0..iterations) %}
+        {% capture offset %}{{ iteration | times:2 }}{% endcapture %}
+        <ul>
+        {% for post in site.posts limit:2 offset:offset %}
+            <li>
+                <h3><a href="{{ post.url }}">{{ post.title }} &rsaquo;</a></h3>
+                <p class="post-date">{{ post.date | date:"%B %d, %Y" }}</p>
+                <p class="content">
+                    {{ post.content | strip_html | truncate: 275 }}
+                    <a href="{{ post.url }}">(read more…)</a>
+                </p>
+            </li>
+        {% endfor %}
+        </ul>
+    {% endfor %}
+</section>
