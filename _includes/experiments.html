@@ -19,7 +19,7 @@
 
             <li class="{{ experiment.label }}">
                 <a href="{{ experiment.url }}">
-                    <canvas width="200px" height="125px"></canvas>
+                    <canvas id="{{ experiment.points }}" width="200px" height="125px"></canvas>
                     <h3>{{ experiment.name }}</h3>
                     <p>{{ experiment.description }}</p>
                 </a>
@@ -30,3 +30,5 @@
     {% endfor %}
 
 </section>
+<script src="/resources/js/experiments.js" type="text/javascript" charset="utf-8"></script>
+<script src="/resources/js/doodler.js" type="text/javascript" charset="utf-8"></script>
