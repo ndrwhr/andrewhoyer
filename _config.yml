@@ -49,9 +49,6 @@ contact:
 default_css:
     - main.css
 
-default_js:
-    - main.js
-
 experiments:
     - name:     CSS3-D Clock
       label:    new
