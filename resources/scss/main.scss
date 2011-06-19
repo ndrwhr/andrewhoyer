@@ -3,9 +3,8 @@
 @import "variables";
 
 body {
-    font-family: lucida grande, serif;
+    font-family: lucida grande, lucida, helvetica, sans-serif;
     color: $font-color;
-    letter-spacing: -0.07em;
     font-size: 12px;
     background: $background-color;
     line-height: 1.3em;
@@ -96,7 +95,7 @@ section.experiments {
     canvas {
         display: block;
         background: white;
-        border-radius: 5px;
+        @include border-radius($border-radius);
         margin-bottom: 1em;
     }
 
