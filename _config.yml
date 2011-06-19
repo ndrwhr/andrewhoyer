@@ -15,16 +15,15 @@ loader:         /resources/images/loader.gif
 
 nav:
     - name:     Andrew Hoyer
-      url:      /
 
-    - name:     (blog)
-      url:      /blog/
-    
-    - name:     (experiments)
+    - name:     experiments
       url:      /experiments/
 
-    - name:     (thoughts)
-      url:      /thoughts/
+    - name:     blog
+      url:      /blog/
+
+    - name:     about
+      url:      /about/
 
 contact:
     - id:       twitter
@@ -49,77 +48,95 @@ contact:
 
 default_css:
     - main.css
-minimal_css:
-    - minimal.css
-
-default_js:
-    - mootools-1.2.4-core-yc.js
-    - main.js
-minimal_js:
-    - minimal.js
 
 experiments:
     - name:     CSS3-D Clock
+      label:    new
       date:     March 2011
       url:      /experiments/clock/
       image:    /resources/images/experiments/clock.jpg
+      points:   css-clock
+      description: A fully 3D clock implemented using nothing but divs and CSS3 3D-transforms.
 
     - name:     Type Rain
+      label:    newish
       date:     February 2011
       url:      /experiments/rain/
       image:    /resources/images/experiments/rain.jpg
+      points:   type-rain
+      description: Nice little rain simulation built using DIVS and CSS Transforms (Makes browsers cry).
 
     - name:     Mobeh Dick
       date:     October 2010
       url:      /experiments/mobeh/
       image:    /resources/images/experiments/mobeh.jpg
+      points:   mobeh
+      description: A goofy experiment in which me and the girlfriend translated the first chapter of Moby Dick into internet-speak.
 
     - name:     Walking With CSS
       date:     October 2010
       url:      /experiments/walking/
       image:    /resources/images/experiments/walking.jpg
+      points:   walking-with-css
+      description: A fully animated figure (myself) using nothing by CSS animations.
 
     - name:     Sudoku Solver
       date:     July 2010
       blog:     /blog/2010/06/28/sudoku-solver/
       url:      /experiments/sudoku/
       image:    /resources/images/experiments/sudoku.jpg
+      points:   sudoku-solver
+      description: A nifty solver that uses simple human strategies to solve sudokus.
 
     - name:     Simple Fractals
       date:     May 2010
       blog:     /blog/2010/05/17/fractals/
       url:      /experiments/fractals/
       image:    /resources/images/experiments/fractals.jpg
+      points:   simple-fractals
+      description: An experiment in which I really just wanted to play with drawing recursive objects.
 
     - name:     Something A Day
       date:     January 2010
       url:      /experiments/something_a_day/
       image:    /resources/images/experiments/somethingaday.jpg
+      points:   something-a-day
+      description: For an entire year I tried writting down one "interesting" thing every single day.
 
     - name:     Cloth Simulation
       date:     August 2009
       blog:     /blog/2009/08/24/the-cloth-simulation/
       url:      /experiments/cloth/
       image:    /resources/images/experiments/cloth.jpg
+      points:    cloth-simulation
+      description: An elegant cloth simulation built on top of the HTML5 Canvas element.
 
     - name:     Numbers to Words
       date:     June 2009
       url:      /experiments/numbers/
       image:    /resources/images/experiments/numbers.jpg
+      points:   numbers-to-words
+      description: Silly experiment that converts just about any integer into words in only 8 lines of code.
 
     - name:     Particle System
       date:     April 2009
       blog:     /blog/2009/04/01/particles/
       url:      /experiments/particle_system/
       image:    /resources/images/experiments/particles.jpg
+      points:   particle-system
+      description: A simple N-Body particle simulation.
 
     - name:     Drip Sessions
       date:     February 2009
       blog:     /blog/2009/02/01/drip-sessions/
       url:      /experiments/dripsessions/
       image:    /resources/images/experiments/dripsessions.jpg
+      points:   drip-sessions
+      description: An early experiment trying to mimic grafitti using HTML5 Canvas.
 
     - name:     Robotic Arm
       date:     December 2008
       url:      /experiments/robotarm/
       image:    /resources/images/experiments/robotarm.jpg
+      points:   robotic-arm
+      description: My first venture into the word of JS and Canvas. The code is awful. The experiment is buggy. I like to keep this one around just for sentimental reasons.

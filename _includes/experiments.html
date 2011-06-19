@@ -1,0 +1,35 @@
+
+<section class="recent-blog-posts">
+    {% for post in site.posts limit:2 %}
+        <div class="post">
+            <h3>{{ post.title }}</h3>
+            <p class="post-date">Posted on {{ post.date | date:"%B %d, %Y" }}</p>
+            <p>{{ post.content | strip_html | truncate: 350 }}</p>
+            <p><a href="{{ post.url }}">Read More...</a></p>
+        </div>
+    {% endfor %}
+</section>
+
+<section class="experiments">
+    {% capture iterations %}{{ site.experiments | size | divided_by:3 | minus:1 }}{% endcapture %}
+    {% for iteration in (0..iterations) %}
+        {% capture offset %}{{ iteration | times:3 }}{% endcapture %}
+        <ul>
+        {% for experiment in site.experiments limit:3 offset:offset %}
+
+            <li class="{{ experiment.label }}">
+                <a href="{{ experiment.url }}">
+                    <canvas id="{{ experiment.points }}" width="200px" height="125px"></canvas>
+                    <h3>{{ experiment.name }}</h3>
+                    <p>{{ experiment.description }}</p>
+                </a>
+            </li>
+
+        {% endfor %}
+        </ul>
+    {% endfor %}
+</section>
+
+<script src="/resources/js/experiments/modernizr.js" type="text/javascript" charset="utf-8"></script>
+<script src="/resources/js/experiments/experiments.js" type="text/javascript" charset="utf-8"></script>
+<script src="/resources/js/experiments/doodler.js" type="text/javascript" charset="utf-8"></script>

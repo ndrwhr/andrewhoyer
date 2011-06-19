@@ -1,24 +1,7 @@
 ---
 layout: default
 permalink: /
+name: experiments
 ---
 
-{% assign class = 'odd' %}
-
-<p id='intro'>I alway have a million ideas in my head, its a shame that so few actually get implemented:</p>
-
-<ul id="experiments">
-{% for experiment in site.experiments %}
-    <li class="{{ class }}">
-        <a class='thumb' href="{{ experiment.url }}"><img width='350px' height='100px' src="{{ experiment.image }}"/></a>
-        <a class='link' href="{{ experiment.url }}">{{ experiment.name | downcase }}</a> <span>({{ experiment.date }})</span>
-    </li>
-    
-    {% if class == 'odd' %}
-        {% assign class = 'even' %}
-    {% else %}
-        {% assign class = 'odd' %}
-    {% endif %}
-    
-{% endfor %}
-</ul>
+{% include experiments.html %}

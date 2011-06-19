@@ -1,68 +1,14 @@
 @import "compass/reset";
-@import "pygments";
+@import "compass/support";
+@import "compass/css3";
 
-$site-color: #777;
+$experimental-support-for-mozilla: true;
+$experimental-support-for-webkit: true;
+$experimental-support-for-opera: true;
+$experimental-support-for-microsoft: true;
 
-$orange: #f3a271;
-$green: #7acf6f;
-$red: #F08080;
-$teal: #75c9ab;
-$purple: #db98d7;
-$yellow: #e0e562;
-
-@mixin link-hover($name, $color){
-    &.#{$name}:hover { background-color: $color };
-}
-
-body {
-    // the reset from compass fucks everything up.
-    line-height: inherit;
-    color: $site-color;
-    font-family: georgia, serif;
-}
-
-a {
-    text-decoration: underline;
-    color: #777;
-    &:hover {
-        text-decoration: none;
-        background-color: #87c6d0;
-        color: white;
-        text-shadow: none;
-    }
-    
-    @include link-hover(orange, $orange);
-    @include link-hover(green, $green);
-    @include link-hover(red, $red);
-    @include link-hover(teal, $teal);
-    @include link-hover(purple, $purple);
-    @include link-hover(yellow, $yellow);
-}
-
-h1, h2, h3, h4, h5, h6 {
-    display: inline-block;
-    font-weight: normal;
-    letter-spacing: -0.06em;
-    background-color: #eee;
-    margin-bottom: 15px;
-}
-
-h1 { font-size: 30px; }
-h2 { font-size: 25px; }
-h3 { font-size: 20px; }
-h4 { font-size: 15px; }
-h5 { font-size: 10px; }
-h6 { font-size:  5px; }
-
-pre {
-    font-family: monaco, monospace;
-    font-size: 0.8em;
-    border: 1px solid #ccc;
-    margin-bottom: 15px;
-    padding: 5px 10px;
-    overflow: auto;
-}
-
-code {
-    font-family: monaco, monospace;
+// A little more reset (HTML5 tags).
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
 }

@@ -5,7 +5,6 @@
     
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="google-site-verification" content="Br-vdo-tI_IepKZayqb0UzGTgoz5otEAdD-MLQv_OYU" />
-    <meta name="generator" content="Jekyll" />
     <meta name="author" content="{{ site.author }}" />
     <meta name="description" content="{{ site.description }}" />
     
@@ -17,24 +16,8 @@
         <link rel="stylesheet" href="/resources/css/{{ css }}?{{ gen_time }}" type="text/css" />
     {% endfor %}
     
-    {% for css in page.css %}
-        <link rel="stylesheet" href="/resources/css/{{ css }}?{{ gen_time }}" type="text/css" />
-    {% endfor %}
-    
-    {% for css in page.exp_css %}
-        <link rel="stylesheet" href="/resources/exp_src/{{ css }}?{{ gen_time }}" type="text/css" />
-    {% endfor %}
-    
-    {% for js in site.default_js %}
-        <script src="/resources/js/{{ js }}?{{ gen_time }}" type="text/javascript" charset="utf-8"></script>
-    {% endfor %}
-    
     {% for js in page.js %}
         <script src="/resources/{{ js }}?{{ gen_time }}" type="text/javascript" charset="utf-8"></script>
-    {% endfor %}
-    
-    {% for js in page.exp_js %}
-        <script src="/resources/exp_src/{{ js }}?{{ gen_time }}" type="text/javascript" charset="utf-8"></script>
     {% endfor %}
     
 </head>
@@ -45,18 +28,32 @@
     {% include warnings.html %}
     
     <header>
-        {% include nav.html %}
+        <nav>
+            <ul>
+                {% for link in site.nav %}
+                <li>
+                    {% if link.url %}
+                        <a href="{{ link.url }}" {% if page.name == link.name %}class="current"{% endif %}>{{ link.name }}</a>
+                    {% else %}
+                        {{ link.name }}
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
     </header>
     
-    <div id='content'>
+    <section class="content">
         {{ content }}
-    </div>
+    </section>
     
-    {% if page.no_footer == null %}
     <footer>
-        {% include social.html %}
+        <div>
+            <h3>Generic Footer:</h3>
+            <p>Feel free to contact me via <a class="twitter" target="_blank" href="http://twitter.com/ndrwhr">the twitter</a>, <a  class="facebook" target="_blank" href="http://facebook.com/ahoyer">the facebook</a>, <a class="github" target="_blank" href="http://github.com/ndrwhr">the github</a> or <a class="email" target="_blank" href="mailto:me@andrew-hoyer.com">the email</a>. I also have a handy <a class="feed" target="_blank" href="http://andrew-hoyer.com/atom.xml">rss feed</a> available for my blog.</p>
+            <div class="clearfix"></div>
+        </div>
     </footer>
-    {% endif %}
     
 </body>
 </html>
