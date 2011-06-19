@@ -3,7 +3,7 @@
     {% for post in site.posts limit:2 %}
         <div class="post">
             <h3>{{ post.title }}</h3>
-            <p class="post-date">Posted on {{ post.date | date:"%B %d" }}</p>
+            <p class="post-date">Posted on {{ post.date | date:"%B %d, %Y" }}</p>
             <p>{{ post.content | strip_html | truncate: 350 }}</p>
             <p><a href="{{ post.url }}">Read More...</a></p>
         </div>
