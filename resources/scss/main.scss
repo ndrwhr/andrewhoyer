@@ -19,13 +19,6 @@ p {
     margin-bottom: 1em;
 }
 
-pre {
-    overflow: auto;
-    margin: 10px 10px 40px;
-    padding: $half-space;
-    border: 1px solid $border-color;
-}
-
 code {
     font-family: courier, monospace;
 }
@@ -187,6 +180,15 @@ article {
     width: 700px;
     margin: 0 auto;
 
+    pre {
+        overflow: auto;
+        margin: 10px 10px 40px;
+        padding: $half-space;
+        border: 1px solid $border-color;
+        background: white;
+        @include border-radius($border-radius);
+    }
+
     h2, h3, h4, h5, h6 {
         margin-bottom: 1.3em;
     }
@@ -218,6 +220,48 @@ article {
         }
         .prev {
             float: left;
+        }
+    }
+}
+
+section.about {
+    width: 600px;
+    margin: 0 auto 40px;
+    border: 1px solid #eee;
+    background: white;
+    color: #999;
+    @include border-radius($border-radius);
+
+    h1 {
+        background: #eee;
+        padding: 4px 10px;
+        margin: 0;
+        font-size: $font-size;
+        font-weight: normal;
+        border-bottom: #eee;
+        code {
+            display: block;
+            float: right;
+        }
+    }
+
+    pre {
+        padding: 5px 10px;
+        &.main {
+            margin-left: 35px;
+            span {
+                &.var{
+                    color:#f3a271;/*orange*/
+                }
+                &.string{
+                    color:#7acf6f;/*green*/
+                }
+            }
+        }
+        &.gutter {
+            float: left;
+            color: #ddd;
+            border-right: 1px solid #f5f5f5;
         }
     }
 }
