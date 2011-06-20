@@ -1,9 +1,9 @@
 var andrew = {
     fullName: "Andrew Hoyer",
 
-    title: "Computer Scientist (Extraordinaire)",
+    title: "Computer Scientist/Engineer",
 
-    homeTown: "Edmonton, AB, Canada",
+    homeTown: "Edmonton AB, Canada",
 
     currentLocation: "San Francisco, CA",
 
@@ -20,19 +20,57 @@ var andrew = {
         }
     },
 
-    likes: ["maths", "peanut butter", "bowling", "taking pictures", "reading",
-            "Smultzy Music", "Walking", "Sudokus", "W(p)GtR", "Programming",
-            "Nerdy Jokes"],
+    likes: [
+        "maths",
+        "peanut butter",
+        "bowling",
+        "reading",
+        "Smultzy Music",
+        "Walking",
+        "Sudokus",
+        "W(p)GtR",
+        "Programming",
+        "Nerdy Jokes"
+    ],
 
-    loves: ["Javascript", "Snow", "Dogs"],
+    loves: [
+        "Javascript",
+        "Snow",
+        "Dogs"
+    ],
 
-    dislikes: ["Naps", "The word 'cyberspace'",  "Angry Music", "Liver Sausage", "Emoticons", "Pickles", "Drama", "One up-ers"],
+    dislikes: [
+        "Naps",
+        "The word 'cyberspace'",
+        "Angry Music",
+        "Liver Sausage",
+        "Emoticons",
+        "Pickles",
+        "Drama",
+        "One up-ers"
+    ],
 
-    hates: ["People chewing with their mouth open"],
+    hates: [
+        "People chewing with their mouth open"
+    ],
 
-    afewThingsIKnow: ["Javascript", "C", "Ruby", "CSS", "HTML", "ASL"],
+    afewThingsIKnow: [
+        "JavaScript",
+        "C",
+        "Ruby",
+        "CSS(3)",
+        "HTML(5)",
+        "ASL"
+    ],
 
-    afewDavesIKnow: ["Dave Hoyer", "David Wahlstrom", "David Maidens", "David Bonar", "David Russell", "David McClelland"],
+    afewDavesIKnow: [
+        "Dave Hoyer",
+        "David Wahlstrom",
+        "David Maidens",
+        "David Bonar",
+        "David Russell",
+        "David McClelland"
+    ],
 
     preferedContact: "<a href=\"mailto:me@andrew-hoyer.com\">me@andrew-hoyer.com</a>",
 
