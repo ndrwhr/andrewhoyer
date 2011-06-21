@@ -157,4 +157,15 @@ canvases.forEach(function(canvas, index){
 
 });
 
+if (!Modernizr.touch) (function cycleDoodle(index){
+    var doodle = doodles[index];
+
+    doodle.forwards(function(){
+        setTimeout(function(){
+            doodle.reverse();
+            cycleDoodle((index + 1) % doodles.length);
+        }, 1000);
+    });
+})(0);
+
 })();
