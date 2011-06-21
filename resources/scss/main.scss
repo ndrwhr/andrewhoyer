@@ -224,8 +224,7 @@ article {
 }
 
 section.about {
-    width: 600px;
-    margin: 0 auto 40px;
+    margin: 0 40px 40px;
     border: 1px solid #eee;
     background: white;
     color: #999;
@@ -266,7 +265,6 @@ section.about {
 }
 
 footer {
-    border-top: 1px solid $border-color;
     font-size: 0.8em;
     color: $light-font-color;
     padding: $half-space 0;
