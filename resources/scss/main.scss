@@ -80,6 +80,11 @@ section.recent-blog-posts {
     margin-right: $half-space;
     padding-top: $half-space;
 
+    h3 a {
+        color: $font-color;
+        text-decoration: none;
+    }
+
     div.post {
         margin-bottom: $standard-space;
     }
