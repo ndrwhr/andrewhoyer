@@ -1,110 +1,160 @@
 (function(){
 
-    // Constants:
-    var FRAME_RATE = 16,
-        JITTER = 2.5;
+// Constants:
+var FRAME_RATE = 16,
+    JITTER = 2.5,
+    LINES = 4;
 
-    var Helpers = {
-        random: function(min, max){
-            return Math.random() * (max - min) + min;
-        },
+var Helpers = {
 
-        shiftPoint: function(point){
-            return [
-                point[0] + Helpers.random(-JITTER, JITTER),
-                point[1] + Helpers.random(-JITTER, JITTER)
-            ];
-        },
+    bind: function(fn, binding){
+        var self = binding;
+        return function(){
+            return fn.call(self);
+        };
+    },
 
-        drawDots: function(context, points){
-            points.forEach(function(point){
-                context.beginPath();
-                context.arc(point[0], point[1], 1, 0, 2 * Math.PI);
-                context.fill();
+    periodical: function(fn, binding, duration){
+        return setInterval(Helpers.bind(fn, binding), duration || FRAME_RATE);
+    },
+
+    random: function(min, max){
+        return Math.random() * (max - min) + min;
+    },
+
+    shiftPoint: function(point){
+        return [
+            point[0] + Helpers.random(-JITTER, JITTER),
+            point[1] + Helpers.random(-JITTER, JITTER)
+        ];
+    }
+
+};
+
+var Doodle = function(canvas){
+    this.width = canvas.width;
+    this.height = canvas.height;
+    this.id = canvas.getAttribute('id');
+    this.context = canvas.getContext('2d');
+    this.points = Experiments.get(this.id);
+    this.tempPaths = [[],[],[],[]];
+    this.active = false;
+    this.timer = null;
+
+    this.context.fillStyle = 'rgba(0,0,0,0.05)';
+    this.context.strokeStyle = 'rgba(0,0,0,0.15)';
+};
+
+Doodle.prototype = {
+
+    allPointsDrawn: function(){
+        return (this.tempPaths[0].length == this.points.length);
+    },
+
+    noPointsDrawn: function(){
+        return (!this.tempPaths[0].length);
+    },
+
+    update: function(){
+        this.clear();
+        this.tempPaths.forEach(this.drawLine, this);
+    },
+
+    forwards: function(callback){
+        // don't draw forwards if we're already done going forwards.
+        if (this.allPointsDrawn()) return;
+
+        this.stop();
+
+        this.timer = Helpers.periodical(function(){
+            var tempPaths = this.tempPaths;
+
+            tempPaths.forEach(function(tempPath){
+                tempPath.push(Helpers.shiftPoint(this.points[tempPath.length]));
+            }, this);
+
+            this.update();
+
+            if (this.allPointsDrawn()){
+                this.stop();
+                if (callback) callback.call(this);
+            }
+        }, this);
+    },
+
+    reverse: function(){
+        if (this.noPointsDrawn()) return;
+
+        this.stop();
+
+        this.timer = Helpers.periodical(function(){
+            var tempPaths = this.tempPaths;
+
+            tempPaths.forEach(function(tempPath){
+                tempPath.pop();
             });
-        },
 
-        drawLines: function(context, points){
-            context.beginPath();
-            points.forEach(function(point, index){
-                context[index ? 'lineTo' : 'moveTo'](point[0], point[1]);
-            });
-            context.stroke();
-        }
-    };
+            this.update();
 
-    // convert node list into an array.
-    var canvases = [].slice.call(document.querySelectorAll('.experiments li canvas'), 0);
+            if (!tempPaths[0].length) this.stop();
+        }, this);
+    },
 
-    canvases.forEach(function(canvas, index){
-        var id = canvas.getAttribute('id'),
-            points = Experiments.get(id),
-            context = canvas.getContext('2d'),
-            tempPaths = [[],[],[],[]];
+    stop: function(){
+        this.timer = clearInterval(this.timer);
+    },
 
-        if (!points) return;
+    clear: function(){
+        this.context.clearRect(0, 0, this.width, this.height);
+    },
 
-        context.fillStyle = 'rgba(0,0,0,0.05)';
-        context.strokeStyle = 'rgba(0,0,0,0.15)';
+    drawEverything: function(){
+        this.tempPaths.forEach(function(){
+            this.drawLine(this.points.map(function(point){
+                return Helpers.shiftPoint(point);
+            }));
+        }, this);
+    },
 
-        if (Modernizr.touch){
+    drawLine: function(line){
+        var context = this.context;
 
-            // Don't add canvas interaction on mobile devices.
-            tempPaths.forEach(function(){
-                Helpers.drawLines(context, points.map(function(point){
-                    return Helpers.shiftPoint(point);
-                }));
-            });
+        context.beginPath();
 
-        } else {
+        line.forEach(function(point, index){
+            context[index ? 'lineTo' : 'moveTo'](point[0], point[1]);
+        });
 
-            var timer;
+        context.stroke();
+    }
 
-            var update = function(){
-                context.clearRect(0, 0, canvas.width, canvas.height);
+};
 
-                tempPaths.forEach(function(tempPath){
-                    Helpers.drawLines(context, tempPath);
-                });
+// convert node list into an array.
+var canvases = [].slice.call(document.querySelectorAll('.experiments li canvas'), 0),
+    doodles = [];
 
-                Helpers.drawDots(context, points);
-            };
+canvases.forEach(function(canvas, index){
+    var doodle = new Doodle(canvas);
+    doodles.push(doodle);
 
-            canvas.addEventListener('mouseover', function(){
+    if (Modernizr.touch){
 
-                timer = clearInterval(timer);
-                timer = setInterval(function(){
-                    tempPaths.forEach(function(tempPath){
-                        tempPath.push(Helpers.shiftPoint(points[tempPath.length]));
-                    });
+        // Don't add canvas interaction on mobile devices,
+        // just draw the pretty pictures.
+        doodle.drawEverything();
 
-                    update();
+    } else {
 
-                    if (tempPaths[0].length == points.length)
-                        timer = clearInterval(timer);
-                }, FRAME_RATE);
+        canvas.addEventListener('mouseover', function(){
+            doodle.forwards();
+        }, false);
 
-            }, false);
+        canvas.addEventListener('mouseout', function(){
+            doodle.reverse();
+        }, false);
+    }
 
-            canvas.addEventListener('mouseout', function(){
-
-                timer = clearInterval(timer);
-                timer = setInterval(function(){
-                    tempPaths.forEach(function(tempPath){
-                        tempPath.pop();
-                    });
-
-                    update();
-
-                    if (!tempPaths[0].length)
-                        timer = clearInterval(timer);
-                }, FRAME_RATE);
-
-            }, false);
-        }
-
-        Helpers.drawDots(context, points);
-
-    });
+});
 
 })();
