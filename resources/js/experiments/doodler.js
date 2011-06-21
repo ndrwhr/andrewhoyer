@@ -14,8 +14,8 @@ var Helpers = {
         };
     },
 
-    periodical: function(fn, binding, duration){
-        return setInterval(Helpers.bind(fn, binding), duration || FRAME_RATE);
+    periodical: function(fn, binding){
+        return setInterval(Helpers.bind(fn, binding), FRAME_RATE);
     },
 
     random: function(min, max){
@@ -60,7 +60,7 @@ Doodle.prototype = {
         this.tempPaths.forEach(this.drawLine, this);
     },
 
-    forwards: function(callback){
+    forwards: function(){
         // don't draw forwards if we're already done going forwards.
         if (this.allPointsDrawn()) return;
 
@@ -75,10 +75,7 @@ Doodle.prototype = {
 
             this.update();
 
-            if (this.allPointsDrawn()){
-                this.stop();
-                if (callback) callback.call(this);
-            }
+            if (this.allPointsDrawn()) this.stop();
         }, this);
     },
 
@@ -96,7 +93,7 @@ Doodle.prototype = {
 
             this.update();
 
-            if (!tempPaths[0].length) this.stop();
+            if (this.noPointsDrawn()) this.stop();
         }, this);
     },
 
@@ -139,33 +136,20 @@ canvases.forEach(function(canvas, index){
     doodles.push(doodle);
 
     if (Modernizr.touch){
-
-        // Don't add canvas interaction on mobile devices,
-        // just draw the pretty pictures.
         doodle.drawEverything();
-
-    } else {
-
-        canvas.addEventListener('mouseover', function(){
-            doodle.forwards();
-        }, false);
-
-        canvas.addEventListener('mouseout', function(){
-            doodle.reverse();
-        }, false);
     }
 
 });
 
-if (!Modernizr.touch) (function cycleDoodle(index){
-    var doodle = doodles[index];
+if (!Modernizr.touch){
+    // Draw the experiments randomly on the page.
+    var timer = setInterval(function(){
+        var index = Math.floor(Math.random() * (doodles.length - 1)),
+            doodle = doodles.splice(index, 1)[0];
 
-    doodle.forwards(function(){
-        setTimeout(function(){
-            doodle.reverse();
-            cycleDoodle((index + 1) % doodles.length);
-        }, 1000);
-    });
-})(0);
+        if (doodle) doodle.forwards();
+        else timer = clearInterval(timer);
+    }, 250);
+}
 
 })();
