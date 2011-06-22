@@ -102,6 +102,9 @@ section.experiments {
         background: white;
         @include border-radius($border-radius);
         margin-bottom: 1em;
+        &:hover {
+            @include box-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+        }
     }
 
     ul {
