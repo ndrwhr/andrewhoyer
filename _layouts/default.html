@@ -15,11 +15,15 @@
     {% for css in site.default_css %}
         <link rel="stylesheet" href="/resources/css/{{ css }}?{{ gen_time }}" type="text/css" />
     {% endfor %}
-    
+
+    {% for js in site.default_js %}
+        <script src="/resources/js/{{ js }}?{{ gen_time }}" type="text/javascript" charset="utf-8"></script>
+    {% endfor %}
+
     {% for js in page.js %}
         <script src="/resources/{{ js }}?{{ gen_time }}" type="text/javascript" charset="utf-8"></script>
     {% endfor %}
-    
+
 </head>
 <body>
     
@@ -51,9 +55,10 @@
         <div>
             <h3>Generic Footer:</h3>
             <p>Feel free to contact me via <a class="twitter" target="_blank" href="http://twitter.com/ndrwhr">the twitter</a>, <a  class="facebook" target="_blank" href="http://facebook.com/ahoyer">the facebook</a>, <a class="github" target="_blank" href="http://github.com/ndrwhr">the github</a> or <a class="email" target="_blank" href="mailto:me@andrew-hoyer.com">the email</a>. I also have a handy <a class="feed" target="_blank" href="http://andrew-hoyer.com/atom.xml">rss feed</a> available for my blog.</p>
+            <p id="latest-commit"></p>
             <div class="clearfix"></div>
         </div>
     </footer>
-    
+    <script type="text/javascript" src="http://github.com/api/v2/json/commits/list/ndrwhr/andrewhoyer/master?callback=loadCommits"></script>
 </body>
 </html>
