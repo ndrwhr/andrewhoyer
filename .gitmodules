@@ -34,3 +34,6 @@
 [submodule "experiments/dripsessions"]
 	path = experiments/dripsessions
 	url = git@github.com:ndrwhr/drip-sessions.git
+[submodule "experiments/zoetrope"]
+	path = experiments/zoetrope
+	url = git@github.com:ndrwhr/zoetrope.git

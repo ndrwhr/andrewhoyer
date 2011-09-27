@@ -53,8 +53,14 @@ default_js:
     - footer.js
 
 experiments:
-    - name:     CSS3-D Clock
+    - name:     CSS Zoetrope
       label:    new
+      date:     September 2011
+      url:      /experiments/zoetrope/
+      points:   zoetrope
+      description: Bridging old school moving pictures with new school CSS animation.
+
+    - name:     CSS3-D Clock
       date:     March 2011
       url:      /experiments/clock/
       image:    /resources/images/experiments/clock.jpg
@@ -62,7 +68,6 @@ experiments:
       description: A fully 3D clock implemented using nothing but divs and CSS3 3D-transforms.
 
     - name:     Type Rain
-      label:    newish
       date:     February 2011
       url:      /experiments/rain/
       image:    /resources/images/experiments/rain.jpg
