@@ -35,7 +35,7 @@ h3. Building the ring
 
 The idea behind the ring shape was actually taken from one of surfin' safari's CSS3 examples. The basic idea is that you take a single div, rotate it about the y-axis and then translate it out of the page slightly. You then continue to do this until you have a complete circle.
 
-In my case I wanted to be able to create some pretty smooth animations so I decided to go with 24 frames, which meant 24 divs all rotated slightly. This as it turned out was extremely tedius and boring, so I ended up writing a small ruby script that generated a css file that contained something like this:
+In my case I wanted to be able to create some pretty smooth animations so I decided to go with 24 frames, which meant 24 divs all rotated slightly. This as it turned out was extremely tedious and boring, so I ended up writing a small ruby script that generated a css (I could have also done it with a SASS function or two) file that contained something like this:
 
 {% highlight css %}
 .frames > div:nth-child(1) {
