@@ -91,7 +91,7 @@ Letter.prototype = {
 
     SNAP_THRESHOLD_: 0.075,
 
-    ATTRACTION_: 0.01,
+    ATTRACTION_: 0.03,
 
     DIRECTION_DAMPNING_: 2,
 
@@ -178,9 +178,13 @@ Letter.prototype = {
             this.py = this.y = this.oy_;
         } else {
             this.x -= Math.cos(this.rotation_) * this.ATTRACTION_;
-            this.y -= Math.sin(this.rotation_) * this.ATTRACTION_ * Math.max(2, Math.abs(dy));
 
-            if (dx < 0) this.x += this.ATTRACTION_ * Math.max(3, dx);
+            var yDamp = Math.min(2, Math.max(2, Math.abs(1 / Math.min(dx,dy))));
+            this.y -= Math.sin(this.rotation_) * this.ATTRACTION_ * yDamp;
+
+            if (dx < 0){
+                this.x += this.ATTRACTION_ * Math.max(1, Math.abs(dx) / 50);
+            }
         }
     },
 
@@ -340,7 +344,7 @@ Simulation.prototype = {
     step_: function(currentTime){
         var dt = currentTime - this.previousTime_;
         
-        if (dt > 20){
+        if (dt > 16){
             var context = this.context_;
             var letters = this.letters_;
             var collisions = this.collisions_;
