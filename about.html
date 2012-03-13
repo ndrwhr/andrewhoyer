@@ -82,6 +82,7 @@ var Letter = function(options){
 
     this.rotation_ = 0;
 };
+
 Letter.prototype = {
 
     BORDER_THRESHOLD_: 5,
@@ -118,14 +119,10 @@ Letter.prototype = {
         this.applyAttraction_();
 
         // Draw the line first.
-        context.save();
-        context.lineWidth = 0.5;
-        context.strokeStyle = 'rgba(0, 0, 0, 0.1)';
         context.beginPath();
         context.moveTo(this.ox_, this.oy_);
         context.lineTo(this.x, this.y);
         context.stroke();
-        context.restore();
 
         // Then draw the actual character.
         context.save();
@@ -188,9 +185,10 @@ Letter.prototype = {
     },
 
     isNearOrigin_: function(dx, dy){
-        return [dx, dy, (this.x - this.px), (this.y - this.py)].every(function(value){
-            return Math.abs(value) < this.SNAP_THRESHOLD_;
-        }, this);
+        return (Math.abs(dx) < this.SNAP_THRESHOLD_) &&
+            (Math.abs(dy) < this.SNAP_THRESHOLD_) &&
+            (Math.abs(this.x - this.px) < this.SNAP_THRESHOLD_) &&
+            (Math.abs(this.y - this.py) < this.SNAP_THRESHOLD_);
     }
 };
 
@@ -209,16 +207,15 @@ var Collision = function(x, y, type){
     }
 
     this.age_ = 0;
-    this.lifetime_ = 2500;
-    this.opacity_ = 0.05;
+    this.lifetime_ = 500;
+    this.opacity_ = 0.1;
 };
+
 Collision.prototype = {
     update: function(context, dt){
         this.age_ += dt;
-        context.save();
         context.fillStyle = 'rgba(0, 0, 0, ' + this.currentOpacity_() + ')';
         context.fillRect(this.x, this.y, this.w, this.h);
-        context.restore();
         return (this.age_ < this.lifetime_);
     },
 
@@ -232,10 +229,13 @@ var Simulation = function(){
     this.context_ = this.canvas_.getContext('2d');
 
     this.context_.font = 'normal 12px lucida grande, lucida, sans-serif';
-    this.context_.fillStyle = '#464646';
+    this.context_.strokeStyle = 'rgba(0, 0, 0, 0.1)';
     this.context_.textBaseline = 'middle';
+    this.context_.lineWidth = 0.5;
 
     this.collisions_ = [];
+
+    this.boundStep_ = this.step_.bind(this);
 
     this.initializeLetters_();
     this.start_();
@@ -243,6 +243,7 @@ var Simulation = function(){
     this.canvas_.addEventListener('mousemove', this.cursorMoved_.bind(this), false);
     this.canvas_.addEventListener('touchmove', this.cursorMoved_.bind(this), false);
 };
+
 Simulation.prototype = {
 
     LINE_HEIGHT: 15,
@@ -316,41 +317,55 @@ Simulation.prototype = {
 
         var x = evt.pageX - this.canvas_.offsetLeft;
         var y = evt.pageY - this.canvas_.offsetTop;
+        var dx, dy, distance, letter;
 
-        this.letters_.forEach(function(letter){
-            var dx = letter.x - x;
-            var dy = letter.y - y;
-            var distance = Math.sqrt((dx * dx) + (dy * dy));
+        for (var i = 0, l = this.letters_.length; i < l; i++){
+            letter = this.letters_[i];
+            dx = letter.x - x;
+            dy = letter.y - y;
+            distance = (dx * dx) + (dy * dy);
 
-            if (distance < 50){
+            if (distance < 2500){
                 letter.x += dx / 100;
                 letter.y += dy / 100;
             }
-        });
+        }
     },
 
     start_: function(){
         this.previousTime_ = +new Date();
-        requestAnimationFrame(this.step_.bind(this))
+        requestAnimationFrame(this.boundStep_);
     },
 
     step_: function(currentTime){
-        requestAnimationFrame(this.step_.bind(this));
-        var width = this.canvas_.width;
-        var height = this.canvas_.height;
         var dt = currentTime - this.previousTime_;
+        
+        if (dt > 20){
+            var context = this.context_;
+            var letters = this.letters_;
+            var collisions = this.collisions_;
+            var activeCollisions = [];
+            var i, l;
 
-        this.context_.clearRect(0, 0, width, height);
+            context.clearRect(0, 0, this.canvas_.width, this.canvas_.height);
 
-        this.letters_.forEach(function(letter){
-            letter.update(this.context_);
-        }, this);
+            context.fillStyle = '#464646';
 
-        this.collisions_ = this.collisions_.filter(function(collision){
-            return collision.update(this.context_, dt);
-        }, this);
+            for (i = 0, l = letters.length; i < l; i++){
+                letters[i].update(context);
+            }
 
-        this.previousTime_ = currentTime;
+            for (i = 0, l = collisions.length; i < l; i++){
+                if (collisions[i].update(context, dt)){
+                    activeCollisions.push(collisions[i]);
+                }
+            }
+            this.collisions_ = activeCollisions;
+
+            this.previousTime_ = currentTime;
+        }
+
+        requestAnimationFrame(this.boundStep_);
     }
 };
 
