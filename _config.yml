@@ -54,7 +54,6 @@ default_js:
 
 experiments:
     - name:     CSS Zoetrope
-      label:    new
       date:     September 2011
       url:      /experiments/zoetrope/
       points:   zoetrope
