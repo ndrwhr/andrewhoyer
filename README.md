@@ -7,6 +7,16 @@ This is the repo for [andrew-hoyer.com][1] and is right now a more or less basic
 
 If you have any questions or comments. Please feel free to contact [me@andrew-hoyer.com][3]
 
+###Running:
+
+Simply run:
+
+    rake
+
+Then point your browser to:
+
+    http://localhost:4000/
+
 ###Dependancies:
 
  * [jekyll][2]

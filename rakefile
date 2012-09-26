@@ -37,11 +37,11 @@ namespace :deploy do
   task :all => [:dev, :live]
   
   def rsync(domain)
-    sh "rsync -rtz --delete _site/ asquared@asquaredcards.com:~/#{domain}/"
+    sh "rsync -rtz --delete _site/ asquared@andrew-hoyer.com:~/#{domain}/"
   end
 end
 
 desc "Save my site"
 task :save do
-  sh "rsync -rtz --delete . asquared@asquaredcards.com:~/jekyll/andrewhoyer/"
+  sh "rsync -rtz --delete . asquared@andrew-hoyer.com:~/jekyll/andrewhoyer/"
 end
