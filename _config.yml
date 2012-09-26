@@ -49,9 +49,6 @@ contact:
 default_css:
     - main.css
 
-default_js:
-    - footer.js
-
 experiments:
     - name:     CSS Zoetrope
       date:     September 2011

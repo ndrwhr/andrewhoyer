@@ -2,22 +2,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="google-site-verification" content="Br-vdo-tI_IepKZayqb0UzGTgoz5otEAdD-MLQv_OYU" />
     <meta name="author" content="{{ site.author }}" />
     <meta name="description" content="{{ site.description }}" />
-    
+
     <title>{{ site.title }}</title>
-    
+
     <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="{{ site.feed }}" />
-    
+
     {% for css in site.default_css %}
         <link rel="stylesheet" href="/resources/css/{{ css }}?{{ gen_time }}" type="text/css" />
-    {% endfor %}
-
-    {% for js in site.default_js %}
-        <script src="/resources/js/{{ js }}?{{ gen_time }}" type="text/javascript" charset="utf-8"></script>
     {% endfor %}
 
     {% for js in page.js %}
@@ -26,11 +22,11 @@
 
 </head>
 <body>
-    
+
     {% include analytics.html %}
-    
+
     {% include warnings.html %}
-    
+
     <header>
         <nav>
             <ul>
@@ -46,19 +42,15 @@
             </ul>
         </nav>
     </header>
-    
+
     <section class="content">
         {{ content }}
     </section>
-    
+
     <footer>
         <div>
             <h3>Generic Footer:</h3>
             <p>Feel free to contact me via <a class="twitter" target="_blank" href="http://twitter.com/ndrwhr">the twitter</a>, <a  class="facebook" target="_blank" href="http://facebook.com/ahoyer">the facebook</a>, <a class="github" target="_blank" href="http://github.com/ndrwhr">the github</a> or <a class="email" target="_blank" href="mailto:me@andrew-hoyer.com">the email</a>. I also have a handy <a class="feed" target="_blank" href="http://andrew-hoyer.com/atom.xml">rss feed</a> available for my blog.</p>
-            
-            <p id="latest-commit"></p>
-            
-            <div class="clearfix"></div>
 
             <p class="social">
                 <iframe src="http://www.facebook.com/plugins/like.php?href=http://andrew-hoyer.com/&amp;layout=button_count&amp;show_faces=false&amp;width=90&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true"></iframe>
@@ -67,11 +59,10 @@
 
                 <g:plusone size="medium" href="http://andrew-hoyer.com"></g:plusone>
             </p>
-            
+
             <div class="clearfix"></div>
         </div>
     </footer>
-    <script type="text/javascript" src="http://github.com/api/v2/json/commits/list/ndrwhr/andrewhoyer/master?callback=loadCommits"></script>
 
     <script type="text/javascript">
       (function() {
