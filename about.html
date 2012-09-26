@@ -343,31 +343,28 @@ Simulation.prototype = {
 
     step_: function(currentTime){
         var dt = currentTime - this.previousTime_;
-        
-        if (dt > 16){
-            var context = this.context_;
-            var letters = this.letters_;
-            var collisions = this.collisions_;
-            var activeCollisions = [];
-            var i, l;
+        var context = this.context_;
+        var letters = this.letters_;
+        var collisions = this.collisions_;
+        var activeCollisions = [];
+        var i, l;
 
-            context.clearRect(0, 0, this.canvas_.width, this.canvas_.height);
+        context.clearRect(0, 0, this.canvas_.width, this.canvas_.height);
 
-            context.fillStyle = '#464646';
+        context.fillStyle = '#464646';
 
-            for (i = 0, l = letters.length; i < l; i++){
-                letters[i].update(context);
-            }
-
-            for (i = 0, l = collisions.length; i < l; i++){
-                if (collisions[i].update(context, dt)){
-                    activeCollisions.push(collisions[i]);
-                }
-            }
-            this.collisions_ = activeCollisions;
-
-            this.previousTime_ = currentTime;
+        for (i = 0, l = letters.length; i < l; i++){
+            letters[i].update(context);
         }
+
+        for (i = 0, l = collisions.length; i < l; i++){
+            if (collisions[i].update(context, dt)){
+                activeCollisions.push(collisions[i]);
+            }
+        }
+        this.collisions_ = activeCollisions;
+
+        this.previousTime_ = currentTime;
 
         requestAnimationFrame(this.boundStep_);
     }
