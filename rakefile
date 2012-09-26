@@ -27,21 +27,16 @@ namespace :deploy do
   task :dev => :build do
     rsync "public_html/dev.andrew-hoyer.com"
   end
-  
+
   desc "Deploy to Live"
   task :live => :build do
     rsync "public_html/andrewhoyer"
   end
-  
+
   desc "Deploy to Dev and Live"
   task :all => [:dev, :live]
-  
+
   def rsync(domain)
     sh "rsync -rtz --delete _site/ asquared@andrew-hoyer.com:~/#{domain}/"
   end
-end
-
-desc "Save my site"
-task :save do
-  sh "rsync -rtz --delete . asquared@andrew-hoyer.com:~/jekyll/andrewhoyer/"
 end

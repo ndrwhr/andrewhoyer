@@ -132,6 +132,10 @@ Letter.prototype = {
         context.restore();
     },
 
+    isMoving: function(){
+        return (this.x - this.px) || (this.y - this.py);
+    },
+
     updateValue_: function(current, previous){
         return (current * 1.99) - (previous * 0.99);
     },
@@ -304,13 +308,6 @@ Simulation.prototype = {
             });
             return letter;
         }, this);
-
-        // Choose a random letter to animate.
-        var randomLetter = this.letters_[Math.round(Math.random() * (this.letters_.length - 1))];
-        randomLetter.x -= 10;
-        randomLetter.y -= 10;
-        randomLetter.px -= 10.5;
-        randomLetter.py -= 10;
     },
 
     cursorMoved_: function(evt){
@@ -337,8 +334,32 @@ Simulation.prototype = {
     },
 
     start_: function(){
+        setInterval(function(){
+            this.moveRandomLetter_();
+        }.bind(this), 3000);
+        this.moveRandomLetter_();
+
         this.previousTime_ = +new Date();
         requestAnimationFrame(this.boundStep_);
+    },
+
+    moveRandomLetter_: function(){
+        var tries = 0;
+        var letter;
+        do {
+            letter = this.letters_[Math.round(Math.random() * (this.letters_.length - 1))];
+            tries++;
+        } while (letter.isMoving() && tries < 10);
+
+        if (tries < 10){
+            var xSign = Math.round(Math.random()) ? 1 : -1;
+            var ySign = Math.round(Math.random()) ? 1 : -1;
+
+            letter.x += xSign * 10;
+            letter.y += ySign * 10;
+            letter.px += xSign * 10.5;
+            letter.py += ySign * 10;
+        }
     },
 
     step_: function(currentTime){
