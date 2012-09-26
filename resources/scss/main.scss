@@ -74,28 +74,8 @@ section.content {
     font-size: 0.9em;
 }
 
-section.recent-blog-posts {
-    width: 200px;
-    float: right;
-    margin-right: $half-space;
-    padding-top: $half-space;
-
-    h3 a {
-        color: $font-color;
-        text-decoration: none;
-    }
-
-    div.post {
-        margin-bottom: $standard-space;
-    }
-
-    p.post-date {
-        color: $light-font-color;
-    }
-}
-
 section.experiments {
-    margin: 0 200px 0 $half-space;
+    margin: 0 $half-space 0 $half-space;
 
     canvas {
         display: block;
@@ -115,7 +95,7 @@ section.experiments {
         display: inline-block;
         float: left;
         width: 200px;
-        padding: $half-space;
+        padding: $small-space;
 
         a {
             color: $font-color;
