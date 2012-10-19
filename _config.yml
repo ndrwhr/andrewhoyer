@@ -50,6 +50,13 @@ default_css:
     - main.css
 
 experiments:
+    - name:     Entropy
+      date:     October 2012
+      label:    new
+      url:      /experiments/entropy/
+      points:   entropy
+      description: Partial JavaScript implementation of the esoteric progamming language entropy.
+
     - name:     CSS Zoetrope
       date:     September 2011
       url:      /experiments/zoetrope/

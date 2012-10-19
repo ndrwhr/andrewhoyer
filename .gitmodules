@@ -37,3 +37,6 @@
 [submodule "experiments/zoetrope"]
 	path = experiments/zoetrope
 	url = git@github.com:ndrwhr/zoetrope.git
+[submodule "experiments/entropy"]
+	path = experiments/entropy
+	url = git@github.com:ndrwhr/entropy.git
