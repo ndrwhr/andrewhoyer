@@ -7,14 +7,21 @@ def compass(opts = "compile")
   sh "compass " + opts
 end
 
+def buildExperiments()
+  # Build the blob.
+  sh "(cd experiments/blob; ./build.sh; ./making-of/build.py)"
+end
+
 desc "Build site using Jekyll"
 task :build do
+  buildExperiments
   compass
   jekyll
 end
 
 desc "Serve on Localhost with port 4000"
 task :default do
+  buildExperiments
   compass("watch &")
   jekyll("--server --auto &> /dev/null")
 end

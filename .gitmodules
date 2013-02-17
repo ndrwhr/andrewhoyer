@@ -40,3 +40,6 @@
 [submodule "experiments/entropy"]
 	path = experiments/entropy
 	url = git@github.com:ndrwhr/entropy.git
+[submodule "experiments/blob"]
+	path = experiments/blob
+	url = git@github.com:ndrwhr/blob.git

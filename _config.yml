@@ -50,9 +50,15 @@ default_css:
     - main.css
 
 experiments:
+    - name:     The Blob
+      date:     February 2013
+      label:    new
+      url:      /experiments/blob/
+      points:   blob
+      description: A loveable blob built on some simple physics. Grab eye, drag it around.
+
     - name:     Entropy
       date:     October 2012
-      label:    new
       url:      /experiments/entropy/
       points:   entropy
       description: Partial JavaScript implementation of the esoteric progamming language entropy.
