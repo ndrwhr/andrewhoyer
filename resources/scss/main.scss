@@ -50,7 +50,6 @@ nav {
 
         a {
             padding: 3px 7px 4px;
-            @include border-radius(5px);
             color: $font-color;
             text-decoration: none;
 
@@ -77,16 +76,6 @@ section.content {
 section.experiments {
     margin: 0 $half-space 0 $half-space;
 
-    canvas {
-        display: block;
-        background: white;
-        @include border-radius($border-radius);
-        margin-bottom: 1em;
-        &:hover {
-            @include box-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
-        }
-    }
-
     ul {
         display: inline-block;
     }
@@ -96,6 +85,18 @@ section.experiments {
         float: left;
         width: 200px;
         padding: $small-space;
+
+        canvas {
+            display: block;
+            background: white;
+            margin-bottom: 1em;
+            @include box-shadow(0 0 5px rgba(0, 0, 0, 0.1));
+            @include transition(box-shadow 100ms ease-in);
+        }
+
+        &:hover canvas {
+            @include box-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+        }
 
         a {
             color: $font-color;
@@ -111,7 +112,6 @@ section.experiments {
             background: #D61B2C;
             font-size: 0.9em;
             font-weight: bold;
-            border-top-left-radius: 5px;
         }
 
         &.newish::before {

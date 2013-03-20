@@ -19,9 +19,6 @@ nav:
     - name:     experiments
       url:      /experiments/
 
-    - name:     blog
-      url:      /blog/
-
     - name:     about
       url:      /about/
 
