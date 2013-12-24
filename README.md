@@ -1,21 +1,19 @@
-This is the repo for [andrew-hoyer.com][1] and is right now a more or less basic [jekyll][2] website.
+###Building:
 
-**If you're interested in the source for my experiments**, you can easily download my entire site then look for the following:
+Ensure that all required gems are installed (using bundler):
 
-* The actual html that you see for an experiment is in the `/experiments/` directory.
-* The Code that runs behind an experiment is in `/resources/exp_src/`.
+`bundle install`
 
-If you have any questions or comments. Please feel free to contact [me@andrew-hoyer.com][3]
+run each command (except the rysnc) from the `deploy.sh` script.
 
-###Running:
+###Developing:
 
-Simply run:
+* `compass watch`
+* `jekyll server --watch`
 
-    rake
+###Deploying:
 
-Then point your browser to:
-
-    http://localhost:4000/
+Run `./build.sh`.
 
 ###Dependancies:
 

@@ -1,3 +1,8 @@
+
+# Needed for the jekyll 2.0 migration.
+relative_permalinks: true
+
+# Meta-information about my site and blog.
 title:          Andrew Hoyer
 author:         Andrew Hoyer
 description:    Personal playground for Andrew Hoyer
@@ -7,9 +12,11 @@ feed:           /atom.xml
 pygments:       true
 
 exclude:
-    - README.md
-    - rakefile
-    - config.rb
+  - deploy.sh
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - config.rb
 
 loader:         /resources/images/loader.gif
 
@@ -26,14 +33,6 @@ contact:
     - id:       twitter
       url:      http://www.twitter.com/ndrwhr
       image:    /resources/images/social/twitter_bw.jpg
-
-    - id:       facebook
-      url:      http://www.facebook.com/ahoyer
-      image:    /resources/images/social/facebook_bw.jpg
-
-    - id:       flickr
-      url:      http://www.flickr.com/people/dolinski
-      image:    /resources/images/social/flickr_bw.jpg
 
     - id:       email
       url:      mailto:me@andrew-hoyer.com
