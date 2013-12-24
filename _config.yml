@@ -46,9 +46,15 @@ default_css:
     - main.css
 
 experiments:
+    - name:     The Tumbler
+      date:     December 2013
+      label:    new
+      url:      /experiments/tumbler/
+      points:   tumbler
+      description: A simple physics simulation/ meditation/relaxation experiment.
+
     - name:     The Blob
       date:     February 2013
-      label:    new
       url:      /experiments/blob/
       points:   blob
       description: A loveable blob built on some simple physics. Grab eye, drag it around.

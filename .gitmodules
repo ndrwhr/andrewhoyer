@@ -43,3 +43,6 @@
 [submodule "experiments/blob"]
 	path = experiments/blob
 	url = git@github.com:ndrwhr/blob.git
+[submodule "experiments/tumbler"]
+	path = experiments/tumbler
+	url = git@github.com:ndrwhr/tumbler.git
