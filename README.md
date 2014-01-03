@@ -2,7 +2,7 @@
 
 Ensure that all required gems are installed (using bundler):
 
-`bundle install`
+`sudo bundle install`
 
 run each command (except the rysnc) from the `deploy.sh` script.
 
@@ -13,7 +13,7 @@ run each command (except the rysnc) from the `deploy.sh` script.
 
 ###Deploying:
 
-Run `./build.sh`.
+Run `./deploy.sh`.
 
 ###Dependancies:
 
