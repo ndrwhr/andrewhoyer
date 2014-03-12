@@ -171,7 +171,6 @@ footer > div {
  */
 ul.experiments {
     margin: 0 auto;
-    min-width: 860px;
     max-width: 960px;
 }
     ul.experiments a {
@@ -219,19 +218,18 @@ ul.experiments {
 
         ul.experiments > li h3 {
             margin-top: 65px;
-            white-space: nowrap;
             text-transform: uppercase;
             letter-spacing: 0.01em;
         }
             ul.experiments > li h3 a {
                 font-size: 50px;
                 word-spacing: 0.3em;
+                padding-right: 15px;
             }
 
             ul.experiments > li h3 .date {
                 display: inline-block;
                 font-size: 15px;
-                margin-left: 15px;
                 line-height: 20px;
                 white-space: normal;
                 color: #aaa;
@@ -250,7 +248,7 @@ ul.experiments {
                 display: inline-block;
                 background: #efefef;
                 padding: 5px 10px;
-                margin-right: 5px;
+                margin: 0 5px 10px 0;
                 font-size: 18px;
             }
 
