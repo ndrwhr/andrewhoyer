@@ -1,3 +1,5 @@
-I no longer update my blog, nor do I want to maintain another set up templates/styles, so I've archive everything here.
+# THIS AIN'T NO BLOG
+
+I no longer update my blog, nor do I want to maintain another set of templates/styles, so I've archived everything here.
 
 If you have any questions, feel free to message me on twitter or something.

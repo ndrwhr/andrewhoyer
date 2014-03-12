@@ -106,6 +106,6 @@ If you're interested in more details, or just have questions, as always feel fre
 [links.ruby]:       https://github.com/ndrwhr/zoetrope/blob/master/generator.rb
 [links.index]:      https://github.com/ndrwhr/zoetrope/blob/master/index.html
 [links.frames]:     https://github.com/ndrwhr/zoetrope/blob/master/assets/css/frames.css
-[images.basic]:     https://github.com/ndrwhr/andrewhoyer/tree/master/blog_archive/images/blog/zoetrope-basic.jpg
-[images.dual]:      https://github.com/ndrwhr/andrewhoyer/tree/master/blog_archive/images/blog/zoetrope-dual-side.jpg
-[images.complete]:  https://github.com/ndrwhr/andrewhoyer/tree/master/blog_archive/images/blog/zoetrope-complete.jpg
+[images.basic]:     https://raw.github.com/ndrwhr/andrewhoyer/master/blog_archive/images/zoetrope-basic.jpg
+[images.dual]:      https://raw.github.com/ndrwhr/andrewhoyer/master/blog_archive/images/zoetrope-dual-side.jpg
+[images.complete]:  https://raw.github.com/ndrwhr/andrewhoyer/master/blog_archive/images/zoetrope-complete.jpg

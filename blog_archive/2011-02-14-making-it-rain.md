@@ -138,7 +138,7 @@ By the way, if you're planning on delving into an experiment using some of the l
 [links.facebook_games]: https://developers.facebook.com/blog/post/460
 [links.exp_html]:       https://github.com/ndrwhr/andrewhoyer/blob/master/experiments/rain.html
 [links.exp_js_css]:     https://github.com/ndrwhr/andrewhoyer/tree/master/resources/exp_src/rain
-[images.cloud]:         https://github.com/ndrwhr/andrewhoyer/tree/master/blog_archive/images/blog/rain-simulation-cloud-screen.jpg
-[images.cursor]:        https://github.com/ndrwhr/andrewhoyer/tree/master/blog_archive/images/blog/rain-simulation-cursor-screen.jpg
-[images.yuno]:          https://github.com/ndrwhr/andrewhoyer/tree/master/blog_archive/images/blog/rain-simulation-yuno.jpg
-[images.fading]:        https://github.com/ndrwhr/andrewhoyer/tree/master/blog_archive/images/blog/rain-simulation-fading-screen.jpg
+[images.cloud]:         https://raw.github.com/ndrwhr/andrewhoyer/master/blog_archive/images/rain-simulation-cloud-screen.jpg
+[images.cursor]:        https://raw.github.com/ndrwhr/andrewhoyer/master/blog_archive/images/rain-simulation-cursor-screen.jpg
+[images.yuno]:          https://raw.github.com/ndrwhr/andrewhoyer/master/blog_archive/images/rain-simulation-yuno.jpg
+[images.fading]:        https://raw.github.com/ndrwhr/andrewhoyer/master/blog_archive/images/rain-simulation-fading-screen.jpg
