@@ -260,3 +260,33 @@ ul.experiments {
     padding: 50px 10px;
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
 }
+
+.four-o-four {
+    text-align: center;
+}
+
+    .four-o-four .content h2 {
+        font-size: 60px;
+        line-height: 1.75em;
+    }
+
+    .four-o-four .content p {
+        font-size: 40px;
+        line-height: 1.75em;
+    }
+
+    .four-o-four .content p a {
+        text-decoration: none;
+        font-size: 16px;
+        color: #999;
+        border-bottom: 1px solid #aaa;
+    }
+
+    .four-o-four .content .gif {
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+        background-image: url("/resources/images/404.gif");
+        height: 500px;
+        margin: 50px 0;
+    }

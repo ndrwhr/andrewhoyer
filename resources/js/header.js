@@ -159,7 +159,8 @@ window.addEventListener('DOMContentLoaded', function(){
     var gradient = Gradient.createRandom(32);
     var headerSVG = document.querySelector('header svg');
     var footerSVG = document.querySelector('footer svg');
-    var headerFooterHeight = Math.floor(window.innerHeight * 0.85);
+    var headerFooterHeight = document.body.classList.contains('four-o-four') ? 300 :
+        Math.floor(window.innerHeight * 0.85);
 
     new PolygonGrid({
         gradient: gradient,
