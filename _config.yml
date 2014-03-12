@@ -9,6 +9,7 @@ description:    Personal playground for Andrew Hoyer
 url:            http://www.andrew-hoyer.com
 
 exclude:
+  - blog_archive
   - deploy.sh
   - Gemfile
   - Gemfile.lock
