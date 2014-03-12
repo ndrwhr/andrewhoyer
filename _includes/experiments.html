@@ -1,24 +1,20 @@
-
-<section class="experiments">
-    {% capture iterations %}{{ site.experiments | size | divided_by:3 }}{% endcapture %}
-    {% for iteration in (0..iterations) %}
-        {% capture offset %}{{ iteration | times:4 }}{% endcapture %}
-        <ul>
-        {% for experiment in site.experiments limit:4 offset:offset %}
-
-            <li class="{{ experiment.label }}">
-                <a href="{{ experiment.url }}">
-                    <canvas id="{{ experiment.points }}" width="200px" height="125px"></canvas>
-                    <h3>{{ experiment.name }}</h3>
-                    <p>{{ experiment.description }}</p>
-                </a>
-            </li>
-
-        {% endfor %}
-        </ul>
+<ul class="experiments">
+    {% for experiment in site.experiments %}
+        <li class="{{ experiment.label }}">
+            <a href="{{ experiment.url }}" class="canvas">
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="-150 -150 300 300" height="300px" width="300px" data-points="{{ experiment.points }}">
+                    <path stroke="#464646" stroke-linejoin="round" stroke-width="1" fill="none"></path>
+                </svg>
+            </a>
+            <h3><a href="{{ experiment.url }}">{{ experiment.name }}</a> <span class="date">{{ experiment.date }}</span></h3>
+            <p class="description">{{ experiment.description }}</p>
+            <ul class="tags">
+                {% for tag in experiment.tags %}
+                    <li>{{ tag }}</li>
+                {% endfor %}
+            </ul>
+        </li>
     {% endfor %}
-</section>
+</ul>
 
-<script src="/resources/js/experiments/modernizr.js" type="text/javascript" charset="utf-8"></script>
-<script src="/resources/js/experiments/experiments.js" type="text/javascript" charset="utf-8"></script>
-<script src="/resources/js/experiments/doodler.js" type="text/javascript" charset="utf-8"></script>
+<script src="/resources/js/experiments.js" type="text/javascript" charset="utf-8"></script>

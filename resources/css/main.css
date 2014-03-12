@@ -1,0 +1,264 @@
+/* RESET */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+html {
+    line-height: 1;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+a img {
+    border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+    display: block;
+}
+
+/* END RESET */
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #464646;
+    font-size: 18px;
+    font-weight: 300;
+    background: #f9f9f9;
+    line-height: 1.3em;
+}
+
+a {
+    color: #333;
+    transition: color 100ms ease-out;
+}
+
+a:hover {
+    color: #999;
+}
+
+/**
+ * Common header and footer related styles.
+ */
+header,
+footer {
+    position: relative;
+    background: #333;
+    text-align: center;
+    overflow: hidden;
+    font-size: 18px;
+}
+
+    header svg,
+    footer svg {
+        display: block;
+        width: 100%;
+        opacity: 1;
+        position: relative;
+        display: block;
+        background: #333;
+    }
+
+        header svg polygon,
+        footer svg polygon {
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 300ms ease-out;
+        }
+
+        header svg.show polygon {
+            opacity: 0.7;
+        }
+
+        header svg polygon:hover {
+            opacity: 1;
+        }
+
+        footer svg polygon.show {
+            opacity: 1;
+        }
+
+    header > div,
+    footer > div {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        padding: 15px;
+        background-color: rgba(241, 241, 241, 0.9);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        transition-property: width, margin-left, border-radius, background-color, opacity;
+        transition-duration: 150ms;
+        transition-timing-function: ease-out;
+    }
+
+    header > div:hover,
+    footer > div:hover {
+        background-color: rgba(241, 241, 241, 1);
+    }
+
+header > div {
+    width: 150px;
+    height: 150px;
+    border-radius: 90px;
+    margin-left: -90px;
+    margin-top: -90px;
+    text-align: left;
+    overflow: hidden;
+    opacity: 0;
+}
+
+header > div.show {
+    opacity: 1;
+}
+
+header > div.show:hover {
+    width: 500px;
+    margin-left: -250px;
+    border-radius: 0;
+}
+
+    header > div img {
+        float: left;
+        width: 150px;
+        height: 150px;
+        border-radius: 75px;
+        transition-property: border-radius;
+        transition-duration: 150ms;
+        transition-timing-function: ease-out;
+    }
+
+    header > div:hover img {
+        border-radius: 0;
+    }
+
+    header > div p {
+        position: absolute;
+        top: 15px;
+        left: 180px;
+        line-height: 1.3em;
+        width: 335px;
+        margin-bottom: 0;
+    }
+
+footer > div {
+    position: absolute;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+/**
+ * Styles for my experiments list.
+ */
+ul.experiments {
+    margin: 0 auto;
+    min-width: 860px;
+    max-width: 960px;
+}
+    ul.experiments a {
+        text-decoration: none;
+    }
+
+    ul.experiments > li {
+        padding: 15px;
+        font-size: 25px;
+        opacity: 0;
+        transition: opacity 600ms ease-out;
+    }
+
+    ul.experiments > li.visible {
+        opacity: 1;
+    }
+
+    /**
+     * Add a small line between each experiment.
+     */
+    ul.experiments > li::after {
+        clear: both;
+        display: block;
+        content: " ";
+    }
+
+    ul.experiments > li:not(:last-child)::after {
+        height: 1px;
+        width: 240px;
+        background: #eee;
+        border-bottom: 1px solid #fff;
+        margin: 0 auto;
+    }
+
+        ul.experiments > li .canvas {
+            float: left;
+        }
+
+        ul.experiments > li h3,
+        ul.experiments > li p,
+        ul.experiments > li ul {
+            margin-left: 320px;
+            margin-bottom: 1em;
+        }
+
+        ul.experiments > li h3 {
+            margin-top: 65px;
+            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: 0.01em;
+        }
+            ul.experiments > li h3 a {
+                font-size: 50px;
+                word-spacing: 0.3em;
+            }
+
+            ul.experiments > li h3 .date {
+                display: inline-block;
+                font-size: 15px;
+                margin-left: 15px;
+                line-height: 20px;
+                white-space: normal;
+                color: #aaa;
+                width: 50px;
+            }
+
+        ul.experiments > li .description {
+            line-height: 1.3em;
+        }
+
+        ul.experiments > li .tags {
+            display: block;
+        }
+
+            ul.experiments > li .tags > li {
+                display: inline-block;
+                background: #efefef;
+                padding: 5px 10px;
+                margin-right: 5px;
+                font-size: 18px;
+            }
+
+/**
+ * General content styles
+ */
+.content {
+    position: relative;
+    padding: 50px 10px;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
+}

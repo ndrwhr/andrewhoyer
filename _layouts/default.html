@@ -7,42 +7,24 @@
     <meta name="author" content="{{ site.author }}" />
     <meta name="description" content="{{ site.description }}" />
 
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300' rel='stylesheet' type='text/css'>
+    <link rel="icon" href="/resources/images/me_tiny.png" type="image/png">
+    <link rel="stylesheet" href="/resources/css/main.css" type="text/css" />
 
     <title>{{ site.title }}</title>
 
     <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="{{ site.feed }}" />
 
-    {% for css in site.default_css %}
-        <link rel="stylesheet" href="/resources/css/{{ css }}?{{ gen_time }}" type="text/css" />
-    {% endfor %}
-
-    {% for js in page.js %}
-        <script src="/resources/{{ js }}?{{ gen_time }}" type="text/javascript" charset="utf-8"></script>
-    {% endfor %}
-
+    <script src="/resources/js/modernizr.js"></script>
+    <script src="/resources/js/header.js"></script>
 </head>
-<body>
-
-    {% include analytics.html %}
-
-    {% include warnings.html %}
-
+<body class="{{page.name}}">
     <header>
-        <nav>
-            <ul>
-                {% for link in site.nav %}
-                <li>
-                    {% if link.url %}
-                        <a href="{{ link.url }}" {% if page.name == link.name %}class="current"{% endif %}>{{ link.name }}</a>
-                    {% else %}
-                        {{ link.name }}
-                    {% endif %}
-                </li>
-                {% endfor %}
-            </ul>
-        </nav>
+        <svg></svg>
+        <div class="me">
+            <img alt="me" src="/resources/images/me_tiny.png">
+            <p>My name is Andrew Hoyer. I am a software engineer in my mid-twenties living it up in sometimes sunny San Francisco. I enjoy walking, eating and occasionally coding. I do not enjoy angry music, pickles or the word cyberspace. I sometimes miss Canada.</p>
+        </div>
     </header>
 
     <section class="content">
@@ -50,27 +32,22 @@
     </section>
 
     <footer>
+        <svg></svg>
         <div>
-            <h3>Generic Footer:</h3>
             <p>Feel free to contact me via <a class="twitter" target="_blank" href="http://twitter.com/ndrwhr">the twitter</a>, <a class="github" target="_blank" href="http://github.com/ndrwhr">the github</a> or <a class="email" target="_blank" href="mailto:me@andrew-hoyer.com">the email</a>.</p>
-
-            <p class="social">
-                <iframe src="http://www.facebook.com/plugins/like.php?href=http://andrew-hoyer.com/&amp;layout=button_count&amp;show_faces=false&amp;width=90&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true"></iframe>
-
-                <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://andrew-hoyer.com/" data-text="Mostly impractical but nevertheless neat experiments by @ndrwhr" data-count="horizontal">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-
-                <g:plusone size="medium" href="http://andrew-hoyer.com"></g:plusone>
-            </p>
-
-            <div class="clearfix"></div>
         </div>
     </footer>
 
+
     <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-15032423-1']);
+      _gaq.push(['_trackPageview']);
+
       (function() {
-        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-        po.src = 'https://apis.google.com/js/plusone.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
 </body>
