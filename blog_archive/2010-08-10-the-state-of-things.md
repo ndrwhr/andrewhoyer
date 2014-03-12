@@ -1,9 +1,6 @@
----
-layout: post
-title: The State of Things
----
+# The State of Things
 
-In re-implementing my website I had several moments of, "My god, this code is awful!" or "I used to be proud of this?!", and quickly came to the conclusion that I should either: 
+In re-implementing my website I had several moments of, "My god, this code is awful!" or "I used to be proud of this?!", and quickly came to the conclusion that I should either:
 
 * rewrite the program from scratch or...
 * completely remove it and forget it ever happened.
