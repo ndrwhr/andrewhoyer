@@ -80,8 +80,9 @@ PolygonGrid.prototype = {
         this.height_ = 100;
         this.width_ = 100;
 
-        this.ns_ = 'http://www.w3.org/2000/svg';
+        this.gradient_ = options.gradient;
 
+        this.ns_ = 'http://www.w3.org/2000/svg';
         this.svg_ = options.svg;
         this.svg_.setAttribute('xmlns', this.ns_);
         this.svg_.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
@@ -89,8 +90,6 @@ PolygonGrid.prototype = {
         this.svg_.setAttribute('preserveAspectRatio', 'xMidYMid slice');
         this.svg_.setAttribute('viewBox', '0 0 ' + this.width_ + ' ' + this.height_);
         this.svg_.setAttribute('height', options.elementHeight + 'px');
-
-        this.gradient_ = options.gradient;
 
         this.draw_();
     },
@@ -100,30 +99,32 @@ PolygonGrid.prototype = {
         var height = 100;
         var step = 10;
         var randomOffset = 3;
+        var points = [];
+        var i, j, index, xOffset, yOffset;
+        for (i = 0; i <= height; i += step){
+            index = Math.floor(i / step);
+            points[index] = [];
+            for (j = 0; j <= width; j += step){
+                xOffset = (j === 0 || j + step > width) ? 0 : randomOffset;
+                yOffset = (i === 0 || i + step > height) ? 0 : randomOffset;
 
-        var x, y, index;;
-        var data = [];
-        for (var i = 0; i <= height + (step * 1); i+=step){
-            var index = Math.floor(i / step);
-            data[index] = [];
-            for (var j = 0; j <= width + (step * 2); j+=step){
-                x = j + rand(-randomOffset, randomOffset) - (step);
-                y = i + rand(-randomOffset, randomOffset) - (step);
-                data[index].push([x, y])
+                points[index].push([
+                    j + rand(-xOffset, xOffset),
+                    i + rand(-yOffset, yOffset)
+                ]);
             }
         }
 
-        var rows = data;
-        rows.slice(0, -1).forEach(function(row, rIndex){
+        points.slice(0, -1).forEach(function(row, rIndex){
             row.slice(0, -1).forEach(function(point, pIndex){
                 if (Math.round(Math.random())){
-                    this.addTriangle_(point, row[pIndex + 1], rows[rIndex + 1][pIndex]);
-                    this.addTriangle_(row[pIndex + 1], rows[rIndex + 1][pIndex + 1],
-                        rows[rIndex + 1][pIndex]);
+                    this.addTriangle_(point, row[pIndex + 1], points[rIndex + 1][pIndex]);
+                    this.addTriangle_(row[pIndex + 1], points[rIndex + 1][pIndex + 1],
+                        points[rIndex + 1][pIndex]);
                 } else {
-                    this.addTriangle_(point, row[pIndex + 1], rows[rIndex + 1][pIndex + 1]);
-                    this.addTriangle_(point, rows[rIndex + 1][pIndex],
-                        rows[rIndex + 1][pIndex + 1]);
+                    this.addTriangle_(point, row[pIndex + 1], points[rIndex + 1][pIndex + 1]);
+                    this.addTriangle_(point, points[rIndex + 1][pIndex],
+                        points[rIndex + 1][pIndex + 1]);
                 }
             }, this);
         }, this);
