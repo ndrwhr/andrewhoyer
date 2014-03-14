@@ -18,8 +18,6 @@ Run `./deploy.sh`.
 ###Dependancies:
 
  * [jekyll][2]
- * [sass][4]
- * [compass][5]
 
 MIT License:
 
@@ -46,5 +44,3 @@ THE SOFTWARE.
 [1]: http://andrew-hoyer.com/ "andrew-hoyer.com"
 [2]: http://jekyllrb.com/ "jekyll"
 [3]: mailto:me@andrew-hoyer.com "via the emails"
-[4]: http://sass-lang.com/ "sass"
-[5]: http://compass-style.org/ "compass"

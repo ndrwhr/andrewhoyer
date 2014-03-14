@@ -1,19 +1,48 @@
-
-Options -Indexes +SymLinksIfOwnerMatch
-DirectoryIndex index.html index.htm index.php
-IndexIgnore *
-
-# Redirect errors to a custom page
-
 ErrorDocument 404 /404/
 
-# Rewrites...
+RewriteEngine on
 
-RewriteEngine On
+# Rewrite blog URL's. At some point I'm going to want to just kill this.
+RewriteCond %{HTTP_HOST} ^andrew\-hoyer\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.andrew\-hoyer\.com$
+RewriteRule ^blog\/2011\/09\/28\/building\-the\-zoetrope\/$ "https\:\/\/github\.com\/ndrwhr\/andrewhoyer\/blob\/master\/blog_archive\/2011\-09\-28\-building\-the\-zoetrope\.md" [R=301,L]
 
-# Prevent accessing hidden files
+RewriteCond %{HTTP_HOST} ^andrew\-hoyer\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.andrew\-hoyer\.com$
+RewriteRule ^blog\/2011\/02\/14\/making\-it\-rain\/$ "https\:\/\/github\.com\/ndrwhr\/andrewhoyer\/blob\/master\/blog_archive\/2011\-02\-14\-making\-it\-rain\.md" [R=301,L]
 
-RewriteRule ^(.*/)?\. - [F,NS,L]
+RewriteCond %{HTTP_HOST} ^andrew\-hoyer\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.andrew\-hoyer\.com$
+RewriteRule ^blog\/2011\/02\/02\/Function\.prototype\.bind\/$ "https\:\/\/github\.com\/ndrwhr\/andrewhoyer\/blob\/master\/blog_archive\/2011\-02\-02\-Function\.prototype\.bind\.md" [R=301,L]
 
-RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+RewriteCond %{HTTP_HOST} ^andrew\-hoyer\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.andrew\-hoyer\.com$
+RewriteRule ^blog\/2010\/10\/21\/walking\/$ "https\:\/\/github\.com\/ndrwhr\/andrewhoyer\/blob\/master\/blog_archive\/2010\-10\-21\-walking\.md" [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^andrew\-hoyer\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.andrew\-hoyer\.com$
+RewriteRule ^blog\/2010\/08\/27\/look\-ma\-no\-rails\/$ "https\:\/\/github\.com\/ndrwhr\/andrewhoyer\/blob\/master\/blog_archive\/2010\-08\-27\-look\-ma\-no\-rails\.md" [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^andrew\-hoyer\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.andrew\-hoyer\.com$
+RewriteRule ^blog\/2010\/08\/10\/the\-state\-of\-things\/$ "https\:\/\/github\.com\/ndrwhr\/andrewhoyer\/blob\/master\/blog_archive\/2010\-08\-10\-the\-state\-of\-things\.md" [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^andrew\-hoyer\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.andrew\-hoyer\.com$
+RewriteRule ^blog\/2010\/06\/28\/sudoku\-solver\/$ "https\:\/\/github\.com\/ndrwhr\/andrewhoyer\/blob\/master\/blog_archive\/2010\-06\-28\-sudoku\-solver\.md" [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^andrew\-hoyer\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.andrew\-hoyer\.com$
+RewriteRule ^blog\/2010\/05\/17\/fractals\/$ "https\:\/\/github\.com\/ndrwhr\/andrewhoyer\/blob\/master\/blog_archive\/2010\-05\-17\-fractals\.md" [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^andrew\-hoyer\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.andrew\-hoyer\.com$
+RewriteRule ^blog\/$ "https\:\/\/github\.com\/ndrwhr\/andrewhoyer\/tree\/master\/blog_archive" [R=301,L]
+
+# Redirect /experiment requests to just /.
+RewriteCond %{HTTP_HOST} ^andrew\-hoyer\.com$ [OR]
+RewriteRule ^experiments\/$ "/" [R=301,L]
+
+# Get rid of the www.
+RewriteCond %{HTTP_HOST} ^www\.andrew\-hoyer\.com$
+RewriteRule ^(.*)$ "http\:\/\/andrew\-hoyer\.com\/$1" [R=301,L]
