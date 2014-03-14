@@ -8,7 +8,6 @@ run each command (except the rysnc) from the `deploy.sh` script.
 
 ###Developing:
 
-* `compass watch`
 * `jekyll server --watch`
 
 ###Deploying:

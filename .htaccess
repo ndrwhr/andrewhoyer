@@ -42,6 +42,7 @@ RewriteRule ^blog\/$ "https\:\/\/github\.com\/ndrwhr\/andrewhoyer\/tree\/master\
 # Redirect /experiment requests to just /.
 RewriteCond %{HTTP_HOST} ^andrew\-hoyer\.com$ [OR]
 RewriteRule ^experiments\/$ "/" [R=301,L]
+RewriteRule ^about\/?$ "/" [R=301,L]
 
 # Get rid of the www.
 RewriteCond %{HTTP_HOST} ^www\.andrew\-hoyer\.com$
