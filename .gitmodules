@@ -46,3 +46,6 @@
 [submodule "experiments/tumbler"]
 	path = experiments/tumbler
 	url = git@github.com:ndrwhr/tumbler.git
+[submodule "tools/paper-divider"]
+	path = tools/paper-divider
+	url = git@github.com:ndrwhr/paper-divider.git

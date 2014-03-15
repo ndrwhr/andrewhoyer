@@ -180,12 +180,6 @@ ul.experiments {
     ul.experiments > li {
         padding: 15px;
         font-size: 25px;
-        opacity: 0;
-        transition: opacity 600ms ease-out;
-    }
-
-    ul.experiments > li.visible {
-        opacity: 1;
     }
 
     /**
@@ -207,6 +201,12 @@ ul.experiments {
 
         ul.experiments > li .canvas {
             float: left;
+            opacity: 0;
+            transition: opacity 600ms ease-out;
+        }
+
+        ul.experiments > li.visible .canvas {
+            opacity: 1;
         }
 
         ul.experiments > li h3,
