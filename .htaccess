@@ -47,3 +47,12 @@ RewriteRule ^about\/?$ "/" [R=301,L]
 # Get rid of the www.
 RewriteCond %{HTTP_HOST} ^www\.andrew\-hoyer\.com$
 RewriteRule ^(.*)$ "http\:\/\/andrew\-hoyer\.com\/$1" [R=301,L]
+
+# enable expirations
+ExpiresActive On
+
+# Everything should be cached for at most a day.
+ExpiresDefault "access plus 1 day"
+
+# HTML documents are good for a minute
+ExpiresByType text/html A60
