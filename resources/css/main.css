@@ -42,7 +42,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 body {
     font-family: 'Source Sans Pro', sans-serif;
     color: #464646;
-    font-size: 18px;
+    font-size: 25px;
     font-weight: 300;
     background: #f9f9f9;
     line-height: 1.3em;
@@ -252,14 +252,33 @@ ul.experiments {
                 font-size: 18px;
             }
 
+            ul.experiments > li .tags > li.chrome {
+                padding: 0;
+            }
+
+                ul.experiments > li .tags > li.chrome a,
+                ul.experiments > li .tags > li.chrome a:visited,
+                ul.experiments > li .tags > li.chrome a:hover {
+                    padding: 5px 10px 5px 35px;
+                    display: block;
+                    background: url("/resources/images/chrome.png") 7px center/25px no-repeat;
+                }
+
 /**
  * General content styles
  */
 .content {
     position: relative;
-    padding: 50px 10px;
+    padding: 50px 0;
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
 }
+
+
+    .content > p {
+        margin: 0 auto 20px;
+        padding: 0 40px;
+        max-width: 1130px;
+    }
 
 .four-o-four {
     text-align: center;

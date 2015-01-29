@@ -1,5 +1,5 @@
 <ul class="experiments">
-    {% for experiment in site.experiments %}
+    {% for experiment in site.data.experiments %}
         <li class="{{ experiment.label }}">
             <a href="{{ experiment.url }}" class="canvas">
                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="-150 -150 300 300" height="300px" width="300px" strokeDashoffset="0" data-points="{{ experiment.points }}">
@@ -12,6 +12,10 @@
                 {% for tag in experiment.tags %}
                     <li>{{ tag }}</li>
                 {% endfor %}
+
+                {% if experiment.chromeExperimentURL %}
+                    <li class="chrome"><a target="_blank" href="{{ experiment.chromeExperimentURL }}">Experiment</a></li>
+                {% endif %}
             </ul>
         </li>
     {% endfor %}

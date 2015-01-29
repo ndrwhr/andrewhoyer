@@ -159,8 +159,18 @@ window.addEventListener('DOMContentLoaded', function(){
     var gradient = Gradient.createRandom(32);
     var headerSVG = document.querySelector('header svg');
     var footerSVG = document.querySelector('footer svg');
+
+    var scaleFactor = 0.75;
+    if ('sessionStorage' in window){
+        if (sessionStorage.getItem('currentSession')){
+            scaleFactor = 0.5;
+        } else {
+            sessionStorage.setItem('currentSession', 1);
+        }
+    }
+
     var headerFooterHeight = document.body.classList.contains('four-o-four') ? 300 :
-        Math.floor(window.innerHeight * 0.85);
+        Math.floor(window.innerHeight * scaleFactor);
 
     new PolygonGrid({
         gradient: gradient,
