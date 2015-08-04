@@ -1,0 +1,21 @@
+{
+    "folders":
+    [
+        {
+            "path": ".",
+            "folder_exclude_patterns":
+            [
+                "anode_modules"
+            ]
+        }
+    ],
+    "settings":
+    {
+        "tab_size": 4,
+        "spell_check": true,
+        "translate_tabs_to_spaces": true,
+        "trim_trailing_white_space_on_save": true,
+        "rulers": [80],
+        "draw_white_space": "all"
+    }
+}
