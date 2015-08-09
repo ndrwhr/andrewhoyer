@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href='http://fonts.googleapis.com/css?family=Inconsolata|Slabo+27px' rel='stylesheet' type='text/css'>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>WORDSTELLATIONS</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inconsolata';
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            max-width: 800px;
+            padding: 0 25px;
+            margin: 0 auto;
+        }
+
+        .content--full-bleed {
+            display: block;
+            width: 100%;
+            margin: 100px 0;
+        }
+
+        .content--header {
+            margin-top: 100px;
+        }
+
+        .content--footer {
+            margin-bottom: 100px;
+            text-align: center;
+        }
+
+        .warning {
+            padding: 10px 20px;
+            border: 1px solid #e74c3c;
+            background: #ecf0f1;
+        }
+
+        iframe {
+            display: block;
+            margin: 0 auto !important;
+        }
+    </style>
+</head>
+<body>
+<div class="content content--header">
+    <h1>WORDSTELLATIONS</h1>
+    <p>Wordstellations is a <a href="https://twitter.com/wordstellations">twitter bot</a> that draws word constellations using frequent words on astronomy related wikipedia pages.</p>
+
+    <div class="warning">
+        <p>This experiment is no longer active. The "<a href="https://twitter.com/ndrwhr/status/559496080912420864">server</a>" that was running this bot tried to burn my apartment down.</p>
+    </div>
+</div>
+
+<img src="imgs/1439061531996.png" class="content--full-bleed"/>
+
+<div class="content">
+    <h2 title="TL;DR = Too Long; Didn't Read">How It Works (TL;DR edition)</h2>
+
+    <p>The entire system operates via a <a href="http://www.seleniumhq.org/" target="_blank">Selenium</a> script (coordinated by <a href="https://jenkins-ci.org/" target="_blank">Jenkins</a>) that injects JavaScript and CSS into a randomly selected wikipedia page. Selenium then takes a screenshot and uploads the result to Twitter.</p>
+</div>
+
+<img src="imgs/1439060181547.png" class="content--full-bleed"/>
+
+<div class="content">
+    <h2>How It Actually Works</h2>
+
+    <h3>Find an astronomy related page to use:</h3>
+
+    <p>Using a script, I scraped a list of <a href="https://en.wikipedia.org/wiki/88_modern_constellations" target="_blank">88 modern constellations</a> as well as a few other manual selections. Here's the final list of 96 pages that the bot has to choose from:<p>
+
+    <p><a href="http://en.wikipedia.org/wiki/Andromeda_(constellation)" target="_blank">Andromeda</a>, <a href="http://en.wikipedia.org/wiki/Antlia" target="_blank">Antlia</a>, <a href="http://en.wikipedia.org/wiki/Apus" target="_blank">Apus</a>, <a href="http://en.wikipedia.org/wiki/Aquarius_(constellation)" target="_blank">Aquarius</a>, <a href="http://en.wikipedia.org/wiki/Aquila_(constellation)" target="_blank">Aquila</a>, <a href="http://en.wikipedia.org/wiki/Ara_(constellation)" target="_blank">Ara</a>, <a href="http://en.wikipedia.org/wiki/Aries_(constellation)" target="_blank">Aries</a>, <a href="http://en.wikipedia.org/wiki/Asterism_(astronomy)" target="_blank">Asterism (astronomy)</a>, <a href="http://en.wikipedia.org/wiki/Astrology" target="_blank">Astrology</a>, <a href="http://en.wikipedia.org/wiki/Auriga_(constellation)" target="_blank">Auriga</a>, <a href="http://en.wikipedia.org/wiki/Bo%C3%B6tes" target="_blank">Boötes</a>, <a href="http://en.wikipedia.org/wiki/Caelum" target="_blank">Caelum</a>, <a href="http://en.wikipedia.org/wiki/Camelopardalis" target="_blank">Camelopardalis</a>, <a href="http://en.wikipedia.org/wiki/Cancer_(constellation)" target="_blank">Cancer</a>, <a href="http://en.wikipedia.org/wiki/Canes_Venatici" target="_blank">Canes Venatici</a>, <a href="http://en.wikipedia.org/wiki/Canis_Major" target="_blank">Canis Major</a>, <a href="http://en.wikipedia.org/wiki/Canis_Minor" target="_blank">Canis Minor</a>, <a href="http://en.wikipedia.org/wiki/Capricornus" target="_blank">Capricornus</a>, <a href="http://en.wikipedia.org/wiki/Carina_(constellation)" target="_blank">Carina</a>, <a href="http://en.wikipedia.org/wiki/Cassiopeia_(constellation)" target="_blank">Cassiopeia</a>, <a href="http://en.wikipedia.org/wiki/Centaurus" target="_blank">Centaurus</a>, <a href="http://en.wikipedia.org/wiki/Cepheus_(constellation)" target="_blank">Cepheus</a>, <a href="http://en.wikipedia.org/wiki/Cetus" target="_blank">Cetus</a>, <a href="http://en.wikipedia.org/wiki/Chamaeleon" target="_blank">Chamaeleon</a>, <a href="http://en.wikipedia.org/wiki/Circinus_(constellation)" target="_blank">Circinus</a>, <a href="http://en.wikipedia.org/wiki/Columba_(constellation)" target="_blank">Columba</a>, <a href="http://en.wikipedia.org/wiki/Coma_Berenices" target="_blank">Coma Berenices</a>, <a href="http://en.wikipedia.org/wiki/Constellation" target="_blank">Constellation</a>, <a href="http://en.wikipedia.org/wiki/Corona_Australis" target="_blank">Corona Australis</a>, <a href="http://en.wikipedia.org/wiki/Corona_Borealis" target="_blank">Corona Borealis</a>, <a href="http://en.wikipedia.org/wiki/Corvus_(constellation)" target="_blank">Corvus</a>, <a href="http://en.wikipedia.org/wiki/Crater_(constellation)" target="_blank">Crater</a>, <a href="http://en.wikipedia.org/wiki/Crux" target="_blank">Crux</a>, <a href="http://en.wikipedia.org/wiki/Cygnus_(constellation)" target="_blank">Cygnus</a>, <a href="http://en.wikipedia.org/wiki/Delphinus" target="_blank">Delphinus</a>, <a href="http://en.wikipedia.org/wiki/Dorado" target="_blank">Dorado</a>, <a href="http://en.wikipedia.org/wiki/Draco_(constellation)" target="_blank">Draco</a>, <a href="http://en.wikipedia.org/wiki/Equuleus" target="_blank">Equuleus</a>, <a href="http://en.wikipedia.org/wiki/Eridanus_(constellation)" target="_blank">Eridanus</a>, <a href="http://en.wikipedia.org/wiki/Fornax" target="_blank">Fornax</a>, <a href="http://en.wikipedia.org/wiki/Gemini_(constellation)" target="_blank">Gemini</a>, <a href="http://en.wikipedia.org/wiki/Grus_(constellation)" target="_blank">Grus</a>, <a href="http://en.wikipedia.org/wiki/Hercules_(constellation)" target="_blank">Hercules</a>, <a href="http://en.wikipedia.org/wiki/Horologium_(constellation)" target="_blank">Horologium</a>, <a href="http://en.wikipedia.org/wiki/Hydra_(constellation)" target="_blank">Hydra</a>, <a href="http://en.wikipedia.org/wiki/Hydrus" target="_blank">Hydrus</a>, <a href="http://en.wikipedia.org/wiki/Indus_(constellation)" target="_blank">Indus</a>, <a href="http://en.wikipedia.org/wiki/Lacerta" target="_blank">Lacerta</a>, <a href="http://en.wikipedia.org/wiki/Leo_(constellation)" target="_blank">Leo</a>, <a href="http://en.wikipedia.org/wiki/Leo_Minor" target="_blank">Leo Minor</a>, <a href="http://en.wikipedia.org/wiki/Lepus_(constellation)" target="_blank">Lepus</a>, <a href="http://en.wikipedia.org/wiki/Libra_(constellation)" target="_blank">Libra</a>, <a href="http://en.wikipedia.org/wiki/Lupus_(constellation)" target="_blank">Lupus</a>, <a href="http://en.wikipedia.org/wiki/Lynx_(constellation)" target="_blank">Lynx</a>, <a href="http://en.wikipedia.org/wiki/Lyra" target="_blank">Lyra</a>, <a href="http://en.wikipedia.org/wiki/Mensa_(constellation)" target="_blank">Mensa</a>, <a href="http://en.wikipedia.org/wiki/Meteorology" target="_blank">Meteorology</a>, <a href="http://en.wikipedia.org/wiki/Microscopium" target="_blank">Microscopium</a>, <a href="http://en.wikipedia.org/wiki/Milky_Way" target="_blank">Milky Way</a>, <a href="http://en.wikipedia.org/wiki/Monoceros" target="_blank">Monoceros</a>, <a href="http://en.wikipedia.org/wiki/Musca" target="_blank">Musca</a>, <a href="http://en.wikipedia.org/wiki/Norma_(constellation)" target="_blank">Norma</a>, <a href="http://en.wikipedia.org/wiki/Octans" target="_blank">Octans</a>, <a href="http://en.wikipedia.org/wiki/Ophiuchus" target="_blank">Ophiuchus</a>, <a href="http://en.wikipedia.org/wiki/Orion%27s_Belt" target="_blank">Orion's Belt</a>, <a href="http://en.wikipedia.org/wiki/Orion_(constellation)" target="_blank">Orion</a>, <a href="http://en.wikipedia.org/wiki/Pavo_(constellation)" target="_blank">Pavo</a>, <a href="http://en.wikipedia.org/wiki/Pegasus_(constellation)" target="_blank">Pegasus</a>, <a href="http://en.wikipedia.org/wiki/Perseus_(constellation)" target="_blank">Perseus</a>, <a href="http://en.wikipedia.org/wiki/Phoenix_(constellation)" target="_blank">Phoenix</a>, <a href="http://en.wikipedia.org/wiki/Pictor" target="_blank">Pictor</a>, <a href="http://en.wikipedia.org/wiki/Pisces_(constellation)" target="_blank">Pisces</a>, <a href="http://en.wikipedia.org/wiki/Piscis_Austrinus" target="_blank">Piscis Austrinus</a>, <a href="http://en.wikipedia.org/wiki/Puppis" target="_blank">Puppis</a>, <a href="http://en.wikipedia.org/wiki/Pyxis" target="_blank">Pyxis</a>, <a href="http://en.wikipedia.org/wiki/Reticulum" target="_blank">Reticulum</a>, <a href="http://en.wikipedia.org/wiki/Sagitta" target="_blank">Sagitta</a>, <a href="http://en.wikipedia.org/wiki/Sagittarius_(constellation)" target="_blank">Sagittarius</a>, <a href="http://en.wikipedia.org/wiki/Scorpius" target="_blank">Scorpius</a>, <a href="http://en.wikipedia.org/wiki/Sculptor_(constellation)" target="_blank">Sculptor</a>, <a href="http://en.wikipedia.org/wiki/Scutum" target="_blank">Scutum</a>, <a href="http://en.wikipedia.org/wiki/Serpens" target="_blank">Serpens</a>, <a href="http://en.wikipedia.org/wiki/Sextans" target="_blank">Sextans</a>, <a href="http://en.wikipedia.org/wiki/Star_formation" target="_blank">Star formation</a>, <a href="http://en.wikipedia.org/wiki/Summer_Triangle" target="_blank">Summer Triangle</a>, <a href="http://en.wikipedia.org/wiki/Taurus_(constellation)" target="_blank">Taurus</a>, <a href="http://en.wikipedia.org/wiki/Telescopium" target="_blank">Telescopium</a>, <a href="http://en.wikipedia.org/wiki/Triangulum" target="_blank">Triangulum</a>, <a href="http://en.wikipedia.org/wiki/Triangulum_Australe" target="_blank">Triangulum Australe</a>, <a href="http://en.wikipedia.org/wiki/Tucana" target="_blank">Tucana</a>, <a href="http://en.wikipedia.org/wiki/Ursa_Major" target="_blank">Ursa Major</a>, <a href="http://en.wikipedia.org/wiki/Ursa_Minor" target="_blank">Ursa Minor</a>, <a href="http://en.wikipedia.org/wiki/Vela_(constellation)" target="_blank">Vela</a>, <a href="http://en.wikipedia.org/wiki/Virgo_(constellation)" target="_blank">Virgo</a>, <a href="http://en.wikipedia.org/wiki/Volans" target="_blank">Volans</a>, <a href="http://en.wikipedia.org/wiki/Vulpecula" target="_blank">Vulpecula</a></p>
+
+    <h3>Figure out which words to draw</h3>
+
+    <p>Once a random page is selected, Selenium then opens a Chrome instance and inject a series of scripts into the page. The first being one which determines which words would make a good constellation.</p>
+
+    <ol>
+        <li>Determine word frequencies (excluding common words like 'the', 'and', and any words with less that 3 characters).</li>
+        <li>Choose the most frequent words ensuring that for the entire page we have at least 250 word instances to work with.</li>
+    </ol>
+
+    <p>Any less than 250 word instances and the words would likely be spaced too far apart for the constellations to look pretty.</p>
+
+    <h3>Drawing the selected words</h3>
+
+    <p>Next Selenium injects another script that when given a list of words:</p>
+
+    <ol>
+        <li>Scroll to a random location on the page.</li>
+        <li>Finds the text nodes that are currently visible in the viewport.</li>
+        <li>Finds the location and style information of the provided words within the text nodes from the previous step.</li>
+    </ol>
+
+    <p>From here on the script actually starts injecting HTML and CSS into the page.</p>
+
+    <ol>
+        <li>Inject a div at the bottom of the page with a super high z-index and pretty background gradient.</li>
+        <li>For each word instance within the viewport, a div was then injected and absolutely positioned on top of its actual location within the page, making sure to mirror font family, style, size, weight, and line-height.</li>
+    </ol>
+
+    <h3>Connecting the words</h3>
+
+    <ol>
+        <li>Inject a root SVG element above all the words drawn in the previous steps.</li>
+        <li>Generate a <a href="https://en.wikipedia.org/wiki/Distance_matrix" target="_blank">distance matrix</a> using the word locations.</li>
+        <li>For each word generate a line SVG element to nearest 1-4 other words but don't insert them yet.</li>
+        <li>Shuffle the list of lines that could be drawn.</li>
+        <li>Remove any lines that are overlapping with other lines.</li>
+        <li>Actually inject the SVG line elements.</li>
+    </ol>
+
+    <h3>Upload the result to twitter:</h3>
+
+    <p>The last step is to tell Selenium to take a screen shot and then upload the result Twitter.</p>
+
+    <blockquote class="twitter-tweet" lang="en"><p lang="in" dir="ltr">‘trianguli’, ‘that’, ‘triangulum’, ‘jump’, ‘with’, ‘constellation’, ‘2013’… <a href="http://t.co/H72XNuSnz7">http://t.co/H72XNuSnz7</a> <a href="http://t.co/zg2ZOVA82U">pic.twitter.com/zg2ZOVA82U</a></p>&mdash; wordstellations (@wordstellations) <a href="https://twitter.com/wordstellations/status/589685159777046528">April 19, 2015</a></blockquote>
+    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+
+<img src="imgs/1422601958020.png" class="content--full-bleed"/>
+
+<div class="content content--footer">
+    <p><a href="/">more experiments</a></p>
+</div>
+
+</body>
+</html>

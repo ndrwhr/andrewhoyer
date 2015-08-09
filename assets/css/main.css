@@ -240,6 +240,10 @@ ul.experiments {
             line-height: 1.3em;
         }
 
+            ul.experiments > li .description > a {
+                border-bottom: 1px solid #999;
+            }
+
         ul.experiments > li .tags {
             display: block;
         }
@@ -261,7 +265,7 @@ ul.experiments {
                 ul.experiments > li .tags > li.chrome a:hover {
                     padding: 5px 10px 5px 35px;
                     display: block;
-                    background: url("/resources/images/chrome.png") 7px center/25px no-repeat;
+                    background: url("/assets/images/chrome.png") 7px center/25px no-repeat;
                 }
 
 /**
