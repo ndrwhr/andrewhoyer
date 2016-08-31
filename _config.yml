@@ -1,7 +1,4 @@
 
-# Needed for the jekyll 2.0 migration.
-relative_permalinks: true
-
 # Meta-information about my site and blog.
 title:          Andrew Hoyer
 author:         Andrew Hoyer
