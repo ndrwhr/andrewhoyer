@@ -1,4 +1,14 @@
 ---
+- name:     Swipe Sudoku
+  date:     October 2016
+  url:      /swipe-sudoku
+  points:   "[[-0.112,-0.318],[-0.114,0.324],[-0.112,-0.32],[-0.112,0.316],[0.114,0.32],[0.118,-0.324],[0.12,0.318],[0.118,-0.328],[0.334,-0.326],[0.334,-0.116],[-0.324,-0.12],[0.338,-0.112],[-0.328,-0.114],[-0.332,0.112],[0.332,0.108],[-0.326,0.11],[0.332,0.116],[0.336,0.342],[-0.334,0.34],[-0.332,-0.336],[0.338,-0.334],[0.328,0.326],[-0.334,0.326],[-0.324,-0.322],[0.33,-0.328],[0.33,0.322]]"
+  description: My stab at creating a gesture focused Sudoku App for iOS.
+  tags:
+    - React
+    - iOS
+    - Swift
+
 - name:     Shrugapillar.js
   date:     August 2016
   url:      https://memeguild.github.io/shrugapillar/
@@ -7,6 +17,7 @@
   tags:
     - Node
     - Shrugs
+
 - name:     Wordstellations
   date:     January 2015
   url:      /experiments/wordstellations
@@ -16,6 +27,7 @@
     - Selenium
     - Node
     - Twitter
+
 - name:     The Tumbler
   date:     December 2013
   url:      /experiments/tumbler/

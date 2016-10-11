@@ -1,0 +1,30 @@
+body {
+    font-family: "Open Sans";
+    background: #dedede;
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 15px;
+    text-align: center;
+    line-height: 2;
+    padding: 20px;
+}
+
+a {
+    color: inherit;
+}
+
+.demo {
+    position: relative;
+    width: 300px;
+    margin: 0 auto 20px;
+}
+
+.demo__mask {
+    width: 100%;
+}
+
+.demo__video {
+    position: absolute;
+    width: 258px;
+    left: 21px;
+    top: 75px;
+}
