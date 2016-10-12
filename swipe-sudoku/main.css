@@ -12,6 +12,11 @@ a {
     color: inherit;
 }
 
+h1 {
+    font-weight: 200;
+    letter-spacing: 0.5em;
+}
+
 .demo {
     position: relative;
     width: 300px;
@@ -27,4 +32,15 @@ a {
     width: 258px;
     left: 21px;
     top: 75px;
+}
+
+.appstore-link {
+    padding: 20px 0 40px 0;
+}
+
+.social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
 }
