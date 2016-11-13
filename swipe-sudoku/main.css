@@ -18,8 +18,9 @@ h1 {
 }
 
 .demo {
+    display: block;
     position: relative;
-    width: 300px;
+    max-width: 486px;
     margin: 0 auto 20px;
 }
 
@@ -29,9 +30,9 @@ h1 {
 
 .demo__video {
     position: absolute;
-    width: 258px;
-    left: 21px;
-    top: 75px;
+    width: 85.9%;
+    left: 7.2%;
+    top: 11.7%;
 }
 
 .appstore-link {
