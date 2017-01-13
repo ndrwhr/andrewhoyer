@@ -1,0 +1,302 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --app-background-color: #f1f2f4;
+
+    --main-banner-height: 100px;
+
+    --divider-height: 45px;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Amatic SC', cursive;
+    color: #254A5E;
+    background: var(--app-background-color);
+    width: 502px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.banner {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #efca14;
+    color: white;
+    text-align: center;
+    margin-bottom: 75px;
+    height: var(--main-banner-height);
+}
+
+.banner__text {
+    z-index: 1;
+    flex: 1;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-size: 60px;
+}
+
+.banner__side {
+    position: absolute;
+    height: var(--main-banner-height);
+    width: 20%;
+    top: 30%;
+    background: #e6c315;
+    z-index: -1;
+}
+
+.banner__side::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    width: 35%;
+    height: 100%;
+    background: #dab605;
+}
+
+.banner__side--left {
+    left: -13%;
+}
+
+.banner__side--left::before {
+    right: 0;
+    transform-origin: right bottom;
+    transform: skewY(40.5deg);
+}
+
+.banner__side--left::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: calc(var(--main-banner-height) / 2) solid transparent;
+    border-bottom: calc(var(--main-banner-height) / 2) solid transparent;
+    border-left: calc(var(--main-banner-height) / 3) solid var(--app-background-color);
+}
+
+.banner__side--right {
+    right: -13%;
+}
+
+.banner__side--right::before {
+    left: 0;
+    transform-origin: left bottom;
+    transform: skewY(-40.5deg);
+}
+
+.banner__side--right::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: calc(var(--main-banner-height) / 2) solid transparent;
+    border-bottom: calc(var(--main-banner-height) / 2) solid transparent;
+    border-right: calc(var(--main-banner-height) / 3) solid var(--app-background-color);
+}
+
+.controls {
+    opacity: 1;
+    transition: opacity 300ms ease-out;
+}
+
+.controls--hidden {
+    display: none;
+}
+
+.controls--hide {
+    opacity: 0;
+}
+
+.controls__seed {
+    font-family: 'Amatic SC', cursive;
+    padding: 10px;
+    display: block;
+    margin: 0 auto 20px;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+    width: 300px;
+    text-align: center;
+    font-size: 40px;
+    outline: none;
+    color: #254A5E;
+    box-shadow: inset 0 1px 2px 0px rgba(0,0,0,0.1);
+}
+
+.controls__seed::-webkit-input-placeholder {
+    color: #e0e0e0;
+}
+
+.controls__button {
+    display: block;
+    background: #e77970;
+    width: 300px;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 40px;
+    margin: 0 auto 50px;
+    appearance: none;
+    border: none;
+    font-family: inherit;
+    outline: none;
+    transition: all 200ms;
+    cursor: pointer;
+}
+
+.controls__button:active {
+    background: #de6e65;
+}
+
+.app__card-pair {
+    perspective: 1800px;
+    display: flex;
+    align-items: center;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 300ms ease-out,
+            transform 300ms ease-out;
+}
+
+.app__card-pair:nth-child(1) {
+    transition-delay: 0;
+}
+
+.app__card-pair:nth-child(2) {
+    transition-delay: 200ms;
+}
+
+.app__card-pair:nth-child(3) {
+    transition-delay: 400ms;
+}
+
+.app__cards--hidden .app__card-pair {
+    opacity: 0;
+    transform: translateY(-10%);
+}
+
+.app__card-pair-divider {
+    display: flex;
+    align-items: center;
+    position: relative;
+    font-size: 25px;
+    padding: 0px 9px 0px 20px;
+    height: 45px;
+    margin: 0 30px 0 20px;
+    background: #efca14;
+    color:  white;
+}
+
+.app__card-pair-divider::before,
+.app__card-pair-divider::after {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+}
+
+.app__card-pair-divider::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top: calc(var(--divider-height) / 2) solid transparent;
+    border-bottom: calc(var(--divider-height) / 2) solid transparent;
+    border-left: calc(var(--divider-height) / 4) solid var(--app-background-color);
+}
+
+.app__card-pair-divider::after {
+    position: absolute;
+    top: 0;
+    right: calc(var(--divider-height) / -4);
+    border-top: calc(var(--divider-height) / 2) solid transparent;
+    border-bottom: calc(var(--divider-height) / 2) solid transparent;
+    border-left: calc(var(--divider-height) / 4) solid #efca14;
+}
+
+.card {
+    position: relative;
+    display: block;
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    height: 150px;
+    flex: 1;
+    margin: 20px 0;
+    line-height: 1.1;
+    transition: all 300ms;
+    transform-style: preserve-3d;
+    flex: 1;
+}
+
+.card__contents {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: #89d0bf;
+    transition: all 500ms ease-out;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px 0px rgba(0,0,0,0.2);
+}
+
+.card--show-back .card__contents {
+    transform: rotateY(180deg);
+}
+
+.card__contents--back {
+    transform: rotateY(180deg);
+}
+
+.card__contents--front {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card__contents--front::after {
+    content: '?';
+    font-size: 100px;
+}
+
+.card--show-back .card__contents--back {
+    transform: rotateY(360deg);
+}
+
+.card__contents--back {
+    transform: rotateY(180deg);
+}
+
+.card--center-transforms .card__contents {
+    transform-origin: center center;
+}
+
+.card--show-front .card__contents--front {
+    transform: rotateY(0deg);
+}
+
+.card--show-front .card__contents--back {
+    transform: rotateY(180deg);
+}
