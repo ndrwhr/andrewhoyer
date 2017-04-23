@@ -48,6 +48,10 @@ RewriteRule ^about\/?$ "/" [R=301,L]
 RewriteCond %{HTTP_HOST} ^www\.andrew\-hoyer\.com$
 RewriteRule ^(.*)$ "http\:\/\/andrew\-hoyer\.com\/$1" [R=301,L]
 
+# Redirect to andrew.wang-hoyer.com permanently.
+RewriteCond %{HTTP_HOST} ^andrew\-hoyer\.com$
+RewriteRule ^(.*)$ "http\:\/\/andrew\.wang\-hoyer\.com\/$1" [R=301,L]
+
 # enable expirations
 ExpiresActive On
 
