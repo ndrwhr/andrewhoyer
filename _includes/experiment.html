@@ -1,0 +1,59 @@
+<li class="experiment">
+    <a href="{{ include.experiment.url }}" class="experiment__canvas">
+        <svg xmlns="http://www.w3.org/2000/svg"
+                version="1.1"
+                viewBox="-150 -150 300 300"
+                strokeDashoffset="0"
+                data-points="{{ include.experiment.points }}">
+            <path stroke="#464646"
+                    stroke-linejoin="round"
+                    stroke-width="1"
+                    fill="none"></path>
+        </svg>
+    </a>
+
+    <div class="experiment__content">
+        <h3 class="experiment__header">
+            <a class="experiment__header-link"
+                    href="{{ include.experiment.url }}">
+                {{ include.experiment.name }}
+            </a>
+        </h3>
+
+        <p class="experiment__description">
+            {{ include.experiment.description }}
+        </p>
+
+        <ul class="experiment__tags">
+            {% for tag in include.experiment.tags %}
+                <li class="experiment__tag">{{ tag }}</li>
+            {% endfor %}
+
+            {% if include.experiment.chromeExperimentURL %}
+                <li class="experiment__tag
+                        experiment__tag--chrome
+                        experiment__tag--link">
+                    <a target="_blank"
+                            href="{{ include.experiment.chromeExperimentURL }}">
+                        Experiment
+                    </a>
+                </li>
+            {% endif %}
+
+            {% if include.experiment.repo %}
+                <li class="experiment__tag
+                        experiment__tag--source
+                        experiment__tag--link">
+                    <a target="_blank"
+                            href="{{ include.experiment.repo }}">
+                        Open Source
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+
+        <p class="experiment__extra-info">
+            Published {{ include.experiment.date }}
+        </p>
+    </div>
+</li>

@@ -1,9 +1,9 @@
 
 # Meta-information about my site and blog.
-title:          Andrew Hoyer
-author:         Andrew Hoyer
-description:    Personal playground for Andrew Hoyer
-url:            http://www.andrew-hoyer.com
+title:          Andrew Wang-Hoyer
+author:         Andrew Wang-Hoyer
+description:    Personal playground for Andrew Wang-Hoyer
+url:            http://andrew.wang-hoyer.com
 
 exclude:
   - blog_archive

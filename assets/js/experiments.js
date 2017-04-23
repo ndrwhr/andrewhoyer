@@ -16,7 +16,7 @@ Experiment.prototype = {
         this.el_ = options.el;
 
         this.svg_ = this.el_.querySelector('svg');
-        this.size_ = parseInt(this.svg_.getAttribute('width'), 10);
+        this.size_ = 300;
         this.pathEl_ = this.svg_.querySelector('path')
 
         // Fetch and parse the point data off of the svg element. The data is stored normalize
@@ -83,7 +83,7 @@ Experiment.prototype = {
         var elMid = this.position_.top + (this.position_.height / 2);
 
         if (viewportBottom >= elMid && elMid >= viewportTop){
-            this.el_.classList.add('visible');
+            this.el_.classList.add('experiment--visible');
             this.draw_();
         }
     },
@@ -97,7 +97,7 @@ Experiment.prototype = {
         var length = this.pathEl_.getTotalLength();
 
         // Clear any previous transition
-        this.pathEl_.style.transition = this.pathEl_.style.WebkitTransition = 'none';
+        this.pathEl_.style.transition = this.pathEl_.style.transition = 'none';
         // Set up the starting positions
         this.pathEl_.style.strokeDasharray = length + ' ' + length;
         this.pathEl_.style.strokeDashoffset = length;
@@ -105,15 +105,15 @@ Experiment.prototype = {
         // picks up the starting position before animating
         this.pathEl_.getBoundingClientRect();
         // Define our transition
-        this.pathEl_.style.transition = this.pathEl_.style[Modernizr.prefixed('transition')] =
-          'stroke-dashoffset ' + this.transitionLength_ + 'ms ease-in-out';
+        this.pathEl_.style.transition = this.pathEl_.style.transition =
+            'stroke-dashoffset ' + this.transitionLength_ + 'ms ease-in-out';
         // Go!
         this.pathEl_.style.strokeDashoffset = '0';
     }
 };
 
 window.addEventListener('DOMContentLoaded', function(){
-    [].forEach.call(document.querySelectorAll('.experiments > li'), function(li){
+    [].forEach.call(document.querySelectorAll('.experiment'), function(li){
         new Experiment({
             el: li
         });

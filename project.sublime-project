@@ -5,7 +5,8 @@
             "path": ".",
             "folder_exclude_patterns":
             [
-                "anode_modules"
+                "node_modules",
+                "_site"
             ]
         }
     ],

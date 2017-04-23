@@ -39,250 +39,299 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 /* END RESET */
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Source Sans Pro', sans-serif;
-    color: #464646;
-    font-size: 25px;
-    font-weight: 300;
-    background: #f9f9f9;
-    line-height: 1.3em;
+    color: #090F2F;
+    font-weight: 400;
+    background: #090F2F;
 }
 
 a {
-    color: #333;
-    transition: color 100ms ease-out;
+    color: inherit;
 }
 
-a:hover {
-    color: #999;
+b {
+    font-weight: 600;
 }
 
-/**
- * Common header and footer related styles.
- */
-header,
-footer {
-    position: relative;
-    background: #333;
-    text-align: center;
-    overflow: hidden;
-    font-size: 18px;
+del {
+    opacity: 0.5;
 }
 
-    header svg,
-    footer svg {
-        display: block;
-        width: 100%;
-        opacity: 1;
-        position: relative;
-        display: block;
-        background: #333;
-    }
-
-        header svg polygon,
-        footer svg polygon {
-            cursor: pointer;
-            opacity: 0;
-            transition: opacity 300ms ease-out;
-        }
-
-        header svg.show polygon {
-            opacity: 0.7;
-        }
-
-        header svg polygon:hover {
-            opacity: 1;
-        }
-
-        footer svg polygon.show {
-            opacity: 1;
-        }
-
-    header > div,
-    footer > div {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        padding: 15px;
-        background-color: rgba(241, 241, 241, 0.9);
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        transition-property: width, margin-left, border-radius, background-color, opacity;
-        transition-duration: 150ms;
-        transition-timing-function: ease-out;
-    }
-
-    header > div:hover,
-    footer > div:hover {
-        background-color: rgba(241, 241, 241, 1);
-    }
-
-header > div {
-    width: 150px;
-    height: 150px;
-    border-radius: 90px;
-    margin-left: -90px;
-    margin-top: -90px;
-    text-align: left;
-    overflow: hidden;
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    transition: opacity 300ms ease-out;
     opacity: 0;
 }
 
-header > div.show {
+.background polygon {
+    opacity: 0.3;
+    transition: opacity 300ms ease-out;
+}
+
+.background polygon:hover,
+.background polygon.visible {
     opacity: 1;
 }
 
-header > div.show:hover {
-    width: 500px;
-    margin-left: -250px;
-    border-radius: 0;
+.site--ready .background {
+    opacity: 1;
 }
 
-    header > div img {
-        float: left;
-        width: 150px;
-        height: 150px;
-        border-radius: 75px;
-        transition-property: border-radius;
-        transition-duration: 150ms;
-        transition-timing-function: ease-out;
-    }
-
-    header > div:hover img {
-        border-radius: 0;
-    }
-
-    header > div p {
-        position: absolute;
-        top: 15px;
-        left: 180px;
-        line-height: 1.4em;
-        width: 335px;
-        margin-bottom: 0;
-    }
-
-footer > div {
-    position: absolute;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    background: linear-gradient(rgba(9, 15, 47, 1), rgba(9, 15, 47, 0.9));
+    color: white;
+    font-size: 15px;
+    padding: 10px 20px;
+    z-index: 1;
+    font-weight: 400;
 }
 
-/**
- * Styles for my experiments list.
- */
-ul.experiments {
+.header__name {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.header__name::before {
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    content: '';
+    height: 1em;
+    width: 1em;
+    margin-right: 10px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url("/assets/images/me_tiny.png");
+}
+
+.header__spacer {
+    flex: 1;
+}
+
+.header__contact {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+}
+
+.header__contact::before {
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    content: '';
+    height: 1em;
+    width: 1em;
+    margin-right: 5px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.header__contact--email::before {
+    top: 4px;
+    background-image: url("/assets/images/email-icon.svg");
+}
+
+.header__contact--github::before {
+    background-image: url("/assets/images/github-icon.svg");
+}
+
+.header__contact:not(:last-child) {
+    margin-right: 0.5em;
+}
+
+@media only screen
+and (max-width: 440px) {
+    .header {
+        font-size: 12px;
+    }
+}
+
+.experiments {
     margin: 0 auto;
-    max-width: 960px;
+    max-width: 840px;
+    padding: 80px 0 20px;
+    pointer-events: none;
 }
-    ul.experiments a {
-        text-decoration: none;
+
+.experiment {
+    position: relative;
+    display: flex;
+    padding: 20px;
+    margin-bottom: 40px;
+    background: rgba(241, 241, 241, 0.97);
+    box-shadow: 0 1px 10px rgba(0,0,0,0.3);
+    pointer-events: auto;
+    transition: background 100ms ease-out;
+    border-radius: 3px;
+}
+
+.experiment:hover {
+    background: rgba(241, 241, 241, 1);
+}
+
+.experiment__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    padding-left: 20px;
+}
+
+.experiment__canvas {
+    opacity: 0;
+    transition: opacity 600ms ease-out;
+    width: 37.5%;
+}
+
+.experiment__canvas svg {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.experiment--visible .experiment__canvas {
+    opacity: 1;
+}
+
+.experiment__header {
+    margin-bottom: 1em;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+}
+
+.experiment__header-link {
+    font-size: 50px;
+    word-spacing: 0.3em;
+    text-decoration: none;
+    font-weight: 300;
+}
+
+.experiment__description {
+    line-height: 1.3em;
+    margin-bottom: 1em;
+    font-size: 25px;
+    font-weight: 300;
+}
+
+.experiment__tags {
+    display: block;
+}
+
+.experiment__tag {
+    display: inline-block;
+    background: #090F2F;
+    padding: 5px 10px 6px;
+    margin: 0 5px 5px 0;
+    font-size: 15px;
+    color: white;
+    border-radius: 3px;
+    white-space: nowrap;
+}
+
+.experiment__tag--link {
+    padding: 0;
+    transition: background-color 100ms ease-out;
+}
+
+.experiment__tag--link a {
+    display: inline-block;
+    padding: 5px 6px 6px 10px;
+}
+
+.experiment__tag--link:hover {
+    background-color: rgba(9, 15, 47, 0.8);
+}
+
+.experiment__tag--link a::after {
+    position: relative;
+    top: 2px;
+    display: inline-block;
+    content: '';
+    height: 0.8em;
+    width: 0.8em;
+    margin-left: 1px;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-image: url("/assets/images/link-icon.svg");
+    background-position: center;
+}
+
+.experiment__tag--chrome a {
+    padding-left: 25px;
+    background: url("/assets/images/chrome.png") 7px center/15px no-repeat;
+    text-decoration: none;
+}
+
+.experiment__tag--source a {
+    padding-left: 27px;
+    background: url("/assets/images/github-icon.svg") 7px center/15px no-repeat;
+    text-decoration: none;
+}
+
+.experiment__extra-info {
+    margin-top: 1.5em;
+    font-size: 13px;
+    opacity: 0.5;
+}
+
+@media only screen
+and (max-width: 640px) {
+    .experiment__description {
+        font-weight: 400;
     }
 
-    ul.experiments > li {
-        padding: 15px;
-        font-size: 25px;
+    .experiment__tag {
+        font-weight: 400;
+    }
+}
+
+@media only screen
+and (max-width: 840px) {
+    .experiment {
+        border-radius: 0;
+        background: rgba(241, 241, 241, 1);
+        box-shadow: none;
     }
 
-    /**
-     * Add a small line between each experiment.
-     */
-    ul.experiments > li::after {
-        clear: both;
-        display: block;
-        content: " ";
+    .experiment__header-link {
+        font-size: 5.9vw;
     }
 
-    ul.experiments > li:not(:last-child)::after {
-        height: 1px;
-        width: 240px;
-        background: #eee;
-        border-bottom: 1px solid #fff;
-        margin: 0 auto;
+    .experiment__description {
+        font-size: 3.2vw;
     }
 
-        ul.experiments > li .canvas {
-            float: left;
-            opacity: 0;
-            transition: opacity 600ms ease-out;
-        }
+    .experiment__tag {
+        font-size: 2.5vw;
+    }
+}
 
-        ul.experiments > li.visible .canvas {
-            opacity: 1;
-        }
-
-        ul.experiments > li h3,
-        ul.experiments > li p,
-        ul.experiments > li ul {
-            margin-left: 320px;
-            margin-bottom: 1em;
-        }
-
-        ul.experiments > li h3 {
-            margin-top: 65px;
-            text-transform: uppercase;
-            letter-spacing: 0.01em;
-        }
-            ul.experiments > li h3 a {
-                font-size: 50px;
-                word-spacing: 0.3em;
-                padding-right: 15px;
-            }
-
-            ul.experiments > li h3 .date {
-                display: inline-block;
-                font-size: 15px;
-                line-height: 20px;
-                white-space: normal;
-                color: #aaa;
-                width: 50px;
-            }
-
-        ul.experiments > li .description {
-            line-height: 1.3em;
-        }
-
-            ul.experiments > li .description > a {
-                border-bottom: 1px solid #999;
-            }
-
-        ul.experiments > li .tags {
-            display: block;
-        }
-
-            ul.experiments > li .tags > li {
-                display: inline-block;
-                background: #efefef;
-                padding: 5px 10px;
-                margin: 0 5px 10px 0;
-                font-size: 18px;
-            }
-
-            ul.experiments > li .tags > li.chrome {
-                padding: 0;
-            }
-
-                ul.experiments > li .tags > li.chrome a,
-                ul.experiments > li .tags > li.chrome a:visited,
-                ul.experiments > li .tags > li.chrome a:hover {
-                    padding: 5px 10px 5px 35px;
-                    display: block;
-                    background: url("/assets/images/chrome.png") 7px center/25px no-repeat;
-                }
-
-/**
- * General content styles
- */
 .content {
     position: relative;
-    padding: 50px 0;
-    box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
 }
 
-
-    .content > p {
-        margin: 0 auto 20px;
-        padding: 0 40px;
-        max-width: 1130px;
-    }
+.footer {
+    color: white;
+    font-size: 13px;
+    text-align: center;
+    opacity: 0.6;
+    padding: 15px;
+}
 
 .four-o-four {
     text-align: center;

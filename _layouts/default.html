@@ -2,28 +2,43 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=800">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="Br-vdo-tI_IepKZayqb0UzGTgoz5otEAdD-MLQv_OYU" />
     <meta name="author" content="{{ site.author }}" />
     <meta name="description" content="{{ site.description }}" />
 
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet">
     <link rel="icon" href="/assets/images/me_tiny.png" type="image/png">
     <link rel="stylesheet" href="/assets/css/main.css" type="text/css" />
 
     <title>{{ site.title }}</title>
 
-    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="{{ site.feed }}" />
-
-    <script src="/assets/js/modernizr.js"></script>
-    <script src="/assets/js/header.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+    <script src="/assets/js/site.js"></script>
 </head>
-<body class="{{page.topic}}">
-    <header>
-        <svg></svg>
-        <div class="me">
-            <img alt="me" src="/assets/images/me_tiny.png">
-            <p>My name is Andrew Wang-Hoyer. I am a software engineer in my late-twenties living in Brooklyn with my beautiful wife Amy. I enjoy walking, eating, and occasionally coding. I do not enjoy angry music, pickles, or the word cyberspace. I sometimes miss Canada.</p>
+<body class="site">
+    <svg class="background"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            version="1.1"
+            preserveAspectRatio="xMidYMid slice"
+            viewBox="0 0 150 150"
+            height="100vh"></svg>
+
+    <header class="header">
+        <h1 class="header__name" title="formerly know as Andrew Hoyer">Andrew Wang-Hoyer</h1>
+        <div class="header__spacer"></div>
+        <div class="header__contact-info">
+            <a class="header__contact header__contact--email"
+                    target="_blank"
+                    href="mailto:me@andrew-hoyer.com">
+                Email
+            </a>
+            <a class="header__contact header__contact--github"
+                    target="_blank"
+                    href="http://github.com/ndrwhr">
+                Github
+            </a>
         </div>
     </header>
 
@@ -31,13 +46,9 @@
         {{ content }}
     </section>
 
-    <footer>
-        <svg></svg>
-        <div>
-            <p>Feel free to contact me via <a class="twitter" target="_blank" href="http://twitter.com/ndrwhr">the twitter</a>, <a class="github" target="_blank" href="http://github.com/ndrwhr">the github</a> or <a class="email" target="_blank" href="mailto:me@andrew-hoyer.com">the email</a>.</p>
-        </div>
+    <footer class="footer">
+        ©️ {{ site.time | date: '%Y' }} Andrew Wang-Hoyer
     </footer>
-
 
     <script type="text/javascript">
       var _gaq = _gaq || [];
