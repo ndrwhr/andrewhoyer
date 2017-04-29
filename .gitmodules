@@ -49,3 +49,6 @@
 [submodule "tools/paper-divider"]
 	path = tools/paper-divider
 	url = git@github.com:ndrwhr/paper-divider.git
+[submodule "experiments/muda"]
+	path = experiments/muda
+	url = git@github.com:ndrwhr/muda.git
