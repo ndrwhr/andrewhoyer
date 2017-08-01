@@ -52,3 +52,6 @@
 [submodule "experiments/muda"]
 	path = experiments/muda
 	url = git@github.com:ndrwhr/muda.git
+[submodule "experiments/chaos-game"]
+	path = experiments/chaos-game
+	url = git@github.com:ndrwhr/chaos-game-static.git
