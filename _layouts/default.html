@@ -1,65 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-site-verification" content="Br-vdo-tI_IepKZayqb0UzGTgoz5otEAdD-MLQv_OYU" />
-    <meta name="author" content="{{ site.author }}" />
-    <meta name="description" content="{{ site.description }}" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="Br-vdo-tI_IepKZayqb0UzGTgoz5otEAdD-MLQv_OYU" />
+  <meta name="author" content="{{ site.author }}" />
+  <meta name="description" content="{{ site.description }}" />
 
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet">
-    <link rel="icon" href="/assets/images/me_tiny.png" type="image/png">
-    <link rel="stylesheet" href="/assets/css/main.css" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Raleway:500,700,900" rel="stylesheet">
 
-    <title>{{ site.title }}</title>
+  <link rel="icon" href="/assets/images/me_tiny.png" type="image/png">
+  <link rel="stylesheet" href="/assets/css/main.css" type="text/css" />
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
-    <script src="/assets/js/site.js"></script>
+  <title>{{ site.title }}</title>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.4.0/gl-matrix-min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js"></script>
+  <script src="/assets/js/site.js"></script>
 </head>
 <body class="site">
-    <svg class="background"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            version="1.1"
-            preserveAspectRatio="xMidYMid slice"
-            viewBox="0 0 150 150"
-            height="100vh"></svg>
+  <svg class="site__background"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    version="1.1"
+    preserveAspectRatio="xMidYMid slice"
+    viewBox="0 0 100 100"
+    height="100vh"></svg>
 
-    <header class="header">
-        <h1 class="header__name" title="formerly know as Andrew Hoyer">Andrew Wang-Hoyer</h1>
-        <div class="header__spacer"></div>
-        <div class="header__contact-info">
-            <a class="header__contact header__contact--email"
-                    target="_blank"
-                    href="mailto:me@andrew-hoyer.com">
-                Email
-            </a>
-            <a class="header__contact header__contact--github"
-                    target="_blank"
-                    href="http://github.com/ndrwhr">
-                Github
-            </a>
-        </div>
-    </header>
+  <header class="site__header">
+    <h1 class="site__header-name">Andrew Wang‑Hoyer</h1>
+    <h2 class="site__header-whatido">New York Based Front‑End Engineer</h2>
+  </header>
 
-    <section class="content">
-        {{ content }}
-    </section>
+  <section class="site__content">
+    {{ content }}
+  </section>
 
-    <footer class="footer">
-        ©️ {{ site.time | date: '%Y' }} Andrew Wang-Hoyer
-    </footer>
+  <footer class="site__footer">
+    <ul class="site__footer-contact">
+      {% for contact in site.data.contact %}
+        <li class="site__footer-contact-item">
+          <a href="{{contact.url}}" target="_blank">{{contact.name}}</a>
+        </li>
+      {% endfor %}
+    </ul>
 
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-15032423-1']);
-      _gaq.push(['_trackPageview']);
+    <div class="site__footer-copywrite">©️ {{ site.time | date: '%Y' }} Andrew Wang-Hoyer</div>
+  </footer>
 
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-15032423-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 </body>
 </html>

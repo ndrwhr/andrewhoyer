@@ -5,9 +5,9 @@
                 viewBox="-150 -150 300 300"
                 strokeDashoffset="0"
                 data-points="{{ include.experiment.points }}">
-            <path stroke="#464646"
+            <path stroke="#000"
                     stroke-linejoin="round"
-                    stroke-width="1"
+                    stroke-width="2"
                     fill="none"></path>
         </svg>
     </a>
@@ -53,7 +53,8 @@
         </ul>
 
         <p class="experiment__extra-info">
-            Published {{ include.experiment.date }}
+            {{ include.experiment.date | date: "%b %Y" }}
         </p>
     </div>
+    <div class="experiment__background"></div>
 </li>
