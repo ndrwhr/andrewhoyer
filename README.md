@@ -1,12 +1,14 @@
 ###Building:
 
-Ensure that all required gems are installed (using bundler):
+Ensure that all required gems (using bundler) and node_modules (using yarn) are installed:
 
-`sudo bundle install`
+`bundle install`
+`yarn install`
 
 ###Developing:
 
-* `jekyll server --watch`
+* `bundle exec jekyll server --watch`
+* `yarn run watch`
 
 ###Deploying:
 

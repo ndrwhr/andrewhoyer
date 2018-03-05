@@ -1,23 +1,24 @@
 {
-    "folders":
-    [
-        {
-            "path": ".",
-            "folder_exclude_patterns":
-            [
-                "node_modules",
-                "experiments",
-                "_site"
-            ]
-        }
-    ],
-    "settings":
+  "folders":
+  [
     {
-        "tab_size": 4,
-        "spell_check": true,
-        "translate_tabs_to_spaces": true,
-        "trim_trailing_white_space_on_save": true,
-        "rulers": [80],
-        "draw_white_space": "all"
+      "path": ".",
+      "folder_exclude_patterns":
+      [
+        "node_modules",
+        "experiments",
+        "_site"
+      ]
     }
+  ],
+  "settings":
+  {
+    "tab_size": 2,
+    "spell_check": true,
+    "translate_tabs_to_spaces": true,
+    "ensure_newline_at_eof_on_save": true,
+    "trim_trailing_white_space_on_save": true,
+    "rulers": [80],
+    "draw_white_space": "all"
+  }
 }

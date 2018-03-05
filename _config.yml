@@ -6,8 +6,13 @@ description:    Personal playground for Andrew Wang-Hoyer
 url:            http://andrew.wang-hoyer.com
 
 exclude:
+  - .git*
+  - LICENSE
   - blog_archive
   - deploy.sh
-  - Gemfile
-  - Gemfile.lock
+  - Gemfile*
   - README.md
+  - project.sublime*
+  - node_modules
+  - package.json
+  - src

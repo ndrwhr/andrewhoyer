@@ -1,0 +1,135 @@
+.experiment {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 30px;
+  pointer-events: auto;
+  transition: background 100ms ease-out;
+  border: 10px solid black;
+  padding: 30px 20px 20px 30px;
+}
+
+/* (side-padding x 2) + grid-gap + experiment-width */
+@media only screen and (max-width: 500px) {
+  .experiment {
+    grid-template-columns: 1fr;
+    grid-gap: 0;
+  }
+}
+
+.experiment__background {
+  position: absolute;
+  width: calc(100% + 10px);
+  height: calc(100% + 10px);
+  top: 10px;
+  left: 10px;
+  background: rgba(78, 227, 174, 0.85);
+  z-index: -1;
+}
+
+.experiment__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1;
+}
+
+.experiment__canvas {
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 600ms ease-out;
+}
+
+.experiment__canvas svg {
+  display: block;
+  width: 100%;
+}
+
+.experiment--visible .experiment__canvas {
+  opacity: 1;
+}
+
+.experiment__header {
+  margin: 0;
+  font-weight: 900;
+  font-size: 2em;
+}
+
+.experiment__header-link {
+  word-spacing: 0.3em;
+  text-decoration: none;
+}
+
+.experiment__description {
+  line-height: 1.3em;
+  margin: 15px 0 0;
+}
+
+.experiment__tags {
+  display: block;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.experiment__tag {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 6px 10px 5px;
+  margin: 0 5px 5px 0;
+  font-weight: 500;
+  font-size: 11px;
+  color: white;
+  white-space: nowrap;
+}
+
+.experiment__tag--link {
+  padding: 0;
+  transition: background-color 100ms ease-out;
+}
+
+.experiment__tag--link a {
+  display: inline-block;
+  padding: 5px 6px 6px 10px;
+  line-height: 1;
+}
+
+.experiment__tag--link:hover {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.experiment__tag--link a::after {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  content: '';
+  height: 0.8em;
+  width: 0.8em;
+  margin-left: 1px;
+  background-repeat: no-repeat;
+  background-size: 22px;
+  background-image: url("/public/images/link-icon.svg");
+  background-position: center;
+}
+
+.experiment__tag--chrome a {
+  padding-left: 23px;
+  background: url("/public/images/chrome.png") 7px center/12px no-repeat;
+  text-decoration: none;
+}
+
+.experiment__tag--source a {
+  padding-left: 24px;
+  background: url("/public/images/github-icon.svg") 8px center/12px no-repeat;
+  text-decoration: none;
+}
+
+.experiment__extra-info {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-top: 15px;
+  font-weight: 500;
+  flex: 1;
+  font-size: 0.8em;
+}

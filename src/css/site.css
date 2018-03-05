@@ -1,0 +1,77 @@
+.site {
+  position: relative;
+  font-family: 'Raleway', sans-serif;
+  color: black;
+  font-weight: 700;
+  background: #E8FFF4;
+  background-attachment: fixed;
+  padding: 30px;
+}
+
+.site__background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.site__background circle,
+.site__background rect,
+.site__background line,
+.site__background polyline {
+  stroke-width: 0.5;
+  stroke: black;
+  fill: none;
+}
+
+.site__background-grid {
+  opacity: 0.03;
+  transform-origin: center center;
+  transform: rotate(12deg) scale(1.2, 1.2);
+}
+
+.site__background-shapes {
+  opacity: 0.1;
+}
+
+.site__header {
+  padding: 30px 0 60px;
+  font-size: inherit;
+}
+
+.site__header-name {
+  font-size: 2.5em;
+  font-weight: 900;
+  margin: 0 0 0.3em;
+  line-height: 1.2em;
+}
+
+.site__header-whatido {
+  font-weight: 700;
+  font-size: 2em;
+  margin: 0;
+}
+
+.site__footer {
+  text-align: center;
+  padding: 60px 0 0 0;
+  font-weight: 500;
+}
+
+.site__footer-contact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 0 30px;
+  font-size: 2em;
+  font-weight: 900;
+  list-style: none;
+  padding: 0;
+  line-height: 1.5em;
+}
+
+.site__footer-contact-item:not(:last-child) {
+  margin-right: 30px;
+}

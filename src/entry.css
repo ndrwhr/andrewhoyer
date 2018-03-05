@@ -1,0 +1,21 @@
+@import "../node_modules/normalize.css/normalize.css";
+@import "./css/site.css";
+@import "./css/experiment.css";
+@import "./css/experiments.css";
+@import "./css/four-o-four.css";
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+}
+
+b {
+  font-weight: 900;
+}
+
+del {
+  opacity: 0.5;
+}

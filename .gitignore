@@ -3,3 +3,6 @@ _site/
 .DS_Store
 Gemfile.lock
 project.sublime-workspace
+node_modules
+public/bundle*
+yarn-error.log

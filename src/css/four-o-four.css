@@ -1,0 +1,28 @@
+.four-o-four {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 500px;
+  pointer-events: auto;
+  border-radius: 3px;
+}
+
+.four-o-four__p {
+  font-size: 20px;
+  margin-bottom: 1em;
+}
+
+.four-o-four .site__content p a {
+  text-decoration: none;
+  font-size: 16px;
+  color: #999;
+  border-bottom: 1px solid #aaa;
+}
+
+.four-o-four__gif {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  background-image: url("/public/images/404.gif");
+  height: 270px;
+  margin-bottom: 1em;
+}
