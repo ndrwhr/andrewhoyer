@@ -5,7 +5,6 @@
   font-weight: 700;
   background: #E8FFF4;
   background-attachment: fixed;
-  padding: 30px;
 }
 
 .site__background {
@@ -37,7 +36,7 @@
 }
 
 .site__header {
-  padding: 30px 0 60px;
+  padding: 30px;
   font-size: inherit;
 }
 
@@ -54,9 +53,14 @@
   margin: 0;
 }
 
+.site__content {
+  padding: 0 30px;
+  overflow: hidden;
+}
+
 .site__footer {
   text-align: center;
-  padding: 60px 0 0 0;
+  padding: 30px 0 0 0;
   font-weight: 500;
 }
 

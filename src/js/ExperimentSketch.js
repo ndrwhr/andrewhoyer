@@ -1,3 +1,5 @@
+import { getScrollPosition } from './utils/Browser';
+
 const CANVAS_SIZE = 100;
 
 // The data is stored normalized over the range [-0.5, 0.5] so that we can
@@ -9,15 +11,6 @@ const VIEW_BOX = [
  CANVAS_SIZE + (PADDING * 2),
  CANVAS_SIZE + (PADDING * 2),
 ].join(' ');
-
-// Helper to get scroll position since cross browser is a mess:
-// https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollY
-const getScrollTop = () => (
-  window.pageYOffset ||
-  document.documentElement.scrollTop ||
-  document.body.scrollTop ||
-  0
-);
 
 export default class ExperimentSketch {
   constructor({ svg }) {
@@ -77,7 +70,7 @@ export default class ExperimentSketch {
   onResize() {
     const rect = this.svg.getBoundingClientRect();
     this.position = {
-      top: rect.top + getScrollTop(),
+      top: rect.top + getScrollPosition()[1],
       height: rect.height
     };
 
@@ -94,7 +87,7 @@ export default class ExperimentSketch {
     // experiment has already started drawing.
     if (this.drawn) return;
 
-    const viewportTop = getScrollTop();
+    const viewportTop = getScrollPosition()[1];
     const viewportHeight = document.documentElement.clientHeight;
     const viewportBottom = viewportTop + viewportHeight;
     const elMid = this.position.top + (this.position.height / 2);
