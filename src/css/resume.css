@@ -1,0 +1,159 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 300;
+  color: #263238;
+  font-size: 0.9em;
+  line-height: 1.5em;
+  min-height: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+@media only print {
+  body {
+    font-size: 12px;
+  }
+
+  .resume__web-only {
+    display: none;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  font-family: 'Merriweather', serif;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+h4 {
+  font-size: 1em;
+  font-weight: 600;
+}
+
+strong {
+  font-weight: 600;
+}
+
+.resume {
+  display: grid;
+  grid-template-rows: 1fr auto auto;
+  grid-template-columns: 2fr 1.2fr;
+  grid-template-areas:
+    "header header"
+    "primary secondary"
+    "footer footer";
+  grid-gap: 30px;
+  max-width: 1000px;
+  padding: 30px;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width : 800px) {
+  .resume {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "primary"
+      "secondary"
+      "footer";
+  }
+}
+
+.resume__section-group--header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  grid-area: header;
+}
+
+.resume__section-group--primary {
+  grid-area: primary;
+}
+
+.resume__section-group--secondary {
+  grid-area: secondary;
+}
+
+.resume__section:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.resume__footer {
+  display: none;
+  text-align: center;
+  grid-area: footer;
+}
+
+@media only print {
+  .resume__footer {
+    display: block;
+  }
+}
+
+.resume__name {
+  margin-bottom: 10px;
+}
+
+.resume__section-header {
+  margin-bottom: 10px;
+}
+
+.resume__work-entry-meta {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "work-title work-when"
+    "work-where where-where";
+  margin-bottom: 10px;
+}
+
+.resume__work-entry-title {
+  grid-area: work-title;
+}
+
+.resume__work-entry-when {
+  text-align: right;
+  grid-area: work-when;
+}
+
+.resume__work-entry-where {
+  grid-area: work-where;
+}
+
+.resume__work-entry:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.resume__rich-text p:not(:last-child),
+.resume__rich-text ul:not(:last-child),
+.resume__rich-text ol:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.resume__rich-text ul {
+  list-style: circle;
+  margin-left: 25px;
+}

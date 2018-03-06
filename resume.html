@@ -1,0 +1,140 @@
+---
+title: andrew-wang-hoyer-resume-2018
+permalink: /resume/
+
+resume:
+  name: Andrew Wang-Hoyer
+  title: Front-End Engineer
+  work:
+    - title: Digital Experimenter
+      when: 2009 - Present
+      details: |
+        Designed and built over 20 browser experiments, with 7 being recognized by [Google’s Chrome Experiments showcase](https://experiments.withgoogle.com/search?q=hoyer). Commissioned to do a [physics based experiment](http://andrew.wang-hoyer.com/experiments/muda/) for the Museum of Digital Art (MuDA) in Switzerland.
+
+    - title: Senior Software Engineer
+      when: 2010 - 2017
+      where: Inkling Systems Inc.
+      details: |
+        * Lead cross team meetings about the web technology stack, to help the team stay up to date on the latest web developments.
+        * Pushed for and implemented CSS style guidelines following the principles of BEM.
+        * Pushed for and implemented React/JavaScript style guidelines and best practices following Airbnb guidelines.
+        * Employed strong testing practices.
+        * Played a critical role in helping build almost all of Inkling’s web based products using modern JavaScript libraries.
+          * Lead front end development team building cross browser web reader using Backbone.js. <span class="resume__web-only">Examples: [Version 1.0](http://andrew.wang-hoyer.com/inkling/#3cb4ae), [Version 2.0](http://andrew.wang-hoyer.com/inkling/#44f04e), [Mobile Friendly](http://andrew.wang-hoyer.com/inkling/#12ffba)</span>.
+          * Lead engineer on the front end growth team. Built and ran over 20 UI/UX experiments over the course of 10 months. <span class="resume__web-only">Examples: [First Experiment](http://andrew.wang-hoyer.com/inkling/#9d95a8), [Progress Snapshot](http://andrew.wang-hoyer.com/inkling/#feccff), [Final Experiment](http://andrew.wang-hoyer.com/inkling/#56a314)</span>
+            * Increased sign up conversions by over 50%.
+            * Built out an internal analytics library to collect consistent data from all of Inkling’s web products.
+        * Worked alongside the design team.
+          * Designed and implemented many UI/UX fixes.
+          * Redesigned and standardized a new modal dialog system.
+          * Improved new project creation.
+
+        A detailed outline of my time at Inkling can be found at [andrew.wang-hoyer.com/inkling](http://andrew.wang-hoyer.com/inkling).
+
+    - title: Undergraduate Research Assistant
+      where: University of Alberta
+      when: 2009 - 2010
+      details: |
+        Designed, developed, and deployed a web interface (Enviro-Net) for the collection, management, and analysis of environmental sensor network data.
+
+    - title: NSERC Undergraduate Research Assistant
+      where: University of Alberta
+      when: 2008
+      details: |
+        Designed and developed a web interface (EcoNET) for displaying environmental sensor network data.
+
+  education:
+    - |
+      University of Alberta, B.S. with Specialization, Computer Science 2010.
+    - |
+      Coursera Certifications:
+        * Machine Learning from Stanford.
+        * Fundamentals of Graphic Design, Introduction to Image making, Introduction to Typography, Ideas from the History of Graphic Design from CalArts.
+
+  skills: |
+    JavaScript: ES6/next, React, React-Native, Redux, Sagas, Backbone.js, Express, Mocha/Chai, Jasmine, and many modern browser and node APIs.
+
+    CSS: CSS3/4, PostCSS, SASS/Compass.
+
+    Comfortable with python environments such as Django and Flask.
+
+    Experience designing and working with Sketch, Photoshop, OpenSCAD, and SketchUp.
+
+  contact: |
+    * Email: [andrew.hoyer1@gmail.com](mailto:andrew.hoyer1@gmail.com)
+    * Github: [github.com/ndrwhr](https://github.com/ndrwhr)
+    * LinkedIn: [goo.gl/rajPWV](https://goo.gl/rajPWV)
+    * Telephone: Upon Request.
+
+---
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ page.title }}</title>
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+  <link rel="stylesheet" href="/public/bundle.css" type="text/css" />
+</head>
+<body class="resume">
+  <section class="resume__section-group resume__section-group--header">
+    <h1 class="resume__name">{{ page.resume.name }}</h1>
+    <h3 class="resume__title">{{ page.resume.title }}</h3>
+  </section>
+
+  <div class="resume__section-group resume__section-group--primary">
+    <section class="resume__section">
+      <h2 class="resume__section-header">Work</h2>
+      <ol class="resume__work-entries">
+        {% for work in page.resume.work %}
+          <li class="resume__work-entry">
+            <div class="resume__work-entry-meta">
+              <h4 class="resume__work-entry-title">{{ work.title }}</h4>
+              <span class="resume__work-entry-when">{{work.when}}</span>
+              {% if work.where %}
+                <p class="resume__work-entry-where">{{ work.where }}</p>
+              {% endif %}
+            </div>
+            <div class="resume__rich-text">
+              {{ work.details | markdownify }}
+            </div>
+          </li>
+        {% endfor %}
+      </ol>
+    </section>
+  </div>
+
+  <div class="resume__section-group resume__section-group--secondary">
+    <section class="resume__section">
+      <h2 class="resume__section-header">Education</h2>
+      <ol class="resume__education-entries">
+        {% for education in page.resume.education %}
+          <li class="resume__education-entry">
+            <div class="resume__rich-text">
+              {{ education | markdownify }}
+            </div>
+          </li>
+        {% endfor %}
+      </ol>
+    </section>
+
+    <section class="resume__section">
+      <h2 class="resume__section-header">Skills</h2>
+      <div class="resume__rich-text">
+        {{ page.resume.skills | markdownify }}
+      </div>
+    </section>
+
+    <section class="resume__section">
+      <h2 class="resume__section-header">Contact</h2>
+      <div class="resume__rich-text">
+        {{ page.resume.contact | markdownify }}
+      </div>
+    </section>
+  </div>
+
+  <footer class="resume__footer">
+    printed from <a href="http://andrew.wang-hoyer.com/resume">andrew.wang-hoyer.com/resume</a>
+  </footer>
+</body>
+</html>
