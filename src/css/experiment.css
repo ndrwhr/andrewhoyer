@@ -37,17 +37,24 @@
 .experiment__canvas {
   display: flex;
   align-items: center;
+}
+
+.experiment__canvas-svg {
+  display: block;
+  width: 100%;
   opacity: 0;
   transition: opacity 600ms ease-out;
 }
 
-.experiment__canvas svg {
-  display: block;
-  width: 100%;
+.experiment__canvas-svg--visible {
+  opacity: 1;
 }
 
-.experiment--visible .experiment__canvas {
-  opacity: 1;
+.experiment__canvas-svg path {
+  stroke: black;
+  stroke-width: 0.6;
+  stroke-linejoin: round;
+  fill: none;
 }
 
 .experiment__header {

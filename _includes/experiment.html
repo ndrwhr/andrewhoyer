@@ -1,14 +1,13 @@
 <li class="experiment">
     <a href="{{ include.experiment.url }}" class="experiment__canvas">
-        <svg xmlns="http://www.w3.org/2000/svg"
-                version="1.1"
-                viewBox="-150 -150 300 300"
-                strokeDashoffset="0"
-                data-points="{{ include.experiment.points }}">
-            <path stroke="#000"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    fill="none"></path>
+        <svg
+            class="experiment__canvas-svg"
+            xmlns="http://www.w3.org/2000/svg"
+            version="1.1"
+            strokeDashoffset="0"
+            data-points="{{ include.experiment.points }}"
+        >
+            <path />
         </svg>
     </a>
 

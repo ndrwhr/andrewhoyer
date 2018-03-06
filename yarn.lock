@@ -2199,6 +2199,10 @@ github-username@^4.0.0:
   dependencies:
     gh-got "^6.0.0"
 
+gl-matrix@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/gl-matrix/-/gl-matrix-2.4.0.tgz#2089b13301a29eec822d9d99dffc1f78ee9a3c50"
+
 glob-all@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/glob-all/-/glob-all-3.1.0.tgz#8913ddfb5ee1ac7812656241b03d5217c64b02ab"
