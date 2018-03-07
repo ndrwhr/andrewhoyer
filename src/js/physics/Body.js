@@ -2,7 +2,7 @@ import { vec2 } from 'gl-matrix';
 
 export default class Body {
   constructor(bodyDef) {
-    this.mass = bodyDef.mass;
+    this.mass = bodyDef.mass || 1;
     this.current = bodyDef.current || vec2.create();
     this.previous = bodyDef.current || vec2.create();
     this.acceleration = vec2.create();

@@ -33,6 +33,18 @@
 
 .site__background-shapes {
   opacity: 0.1;
+  transform-origin: center center;
+  transform: rotate(-12deg)
+}
+
+.site__background-shapes circle {
+  animation-name: circle;
+  animation-iteration-count: infinite;
+}
+
+.site__background-shapes rect {
+  animation-name: rect;
+  animation-iteration-count: infinite;
 }
 
 .site__header {
@@ -78,4 +90,22 @@
 
 .site__footer-contact-item:not(:last-child) {
   margin-right: 30px;
+}
+
+@keyframes circle {
+  from {
+    transform: scale(0.7);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes rect {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
