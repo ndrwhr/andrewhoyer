@@ -8,6 +8,11 @@
         "node_modules",
         "experiments",
         "_site"
+      ],
+      "file_exclude_patterns":
+      [
+        "public/bundle.js",
+        "yarn.lock"
       ]
     }
   ],

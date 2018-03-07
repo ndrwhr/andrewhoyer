@@ -1,0 +1,36 @@
+:root {
+  --std-padding: 30px;
+  --default-color: rgba(0, 0, 0, 0.9);
+}
+
+/**
+ * Set up custom media queries based on the number of experiments that are
+ * shown. Each experiment should have a minimum width of 440px. Unfortunately
+ * you can't use custom properties in @custom-media declarations, so I've had
+ * to do all the calculations by hand.
+ */
+
+/**
+ * 1 small column: (std-padding x 2) + (min-experiment-width x 1)
+ */
+@custom-media --extra-small-viewport (width < 500px);
+
+/**
+ * 1 column: (std-padding x 2) + (min-experiment-width x 1)
+ */
+@custom-media --small-viewport (width < 820px);
+
+/**
+ * 2 columns: (std-padding x 3) + (min-experiment-width x 2)
+ */
+@custom-media --medium-viewport (width >= 820px);
+
+/**
+ * 4 columns: (std-padding x 4) + (min-experiment-width x 3)
+ */
+@custom-media --large-viewport (width >= 1440px);
+
+/**
+ * 5 columns: (std-padding x 5) + (min-experiment-width x 4)
+ */
+@custom-media --extra-large-viewport (width >= 1910px);

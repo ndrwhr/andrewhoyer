@@ -5,3 +5,5 @@
   name: Twitter
 - url: "mailto:me@andrew-hoyer.com"
   name: Email
+- url: /resume
+  name: Resume

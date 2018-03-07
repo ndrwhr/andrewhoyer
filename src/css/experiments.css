@@ -1,26 +1,25 @@
+@import "./variables.css";
+
 .experiments {
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: 30px;
+  grid-gap: var(--std-padding);
   padding: 0;
 }
 
-/* (side-padding x 2) + grid-gap + (experiment-width x 2) */
-@media only screen and (min-width: 820px) {
+@media (--medium-viewport) {
   .experiments {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* (side-padding x 2) + (grid-gap x 2) + (experiment-width x 3) */
-@media only screen and (min-width: 1440px) {
+@media (--large-viewport) {
   .experiments {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* (side-padding x 2) + (grid-gap x 3) + (experiment-width x 4) */
-@media only screen and (min-width: 1910px) {
+@media (--extra-large-viewport) {
   .experiments {
     grid-template-columns: repeat(4, 1fr);
   }

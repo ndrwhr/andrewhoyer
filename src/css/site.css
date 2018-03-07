@@ -1,10 +1,18 @@
+@import "./variables.css";
+
 .site {
   position: relative;
   font-family: 'Raleway', sans-serif;
-  color: black;
+  color: var(--default-color);
   font-weight: 700;
   background: #E8FFF4;
   background-attachment: fixed;
+}
+
+@media (--extra-small-viewport) {
+  .site {
+    font-size: 0.7em;
+  }
 }
 
 .site__background {
@@ -21,7 +29,7 @@
 .site__background line,
 .site__background polyline {
   stroke-width: 0.5;
-  stroke: black;
+  stroke: var(--default-color);
   fill: none;
 }
 
@@ -38,17 +46,17 @@
 }
 
 .site__background-shapes circle {
-  animation-name: circle;
+  animation-name: scale;
   animation-iteration-count: infinite;
 }
 
 .site__background-shapes rect {
-  animation-name: rect;
+  animation-name: rotate;
   animation-iteration-count: infinite;
 }
 
 .site__header {
-  padding: 30px;
+  padding: var(--std-padding);
   font-size: inherit;
 }
 
@@ -66,13 +74,13 @@
 }
 
 .site__content {
-  padding: 0 30px;
+  padding: 0 var(--std-padding);
   overflow: hidden;
 }
 
 .site__footer {
   text-align: center;
-  padding: 30px 0 0 0;
+  padding: var(--std-padding) 0;
   font-weight: 500;
 }
 
@@ -80,7 +88,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 0 0 30px;
+  margin: 0 0 var(--std-padding);
   font-size: 2em;
   font-weight: 900;
   list-style: none;
@@ -89,10 +97,10 @@
 }
 
 .site__footer-contact-item:not(:last-child) {
-  margin-right: 30px;
+  margin-right: var(--std-padding);
 }
 
-@keyframes circle {
+@keyframes scale {
   from {
     transform: scale(0.7);
   }
@@ -101,7 +109,7 @@
   }
 }
 
-@keyframes rect {
+@keyframes rotate {
   from {
     transform: rotate(0);
   }
