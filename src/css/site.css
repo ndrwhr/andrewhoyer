@@ -8,11 +8,17 @@
 .site {
   position: relative;
   font-family: 'Raleway', sans-serif;
-  color: var(--default-color);
   font-weight: 700;
-  background: var(--background-color);
-  background-attachment: fixed;
+  color: var(--default-color);
+  background: var(--site-background-color-default);
+  transition: var(--background-transition);
 }
+
+.site--color-1 { background: var(--site-background-color-1) }
+.site--color-2 { background: var(--site-background-color-2) }
+.site--color-3 { background: var(--site-background-color-3) }
+.site--color-4 { background: var(--site-background-color-4) }
+.site--color-5 { background: var(--site-background-color-5) }
 
 @media (--extra-small-viewport) {
   .site {
@@ -27,22 +33,17 @@
   width: 100%;
   height: 100%;
   z-index: -1;
-}
-
-.site__background polygon,
-.site__background line {
-
-
+  opacity: 0.05;
 }
 
 .site__background line {
-  stroke: var(--background-grid-stoke);
+  stroke: black;
   stroke-width: var(--background-grid-stroke-width);
 }
 
 .site__background polygon {
-  fill: var(--background-color);
-  stroke: var(--background-shape-stoke);
+  fill: none;
+  stroke: black;
   stroke-width: var(--background-polygon-stroke-width);
 }
 

@@ -1,3 +1,4 @@
+import random from 'lodash/random';
 
 import { startClock } from './js/utils/Clock';
 import SiteBackground from './js/SiteBackground';
@@ -10,4 +11,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const background = new SiteBackground();
   const experiments = new Experiments();
+
+  document.body.classList.add(`site--color-${random(1, 5)}`);
 });

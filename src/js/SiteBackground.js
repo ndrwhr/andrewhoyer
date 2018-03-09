@@ -105,26 +105,30 @@ export default class Background {
   drawGrid() {
     const gridGroup = createSVGElement('g');
     gridGroup.classList.add('site__background-grid');
-    range(NUM_GRID_LINES + 1).forEach(function(index) {
-      const position = index * (WIDTH / NUM_GRID_LINES);
-      gridGroup.appendChild(createSVGElement('line', {
-        x1: 0,
-        y1: position,
-        x2: WIDTH,
-        y2:position
-      }));
-      gridGroup.appendChild(createSVGElement('line', {
-        x1: position,
-        y1: 0,
-        x2: position,
-        y2: HEIGHT
-      }));
+
+    range(2).forEach((index) => {
+      const lineGroup = createSVGElement('g', {
+        transform: `rotate(${index * 90} 50 50)`,
+      });
+
+      range(NUM_GRID_LINES + 1).forEach(function(index) {
+        const position = index * (WIDTH / NUM_GRID_LINES);
+        lineGroup.appendChild(createSVGElement('line', {
+          x1: 0,
+          y1: position,
+          x2: WIDTH,
+          y2:position
+        }));
+      });
+
+      gridGroup.appendChild(lineGroup);
     });
+
     this.svg.appendChild(gridGroup);
   }
 
   drawShapes() {
-    const numShapes = Math.floor(SHAPE_SPOTS.length * 0.5);
+    const numShapes = Math.floor(SHAPE_SPOTS.length * 0.7);
     sampleSize(SHAPE_SPOTS, numShapes).forEach(([x, y]) => {
       this.shapes.push({
         x, y,
