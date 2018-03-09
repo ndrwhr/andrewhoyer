@@ -1,5 +1,10 @@
 :root {
   --std-padding: 30px;
+
+  --background-color: #E8FFF4;
+  --background-grid-stoke: color(#000 blend(var(--background-color) 96%));
+  --background-shape-stoke: color(#000 blend(var(--background-color) 94%));
+
   --default-color: rgba(0, 0, 0, 0.9);
 }
 

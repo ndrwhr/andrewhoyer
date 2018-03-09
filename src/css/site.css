@@ -1,11 +1,16 @@
 @import "./variables.css";
 
+:root {
+  --background-grid-stroke-width: 0.20;
+  --background-polygon-stroke-width: 0.4;
+}
+
 .site {
   position: relative;
   font-family: 'Raleway', sans-serif;
   color: var(--default-color);
   font-weight: 700;
-  background: #E8FFF4;
+  background: var(--background-color);
   background-attachment: fixed;
 }
 
@@ -24,35 +29,48 @@
   z-index: -1;
 }
 
-.site__background circle,
-.site__background rect,
-.site__background line,
-.site__background polyline {
-  stroke-width: 0.5;
-  stroke: var(--default-color);
-  fill: none;
+.site__background polygon,
+.site__background line {
+
+
+}
+
+.site__background line {
+  stroke: var(--background-grid-stoke);
+  stroke-width: var(--background-grid-stroke-width);
+}
+
+.site__background polygon {
+  fill: var(--background-color);
+  stroke: var(--background-shape-stoke);
+  stroke-width: var(--background-polygon-stroke-width);
 }
 
 .site__background-grid {
-  opacity: 0.03;
   transform-origin: center center;
   transform: rotate(12deg) scale(1.2, 1.2);
 }
 
 .site__background-shapes {
-  opacity: 0.1;
   transform-origin: center center;
   transform: rotate(-12deg)
 }
 
-.site__background-shapes circle {
-  animation-name: scale;
+.site__background-shapes polygon {
   animation-iteration-count: infinite;
 }
 
-.site__background-shapes rect {
-  animation-name: rotate;
-  animation-iteration-count: infinite;
+
+.site__background-shape-wrapper:nth-child(n) polygon {
+  animation-name: animate-scale;
+}
+
+.site__background-shape-wrapper:nth-child(2n) polygon {
+  animation-name: animate-rotation;
+}
+
+.site__background-shape-wrapper:nth-child(3n) polygon {
+  animation-name: animate-both;
 }
 
 .site__header {
@@ -100,20 +118,29 @@
   margin-right: var(--std-padding);
 }
 
-@keyframes scale {
+@keyframes animate-scale {
   from {
-    transform: scale(0.7);
+    transform: scale(0.8);
   }
   to {
     transform: scale(1);
   }
 }
 
-@keyframes rotate {
+@keyframes animate-rotation {
   from {
     transform: rotate(0);
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes animate-both {
+  from {
+    transform: scale(0.8) rotate(0);
+  }
+  to {
+    transform: scale(1) rotate(360deg);
   }
 }

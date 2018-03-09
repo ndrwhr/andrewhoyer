@@ -1,7 +1,8 @@
-import { vec2 } from 'gl-matrix';
+import { vec2, mat2 } from 'gl-matrix';
 import random from 'lodash/random';
 import range from 'lodash/range';
 import sample from 'lodash/sample';
+import sampleSize from 'lodash/sampleSize';
 import shuffle from 'lodash/shuffle';
 
 import Body from './physics/Body';
@@ -11,14 +12,14 @@ import { addClockListener } from './utils/Clock';
 const WIDTH = 100;
 const HEIGHT = 100;
 
-const NUM_GRID_LINES = 10;
+const NUM_GRID_LINES = 20;
 
 const SHAPE_SPOTS = (() => {
   const NUM_SHAPES_PER_ROW = 7;
   const NUM_SHAPE_SPOTS = NUM_SHAPES_PER_ROW * NUM_SHAPES_PER_ROW;
 
   const SHAPE_GRID_OFFSET = WIDTH / NUM_SHAPES_PER_ROW ;
-  const MAX_RANDOM_OFFSET = SHAPE_GRID_OFFSET / 5;
+  const MAX_RANDOM_OFFSET = SHAPE_GRID_OFFSET / 3;
 
   // Generate a grid of possible locations that shapes can be so that we don't
   // have any overlapping shapes.
@@ -37,8 +38,6 @@ const SHAPE_SPOTS = (() => {
   return shuffle(coords);
 })();
 
-const getRandomDirection = () => sample(['alternate', 'alternate-reverse']);
-
 const createSVGElement = (type, attributes = {}) => {
   const el = document.createElementNS('http://www.w3.org/2000/svg', type);
 
@@ -49,45 +48,47 @@ const createSVGElement = (type, attributes = {}) => {
   return el;
 };
 
+const createRandomShape = (() => {
+  const createShapeWrapper = (x, y) => {
+    const g = createSVGElement('g', {
+      transform: `translate(${x} ${y})`,
+      'class': 'site__background-shape-wrapper',
+    });
+    return g;
+  };
 
-const createShapeWrapper = ({ x, y } = {}) => {
-  const g = createSVGElement('g', {
-    transform: `translate(${x} ${y})`,
-    'class': 'site__background-shape-wrapper',
-  });
-  return g;
-};
+  const createRandomPolygon = () => {
+    const n = sample([3, 3, 4, 4, 5, 6, 7, 20]);
+    const radius = random(2, 4, true);
+    const offsetAngle = random(-Math.PI * 2, Math.PI * 2);
+    const points = [];
 
-const createCircle = ({ cx, cy, r, animationDuration }) => {
-  const g = createShapeWrapper({
-    x: cx,
-    y: cy,
-  });
-  const circle = createSVGElement('circle', {
-    cx: 0,
-    cy: 0,
-    r,
-  });
-  circle.style.animationDuration = `${animationDuration}s`;
-  circle.style.animationDirection = getRandomDirection();
+    const lerp = 2 * Math.PI / n;
+    range(n).forEach((index) => {
+      const angle = lerp * index;
+      const vector = vec2.fromValues(0, -1);
+      const rotationMatrix = mat2.fromRotation(mat2.create(), angle + offsetAngle);
+      points.push(vec2.transformMat2(vec2.create(), vector, rotationMatrix));
+    });
 
-  g.appendChild(circle);
-  return g;
-};
+    const polygon = createSVGElement('polygon', {
+      points: points.map(([x, y]) => `${x * radius},${y * radius}`).join(' '),
+    });
 
-const createSquare = ({ x, y, width, animationDuration }) => {
-  const g = createShapeWrapper({ x, y });
-  const rect = createSVGElement('rect', {
-    x: -(width / 2),
-    y: -(width / 2),
-    height: width,
-    width,
-  });
-  rect.style.animationDuration = `${animationDuration}s`;
-  rect.style.animationDirection = getRandomDirection();
-  g.appendChild(rect);
-  return g;
-}
+    polygon.style.animationDuration = `${random(5, 30)}s`;
+    polygon.style.animationDirection = sample([
+      'alternate', 'alternate-reverse'
+    ]);
+
+    return polygon;
+  };
+
+  return (x, y) => {
+    const wrapper = createShapeWrapper(x, y);
+    wrapper.appendChild(createRandomPolygon());
+    return wrapper;
+  };
+})();
 
 export default class Background {
   constructor() {
@@ -98,7 +99,7 @@ export default class Background {
     this.drawGrid();
     this.drawShapes();
 
-    addClockListener(this.tick.bind(this));
+    // addClockListener(this.tick.bind(this));
   }
 
   drawGrid() {
@@ -123,38 +124,18 @@ export default class Background {
   }
 
   drawShapes() {
-    const totalNumShapes = Math.floor(SHAPE_SPOTS.length * 0.9);
-
-    const numCircles = Math.floor(totalNumShapes * 0.4);
-    const numSquares = Math.floor(totalNumShapes * 0.4);
-    const numSquiggles = totalNumShapes - numCircles - numSquares;
-
-    SHAPE_SPOTS.slice(0, numCircles).forEach(([x, y]) => {
+    const numShapes = Math.floor(SHAPE_SPOTS.length * 0.5);
+    sampleSize(SHAPE_SPOTS, numShapes).forEach(([x, y]) => {
       this.shapes.push({
         x, y,
-        el: createCircle({
-          cx: x, cy: y,
-          animationDuration: random(3, 10, true),
-          r: random(2, 4),
-        })
+        el: createRandomShape(x, y),
       });
     });
 
-    SHAPE_SPOTS.slice(numCircles, numCircles + numSquares).forEach(([x, y]) => {
-      this.shapes.push({
-        x, y,
-        el: createSquare({
-          x: x, y: y,
-          animationDuration: random(20, 40, true),
-          width: random(4, 8),
-        })
-      });
-    });
-
-    const avgFriction = 0.05;
-    const frictionDelta = avgFriction * 0.5;
+    const avgFriction = 0.1;
+    const frictionDelta = avgFriction * 0.3;
     const avgK = 0.0001;
-    const kDelta = avgK * 0.5;
+    const kDelta = avgK * 0.3;
 
     const g = createSVGElement('g');
     g.classList.add('site__background-shapes');
