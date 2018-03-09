@@ -129,12 +129,12 @@
   top: 1px;
   display: inline-block;
   content: '';
-  height: 0.8em;
-  width: 0.8em;
+  height: 0.9em;
+  width: 0.9em;
   margin-left: 1px;
   background-repeat: no-repeat;
-  background-size: 22px;
-  background-image: url("/public/images/link-icon.svg");
+  background-size: contain;
+  background-image: url("/public/images/external-link-icon.svg");
   background-position: center;
 }
 

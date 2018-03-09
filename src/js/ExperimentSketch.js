@@ -107,7 +107,7 @@ export default class ExperimentSketch {
     const length = this.pathEl.getTotalLength();
 
     // Clear any previous transition
-    this.pathEl.style.transition = this.pathEl.style.transition = 'none';
+    this.pathEl.style.transition = 'none';
     // Set up the starting positions
     this.pathEl.style.strokeDasharray = length + ' ' + length;
     this.pathEl.style.strokeDashoffset = length;
