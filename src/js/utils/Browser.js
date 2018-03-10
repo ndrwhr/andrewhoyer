@@ -2,7 +2,7 @@ import { vec2 } from 'gl-matrix';
 
 // Helper to get scroll position since cross browser is a mess:
 // https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollY
-export const getScrollPosition = () => (
+const getScrollValues = () => (
   vec2.fromValues(
     window.pageXOffset ||
     document.documentElement.scrollLeft ||
@@ -15,6 +15,34 @@ export const getScrollPosition = () => (
   )
 );
 
-export const getWindowPosition = () => (
-  vec2.fromValues(window.screenX, window.screenY)
-);
+const scrollListeners = [];
+const resizeListeners = [];
+
+let currentScrollPosition;
+
+export default {
+  init() {
+    currentScrollPosition = getScrollValues();
+
+    window.addEventListener('scroll', () => requestAnimationFrame(() => {
+      currentScrollPosition = getScrollValues();
+      scrollListeners.forEach(callback => callback(currentScrollPosition));
+    }));
+
+    window.addEventListener('resize', () => requestAnimationFrame(() => {
+      resizeListeners.forEach(callback => callback());
+    }));
+  },
+
+  getScrollPosition() {
+    return currentScrollPosition;
+  },
+
+  addScrollListener(callback) {
+    scrollListeners.push(callback);
+  },
+
+  addResizeListener(callback) {
+    resizeListeners.push(callback)
+  },
+};

@@ -39,11 +39,11 @@
   transition: var(--background-transition);
 }
 
-.site--color-1 .experiment__background { background: var(--experiment-background-color-1) }
-.site--color-2 .experiment__background { background: var(--experiment-background-color-2) }
-.site--color-3 .experiment__background { background: var(--experiment-background-color-3) }
-.site--color-4 .experiment__background { background: var(--experiment-background-color-4) }
-.site--color-5 .experiment__background { background: var(--experiment-background-color-5) }
+.site--color-1 .experiment__background { background: color(var(--experiment-background-color-1) a(70%)) }
+.site--color-2 .experiment__background { background: color(var(--experiment-background-color-2) a(70%)) }
+.site--color-3 .experiment__background { background: color(var(--experiment-background-color-3) a(70%)) }
+.site--color-4 .experiment__background { background: color(var(--experiment-background-color-4) a(70%)) }
+.site--color-5 .experiment__background { background: color(var(--experiment-background-color-5) a(70%)) }
 
 .experiment__content {
   display: flex;

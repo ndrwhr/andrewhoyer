@@ -61,7 +61,6 @@
   animation-iteration-count: infinite;
 }
 
-
 .site__background-shape-wrapper:nth-child(n) polygon {
   animation-name: animate-scale;
 }
@@ -77,18 +76,19 @@
 .site__header {
   padding: var(--std-padding);
   font-size: inherit;
+  text-align: center;
 }
 
 .site__header-name {
-  font-size: 2.5em;
+  font-size: 8.5vw;
   font-weight: 900;
-  margin: 0 0 0.3em;
-  line-height: 1.2em;
+  margin: 0 0 var(--std-padding);
+  line-height: 1;
 }
 
 .site__header-whatido {
   font-weight: 700;
-  font-size: 2em;
+  font-size: 5vw;
   margin: 0;
 }
 
@@ -107,8 +107,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 0 0 var(--std-padding);
-  font-size: 2em;
+  margin: 0 0 calc(var(--std-padding) / 2);
+  font-size: 1em;
   font-weight: 900;
   list-style: none;
   padding: 0;
@@ -116,7 +116,7 @@
 }
 
 .site__footer-contact-item:not(:last-child) {
-  margin-right: var(--std-padding);
+  margin-right: calc(var(--std-padding) / 2);
 }
 
 @keyframes animate-scale {

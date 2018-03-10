@@ -3,11 +3,6 @@ import random from 'lodash/random';
 import range from 'lodash/range';
 import sample from 'lodash/sample';
 import sampleSize from 'lodash/sampleSize';
-import shuffle from 'lodash/shuffle';
-
-import Body from './physics/Body';
-import Spring from './physics/Spring';
-import { addClockListener } from './utils/Clock';
 
 const WIDTH = 100;
 const HEIGHT = 100;
@@ -35,7 +30,7 @@ const SHAPE_SPOTS = (() => {
     return acc;
   }, []);
 
-  return shuffle(coords);
+  return coords;
 })();
 
 const createSVGElement = (type, attributes = {}) => {
@@ -92,14 +87,9 @@ const createRandomShape = (() => {
 
 export default class Background {
   constructor() {
-    this.svg = document.querySelector('.site__background')
-
-    this.shapes = [];
-
+    this.svg = document.querySelector('.site__background');
     this.drawGrid();
     this.drawShapes();
-
-    // addClockListener(this.tick.bind(this));
   }
 
   drawGrid() {
@@ -129,56 +119,12 @@ export default class Background {
 
   drawShapes() {
     const numShapes = Math.floor(SHAPE_SPOTS.length * 0.7);
-    sampleSize(SHAPE_SPOTS, numShapes).forEach(([x, y]) => {
-      this.shapes.push({
-        x, y,
-        el: createRandomShape(x, y),
-      });
+    const g = createSVGElement('g', {
+      'class': 'site__background-shapes',
     });
-
-    const avgFriction = 0.1;
-    const frictionDelta = avgFriction * 0.3;
-    const avgK = 0.0001;
-    const kDelta = avgK * 0.3;
-
-    const g = createSVGElement('g');
-    g.classList.add('site__background-shapes');
-    this.shapes.forEach((shape) => {
-      const positionOffset = 0.1;
-      const body = new Body({
-        friction: random(avgFriction - frictionDelta, avgFriction + frictionDelta),
-        current: vec2.fromValues(
-          random(-positionOffset, positionOffset, true),
-          random(-positionOffset, positionOffset, true)
-        ),
-      });
-      const spring = new Spring({
-        k: random(avgK - kDelta, avgK + kDelta),
-        body,
-      });
-
-      shape.spring = spring;
-      shape.body = body;
-
-      g.appendChild(shape.el);
+    sampleSize(SHAPE_SPOTS, numShapes).forEach(([x, y]) => {
+      g.appendChild(createRandomShape(x, y));
     });
     this.svg.appendChild(g);
-  }
-
-  tick(dt, { scrollAcceleration, windowAcceleration }) {
-    const acceleration = vec2.add(
-      vec2.create(),
-      vec2.scale(vec2.create(), scrollAcceleration, 0.001),
-      vec2.scale(vec2.create(), windowAcceleration, 0.01)
-    );
-    this.shapes.forEach((shape) => {
-      shape.body.applyAcceleration(acceleration);
-      shape.spring.satisfy();
-      shape.body.move(dt);
-
-      const x = shape.x + shape.body.current[0];
-      const y = shape.y + shape.body.current[1];
-      shape.el.setAttribute('transform', `translate(${x} ${y})`);
-    });
   }
 }
