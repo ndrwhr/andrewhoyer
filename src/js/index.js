@@ -1,10 +1,8 @@
 import random from 'lodash/random';
 
-import Browser from './js/utils/Browser';
-import SiteBackground from './js/SiteBackground';
-import Experiments from './js/Experiments';
-
-import './entry.css';
+import Browser from './utils/Browser';
+import SiteBackground from './SiteBackground';
+import Experiments from './Experiments';
 
 window.addEventListener('DOMContentLoaded', () => {
   Browser.init();

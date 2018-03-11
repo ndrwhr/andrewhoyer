@@ -1,8 +1,36 @@
+@import "normalize.css/normalize.css";
+@import "./experiment.css";
+@import "./experiments.css";
+@import "./four-o-four.css";
 @import "./variables.css";
 
 :root {
   --background-grid-stroke-width: 0.20;
   --background-polygon-stroke-width: 0.4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+b {
+  font-weight: 900;
+}
+
+del {
+  opacity: 0.5;
 }
 
 .site {

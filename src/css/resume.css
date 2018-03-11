@@ -1,6 +1,12 @@
+@import 'reset-css/reset.css';
+
+:root {
+
+}
+
 .resume {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-weight: 300;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
   color: #263238;
   font-size: 0.9em;
   line-height: 1.5em;
@@ -21,6 +27,7 @@
 @media only print {
   .resume {
     font-size: 12px;
+    color: black;
   }
 
   .resume__web-only {
@@ -28,12 +35,7 @@
   }
 }
 
-.resume h1,
-.resume h2,
-.resume h3,
-.resume h4,
-.resume h5,
-.resume h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: 'Merriweather', serif;
   margin: 0;
 }

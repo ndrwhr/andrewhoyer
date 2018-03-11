@@ -11,7 +11,9 @@
       ],
       "file_exclude_patterns":
       [
-        "public/bundle.js",
+        "public/resume.css",
+        "public/site.js",
+        "public/site.css",
         "yarn.lock"
       ]
     }

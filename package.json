@@ -20,12 +20,15 @@
     "postcss-cssnext": "^3.1.0",
     "postcss-import": "^11.1.0",
     "postcss-loader": "^2.1.1",
+    "reset-css": "^2.2.1",
     "style-loader": "^0.20.2",
     "webpack": "^4.1.0",
     "webpack-cli": "^2.0.10"
   },
   "scripts": {
-    "build": "webpack --config src/webpack.config.js --mode production && bundle exec jekyll build",
+    "build": "yarn run build-public && yarn run build-jekyll",
+    "build-public": "webpack --config src/webpack.config.js --mode production",
+    "build-jekyll": "bundle exec jekyll build",
     "watch": "concurrently --kill-others \"webpack --config src/webpack.config.js --watch --mode development\" \"bundle exec jekyll serve -l -o -H 0.0.0.0\"",
     "clean": "rm -rf public/bundle.css public/bundle.js _site"
   }

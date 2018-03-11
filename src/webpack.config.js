@@ -5,11 +5,13 @@ module.exports = {
   mode: 'development',
 
   entry: {
-    js: './src/entry.js',
+    'site.js': './src/js/index.js',
+    'site.css': './src/css/site.css',
+    'resume.css': './src/css/resume.css',
   },
   output: {
     path: path.resolve(__dirname, '../public'),
-    filename: 'bundle.js',
+    filename: '[name]',
   },
   module: {
     rules: [
@@ -42,6 +44,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new ExtractTextPlugin("bundle.css"),
+    new ExtractTextPlugin("[name]"),
   ],
 };
