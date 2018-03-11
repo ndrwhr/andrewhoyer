@@ -3,9 +3,18 @@
 @import "./css/experiment.css";
 @import "./css/experiments.css";
 @import "./css/four-o-four.css";
+@import "./css/resume.css";
 
 * {
   box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
 }
 
 a {
