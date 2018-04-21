@@ -1,82 +1,63 @@
 @import 'reset-css/reset.css';
 
-:root {
-
+html {
+  font-size: 62.5%;
 }
 
 .resume {
   font-family: 'Raleway', sans-serif;
-  font-weight: 400;
+  font-size: 1.5rem;
+  font-weight: 500;
   color: #263238;
-  font-size: 0.9em;
-  line-height: 1.5em;
+  line-height: 1.6;
 
   display: grid;
   grid-template-rows: 1fr auto auto;
   grid-template-columns: 2fr 1.2fr;
   grid-template-areas:
     "header header"
-    "primary secondary"
-    "footer footer";
-  grid-gap: 30px;
-  max-width: 1000px;
-  padding: 30px;
+    "primary secondary";
+  grid-gap: 3rem;
+  max-width: 100rem;
+  padding: 3rem;
   margin: 0 auto;
 }
 
-@media only print {
-  .resume {
-    font-size: 12px;
-    color: black;
-  }
-
-  .resume__web-only {
-    display: none;
-  }
-}
-
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4 {
   font-family: 'Merriweather', serif;
-  margin: 0;
+  font-weight: 600;
+  line-height: 1;
 }
 
-.resume h1 {
-  font-size: 2em;
-  font-weight: 400;
+h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
 }
 
-.resume h2 {
-  font-size: 1.3em;
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 1.8rem;
+}
+
+strong {
   font-weight: 600;
 }
 
-.resume h3 {
-  font-size: 1.5em;
+a,
+a:visited {
+  color: blue;
 }
 
-.resume h4 {
-  font-size: 1em;
-  font-weight: 600;
-}
-
-.resume strong {
-  font-weight: 600;
-}
-
-.resume ol,
-.resume ul {
-  list-style: none;
-
-}
-
-@media only screen and (max-width : 800px) {
+@media only screen and (width <= 50rem) {
   .resume {
     grid-template-columns: 1fr;
     grid-template-areas:
       "header"
       "primary"
-      "secondary"
-      "footer";
+      "secondary";
   }
 }
 
@@ -96,27 +77,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .resume__section:not(:last-child) {
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 }
 
-.resume__footer {
-  display: none;
-  text-align: center;
-  grid-area: footer;
-}
-
-@media only print {
-  .resume__footer {
-    display: block;
-  }
-}
-
-.resume .resume__name {
-  margin-bottom: 10px;
-}
-
-.resume .resume__section-header {
-  margin-bottom: 10px;
+.resume__section-header {
+  margin-bottom: 1rem;
 }
 
 .resume__work-entries {
@@ -130,7 +95,7 @@ h1, h2, h3, h4, h5, h6 {
   grid-template-areas:
     "work-title work-when"
     "work-where where-where";
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
 .resume__work-entry-title {
@@ -146,10 +111,11 @@ h1, h2, h3, h4, h5, h6 {
 .resume__work-entry-where {
   grid-area: work-where;
   margin: 0;
+  line-height: 1;
 }
 
 .resume__work-entry:not(:last-child) {
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 }
 
 .resume__education-entries {
@@ -161,12 +127,38 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
+.resume__rich-text--indent-ps p {
+  margin: 0 0 0 1rem;
+  text-indent: -1rem;
+}
+
 .resume__rich-text p:not(:last-child),
 .resume__rich-text ul:not(:last-child),
 .resume__rich-text ol:not(:last-child) {
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
 .resume__rich-text ul {
   list-style: circle;
+  margin-left: 3rem;
+}
+
+.resume__rich-text li {
+  margin-bottom: 0.4rem;
+}
+
+@media only print {
+  html {
+    font-size: 45%;
+  }
+
+  .resume {
+    color: black;
+  }
+
+  a,
+  a:visited {
+    color: black;
+    text-decoration: none;
+  }
 }
