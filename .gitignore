@@ -5,4 +5,5 @@ Gemfile.lock
 project.sublime-workspace
 node_modules
 public/bundle*
+public/resume.css
 yarn-error.log
