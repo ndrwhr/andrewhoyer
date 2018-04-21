@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>moment-love</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-2.000000, -2.000000)">
+            <g id="moment-love" transform="translate(2.000000, 2.000000)">
+                <circle fill="#C20000" cx="10" cy="10" r="10"></circle>
+                <path d="M15.1314224,6.85267629 C16.2901051,7.989576 16.2889465,9.81901555 15.1314224,10.9570213 L10.0032017,16 C8.29185688,14.3209604 6.58044999,12.6419008 4.86910517,10.9628613 C3.71029828,9.82593554 3.71029828,7.995416 4.86910517,6.85849629 C6.02787068,5.72160257 7.8936224,5.72159057 9.0524086,6.85849629 L9.99726377,7.78547605 L10.9480362,6.85267629 C12.1068224,5.71577457 13.9725741,5.71577457 15.1314224,6.85267629 Z" id="Shape" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>

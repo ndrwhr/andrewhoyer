@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="459px" height="565px" viewBox="0 0 459 565" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M18,44.3627525 C7.75952783,46.2437778 0,55.2157215 0,66 C0,78.1502645 9.8497355,88 22,88 C34.1502645,88 44,78.1502645 44,66 L44,0 L18,0 L18,44.3627525 Z" id="path-1"></path>
+        <path d="M18,44.3627525 C7.75952783,46.2437778 0,55.2157215 0,66 C0,78.1502645 9.8497355,88 22,88 C34.1502645,88 44,78.1502645 44,66 L44,0 L18,0 L18,44.3627525 Z" id="path-3"></path>
+        <path d="M18,44.3627525 C7.75952783,46.2437778 0,55.2157215 0,66 C0,78.1502645 9.8497355,88 22,88 C34.1502645,88 44,78.1502645 44,66 L44,0 L18,0 L18,44.3627525 Z" id="path-5"></path>
+        <path d="M18,44.3627525 C7.75952783,46.2437778 0,55.2157215 0,66 C0,78.1502645 9.8497355,88 22,88 C34.1502645,88 44,78.1502645 44,66 L44,0 L18,0 L18,44.3627525 Z" id="path-7"></path>
+        <path d="M18,44.3627525 C7.75952783,46.2437778 0,55.2157215 0,66 C0,78.1502645 9.8497355,88 22,88 C34.1502645,88 44,78.1502645 44,66 L44,0 L18,0 L18,44.3627525 Z" id="path-9"></path>
+        <path d="M18,44.3627525 C7.75952783,46.2437778 0,55.2157215 0,66 C0,78.1502645 9.8497355,88 22,88 C34.1502645,88 44,78.1502645 44,66 L44,0 L18,0 L18,44.3627525 Z" id="path-11"></path>
+        <path d="M0,8.92319793 C12.9120722,1.91152478 26.6001924,-0.380016793 41.0643607,2.04857323 C56.6956754,4.67313165 67.6939523,8.07789706 94.8616151,4.67313165 C102.799236,3.6783557 117.748347,2.14059659 139.708946,0.0598543394 L137.582047,172.555751 C121.814189,171.735841 110.081135,171.735841 102.382885,172.555751 C78.9006986,175.056747 57.6971531,180.780526 46.7564773,179.88089 C30.4357197,178.538857 14.8502272,172.326086 0,161.242575 L0,8.92319793 Z" id="path-13"></path>
+        <path d="M74.2637904,25.914605 C83.0815294,30.8639133 116.617488,51.5952742 154.64543,49.8771025 C179.997392,48.7316547 207.115582,32.1226069 236,0.0499592185 L236,38.6350812 C209.340847,61.376923 182.222657,73.362867 154.64543,74.5929132 C127.068203,75.8229594 96.2073076,66.6353554 62.0627444,47.0301011 L49.4984179,38.972353 C49.3182657,52.7745958 41.9126852,59.1950775 27.2816764,58.233798 C5.33516319,56.7918788 -0.0636762967,38.1835951 0.26603275,29.3876428 C0.527016171,22.4251475 2.71867918,15.2029135 10.4012461,9.10048516 C18.0838131,2.99805682 26.0928623,2.68111773 34.5487234,3.93475537 C52.2208608,6.55476725 65.4460513,20.9652967 74.2637904,25.914605 Z" id="path-15"></path>
+        <path d="M74.8517726,36.914605 C83.6695117,41.8639133 112.2751,55.9464615 148.300838,60.2934391 C163.548677,62.1332908 172.676869,55.0316824 170.792403,46.9827899 C169.536091,41.6168615 162.218634,36.3782132 148.84003,31.2668449 L148.84003,0.42302913 C163.548495,5.69562532 176.198172,13.8502155 186.78906,24.8867996 C202.675392,41.4416758 198.448876,58.4546867 193.593036,67.1217079 C188.737195,75.7887291 174.901341,84.7687326 155.233412,85.5929132 C135.565484,86.4170939 83.8475147,66.7600913 72.4378651,61.6027989 C64.8314319,58.164604 57.2490612,54.6242575 49.6907528,50.9817594 C49.7743656,64.1110646 42.5006675,70.1950775 27.8696587,69.233798 C5.92314547,67.7918788 0.524305985,49.1835951 0.854015032,40.3876428 C1.11499845,33.4251475 3.30666146,26.2029135 10.9892284,20.1004852 C18.6717954,13.9980568 26.6808446,13.6811177 35.1367056,14.9347554 C52.8088431,17.5547673 66.0340336,31.9652967 74.8517726,36.914605 Z" id="path-17"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard">
+            <g id="Otto">
+                <ellipse id="shadow" fill="#363941" opacity="0.234488225" cx="233" cy="550.5" rx="226" ry="14.5"></ellipse>
+                <path d="M243.5,0 C350.367099,0 437,86.6329009 437,193.5 C437,193.611144 437,285.444477 437,469 L50,469 L50,194 C50,86.6329009 136.632901,0 243.5,0 Z" id="Combined-Shape" fill="#EF8FD7"></path>
+                <g id="feet" transform="translate(32.000000, 468.000000)">
+                    <g id="foot">
+                        <g id="Group">
+                            <mask id="mask-2" fill="white">
+                                <use xlink:href="#path-1"></use>
+                            </mask>
+                            <use id="foot" fill="#EF8FD7" xlink:href="#path-1"></use>
+                            <circle id="Oval-2" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-2)" cx="44" cy="13" r="8"></circle>
+                            <circle id="Oval-2-Copy" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-2)" cx="44" cy="32" r="8"></circle>
+                            <circle id="Oval-2-Copy-2" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-2)" cx="44" cy="53" r="8"></circle>
+                            <circle id="Oval-2-Copy-3" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-2)" cx="39" cy="76" r="8"></circle>
+                            <circle id="Oval-2-Copy-4" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-2)" cx="12" cy="81" r="8"></circle>
+                            <path d="M11.2631074,45.4682269 C19.0815185,45.4682269 29.1526153,48.6567883 31.8112754,58.3892746 C34.4699356,68.1217608 28.0256851,71.0326581 23.392863,71.0855465 C18.7600409,71.1384349 14.9713993,66.1509638 14.9713993,63.2743338" id="Path-2" stroke="#000000" stroke-width="4" opacity="0.4" stroke-linecap="round" mask="url(#mask-2)"></path>
+                        </g>
+                    </g>
+                    <g id="foot" transform="translate(74.000000, 0.000000)">
+                        <g id="Group">
+                            <mask id="mask-4" fill="white">
+                                <use xlink:href="#path-3"></use>
+                            </mask>
+                            <use id="foot" fill="#EF8FD7" xlink:href="#path-3"></use>
+                            <circle id="Oval-2" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-4)" cx="44" cy="13" r="8"></circle>
+                            <circle id="Oval-2-Copy" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-4)" cx="44" cy="32" r="8"></circle>
+                            <circle id="Oval-2-Copy-2" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-4)" cx="44" cy="53" r="8"></circle>
+                            <circle id="Oval-2-Copy-3" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-4)" cx="39" cy="76" r="8"></circle>
+                            <circle id="Oval-2-Copy-4" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-4)" cx="12" cy="81" r="8"></circle>
+                            <path d="M11.2631074,45.4682269 C19.0815185,45.4682269 29.1526153,48.6567883 31.8112754,58.3892746 C34.4699356,68.1217608 28.0256851,71.0326581 23.392863,71.0855465 C18.7600409,71.1384349 14.9713993,66.1509638 14.9713993,63.2743338" id="Path-2" stroke="#000000" stroke-width="4" opacity="0.4" stroke-linecap="round" mask="url(#mask-4)"></path>
+                        </g>
+                    </g>
+                    <g id="foot" transform="translate(149.000000, 0.000000)">
+                        <g id="Group">
+                            <mask id="mask-6" fill="white">
+                                <use xlink:href="#path-5"></use>
+                            </mask>
+                            <use id="foot" fill="#EF8FD7" xlink:href="#path-5"></use>
+                            <circle id="Oval-2" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-6)" cx="44" cy="13" r="8"></circle>
+                            <circle id="Oval-2-Copy" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-6)" cx="44" cy="32" r="8"></circle>
+                            <circle id="Oval-2-Copy-2" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-6)" cx="44" cy="53" r="8"></circle>
+                            <circle id="Oval-2-Copy-3" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-6)" cx="39" cy="76" r="8"></circle>
+                            <circle id="Oval-2-Copy-4" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-6)" cx="12" cy="81" r="8"></circle>
+                            <path d="M11.2631074,45.4682269 C19.0815185,45.4682269 29.1526153,48.6567883 31.8112754,58.3892746 C34.4699356,68.1217608 28.0256851,71.0326581 23.392863,71.0855465 C18.7600409,71.1384349 14.9713993,66.1509638 14.9713993,63.2743338" id="Path-2" stroke="#000000" stroke-width="4" opacity="0.4" stroke-linecap="round" mask="url(#mask-6)"></path>
+                        </g>
+                    </g>
+                    <g id="foot" transform="translate(217.000000, 0.000000)">
+                        <g id="Group">
+                            <mask id="mask-8" fill="white">
+                                <use xlink:href="#path-7"></use>
+                            </mask>
+                            <use id="foot" fill="#EF8FD7" xlink:href="#path-7"></use>
+                            <circle id="Oval-2" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-8)" cx="44" cy="13" r="8"></circle>
+                            <circle id="Oval-2-Copy" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-8)" cx="44" cy="32" r="8"></circle>
+                            <circle id="Oval-2-Copy-2" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-8)" cx="44" cy="53" r="8"></circle>
+                            <circle id="Oval-2-Copy-3" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-8)" cx="39" cy="76" r="8"></circle>
+                            <circle id="Oval-2-Copy-4" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-8)" cx="12" cy="81" r="8"></circle>
+                            <path d="M11.2631074,45.4682269 C19.0815185,45.4682269 29.1526153,48.6567883 31.8112754,58.3892746 C34.4699356,68.1217608 28.0256851,71.0326581 23.392863,71.0855465 C18.7600409,71.1384349 14.9713993,66.1509638 14.9713993,63.2743338" id="Path-2" stroke="#000000" stroke-width="4" opacity="0.4" stroke-linecap="round" mask="url(#mask-8)"></path>
+                        </g>
+                    </g>
+                    <g id="foot" transform="translate(287.000000, 0.000000)">
+                        <g id="Group">
+                            <mask id="mask-10" fill="white">
+                                <use xlink:href="#path-9"></use>
+                            </mask>
+                            <use id="foot" fill="#EF8FD7" xlink:href="#path-9"></use>
+                            <circle id="Oval-2" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-10)" cx="44" cy="13" r="8"></circle>
+                            <circle id="Oval-2-Copy" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-10)" cx="44" cy="32" r="8"></circle>
+                            <circle id="Oval-2-Copy-2" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-10)" cx="44" cy="53" r="8"></circle>
+                            <circle id="Oval-2-Copy-3" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-10)" cx="39" cy="76" r="8"></circle>
+                            <circle id="Oval-2-Copy-4" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-10)" cx="12" cy="81" r="8"></circle>
+                            <path d="M11.2631074,45.4682269 C19.0815185,45.4682269 29.1526153,48.6567883 31.8112754,58.3892746 C34.4699356,68.1217608 28.0256851,71.0326581 23.392863,71.0855465 C18.7600409,71.1384349 14.9713993,66.1509638 14.9713993,63.2743338" id="Path-2" stroke="#000000" stroke-width="4" opacity="0.4" stroke-linecap="round" mask="url(#mask-10)"></path>
+                        </g>
+                    </g>
+                    <g id="foot" transform="translate(361.000000, 0.000000)">
+                        <g id="Group">
+                            <mask id="mask-12" fill="white">
+                                <use xlink:href="#path-11"></use>
+                            </mask>
+                            <use id="foot" fill="#EF8FD7" xlink:href="#path-11"></use>
+                            <circle id="Oval-2" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-12)" cx="44" cy="13" r="8"></circle>
+                            <circle id="Oval-2-Copy" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-12)" cx="44" cy="32" r="8"></circle>
+                            <circle id="Oval-2-Copy-2" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-12)" cx="44" cy="53" r="8"></circle>
+                            <circle id="Oval-2-Copy-3" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-12)" cx="39" cy="76" r="8"></circle>
+                            <circle id="Oval-2-Copy-4" fill="#FFFFFF" opacity="0.509737319" mask="url(#mask-12)" cx="12" cy="81" r="8"></circle>
+                            <path d="M11.2631074,45.4682269 C19.0815185,45.4682269 29.1526153,48.6567883 31.8112754,58.3892746 C34.4699356,68.1217608 28.0256851,71.0326581 23.392863,71.0855465 C18.7600409,71.1384349 14.9713993,66.1509638 14.9713993,63.2743338" id="Path-2" stroke="#000000" stroke-width="4" opacity="0.4" stroke-linecap="round" mask="url(#mask-12)"></path>
+                        </g>
+                    </g>
+                </g>
+                <rect id="mouth" fill="#000000" x="169" y="242" width="39" height="5"></rect>
+                <path d="M436.947863,188.963302 C434.537405,84.1918219 348.850729,0 243.5,0 C159.011507,0 87.1701768,54.1489375 60.7870649,129.882832 C73.3317642,131.28169 86.0819969,132 99,132 C166.464314,132 229.352768,112.408413 282.286343,78.6042561 C305.569179,141.982331 365.847291,187.492917 436.947863,188.963302 L436.947863,188.963302 Z" id="hair" fill="#000000"></path>
+                <g id="eye" transform="translate(102.000000, 171.000000)">
+                    <circle id="Oval" fill="#FFFFFF" cx="26" cy="26" r="26"></circle>
+                    <circle id="Oval-2" fill="#000000" cx="25" cy="27" r="9"></circle>
+                </g>
+                <g id="towel" transform="translate(50.000000, 294.000000)">
+                    <g id="Group-4" transform="translate(0.000000, 11.000000)">
+                        <mask id="mask-14" fill="white">
+                            <use xlink:href="#path-13"></use>
+                        </mask>
+                        <use id="Path-4" fill="#FAF9F3" xlink:href="#path-13"></use>
+                        <polygon id="Path-2" fill="#EEEBDD" mask="url(#mask-14)" points="139.694764 -1.83515069 121.753115 -0.804808232 120.244494 175.99449 138.208615 172.763184"></polygon>
+                    </g>
+                    <path d="M387,9.35998535 C368.353215,13.9421227 337.914903,15.8093266 295.685063,14.9615969 C268.349774,14.4128633 222.616177,3.43611273 186.101836,0.777695993 C172.837793,-0.187989054 156.182034,1.17469471 136.134559,4.8657473 L133.464843,189.659534 C162.006614,183.506262 190.782395,180.174665 219.792186,179.664741 C263.306871,178.899856 320.902867,187.202522 342.019546,185.670303 C356.097333,184.648824 371.090817,180.440945 387,173.046666 L387,9.35998535 Z" id="Path-5" fill="#FAF9F3"></path>
+                </g>
+                <g id="eye" transform="translate(232.000000, 171.000000)">
+                    <circle id="Oval" fill="#FFFFFF" cx="26" cy="26" r="26"></circle>
+                    <circle id="Oval-2" fill="#000000" cx="25" cy="27" r="9"></circle>
+                </g>
+                <g id="glasses" transform="translate(82.000000, 151.000000)" fill="#000000">
+                    <rect id="Rectangle" x="89" y="43" width="44" height="5"></rect>
+                    <path d="M46,92 C20.5949015,92 0,71.4050985 0,46 C0,20.5949015 20.5949015,0 46,0 C71.4050985,0 92,20.5949015 92,46 C92,71.4050985 71.4050985,92 46,92 Z M46,87 C68.6436747,87 87,68.6436747 87,46 C87,23.3563253 68.6436747,5 46,5 C23.3563253,5 5,23.3563253 5,46 C5,68.6436747 23.3563253,87 46,87 Z" id="Combined-Shape"></path>
+                    <path d="M176,92 C150.594902,92 130,71.4050985 130,46 C130,20.5949015 150.594902,0 176,0 C201.405098,0 222,20.5949015 222,46 C222,71.4050985 201.405098,92 176,92 Z M176,87 C198.643675,87 217,68.6436747 217,46 C217,23.3563253 198.643675,5 176,5 C153.356325,5 135,23.3563253 135,46 C135,68.6436747 153.356325,87 176,87 Z" id="Combined-Shape-Copy"></path>
+                </g>
+                <g id="left-arm" transform="translate(201.000000, 294.000000)">
+                    <mask id="mask-16" fill="white">
+                        <use xlink:href="#path-15"></use>
+                    </mask>
+                    <use fill="#EF8FD7" xlink:href="#path-15"></use>
+                    <circle id="Oval-2-Copy-5" fill="#FFFFFF" opacity="0.5" mask="url(#mask-16)" cx="44" cy="53" r="8"></circle>
+                    <circle id="Oval-2-Copy-6" fill="#FFFFFF" opacity="0.5" mask="url(#mask-16)" cx="17" cy="56" r="8"></circle>
+                    <circle id="Oval-2-Copy-7" fill="#FFFFFF" opacity="0.5" mask="url(#mask-16)" cx="1" cy="35" r="8"></circle>
+                    <circle id="Oval-2-Copy-8" fill="#FFFFFF" opacity="0.5" mask="url(#mask-16)" cx="9" cy="10" r="8"></circle>
+                    <circle id="Oval-2-Copy-9" fill="#FFFFFF" opacity="0.5" mask="url(#mask-16)" cx="33" cy="2" r="8"></circle>
+                    <path d="M54.7700721,45.4516033 C52.4385275,37.6894436 48.8867202,31.6453624 44.11465,27.3193595 C38.7240486,22.4326422 29.1961661,23.0245033 26,25.1300336 C19.6114897,29.3385763 21.1540408,36.0991476 22.9133088,39.1151246 C24.6725768,42.1311016 30.8240988,44.6868666 32.82188,44.0578894" id="Path-3" stroke="#000000" stroke-width="4" opacity="0.4" mask="url(#mask-16)"></path>
+                </g>
+                <g id="right-arm" transform="translate(0.000000, 298.000000)">
+                    <mask id="mask-18" fill="white">
+                        <use xlink:href="#path-17"></use>
+                    </mask>
+                    <use id="left-arm" fill="#EF8FD7" transform="translate(99.420015, 43.020555) scale(-1, 1) translate(-99.420015, -43.020555) " xlink:href="#path-17"></use>
+                    <circle id="Oval-2" fill="#FFFFFF" opacity="0.5" mask="url(#mask-18)" cx="155" cy="65" r="8"></circle>
+                    <circle id="Oval-2-Copy" fill="#FFFFFF" opacity="0.5" mask="url(#mask-18)" cx="187" cy="65" r="8"></circle>
+                    <circle id="Oval-2-Copy-2" fill="#FFFFFF" opacity="0.5" mask="url(#mask-18)" cx="198" cy="40" r="8"></circle>
+                    <circle id="Oval-2-Copy-3" fill="#FFFFFF" opacity="0.5" mask="url(#mask-18)" cx="187" cy="19" r="8"></circle>
+                    <circle id="Oval-2-Copy-4" fill="#FFFFFF" opacity="0.5" mask="url(#mask-18)" cx="163" cy="11" r="8"></circle>
+                    <path d="M179.397151,53.8839918 C177.065606,46.1218321 173.513799,40.0777509 168.741729,35.751748 C163.351127,30.8650307 153.823245,31.4568918 150.627079,33.5624221 C144.238568,37.7709648 145.78112,44.5315361 147.540388,47.5475131 C149.299656,50.5634901 155.451178,53.1192551 157.448959,52.4902778" id="Path-3" stroke="#000000" stroke-width="4" opacity="0.4" mask="url(#mask-18)" transform="translate(162.698575, 42.941996) scale(-1, 1) translate(-162.698575, -42.941996) "></path>
+                </g>
+                <path d="M344,206.047161 C349.522847,206.047161 354,201.570009 354,196.047161 C354,192.365263 350.666667,184.016209 344,171 C337.333333,184.016209 334,192.365263 334,196.047161 C334,201.570009 338.477153,206.047161 344,206.047161 Z" id="Oval-3" fill-opacity="0.784307065" fill="#4A90E2"></path>
+                <path d="M72,168.047161 C77.5228475,168.047161 82,163.570009 82,158.047161 C82,154.365263 78.6666667,146.016209 72,133 C65.3333333,146.016209 62,154.365263 62,158.047161 C62,163.570009 66.4771525,168.047161 72,168.047161 Z" id="Oval-3-Copy" fill-opacity="0.784307065" fill="#4A90E2"></path>
+                <path d="M268,133.047161 C273.522847,133.047161 278,128.570009 278,123.047161 C278,119.365263 274.666667,111.016209 268,98 C261.333333,111.016209 258,119.365263 258,123.047161 C258,128.570009 262.477153,133.047161 268,133.047161 Z" id="Oval-3-Copy-2" fill-opacity="0.784307065" fill="#4A90E2"></path>
+                <path d="M405,242.047161 C410.522847,242.047161 415,237.570009 415,232.047161 C415,228.365263 411.666667,220.016209 405,207 C398.333333,220.016209 395,228.365263 395,232.047161 C395,237.570009 399.477153,242.047161 405,242.047161 Z" id="Oval-3-Copy-3" fill-opacity="0.784307065" fill="#4A90E2"></path>
+            </g>
+        </g>
+    </g>
+</svg>
