@@ -2,6 +2,6 @@
 set -e
 
 rm -rvf _site &&
-    jekyll build
+    yarn build
     rsync -atvz _site/ asquared@andrew-hoyer.com:~/public_html/
     rsync -atvz _site/ asquared@andrew-hoyer.com:~/public_html/andrew/
