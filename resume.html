@@ -92,6 +92,13 @@ resume:
 
   <div class="resume__section-group resume__section-group--primary">
     <section class="resume__section">
+      <h2 class="resume__section-header">Experiments and Digital Art</h2>
+      <div class="resume__rich-text{% if section.indentPs %} resume__rich-text--indent-ps{% endif %}">
+        {{ page.resume.sideProjects.details | markdownify }}
+      </div>
+    </section>
+
+    <section class="resume__section">
       <h2 class="resume__section-header">Work</h2>
       <ol class="resume__work-entries">
         {% for work in page.resume.work %}
@@ -110,13 +117,6 @@ resume:
         {% endfor %}
       </ol>
     </section>
-
-    <section class="resume__section">
-        <h2 class="resume__section-header">Experiments and Digital Art</h2>
-        <div class="resume__rich-text{% if section.indentPs %} resume__rich-text--indent-ps{% endif %}">
-          {{ page.resume.sideProjects.details | markdownify }}
-        </div>
-      </section>
   </div>
 
   <div class="resume__section-group resume__section-group--secondary">
