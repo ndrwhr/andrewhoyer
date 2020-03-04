@@ -1,9 +1,8 @@
-
 # Meta-information about my site and blog.
-title:          Andrew Wang-Hoyer
-author:         Andrew Wang-Hoyer
-description:    Personal playground for Andrew Wang-Hoyer
-url:            http://andrew.wang-hoyer.com
+title: Andrew Wang-Hoyer
+author: Andrew Wang-Hoyer
+description: Personal playground for Andrew Wang-Hoyer
+url: http://andrew.wang-hoyer.com
 
 exclude:
   - .git*
@@ -16,3 +15,4 @@ exclude:
   - node_modules
   - package.json
   - src
+  - experiments/svg-animations-src/site

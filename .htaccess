@@ -2,6 +2,9 @@ ErrorDocument 404 /404/
 
 RewriteEngine on
 
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
 # Rewrite blog URL's. At some point I'm going to want to just kill this.
 RewriteCond %{HTTP_HOST} ^andrew\-hoyer\.com$ [OR]
 RewriteCond %{HTTP_HOST} ^www\.andrew\-hoyer\.com$
@@ -51,6 +54,9 @@ RewriteRule ^(.*)$ "http\:\/\/andrew\-hoyer\.com\/$1" [R=301,L]
 # Redirect to andrew.wang-hoyer.com permanently.
 RewriteCond %{HTTP_HOST} ^andrew\-hoyer\.com$
 RewriteRule ^(.*)$ "http\:\/\/andrew\.wang\-hoyer\.com\/$1" [R=301,L]
+
+RewriteRule "^experiments/svg-animations$" "/experiments/svg-animations/" [R=301,L]
+RewriteRule "^experiments/svg-animations/(.*)$" "/experiments/svg-animations-src/dist/$1" [L]
 
 # enable expirations
 ExpiresActive On

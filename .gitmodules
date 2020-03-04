@@ -55,3 +55,6 @@
 [submodule "experiments/chaos-game"]
 	path = experiments/chaos-game
 	url = git@github.com:ndrwhr/chaos-game-static.git
+[submodule "experiments/svg-animations-src"]
+	path = experiments/svg-animations-src
+	url = git@github.com:ndrwhr/svg-animation-src.git
