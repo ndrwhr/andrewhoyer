@@ -163,6 +163,7 @@
     - Physics
 
 - name: Mobeh Dick
+  hidden: true
   date: 2010-10-01
   repo: https://github.com/ndrwhr/mobeh-dick
   url: /experiments/mobeh/
@@ -202,6 +203,7 @@
     - Maths
 
 - name: Something A Day
+  hidden: true
   date: 2010-01-01
   repo: https://github.com/ndrwhr/something-a-day
   url: /experiments/something_a_day/

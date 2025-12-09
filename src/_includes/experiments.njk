@@ -1,5 +1,7 @@
 <ul class="experiments">
   {% for experiment in experiments %}
-    {% include "experiment.njk" %}
+    {% if not experiment.hidden %}
+      {% include "experiment.njk" %}
+    {% endif %}
   {% endfor %}
 </ul>
