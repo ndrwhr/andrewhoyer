@@ -35,7 +35,7 @@
   },
   "scripts": {
     "dev": "concurrently --kill-others \"vite\" \"npx @11ty/eleventy --serve --watch\"",
-    "build": "vite build && npx @11ty/eleventy && node scripts/copy-apps.mjs",
+    "build": "vite build && npx @11ty/eleventy",
     "build:vite": "vite build",
     "build:11ty": "npx @11ty/eleventy",
     "preview": "vite preview",

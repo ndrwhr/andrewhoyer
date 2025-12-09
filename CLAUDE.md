@@ -34,7 +34,6 @@ npm run build    # Full production build
 This runs:
 1. `vite build` - TypeScript/CSS compilation (outputs to `dist/public/`)
 2. `npx @11ty/eleventy` - 11ty site generation (outputs to `dist/`)
-3. `node scripts/copy-apps.mjs` - Copies apps to dist
 
 ### Individual Build Commands
 
@@ -94,8 +93,6 @@ andrewhoyer/
 │   │   └── ... (18+ experiments)
 │   ├── inkling/                # React work history app
 │   └── swipe-sudoku/           # Sudoku landing page
-├── scripts/
-│   └── copy-apps.mjs           # Build script for apps
 ├── tests/                      # Unit tests
 ├── dist/                       # Build output (gitignored)
 ├── eleventy.config.mjs         # 11ty configuration
@@ -140,7 +137,8 @@ The `apps/` directory contains standalone projects:
 - `apps/inkling/` - React app for work history
 - `apps/swipe-sudoku/` - Sudoku game landing page
 
-These are copied to `dist/` during build via `scripts/copy-apps.mjs`.
+These are copied to `dist/` via 11ty passthrough copy (configured in `eleventy.config.mjs`).
+Note: `apps/experiments/svg-animations-src` is mapped to `experiments/svg-animations`.
 Submodules should not be modified directly.
 
 ## Important Patterns
@@ -163,7 +161,7 @@ The `SiteBackground` class generates animated SVG patterns. A random color schem
 - Vite outputs JS/CSS to `dist/public/`
 - 11ty generates HTML to `dist/`
 - Static assets copied via passthrough: `src/assets/` → `dist/public/`
-- Apps copied via build script: `apps/` → `dist/experiments/`, `dist/inkling/`, etc.
+- Apps copied via passthrough: `apps/` → `dist/experiments/`, `dist/inkling/`, etc.
 
 ## Dependencies
 

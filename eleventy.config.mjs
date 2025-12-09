@@ -14,6 +14,16 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "resume.pdf": "resume.pdf" });
   eleventyConfig.addPassthroughCopy({ ".htaccess": ".htaccess" });
 
+  // Passthrough copy for apps (experiments, inkling, swipe-sudoku)
+  eleventyConfig.addPassthroughCopy({ "apps/experiments": "experiments" });
+  eleventyConfig.addPassthroughCopy({ "apps/inkling": "inkling" });
+  eleventyConfig.addPassthroughCopy({ "apps/swipe-sudoku": "swipe-sudoku" });
+
+  // Special case: svg-animations-src → experiments/svg-animations
+  eleventyConfig.addPassthroughCopy({
+    "apps/experiments/svg-animations-src": "experiments/svg-animations",
+  });
+
   // Watch targets for development
   eleventyConfig.addWatchTarget("./src/styles/");
   eleventyConfig.addWatchTarget("./src/scripts/");
