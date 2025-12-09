@@ -1,60 +1,57 @@
-[submodule "experiments/clock"]
-	path = experiments/clock
+[submodule "apps/experiments/clock"]
+	path = apps/experiments/clock
 	url = git@github.com:ndrwhr/css3d-clock.git
-[submodule "experiments/rain"]
-	path = experiments/rain
+[submodule "apps/experiments/rain"]
+	path = apps/experiments/rain
 	url = git@github.com:ndrwhr/typographic-rain.git
-[submodule "experiments/mobeh"]
-	path = experiments/mobeh
+[submodule "apps/experiments/mobeh"]
+	path = apps/experiments/mobeh
 	url = git@github.com:ndrwhr/mobeh-dick.git
-[submodule "experiments/walking"]
-	path = experiments/walking
+[submodule "apps/experiments/walking"]
+	path = apps/experiments/walking
 	url = git@github.com:ndrwhr/css3-walking-man.git
-[submodule "experiments/sudoku"]
-	path = experiments/sudoku
+[submodule "apps/experiments/sudoku"]
+	path = apps/experiments/sudoku
 	url = git@github.com:ndrwhr/simple-sudoku-solver.git
-[submodule "experiments/fractals"]
-	path = experiments/fractals
+[submodule "apps/experiments/fractals"]
+	path = apps/experiments/fractals
 	url = git@github.com:ndrwhr/simple-fractals.git
-[submodule "experiments/something_a_day"]
-	path = experiments/something_a_day
+[submodule "apps/experiments/something_a_day"]
+	path = apps/experiments/something_a_day
 	url = git@github.com:ndrwhr/something-a-day.git
-[submodule "experiments/numbers"]
-	path = experiments/numbers
+[submodule "apps/experiments/numbers"]
+	path = apps/experiments/numbers
 	url = git@github.com:ndrwhr/numbers-to-words.git
-[submodule "experiments/cloth"]
-	path = experiments/cloth
+[submodule "apps/experiments/cloth"]
+	path = apps/experiments/cloth
 	url = git@github.com:ndrwhr/cloth-simulation.git
-[submodule "experiments/robotarm"]
-	path = experiments/robotarm
+[submodule "apps/experiments/robotarm"]
+	path = apps/experiments/robotarm
 	url = git@github.com:ndrwhr/robotic-arm.git
-[submodule "experiments/particle_system"]
-	path = experiments/particle_system
+[submodule "apps/experiments/particle_system"]
+	path = apps/experiments/particle_system
 	url = git@github.com:ndrwhr/particle-system.git
-[submodule "experiments/dripsessions"]
-	path = experiments/dripsessions
+[submodule "apps/experiments/dripsessions"]
+	path = apps/experiments/dripsessions
 	url = git@github.com:ndrwhr/drip-sessions.git
-[submodule "experiments/zoetrope"]
-	path = experiments/zoetrope
+[submodule "apps/experiments/zoetrope"]
+	path = apps/experiments/zoetrope
 	url = git@github.com:ndrwhr/zoetrope.git
-[submodule "experiments/entropy"]
-	path = experiments/entropy
+[submodule "apps/experiments/entropy"]
+	path = apps/experiments/entropy
 	url = git@github.com:ndrwhr/entropy.git
-[submodule "experiments/blob"]
-	path = experiments/blob
+[submodule "apps/experiments/blob"]
+	path = apps/experiments/blob
 	url = git@github.com:ndrwhr/blob.git
-[submodule "experiments/tumbler"]
-	path = experiments/tumbler
+[submodule "apps/experiments/tumbler"]
+	path = apps/experiments/tumbler
 	url = git@github.com:ndrwhr/tumbler.git
-[submodule "tools/paper-divider"]
-	path = tools/paper-divider
-	url = git@github.com:ndrwhr/paper-divider.git
-[submodule "experiments/muda"]
-	path = experiments/muda
+[submodule "apps/experiments/muda"]
+	path = apps/experiments/muda
 	url = git@github.com:ndrwhr/muda.git
-[submodule "experiments/chaos-game"]
-	path = experiments/chaos-game
+[submodule "apps/experiments/chaos-game"]
+	path = apps/experiments/chaos-game
 	url = git@github.com:ndrwhr/chaos-game-static.git
-[submodule "experiments/svg-animations-src"]
-	path = experiments/svg-animations-src
+[submodule "apps/experiments/svg-animations-src"]
+	path = apps/experiments/svg-animations-src
 	url = git@github.com:ndrwhr/svg-animation-src.git

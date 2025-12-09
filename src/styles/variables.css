@@ -1,0 +1,38 @@
+:root {
+  --std-padding: 30px;
+
+  --background-color: #E8FFF4;
+  --default-color: rgba(0, 0, 0, 0.9);
+  --background-transition: background-color 250ms ease-out 100ms;
+
+  /* Experiment background colors */
+  --experiment-background-color-default: #CFD8DC;
+  --experiment-background-color-1: #4DE3AE;
+  --experiment-background-color-2: #4DD0E1;
+  --experiment-background-color-3: #FFAB91;
+  --experiment-background-color-4: #CE93D8;
+  --experiment-background-color-5: #F8BBD0;
+
+  /* Site background colors (tinted versions - precalculated) */
+  /* Original: color(var(--experiment-background-color-X) tint(80%)) */
+  --site-background-color-default: #e7ebec;
+  --site-background-color-1: #dbf6ed;
+  --site-background-color-2: #dbf3f6;
+  --site-background-color-3: #ffeee9;
+  --site-background-color-4: #f5eaf8;
+  --site-background-color-5: #fdf1f5;
+
+  /* Experiment background colors with alpha (precalculated) */
+  /* Original: color(var(--experiment-background-color-X) a(70%)) */
+  --experiment-background-color-1-alpha: rgba(77, 227, 174, 0.7);
+  --experiment-background-color-2-alpha: rgba(77, 208, 225, 0.7);
+  --experiment-background-color-3-alpha: rgba(255, 171, 145, 0.7);
+  --experiment-background-color-4-alpha: rgba(206, 147, 216, 0.7);
+  --experiment-background-color-5-alpha: rgba(248, 187, 208, 0.7);
+}
+
+@custom-media --extra-small-viewport (width < 500px);
+@custom-media --small-viewport (width < 820px);
+@custom-media --medium-viewport (width >= 820px);
+@custom-media --large-viewport (width >= 1440px);
+@custom-media --extra-large-viewport (width >= 1910px);

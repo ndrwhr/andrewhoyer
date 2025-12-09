@@ -1,0 +1,133 @@
+---
+title: andrew-wang-hoyer-resume-2018
+permalink: /resume/
+layout: false
+
+resume:
+  name: Andrew Wang-Hoyer
+  title: Senior Software Engineer | New York
+  work:
+    - title: Senior Software Engineer
+      when: 2010 - 2017
+      where: Inkling, San Francisco, CA/New York, NY
+      details: |
+        7+ years leading development on large scale front-end applications.
+
+        * Designed and led implementation of a notification administrator interface using React/Redux, and Firebase's Realtime Database.
+        * Maintained and improved UI/UX on a large-scale Backbone.js WYSIWYG editor, while maintaining strict unit and integration testing practices.
+        * Lead engineer of an analytics dashboard built using React/Redux and Express. Responsible for planning full stack implementation, and aided in implementing the front-end.
+        * Lead engineer for the front-end growth team, creating an internal analytics library and 20+ UI/UX experiments resulting in a 100% sign up conversion increase.
+        * Lead engineer responsible for building a cross browser web reader using Backbone.js.
+        * Coordinated cross team meetings about the web technology stack to help the team stay up to date on the latest web platform developments.
+        * Cultivated strong development practices using Airbnb's JavaScript/React style guide and BEM for company wide stylesheets.
+        * Mentored and on-boarded junior engineers and interns.
+
+        A detailed outline of my time at Inkling can be found at:
+
+        [http://andrew.wang-hoyer.com/inkling](http://andrew.wang-hoyer.com/inkling).
+
+    - title: Undergraduate Research Assistant
+      where: University of Alberta, Edmonton, AB, Canada
+      when: 2009 - 2010
+      details: |
+        Designed, developed, and deployed a web interface (Enviro-Net) for the collection, management, and analysis of environmental sensor network data.
+
+    - title: NSERC Undergraduate Research Assistant
+      where: University of Alberta, Edmonton, AB, Canada
+      when: 2008
+      details: |
+        Designed and developed a prototype web interface (EcoNET) for displaying environmental sensor network data.
+
+  sideProjects:
+    details: |
+      10 years of experience creating interactive experiments and other digital art.
+
+      * Designed and implemented 20+ browser experiments, with 7 being recognized by [Google's Chrome Experiments Showcase](https://experiments.withgoogle.com/search?q=hoyer).
+      * Designed and implemented a Sudoku App for iOS ([Swipe Sudoku](http://andrew.wang-hoyer.com/swipe-sudoku/)) with native performance using React-Web.
+      * Commissioned to create a physics based experiment ([Emergent Motion](http://andrew.wang-hoyer.com/experiments/muda/)) for the Museum of Digital Art in Zurich, Switzerland.
+
+  sidebar:
+    - indentPs: true
+      header: Education
+      details: |
+        University of Alberta, B.S. in Computer Science, 2010. Dean's Honor Roll.
+
+        Stanford University Coursera Certification in Machine Learning, 2017.
+
+        CalArts Coursera Certifications in Graphic Design, Image Making, Typography, and The History of Graphic Design, 2017.
+    - indentPs: true
+      header: Skills
+      details: |
+        JavaScript: ES6/Next, React, React-Native, Redux, Sagas, Backbone.js, Express, Mocha/Chai, Jasmine, modern browser and node APIs
+
+        CSS: Expert with CSS3+, PostCSS, SASS/Compass
+
+        Python: Django, Flask, Pytest
+
+        Design: Sketch, Adobe Photoshop, OpenSCAD, SketchUp
+    - header: Contact
+      details: |
+        * Website: [andrew.wang-hoyer.com](http://andrew.wang-hoyer.com)
+        * Email: [andrew.wanghoyer@gmail.com](mailto:andrew.wanghoyer@gmail.com)
+        * Github: [ndrwhr](https://github.com/ndrwhr)
+        * Twitter: [ndrwhr](https://twitter.com/ndrwhr)
+        * LinkedIn: [andrew-wang-hoyer](https://www.linkedin.com/in/andrew-wang-hoyer)
+        * Phone: Upon Request.
+---
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }}</title>
+  <link href="https://fonts.googleapis.com/css?family=Merriweather|Raleway:500,700,900" rel="stylesheet">
+  <link rel="stylesheet" href="/public/resume.css" type="text/css" />
+  <link rel="icon" href="/public/images/me_tiny.png" type="image/png">
+</head>
+<body class="resume">
+  <section class="resume__section-group resume__section-group--header">
+    <h1 class="resume__name">{{ resume.name }}</h1>
+    <h2 class="resume__title">{{ resume.title }}</h2>
+  </section>
+
+  <div class="resume__section-group resume__section-group--primary">
+    <section class="resume__section">
+      <h2 class="resume__section-header">Experiments and Digital Art</h2>
+      <div class="resume__rich-text">
+        {{ resume.sideProjects.details | markdownify | safe }}
+      </div>
+    </section>
+
+    <section class="resume__section">
+      <h2 class="resume__section-header">Work</h2>
+      <ol class="resume__work-entries">
+        {% for work in resume.work %}
+          <li class="resume__work-entry">
+            <div class="resume__work-entry-meta">
+              <h3 class="resume__work-entry-title">{{ work.title }}</h3>
+              <span class="resume__work-entry-when">{{ work.when }}</span>
+              {% if work.where %}
+                <p class="resume__work-entry-where">{{ work.where }}</p>
+              {% endif %}
+            </div>
+            <div class="resume__rich-text">
+              {{ work.details | markdownify | safe }}
+            </div>
+          </li>
+        {% endfor %}
+      </ol>
+    </section>
+  </div>
+
+  <div class="resume__section-group resume__section-group--secondary">
+    {% for section in resume.sidebar %}
+      <section class="resume__section">
+        <h2 class="resume__section-header">{{ section.header }}</h2>
+        <div class="resume__rich-text{% if section.indentPs %} resume__rich-text--indent-ps{% endif %}">
+          {{ section.details | markdownify | safe }}
+        </div>
+      </section>
+    {% endfor %}
+  </div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="Br-vdo-tI_IepKZayqb0UzGTgoz5otEAdD-MLQv_OYU" />
+  <meta name="author" content="{{ site.author }}" />
+  <meta name="description" content="{{ site.description }}" />
+
+  <link href="https://fonts.googleapis.com/css?family=Raleway:500,700,900" rel="stylesheet">
+
+  <link rel="icon" href="/public/images/me_tiny.png" type="image/png">
+  <link rel="stylesheet" href="/public/site.css" type="text/css" />
+
+  <title>{{ site.title }}</title>
+
+  <script type="module" src="/public/site.js"></script>
+</head>
+<body class="site">
+  <svg class="site__background"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    version="1.1"
+    preserveAspectRatio="xMidYMid slice"
+    viewBox="0 0 100 100"
+    height="100vh"></svg>
+
+  <header class="site__header">
+    <h1 class="site__header-name">Andrew Wang-Hoyer</h1>
+    <h2 class="site__header-whatido">New York Based Front-End Engineer</h2>
+  </header>
+
+  <section class="site__content">
+    {{ content | safe }}
+  </section>
+
+  <footer class="site__footer">
+    <ul class="site__footer-contact">
+      {% for item in contact %}
+        <li class="site__footer-contact-item">
+          <a href="{{ item.url }}" target="_blank">{{ item.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <div class="site__footer-copywrite">{% year %} Andrew Wang-Hoyer</div>
+  </footer>
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-15032423-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</body>
+</html>

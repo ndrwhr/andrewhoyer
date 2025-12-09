@@ -1,9 +1,16 @@
-_site/
-.sass-cache
+# Build output
+dist/
+
+# Dependencies
+node_modules/
+
+# Editor
 .DS_Store
-Gemfile.lock
 project.sublime-workspace
-node_modules
-public/bundle*
-public/resume.css
-yarn-error.log
+
+# Logs
+*.log
+
+# Lock files (regenerated on install)
+package-lock.json
+yarn.lock
