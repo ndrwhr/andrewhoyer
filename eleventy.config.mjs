@@ -1,28 +1,44 @@
 import { DateTime } from "luxon";
 import markdownIt from "markdown-it";
 import yaml from "js-yaml";
-import { readFileSync } from "fs";
 
 export default function (eleventyConfig) {
   const md = markdownIt({ html: true, linkify: true });
 
   // Add YAML data file extension support
-  eleventyConfig.addDataExtension("yml,yaml", (contents) => yaml.load(contents));
+  eleventyConfig.addDataExtension("yml,yaml", (contents) =>
+    yaml.load(contents)
+  );
 
   // Passthrough copy for static assets
   eleventyConfig.addPassthroughCopy({ "src/assets": "public" });
   eleventyConfig.addPassthroughCopy({ "resume.pdf": "resume.pdf" });
   eleventyConfig.addPassthroughCopy({ ".htaccess": ".htaccess" });
 
+  // Filter to exclude .git files from passthrough copy
+  const excludeGit = (path) => !path.includes(".git");
+
   // Passthrough copy for apps (experiments, inkling, swipe-sudoku)
-  eleventyConfig.addPassthroughCopy({ "apps/experiments": "experiments" });
-  eleventyConfig.addPassthroughCopy({ "apps/inkling": "inkling" });
-  eleventyConfig.addPassthroughCopy({ "apps/swipe-sudoku": "swipe-sudoku" });
+  eleventyConfig.addPassthroughCopy(
+    { "apps/experiments": "experiments" },
+    { filter: excludeGit }
+  );
+  eleventyConfig.addPassthroughCopy(
+    { "apps/inkling": "inkling" },
+    { filter: excludeGit }
+  );
+  eleventyConfig.addPassthroughCopy(
+    { "apps/swipe-sudoku": "swipe-sudoku" },
+    { filter: excludeGit }
+  );
 
   // Special case: svg-animations-src/dist → experiments/svg-animations
-  eleventyConfig.addPassthroughCopy({
-    "apps/experiments/svg-animations-src/dist": "experiments/svg-animations",
-  });
+  eleventyConfig.addPassthroughCopy(
+    {
+      "apps/experiments/svg-animations-src/dist": "experiments/svg-animations",
+    },
+    { filter: excludeGit }
+  );
 
   // Watch targets for development
   eleventyConfig.addWatchTarget("./src/styles/");
