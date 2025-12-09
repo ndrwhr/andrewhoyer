@@ -5,7 +5,7 @@
 @import "./variables.css";
 
 :root {
-  --background-grid-stroke-width: 0.20;
+  --background-grid-stroke-width: 0.2;
   --background-polygon-stroke-width: 0.4;
 }
 
@@ -35,18 +35,28 @@ del {
 
 .site {
   position: relative;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 700;
   color: var(--default-color);
   background: var(--site-background-color-default);
   transition: var(--background-transition);
 }
 
-.site--color-1 { background: var(--site-background-color-1) }
-.site--color-2 { background: var(--site-background-color-2) }
-.site--color-3 { background: var(--site-background-color-3) }
-.site--color-4 { background: var(--site-background-color-4) }
-.site--color-5 { background: var(--site-background-color-5) }
+.site--color-1 {
+  background: var(--site-background-color-1);
+}
+.site--color-2 {
+  background: var(--site-background-color-2);
+}
+.site--color-3 {
+  background: var(--site-background-color-3);
+}
+.site--color-4 {
+  background: var(--site-background-color-4);
+}
+.site--color-5 {
+  background: var(--site-background-color-5);
+}
 
 @media (--extra-small-viewport) {
   .site {
@@ -82,7 +92,7 @@ del {
 
 .site__background-shapes {
   transform-origin: center center;
-  transform: rotate(-12deg)
+  transform: rotate(-12deg);
 }
 
 .site__background-shapes polygon {
@@ -112,12 +122,6 @@ del {
   font-weight: 900;
   margin: 0 0 var(--std-padding);
   line-height: 1;
-}
-
-.site__header-whatido {
-  font-weight: 700;
-  font-size: 5vw;
-  margin: 0;
 }
 
 .site__content {

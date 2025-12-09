@@ -1,8 +1,6 @@
 ---
 - url: https://github.com/ndrwhr
   name: Github
-- url: https://twitter.com/ndrwhr
-  name: Twitter
 - url: "mailto:andrew.wanghoyer@gmail.com"
   name: Email
 - url: /resume
