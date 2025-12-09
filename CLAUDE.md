@@ -138,7 +138,7 @@ The `apps/` directory contains standalone projects:
 - `apps/swipe-sudoku/` - Sudoku game landing page
 
 These are copied to `dist/` via 11ty passthrough copy (configured in `eleventy.config.mjs`).
-Note: `apps/experiments/svg-animations-src` is mapped to `experiments/svg-animations`.
+Note: `apps/experiments/svg-animations-src/dist` is mapped to `experiments/svg-animations` (pre-built output).
 Submodules should not be modified directly.
 
 ## Important Patterns

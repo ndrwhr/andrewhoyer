@@ -19,9 +19,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "apps/inkling": "inkling" });
   eleventyConfig.addPassthroughCopy({ "apps/swipe-sudoku": "swipe-sudoku" });
 
-  // Special case: svg-animations-src → experiments/svg-animations
+  // Special case: svg-animations-src/dist → experiments/svg-animations
   eleventyConfig.addPassthroughCopy({
-    "apps/experiments/svg-animations-src": "experiments/svg-animations",
+    "apps/experiments/svg-animations-src/dist": "experiments/svg-animations",
   });
 
   // Watch targets for development
