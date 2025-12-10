@@ -1,0 +1,18 @@
+# Legacy blog redirects
+/blog/2011/09/28/building-the-zoetrope/ https://github.com/ndrwhr/andrewhoyer/blob/master/blog_archive/2011-09-28-building-the-zoetrope.md 301
+/blog/2011/02/14/making-it-rain/ https://github.com/ndrwhr/andrewhoyer/blob/master/blog_archive/2011-02-14-making-it-rain.md 301
+/blog/2011/02/02/Function.prototype.bind/ https://github.com/ndrwhr/andrewhoyer/blob/master/blog_archive/2011-02-02-Function.prototype.bind.md 301
+/blog/2010/10/21/walking/ https://github.com/ndrwhr/andrewhoyer/blob/master/blog_archive/2010-10-21-walking.md 301
+/blog/2010/08/27/look-ma-no-rails/ https://github.com/ndrwhr/andrewhoyer/blob/master/blog_archive/2010-08-27-look-ma-no-rails.md 301
+/blog/2010/08/10/the-state-of-things/ https://github.com/ndrwhr/andrewhoyer/blob/master/blog_archive/2010-08-10-the-state-of-things.md 301
+/blog/2010/06/28/sudoku-solver/ https://github.com/ndrwhr/andrewhoyer/blob/master/blog_archive/2010-06-28-sudoku-solver.md 301
+/blog/2010/05/17/fractals/ https://github.com/ndrwhr/andrewhoyer/blob/master/blog_archive/2010-05-17-fractals.md 301
+/blog/ https://github.com/ndrwhr/andrewhoyer/tree/master/blog_archive 301
+
+# URL redirects
+/experiments/ / 301
+/about / 301
+/about/ / 301
+
+# SVG animations trailing slash
+/experiments/svg-animations /experiments/svg-animations/ 301

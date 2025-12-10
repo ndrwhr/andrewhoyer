@@ -15,10 +15,12 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
-    "js-yaml": "^4.1.0",
     "@types/lodash-es": "^4.17.12",
+    "@vitest/coverage-v8": "^2.1.8",
     "concurrently": "^9.1.0",
     "cssnano": "^7.0.6",
+    "js-yaml": "^4.1.0",
+    "jsdom": "^25.0.1",
     "luxon": "^3.5.0",
     "markdown-it": "^14.1.0",
     "normalize.css": "^8.0.1",
@@ -30,8 +32,7 @@
     "typescript": "^5.7.2",
     "vite": "^6.0.3",
     "vitest": "^2.1.8",
-    "@vitest/coverage-v8": "^2.1.8",
-    "jsdom": "^25.0.1"
+    "wrangler": "^4.53.0"
   },
   "scripts": {
     "dev": "concurrently --kill-others \"vite\" \"npx @11ty/eleventy --serve --watch\"",
@@ -42,6 +43,7 @@
     "clean": "rm -rf dist",
     "test": "vitest",
     "test:run": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "deploy:cf": "npm run build && wrangler pages deploy dist"
   }
 }

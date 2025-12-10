@@ -1,23 +1,36 @@
-###Building:
+# andrew.wang-hoyer.com
 
-Ensure that all required gems (using bundler) and node_modules (using yarn) are installed:
+Personal website and portfolio showcasing creative coding experiments.
 
-`bundle install`
-`yarn install`
+## Quick Start
 
-###Developing:
+```bash
+nvm use           # Use Node 22 (from .nvmrc)
+npm install       # Install dependencies
+npm run dev       # Start development server
+```
 
-* `bundle exec jekyll server --watch`
-* `yarn run watch`
+## Build
 
-###Deploying:
+```bash
+npm run build     # Full production build to dist/
+npm run typecheck # TypeScript type checking
+npm run test      # Run tests
+```
 
-Run `./deploy.sh`.
+## Deploy
 
-###Dependancies:
+```bash
+wrangler login      # First time: authenticate with Cloudflare
+npm run deploy:cf   # Build and deploy to Cloudflare Pages
+```
 
- * [jekyll][2]
+## Tech Stack
 
-[1]: http://andrew-hoyer.com/ "andrew-hoyer.com"
-[2]: http://jekyllrb.com/ "jekyll"
-[3]: mailto:me@andrew-hoyer.com "via the emails"
+- **Static Site Generator**: 11ty v3
+- **Build Tool**: Vite v6
+- **Language**: TypeScript
+- **Styling**: PostCSS with custom properties
+- **Testing**: Vitest
+
+See [CLAUDE.md](./CLAUDE.md) for detailed architecture documentation.

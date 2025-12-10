@@ -13,7 +13,10 @@ export default function (eleventyConfig) {
   // Passthrough copy for static assets
   eleventyConfig.addPassthroughCopy({ "src/assets": "public" });
   eleventyConfig.addPassthroughCopy({ "resume.pdf": "resume.pdf" });
-  eleventyConfig.addPassthroughCopy({ ".htaccess": ".htaccess" });
+
+  // Cloudflare Pages configuration files
+  eleventyConfig.addPassthroughCopy({ "src/_redirects": "_redirects" });
+  eleventyConfig.addPassthroughCopy({ "src/_headers": "_headers" });
 
   // Filter to exclude .git files from passthrough copy
   const excludeGit = (path) => !path.includes(".git");

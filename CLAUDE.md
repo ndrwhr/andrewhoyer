@@ -49,8 +49,11 @@ npm run test:run     # Run tests once (no watch)
 ### Deployment
 
 ```bash
-./deploy.sh  # Build and deploy to production server via rsync
+wrangler login      # First time: authenticate with Cloudflare
+npm run deploy:cf   # Build and deploy to Cloudflare Pages
 ```
+
+Configure custom domain via Cloudflare dashboard after first deploy.
 
 ## Directory Structure
 
