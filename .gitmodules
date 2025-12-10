@@ -55,3 +55,6 @@
 [submodule "apps/experiments/svg-animations-src"]
 	path = apps/experiments/svg-animations-src
 	url = git@github.com:ndrwhr/svg-animation-src.git
+[submodule "apps/experiments/mbmbalphabet"]
+	path = apps/experiments/mbmbalphabet
+	url = git@github.com:ndrwhr/mbmbalphabet.git
