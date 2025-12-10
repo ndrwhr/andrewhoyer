@@ -58,3 +58,6 @@
 [submodule "apps/experiments/mbmbalphabet"]
 	path = apps/experiments/mbmbalphabet
 	url = git@github.com:ndrwhr/mbmbalphabet.git
+[submodule "apps/experiments/clap-dot-space"]
+	path = apps/experiments/clap-dot-space
+	url = git@github.com:ndrwhr/clap.space.git
